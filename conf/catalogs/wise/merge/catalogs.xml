@@ -21,8 +21,9 @@
 
     <!--
     <chunk_index path="/stage/irsa-wise-xpf/chunk_index/cur/wise_neowiser/neowiser_merge_p1bm_frm/index.ci" />
-    -->
     <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/neowiser_merge_p1bm_frm/index.ci" />
+    -->
+    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_merge/merge_p1bm_frm/index.ci" />
 
     <corners radius="0.75"/>
     <center ra="crval1" dec="crval2"/>
@@ -633,7 +634,10 @@
 
     <description>WISE Merge AllWISE Atlas (L3a) Images</description>
 
+    <!--
     <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_allwise/merge_p3am_cdd/index.ci" />
+    -->
+    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_merge/merge_p3am_cdd/index.ci" />
 
     <corners radius="1.5"/>
     <center ra="crval1" dec="crval2"/>
