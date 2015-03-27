@@ -1,3 +1,4 @@
+.*
 *.d
 *.o
 *.pyc
@@ -19,3 +20,4 @@ web/conf/httpd.conf
 web/html/data/
 web/html/docs/
 web/html/ibe/
+web/logs/

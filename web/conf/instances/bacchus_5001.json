@@ -1,8 +1,10 @@
 {
     "WSGIProcesses": "2", 
     "datasets": [
-        "wise/neowiser",
-        "wise/merge"
+        "wise/merge" 
+      , "wise/neowiser" 
+      , "wise/neowiser_int" 
+      , "wise/neowiser_yr1"
     ], 
     "MaxSpareServers": "2", 
     "MinSpareServers": "1", 

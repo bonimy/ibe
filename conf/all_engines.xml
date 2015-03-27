@@ -53,6 +53,26 @@
   <paramstyle>named</paramstyle>
 </engine>
 
+<engine id="wise_neowiser_int" echo="false" echo_pool="false" pool_recycle="300">
+  <url>oracle://neowiser_app:NEOappWISER@nwrops1</url>
+  <paramstyle>named</paramstyle>
+</engine>
+
+<engine id="wise_neowiser_yr1" echo="false" echo_pool="false" pool_recycle="300">
+  <url>oracle://neowiser_app:NEOappWISER@nwrops1</url>
+  <paramstyle>named</paramstyle>
+</engine>
+
+<engine id="wise_neowiser_yr2" echo="false" echo_pool="false" pool_recycle="300">
+  <url>oracle://neowiser_app:NEOappWISER@nwrops1</url>
+  <paramstyle>named</paramstyle>
+</engine>
+
+<engine id="wise_neowiser_yr3" echo="false" echo_pool="false" pool_recycle="300">
+  <url>oracle://neowiser_app:NEOappWISER@nwrops1</url>
+  <paramstyle>named</paramstyle>
+</engine>
+
 <engine id="wise_allwise" echo="false" echo_pool="false">
   <url>informix://irsadmin@rmt_dbms18b/wise_allwise?autocommit=false</url>
   <paramstyle>qmark</paramstyle>

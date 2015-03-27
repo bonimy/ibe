@@ -6,25 +6,26 @@
 
 <!-- {  ____________________________________________________
       /                                                      \
-     |   NEOWISER Public                                      | -->
+     |   NEOWISER Internal                                    | -->
 
 
-<schema name="neowiser" engine="wise_neowiser">
+<schema name="neowiser_yr1" engine="wise_neowiser_yr1">
 
- <description>NEOWISER L1b Tables</description>
+ <description>NEOWISER Internal L1b Tables</description>
 
 
-  <!-- neowiser_p1bm_frm - NEOWISER Public L1b image inventory       -->
 
-  <table name="p1bm_frm" dbname="neowiser_p1bm_frm">
+  <!-- neowiser_yr1_p1bm_frm - NEOWISER Year1 L1b image inventory    -->
 
-    <description>NEOWISER L1b Images</description>
+  <table name="yr1_p1bm_frm" dbname="neowiser_yr1_p1bm_frm">
+
+    <description>NEOWISER Year1 L1b Images</description>
 
     <!--
-    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/p1bm_frm/current/merge.ci" />
-    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/p1bm_frm/current/merge.ci" />
+    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/yr1_p1bm_frm/current/merge.ci" />
+    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/yr1_p1bm_frm/current/merge.ci" />
     -->
-    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/p1bm_frm/current/merge.ci" />
+    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/yr1_p1bm_frm/current/merge.ci" />
 
     <corners radius="0.75"/>
     <center ra="crval1" dec="crval2"/>
@@ -48,12 +49,12 @@
     <reference from="frame_num" to="wise.neowiser.p1bs_psd.frame_num"       />
 
     <!--
-    <reference from="scan_id"   to="wise.neowiser.p1bm_frm.scan_id"     />
-    <reference from="frame_num" to="wise.neowiser.p1bm_frm.frame_num"   />
+    <reference from="scan_id"   to="wise.neowiser.yr1_p1bm_frm.scan_id"     />
+    <reference from="frame_num" to="wise.neowiser.yr1_p1bm_frm.frame_num"   />
     -->
 
-    <reference from="scan_id"   to="wise.neowiser.p1bs_psd.scan_id"     />
-    <reference from="frame_num" to="wise.neowiser.p1bs_psd.frame_num"   />
+    <reference from="scan_id"   to="wise.neowiser.yr1_p1bs_psd.scan_id"     />
+    <reference from="frame_num" to="wise.neowiser.yr1_p1bs_psd.frame_num"   />
 
 
     <reference from="scan_id"   to="wise.allsky.2band_p1bs_psd.scan_id"     />
@@ -77,11 +78,11 @@
     <sia writer="ibe.lib.sia.WiseSiaWriter" />
 
     <!--
-    <products rootpath="/stage/irsa-wise-links-ops/links-neowiser/l1b-pub"    />
-    <products rootpath="/stage/irsa-wise-links-public/links-neowiser/l1b"     />
-    <products rootpath="/stage/irsa-wise-links-public/links-neowiser/l1b-pub" />
+    <products rootpath="/stage/irsa-wise-links-ops/links-neowiser/l1b-yr1"    />
+    <products rootpath="/stage/irsa-wise-links-public/links-neowiser/l1b-yr1" />
     -->
-    <products rootpath="/stage/irsa-wise-links-public/links-neowiser/l1b"     />
+    <products rootpath="/stage/irsa-wise-links-public/links-neowiser/l1b-yr1" />
+
 
         <column name="band" principal="true">
           <description>WISE band number</description>
@@ -652,17 +653,17 @@
 </table>
 
 
-  <!-- neowiser_p1bs_psd - NEOWISER Public L1b source table          -->
+  <!-- neowiser_yr1_p1bs_psd - NEOWISER Year1 L1b source table       -->
 
-  <table name="p1bs_psd" dbname="neowiser_p1bs_psd">
+  <table name="yr1_p1bs_psd" dbname="neowiser_yr1_p1bs_psd">
 
-    <description>NEOWISER L1b Images</description>
+    <description>NEOWISER Year1 L1b Images</description>
 
     <!--
-    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/p1bs_psd/current/merge.ci" />
-    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/p1bs_psd/current/merge.ci" />
+    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/yr1_p1bs_psd/current/merge.ci" />
+    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/yr1_p1bs_psd/current/merge.ci" />
     -->
-    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/p1bs_psd/current/merge.ci" />
+    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/yr1_p1bs_psd/current/merge.ci" />
 
     <unique refs="cntr" />
     <unique refs="source_id" />
@@ -681,12 +682,12 @@
     <reference from="scan_id"   to="wise.neowiser.p1bs_psd.scan_id"         />
     <reference from="frame_num" to="wise.neowiser.p1bs_psd.frame_num"       />
 
-    <reference from="scan_id"   to="wise.neowiser.p1bm_frm.scan_id"     />
-    <reference from="frame_num" to="wise.neowiser.p1bm_frm.frame_num"   />
+    <reference from="scan_id"   to="wise.neowiser.yr1_p1bm_frm.scan_id"     />
+    <reference from="frame_num" to="wise.neowiser.yr1_p1bm_frm.frame_num"   />
 
     <!--
-    <reference from="scan_id"   to="wise.neowiser.p1bs_psd.scan_id"     />
-    <reference from="frame_num" to="wise.neowiser.p1bs_psd.frame_num"   />
+    <reference from="scan_id"   to="wise.neowiser.yr1_p1bs_psd.scan_id"     />
+    <reference from="frame_num" to="wise.neowiser.yr1_p1bs_psd.frame_num"   />
     -->
 
 

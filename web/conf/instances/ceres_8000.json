@@ -6,6 +6,8 @@
       , "wise/cryo_3band"
       , "wise/merge"
       , "wise/neowiser"
+      , "wise/neowiser_int"
+      , "wise/neowiser_yr1"
       , "wise/pass1"
       , "wise/pass2"
       , "wise/prelim"
