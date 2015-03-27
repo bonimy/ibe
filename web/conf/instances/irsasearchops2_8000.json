@@ -21,7 +21,7 @@
    ], 
    "MaxSpareServers": "8",
    "MinSpareServers": "1",
-   "proxied": false,
+   "proxied": true,
    "host": "http://irsasearchops.ipac.caltech.edu:8000",
    "workspace_root": "/work",
    "StartServers": "4",
