@@ -88,8 +88,10 @@
     # 
     <products rootpath="/stage/irsa-wise-links-ops/links-neowiser/l1b"        />
     <products rootpath="/stage/irsa-wise-links-public/links-neowiser/l1b"     />
-    -->
+    # 
     <products rootpath="/stage/irsa-wise-links-public/links-neowiser/l1b"     />
+    -->
+    <products rootpath="/stage/irsa-wise-links-ops/links-neowiser/l1b"        />
 
 
         <column name="band" principal="true">
