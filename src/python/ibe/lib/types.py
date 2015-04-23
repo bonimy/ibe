@@ -185,7 +185,9 @@ class Double(FormattableColumnType):
     """A double precision floating point number.
     """
     def __init__(self, format_spec, null_value):
-        FormattableColumnType.__init__(self, 24, '.17g', format_spec, null_value)
+        FormattableColumnType.__init__(self, 24, '', format_spec, null_value)
+        if not format_spec:
+            self._format_spec = '{0!r}'
 
     _type_reprs = [ 'DOUBLE', sa.types.Float(17),
                     'double', 'D', ('double', None) ]
