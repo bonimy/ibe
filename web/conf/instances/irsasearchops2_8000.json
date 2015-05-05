@@ -4,7 +4,8 @@
    "WSGIProcesses": "8",
    "WSGISocketPrefix": "/opt/ibe/logs/wsgi",
    "datasets": [
-       "twomass/calibration"
+       "twomass/mosaic"
+     , "twomass/calibration"
      , "twomass/allsky"
      , "twomass/full"
      , "twomass/sixxfull"
