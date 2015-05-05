@@ -22,11 +22,13 @@
     <description>NEOWISER L1b Images</description>
 
     <!--
-    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/i1bm_frm/current/merge.ci" />
+    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/i1bm_frm/current/merge.ci"        />
     <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/neowiser/i1bm_frm/current/merge.ci" />
+    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/i1bm_frm/current/merge.ci"        />
+    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/neowiser_i1bm_frm/index.ci"       />
     NEVER PUBLIC
     -->
-    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/i1bm_frm/current/merge.ci" />
+    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/neowiser_i1bm_frm/index.ci"       />
 
     <corners radius="0.75"/>
     <center ra="crval1" dec="crval2"/>
