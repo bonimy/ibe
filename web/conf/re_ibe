@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-# $Id: re_ibe,v 20150505.99170703 2015/05/06 00:07:03 modell ipac $
+# $Id: re_ibe,v 20150505.99171808 2015/05/06 00:18:08 modell ipac $
 
 # * [re-]start IBE
 
@@ -63,11 +63,11 @@ if echo $* | grep -i    help >/dev/null 2>&1 || \
    exit -10;
 fi
 
-if [[ "nosudo" == "_$1_" ]]; then
+if [[ "_nosudo_" == "_$1_" ]]; then
     shift;
     sudo="";
 
-elif [[ "sudo" == "_$1_" ]]; then
+elif [[ "_sudo_" == "_$1_" ]]; then
     shift;
     sudo="sudo";
 fi
