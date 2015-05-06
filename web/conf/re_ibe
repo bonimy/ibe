@@ -1,5 +1,7 @@
 #!/bin/bash 
 
+# $Id: re_ibe,v 20150505.99170703 2015/05/06 00:07:03 modell ipac $
+
 # * [re-]start IBE
 
 # use "re_ibe help" for assistance
@@ -9,14 +11,17 @@
 
 # # all just wrapping for running this:
 # # 
-# ./apachectl.sh stop            && \
+# [sudo] ./apachectl.sh stop     && \
 # ./configure.py --load=${fcfg}  && \
-# ./apachectl.sh start           
+# [sudo] ./apachectl.sh start           
 
 export cn=$0;
 export cf=` pwd `;
 export ca=` basename "${cn}" `;
 export ci=`  dirname "${cn}" `;
+
+sudo="sudo";
+sudo="";
 
 inst=instances;
 syst=bacchus
@@ -35,12 +40,16 @@ function usage () {
   echo "";
   echo "  usage:";
   echo "";
-  echo "    ${ca} [[instances/]sysname_portnum[.json]]";
+  echo "    ${ca} [no[sudo]] [[instances/]sysname_portnum[.json]]";
   echo "";
   echo "      (e.g.)";
   echo "";
   echo "        cd    .../ibe/web/conf";
   echo "        ${ca} ${typ}";
+  echo "";
+  echo "          defaults to nosudo";
+  echo "";
+  echo "            (sudo only used to control apache)";
   echo "";
   echo "  currently available instances:";
   echo "";
@@ -52,6 +61,15 @@ if echo $* | grep -i    help >/dev/null 2>&1 || \
    echo $* | grep -i -- '-h' >/dev/null 2>&1    ; then
    usage;
    exit -10;
+fi
+
+if [[ "nosudo" == "_$1_" ]]; then
+    shift;
+    sudo="";
+
+elif [[ "sudo" == "_$1_" ]]; then
+    shift;
+    sudo="sudo";
 fi
 
 sys_nm=` uname -n `;
@@ -66,8 +84,6 @@ xdH=`  dirname "${xdh}" `;
 
 xDT=` basename "${xdH}" `;
 xDH=`  dirname "${xdH}" `;
-
-#  [[ "ibe"  != "${xDT}" ]]    ; then
 
 if [[ "conf" != "${xdt}" ]] ||  
    [[ "web"  != "${xdT}" ]] ||  
@@ -109,14 +125,16 @@ if ! echo "${fcfg}" | grep -i ${sys_nm} >/dev/null 2>&1; then
 fi
 
 echo "BEGIN"                            && \
-  ./apachectl.sh stop                   && \
+  ${sudo} ./apachectl.sh stop           && \
   echo "Apache stopped"                 && \
     ./configure.py --load=${fcfg}       && \
     echo "configure[.py]'d"             && \
       echo "  pause for httpd stop..."  && \
       sleep 1                           && \
-  ./apachectl.sh start                  && \
+  ${sudo} ./apachectl.sh start          && \
   echo "Apache restarted"               && \
 echo "DONE"                             && \
 exit 0;
+
+# vi:set tabstop=4 shiftwidth=4 expandtab syntax=sh foldmethod=marker foldmarker={{,}} :
 
