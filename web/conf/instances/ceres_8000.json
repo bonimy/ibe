@@ -1,7 +1,8 @@
 {
     "WSGIProcesses": "8",
     "datasets": [
-        "wise/allsky"
+        "ptf/images" 
+      , "wise/allsky"
       , "wise/allwise"
       , "wise/cryo_3band"
       , "wise/merge"
@@ -12,7 +13,6 @@
       , "wise/pass2"
       , "wise/prelim"
       , "wise/prelim_postcryo"
-      , "ptf/images" 
     ],
     "MaxSpareServers": "8",
     "MinSpareServers": "1",

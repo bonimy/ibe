@@ -4,12 +4,14 @@
     "WSGIProcesses": "8",
     "WSGISocketPrefix": "/local2/ibe/logs/wsgi",
     "datasets": [
-        "twomass/mosaic"
-      , "twomass/calibration"
+        "lsst/summer2012" 
+      , "ptf/images" 
       , "twomass/allsky"
+      , "twomass/calibration"
       , "twomass/full"
-      , "twomass/sixxfull"
+      , "twomass/mosaic"
       , "twomass/sixxcat"
+      , "twomass/sixxfull"
       , "wise/allsky"
       , "wise/allwise"
       , "wise/cryo_3band"
@@ -23,8 +25,6 @@
       , "wise/postcryo"
       , "wise/prelim" 
       , "wise/prelim_postcryo" 
-      , "ptf/images" 
-      , "lsst/summer2012" 
     ], 
     "MaxSpareServers": "2", 
     "MinSpareServers": "1",
