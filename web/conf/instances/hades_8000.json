@@ -4,8 +4,7 @@
     "WSGIProcesses": "8",
     "WSGISocketPrefix": "/local2/ibe/logs/wsgi",
     "datasets": [
-        "lsst/summer2012" 
-      , "ptf/images" 
+        "ptf/images" 
       , "twomass/allsky"
       , "twomass/calibration"
       , "twomass/full"
