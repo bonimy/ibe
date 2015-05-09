@@ -52,7 +52,7 @@ fileConfig(INIFILE)
 
 def load_app( s ):
     try:
-        loadapp(  s )
+        return loadapp(  s )
     except:
         print_exc_plus()
 
