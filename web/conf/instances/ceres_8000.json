@@ -6,6 +6,7 @@
       , "wise/allwise"
       , "wise/cryo_3band"
       , "wise/merge"
+      , "wise/merge_int" 
       , "wise/neowiser"
       , "wise/neowiser_int"
       , "wise/neowiser_yr1"

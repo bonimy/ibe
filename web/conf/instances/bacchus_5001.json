@@ -2,6 +2,7 @@
     "WSGIProcesses": "2", 
     "datasets": [
         "wise/merge" 
+      , "wise/merge_int" 
       , "wise/neowiser" 
       , "wise/neowiser_int" 
       , "wise/neowiser_yr1"
