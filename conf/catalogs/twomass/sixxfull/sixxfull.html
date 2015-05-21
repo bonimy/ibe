@@ -65,8 +65,8 @@ fireflyToolbar= {
 </div>
 
 <p>
-	For example, <a href="../../../../search/twomass/sixxfull/sixxfull?POS=0,0"><span class="root">&lt;root&gt;</span>/search/twomass/sixxfull/sixxfull?POS=0,0</a>
-	returns metadata for images containing (RA,Dec) = (0, 0).
+	For example, <a href="../../../../search/twomass/sixxfull/sixxfull?POS=10.4,-10.8"><span class="root">&lt;root&gt;</span>/search/twomass/sixxfull/sixxfull?POS=10.4,-10.8</a>
+	returns metadata for images containing (RA,Dec) = (10.4, -10.8).
 	Query parameters are documented <a href="../../../../queries.html">here</a>.
 </p>
 
@@ -206,17 +206,11 @@ String url = String.format( "%1$s/data/twomass/sixxfull/sixxfull/%2$s%3$s/s%4$03
 
 </div>
 
-<script type="text/javascript">
-
-<!--
-        NOTE:  below join "- -level" (remove space) before using
--->
-
-<!--
+<script type="text/javascript"><!--
 	$(document).ready(function() {
 		var root, i, p = window.location.pathname;
 		i = p.lastIndexOf("/") - 1;
-		for (var level = 4; level > 0 && i >= 0; - -level, i = p.lastIndexOf("/", i) - 1) { }
+		for (var level = 4; level > 0 && i >= 0; --level, i = p.lastIndexOf("/", i) - 1) { }
 		if (i < 0) {
 		        root = "";
 		} else {
@@ -227,9 +221,7 @@ String url = String.format( "%1$s/data/twomass/sixxfull/sixxfull/%2$s%3$s/s%4$03
 		$('span.root').text(root);
 	});
 	$(document).ready(prettyPrint);
--->
-
-</script>
+--></script>
 
 <div id="irsa-footer" style="position:absolute;left:0;right:0;margin-top:20px">
 <iframe src="http://irsa.ipac.caltech.edu/frontpage/footer.html" width="100%" frameborder=0 scrolling=0 seamless=1/>

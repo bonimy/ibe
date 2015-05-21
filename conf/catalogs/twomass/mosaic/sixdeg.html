@@ -174,17 +174,11 @@ String url = String.format( "%1$s/data/twomass/mosaic/sixdeg/%2$s/%3$05d/mosaic_
 
 </div>
 
-<script type="text/javascript">
-
-<!--
-        NOTE:  below join "- -level" (remove space) before using
--->
-
-<!--
+<script type="text/javascript"><!--
 	$(document).ready(function() {
 		var root, i, p = window.location.pathname;
 		i = p.lastIndexOf("/") - 1;
-		for (var level = 4; level > 0 && i >= 0; - -level, i = p.lastIndexOf("/", i) - 1) { }
+		for (var level = 4; level > 0 && i >= 0; --level, i = p.lastIndexOf("/", i) - 1) { }
 		if (i < 0) {
 		        root = "";
 		} else {
@@ -195,9 +189,7 @@ String url = String.format( "%1$s/data/twomass/mosaic/sixdeg/%2$s/%3$05d/mosaic_
 		$('span.root').text(root);
 	});
 	$(document).ready(prettyPrint);
--->
-
-</script>
+--></script>
 
 <div id="irsa-footer" style="position:absolute;left:0;right:0;margin-top:20px">
 <iframe src="http://irsa.ipac.caltech.edu/frontpage/footer.html" width="100%" frameborder=0 scrolling=0 seamless=1/>
