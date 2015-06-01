@@ -22,9 +22,6 @@
     <description>NEOWISER Year1 L1b Images</description>
 
     <!--
-    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/yr1_p1bm_frm/current/merge.ci" />
-    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/yr1_p1bm_frm/current/merge.ci" />
-    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/yr1_p1bm_frm_sep/index.ci" />
     -->
     <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/yr1_p1bm_frm_sep/index.ci" />
 
@@ -79,8 +76,6 @@
     <sia writer="ibe.lib.sia.WiseSiaWriter" />
 
     <!--
-    <products rootpath="/stage/irsa-wise-links-ops/links-neowiser/l1b-yr1"    />
-    <products rootpath="/stage/irsa-wise-links-public/links-neowiser/l1b-yr1" />
     -->
     <products rootpath="/stage/irsa-wise-links-public/links-neowiser/l1b-yr1" />
 
@@ -661,8 +656,6 @@
     <description>NEOWISER Year1 L1b Images</description>
 
     <!--
-    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/yr1_p1bs_psd/current/merge.ci" />
-    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/yr1_p1bs_psd/current/merge.ci" />
     -->
     <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/yr1_p1bs_psd/current/merge.ci" />
 

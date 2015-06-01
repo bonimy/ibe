@@ -22,6 +22,8 @@
 
     <description>NEOWISER Provisional L1b Images</description>
 
+    <!--
+    -->
     <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser_prov/i1bm_frm/current/merge.ci" />
 
     <corners radius="0.75"/>
@@ -56,6 +58,8 @@
 
     <sia writer="ibe.lib.sia.WiseSiaWriter" />
 
+    <!--
+    -->
     <products rootpath="/stage/irsa-wise-links-ops/links-nprov/l1b" />
 
 
@@ -634,6 +638,8 @@
 
     <description>NEOWISER Provisional L1bs Images</description>
 
+    <!--
+    -->
     <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser_prov/i1bs_psd/current/merge.ci" />
 
     <unique refs="cntr" />

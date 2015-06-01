@@ -20,10 +20,6 @@
     <description>WISE Internal Merge L1b Images</description>
 
     <!--
-    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/cur/wise_neowiser/neowiser_merge_i1bm_frm/index.ci" />
-    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/neowiser_merge_i1bm_frm/index.ci" />
-    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_merge/merge_i1bm_frm/index.ci" />
-    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/wise_merge/merge_i1bm_frm/index.ci" />
     -->
     <chunk_index path="/stage/irsa-wise-xpf/chunk_index/wise_merge/merge_i1bm_frm/index.ci" />
 
@@ -60,11 +56,6 @@
     <sia writer="ibe.lib.sia.WiseSiaWriter" />
 
     <!--
-    <products rootpath="/stage/irsa-wise-links-ops/links-merge/l1b-merge"    />
-    <products rootpath="/stage/irsa-wise-links-public/links-merge/l1b-merge" />
-    <products rootpath="/stage/irsa-wise-links-public/links-merge/l1b" />
-    <products rootpath="/stage/irsa-wise-links-public/links-merge/l1b-int" />
-    <products rootpath="/stage/irsa-wise-links-ops/links-merge/l1b" />
     -->
     <products rootpath="/stage/irsa-wise-links-ops/links-merge/l1b" />
 
