@@ -40,7 +40,7 @@ def write_paths(conn_string, table, writer):
                       True,  # raw exposure
                       # afilename[1-4]; masks, catalogs, JPEG
                       False, False, False, False,
-                      # cfilename[104]; calibration products
+                      # cfilename[1-4]; calibration products
                       True, True, True, True,
                      )
     with closing(sql.connect(conn_string)) as conn:

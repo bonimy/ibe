@@ -12,7 +12,7 @@
   <table name="level1" dbname="new_ptf_procimg">
     <description>PTF Level 1 Processed Images</description>
 
-    <chunk_index path="/xpf/chunk_index/ptf/images/level1/index.ci" />
+    <chunk_index path="/xpf/chunk_index/ptf2/images/level1/index.ci" />
     <corners radius="3.0" />
 
     <unique refs="cntr" />
@@ -22,7 +22,7 @@
 
     <products rootpath="/stage/irsa-ptf-links/" />
 
-    <access policy="ACCESS_ROW_DATE" mission="106" group="0" fsdb="/xpf/fsdb/ptf/images/level1.sqlite3" />
+    <access policy="ACCESS_ROW_DATE" mission="106" group="0" fsdb="/xpf/fsdb/ptf2/images/level1.sqlite3" />
 
     <!-- Note: not in database column order! -->
     <column name="expid" principal="true">
@@ -732,10 +732,10 @@
   </table>
 
   <!-- PTF Reference image metadata -->
-  <table name="level2" dbname="refims">
+  <table name="level2" dbname="refims_new_new">
     <description>PTF Level 2 Reference Images</description>
 
-    <chunk_index path="/xpf/chunk_index/ptf/images/level2/index.ci" />
+    <chunk_index path="/xpf/chunk_index/ptf2/images/level2/index.ci" />
     <corners radius="0.73" />
 
     <unique refs="cntr" />
@@ -743,9 +743,9 @@
 
     <sia writer="ibe.lib.sia.PtfLevel2SiaWriter" />
 
-    <products rootpath="/stage/irsa-ptf-links/refims" />
+    <products rootpath="/stage/irsa-ptf-links/refims-links" />
 
-    <access policy="ACCESS_TABLE" mission="106" group="100" />
+    <access policy="ACCESS_ROW_DATE" mission="106" group="0" fsdb="/xpf/fsdb/ptf2/images/level2.sqlite3" />
 
     <!-- Note: not in database column order! -->
     <column name="rfid" principal="true">
@@ -1140,7 +1140,15 @@
     <column name="psfrfcatfilename"  principal="true"><description>Reference-image PSF-fit catalog filename</description><datatype>CHAR(73)</datatype></column>
     <column name="psfrfcatchecksum"><description>checksum (MD5)</description><datatype>CHAR(33)</datatype></column>
 
-<!-- POSITION BLOCK -->
+   <column name="ipac_gid" principal="true">
+      <description>IPAC Group ID</description>
+      <datatype>INTEGER</datatype>
+    </column>
+    <column name="ipac_pub_date" principal="true">
+      <description>UTC date exposure becomes public</description>
+      <datatype>DATETIME</datatype>
+      <ucd>time.release</ucd>
+    </column>
     <column name="x">
       <description>unit sphere position x = cos(ra)*cos(dec)</description>
       <ucd>pos.cartesian.x</ucd>
