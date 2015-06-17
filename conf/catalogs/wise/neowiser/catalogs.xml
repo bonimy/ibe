@@ -2,18 +2,17 @@
 
 <catalogs>
 
+<!-- {  ____________________________________________________
+      /                                                      \
+     |   NEOWISER Public                                      | -->
+
 <schema_group id="wise">
 
 <!--  all of NEOWISER is ~ 2-Band  -->
 
-<!-- {  ____________________________________________________
-      /                                                      \
-     |   NEOWISER Current/Ingest                              | -->
-
 <schema name="neowiser" engine="wise_neowiser">
 
  <description>NEOWISER L1b Tables</description>
-
 
 
   <!-- neowiser_p1bm_frm - NEOWISER Public L1b Tables        -->
@@ -651,8 +650,6 @@
 
     <description>NEOWISER L1b Images</description>
 
-    <!--
-    -->
     <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/p1bs_psd/current/merge.ci" />
 
     <unique refs="cntr" />
