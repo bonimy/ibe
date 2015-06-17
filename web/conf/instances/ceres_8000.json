@@ -10,9 +10,11 @@
       , "wise/neowiser"
       , "wise/neowiser_int"
       , "wise/neowiser_yr1"
+      , "wise/neowiser_yr2"
       , "wise/neowiser_prov"
       , "wise/pass1"
       , "wise/pass2"
+      , "wise/postcryo"
       , "wise/prelim"
       , "wise/prelim_postcryo"
     ],

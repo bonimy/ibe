@@ -6,12 +6,12 @@
 
 <!-- {  ____________________________________________________
       /                                                      \
-     |   NEOWISER Internal                                    | -->
+     |   NEOWISER Year1                                       | -->
 
 
 <schema name="neowiser_yr1" engine="wise_neowiser_yr1">
 
- <description>NEOWISER Internal L1b Tables</description>
+ <description>NEOWISER Year1 L1b Tables</description>
 
 
 
@@ -51,9 +51,15 @@
     <reference from="frame_num" to="wise.neowiser.yr1_p1bm_frm.frame_num"   />
     -->
 
+    <reference from="scan_id"   to="wise.neowiser.yr2_p1bm_frm.scan_id"     />
+    <reference from="frame_num" to="wise.neowiser.yr2_p1bm_frm.frame_num"   />
+
     <reference from="scan_id"   to="wise.neowiser.yr1_p1bs_psd.scan_id"     />
     <reference from="frame_num" to="wise.neowiser.yr1_p1bs_psd.frame_num"   />
 
+
+    <reference from="scan_id"   to="wise.neowiser.yr2_p1bs_psd.scan_id"     />
+    <reference from="frame_num" to="wise.neowiser.yr2_p1bs_psd.frame_num"   />
 
     <reference from="scan_id"   to="wise.allsky.2band_p1bs_psd.scan_id"     />
     <reference from="frame_num" to="wise.allsky.2band_p1bs_psd.frame_num"   />
@@ -655,8 +661,6 @@
 
     <description>NEOWISER Year1 L1b Images</description>
 
-    <!--
-    -->
     <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/yr1_p1bs_psd/current/merge.ci" />
 
     <unique refs="cntr" />

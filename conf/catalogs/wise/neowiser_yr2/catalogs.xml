@@ -6,20 +6,20 @@
 
 <!-- {  ____________________________________________________
       /                                                      \
-     |   NEOWISER Internal                                    | -->
+     |   NEOWISER Year2                                       | -->
 
 
-<schema name="neowiser_int" engine="wise_neowiser_int">
+<schema name="neowiser_yr2" engine="wise_neowiser_yr2">
 
- <description>NEOWISER Internal L1b Tables</description>
+ <description>NEOWISER Year2 L1b Tables</description>
 
 
 
- <!-- neowiser_i1bm_frm - NEOWISER Internal L1b image inventory      -->
+ <!-- neowiser_yr2_i1bm_frm - NEOWISER Year2 L1b image inventory      -->
 
-  <table name="i1bm_frm" dbname="neowiser_i1bm_frm">
+  <table name="yr2_i1bm_frm" dbname="neowiser_yr2_i1bm_frm">
 
-    <description>NEOWISER L1b Images</description>
+    <description>NEOWISER Year2 L1b Images</description>
 
     <!--
     NEVER PUBLIC
@@ -52,8 +52,16 @@
     <reference from="scan_id"   to="wise.neowiser.yr1_p1bm_frm.scan_id"     />
     <reference from="frame_num" to="wise.neowiser.yr1_p1bm_frm.frame_num"   />
 
+    <!--
+    <reference from="scan_id"   to="wise.neowiser.yr2_p1bm_frm.scan_id"     />
+    <reference from="frame_num" to="wise.neowiser.yr2_p1bm_frm.frame_num"   />
+    -->
+
     <reference from="scan_id"   to="wise.neowiser.yr1_p1bs_psd.scan_id"     />
     <reference from="frame_num" to="wise.neowiser.yr1_p1bs_psd.frame_num"   />
+
+    <reference from="scan_id"   to="wise.neowiser.yr2_p1bs_psd.scan_id"     />
+    <reference from="frame_num" to="wise.neowiser.yr2_p1bs_psd.frame_num"   />
 
 
     <reference from="scan_id"   to="wise.allsky.2band_p1bs_psd.scan_id"     />
@@ -650,15 +658,12 @@
 </table>
 
 
-  <!-- neowiser_i1bs_psd - NEOWISER Internal L1b source table        -->
+  <!-- neowiser_yr2_i1bs_psd - NEOWISER Year2 L1b source table        -->
 
-  <table name="i1bs_psd" dbname="neowiser_i1bs_psd">
+  <table name="yr2_i1bs_psd" dbname="neowiser_yr2_i1bs_psd">
 
-    <description>NEOWISER L1b Images</description>
+    <description>NEOWISER Year2 Images</description>
 
-    <!--
-    NEVER PUBLIC
-    -->
     <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/i1bs_psd/current/merge.ci" />
 
     <unique refs="cntr" />
