@@ -23,7 +23,7 @@ dialect = {
 }
 
 level2_filename_re = re.compile(
-    r'^PTF_(?P<ptffield>d\d{6})_(?P<fid>f\d{2})_(?P<ccdid>c\d{2})_')
+    r'^PTF_(?P<ptffield>d\d{6})_f(?P<fid>\d{2})_c(?P<ccdid>\d{2})_')
 
 
 def write_paths(conn_string, table, writer):
