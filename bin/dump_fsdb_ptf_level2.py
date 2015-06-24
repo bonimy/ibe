@@ -65,8 +65,8 @@ def write_paths(conn_string, table, writer):
                     # Construct path relative to link tree from filename
                     f = os.path.join(m.group('ptffield')[:4],
                                      m.group('ptffield'),
-                                     str(int(m.group('fid'))),
-                                     str(int(m.group('ccdid'))),
+                                     'f' + str(int(m.group('fid'))),
+                                     'c' + str(int(m.group('ccdid'))),
                                      f)
                     if always_private[i]:
                         # Hide away private files
