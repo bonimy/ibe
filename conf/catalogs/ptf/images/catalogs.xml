@@ -732,7 +732,7 @@
   </table>
 
   <!-- PTF Reference image metadata -->
-  <table name="level2" dbname="refims_new_new">
+  <table name="level2" dbname="ptf_refims">
     <description>PTF Level 2 Reference Images</description>
 
     <chunk_index path="/xpf/chunk_index/ptf2/images/level2/index.ci" />
