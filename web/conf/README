@@ -214,11 +214,6 @@ Here is a current bacchus:5000 IBE startup transcript:
             - creating directory /local/ibe_dev/web/html/.data.next/ptf/dev
             - symlinking /local/ibe_dev/web/html/.data.next/ptf/dev/process
                 to /stage/irsa-ptf-links/
-
-    Deploying dataset lsst/summer2012 ...
-            - creating directory /local/ibe_dev/web/html/.data.next/lsst/summer2012
-            - symlinking /local/ibe_dev/web/html/.data.next/lsst/summer2012/good_seeing_coadd
-                to /irsadata/LSST/dr-s2012/sdss/coadd/rr1000/s4S
             - writing /local/ibe_dev/web/conf/.apachectl.sh.next
             - writing /local/ibe_dev/web/conf/.httpd.conf.next
             - writing /local/ibe_dev/src/python/.production.ini.next

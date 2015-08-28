@@ -104,18 +104,6 @@
 
 <!--    ____________________________________________________
       /                                                      \
-     |   LSST                                                 | -->
-
-<engine id="lsst_dev" echo="false" echo_pool="false">
-  <url>informix://irsadmin@rmt_dbms26/lsst_dev?autocommit=false</url>
-  <paramstyle>qmark</paramstyle>
-</engine>
-
-<!-- |                                                        |
-      \ ____________________________________________________ /  -->
-
-<!--    ____________________________________________________
-      /                                                      \
      |   PTF                                                  | -->
 
 <engine id="ptf_images" echo="false" echo_pool="false" pool_recycle="300">

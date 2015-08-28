@@ -23,7 +23,6 @@
       , "wise/prelim"
       , "wise/prelim_postcryo"
       , "ptf/images"
-      , "lsst/summer2012"
     ],
     "MaxSpareServers": "2",
     "MinSpareServers": "1",
