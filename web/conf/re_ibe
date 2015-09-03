@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-# $Id: re_ibe,v 20150903.99113738 2015/09/03 18:37:38 modell ipac $
+# $Id: re_ibe,v 20150903.99115129 2015/09/03 18:51:29 modell ipac $
 
 # [re-]start IBE
 
@@ -49,7 +49,7 @@ inst=instances;
 suff=json;
 
 syst=bacchus
-port=5000;
+port=5001;
 
 syst=$( uname -n | LC );
 
@@ -85,7 +85,7 @@ function usage () {
   echo "";
   echo "  usage:";
   echo "";
-  echo "    ${ca} [no[sudo]] [[instances/]sysname_portnum[.json]]";
+  echo "    ${ca} help | [no[sudo]] [instances/]sysname_portnum[.json]";
   echo "";
   echo "      (e.g.)";
   echo "";
@@ -138,6 +138,17 @@ if [[ "conf" != "${xdt}" ]] ||
   exit 11;
 fi
 
+# if [[ ""        == "$1"      ]] && 
+#    [[ "bacchus" != "${syst}" ]]    ; then
+#    usage;
+#    exit 12;
+# fi
+
+if [[ "" == "$1" ]]; then
+   usage;
+   exit 12;
+fi
+
 given=${dflt};
 # 
 if [[ "" != "$1" ]]; then
@@ -153,19 +164,19 @@ fi
 fcfg=${cfg};
 # 
 if ! [[ -r "${cfg}" ]]; then
-  echo "cannot read config @ '${cfg}' ";
-  echo "trying  ...  '${inst}/${cfg}' ";
+  # echo "cannot read config @ '${cfg}' ";
+  # echo "trying  ...  '${inst}/${cfg}' ";
   fcfg=${inst}/${cfg};
 fi
 
 if ! [[ -r "${fcfg}" ]]; then
   echo "cannot read config @ '${fcfg}' ";
-  exit 12;
+  exit 13;
 fi
 
 if ! echo "${fcfg}" | grep -i ${sys_nm} >/dev/null 2>&1; then
   echo "error -- expected config name '${fcfg}' would include system name '${sys_nm}'";
-  exit 13;
+  exit 14;
 fi
 
 echo "BEGIN"                            && \
