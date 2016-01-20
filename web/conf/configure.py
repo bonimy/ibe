@@ -168,7 +168,7 @@ def prompt_for_configuration():
         cfg.MaxSpareServers = '2'
         cfg.MaxClients = '100'
         cfg.WSGIProcesses = '2'
-        cfg.sso_idm_endpoint = 'http://shadev1.ipac.caltech.edu/account/services/SSOIdentityManagerSoap'
+        cfg.sso_idm_endpoint = 'http://irsawebdev1.ipac.caltech.edu/account/services/SSOIdentityManagerSoap'
         cfg.workspace_root = '/work/%s_%s' % (cfg.User, cfg.Port)
     # IBE might be proxied, in which case the appropriate URLs must be generated.
     cfg.proxied = bool_input('Proxied under /ibe of an operational server [no]? ')

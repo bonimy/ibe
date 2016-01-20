@@ -1,19 +1,41 @@
 #!/bin/bash 
 
-# $Id: re_ibe,v 20150505.99171808 2015/05/06 00:18:08 modell ipac $
+# $Id: re_ibe,v 20150903.99115129 2015/09/03 18:51:29 modell ipac $
 
-# * [re-]start IBE
+# [re-]start IBE
 
-# use "re_ibe help" for assistance
-# expects to be in an IBE directory 
-# which should have a path ending ~ 
-# .../*ibe*/web/conf
+# $0 [ help | [sudo] [instances/]sysname_port[.json] ]
 
-# # all just wrapping for running this:
-# # 
-# [sudo] ./apachectl.sh stop     && \
-# ./configure.py --load=${fcfg}  && \
-# [sudo] ./apachectl.sh start           
+# $0 help
+# $0 bacchus_5000
+# $0 sudo bacchus_8000
+# $0 sudo hades_8000
+
+# {{{  # notes
+
+    # use "re_ibe help" for assistance
+
+    # expects to be in an IBE directory 
+    # which should have a path ending ~ 
+    # .../*ibe*/web/conf
+
+    # # all just wrapping for running this (dev):
+    # # 
+    # [sudo] ./apachectl.sh stop     && \
+    # ./configure.py --load=${fcfg}  && \
+    # [sudo] ./apachectl.sh start           
+    # 
+    # # or this (ops):
+    # # 
+    # [sudo] /etc/init.d/irsa_web stop     && \
+    # ./configure.py --load=${fcfg}        && \
+    # [sudo] /etc/init.d/irsa_web start           
+
+# }}}
+
+function LC () {
+    tr '[:upper:]' '[:lower:]'
+}
 
 export cn=$0;
 export cf=` pwd `;
@@ -24,15 +46,38 @@ sudo="sudo";
 sudo="";
 
 inst=instances;
-syst=bacchus
-port=5000;
 suff=json;
+
+syst=bacchus
+port=5001;
+
+syst=$( uname -n | LC );
 
 sprt=${syst}_${port};
 
-typ=${sprt};
+export typ=${sprt};
 
 dflt=${inst}/${typ}.${suff};
+
+cp_dev=./apachectl.sh;
+cp_ops=/etc/init.d/irsa_web;
+
+cp_use=${cp_dev};
+
+if ! echo "${syst}" | grep -i bacchus >/dev/null 2>&1; then
+    cp_use=${cp_ops};
+fi
+
+if ! [[ -r ${cp_use} ]]; then
+    echo "${cp_use} is not readable";
+    cp_use=${cp_dev};
+    echo "reverting to ${cp_use}";
+fi
+
+if ! [[ -x ${cp_use} ]]; then
+    echo "error -- ${cp_use} is not executable";
+    exit 9;
+fi
 
 function usage () {
   echo "";
@@ -40,7 +85,7 @@ function usage () {
   echo "";
   echo "  usage:";
   echo "";
-  echo "    ${ca} [no[sudo]] [[instances/]sysname_portnum[.json]]";
+  echo "    ${ca} help | [no[sudo]] [instances/]sysname_portnum[.json]";
   echo "";
   echo "      (e.g.)";
   echo "";
@@ -60,7 +105,7 @@ function usage () {
 if echo $* | grep -i    help >/dev/null 2>&1 || \
    echo $* | grep -i -- '-h' >/dev/null 2>&1    ; then
    usage;
-   exit -10;
+   exit 10;
 fi
 
 if [[ "_nosudo_" == "_$1_" ]]; then
@@ -72,7 +117,8 @@ elif [[ "_sudo_" == "_$1_" ]]; then
     sudo="sudo";
 fi
 
-sys_nm=` uname -n `;
+# sys_nm=` uname -n `;
+sys_nm=${syst};
 
 xdp=` pwd -P `;
 
@@ -89,7 +135,18 @@ if [[ "conf" != "${xdt}" ]] ||
    [[ "web"  != "${xdT}" ]] ||  
    ! echo "${xDT}" | grep -i ibe >/dev/null 2>&1; then
   echo "error -- expected current directory '${xdp}' path ending to look like .../*ibe*/web/conf";
-  exit -1;
+  exit 11;
+fi
+
+# if [[ ""        == "$1"      ]] && 
+#    [[ "bacchus" != "${syst}" ]]    ; then
+#    usage;
+#    exit 12;
+# fi
+
+if [[ "" == "$1" ]]; then
+   usage;
+   exit 12;
 fi
 
 given=${dflt};
@@ -110,31 +167,29 @@ if ! [[ -r "${cfg}" ]]; then
   # echo "cannot read config @ '${cfg}' ";
   # echo "trying  ...  '${inst}/${cfg}' ";
   fcfg=${inst}/${cfg};
-  # echo "error -- unable to read config @ '${cfg}' ";
-  # exit -3;
 fi
 
 if ! [[ -r "${fcfg}" ]]; then
-  echo "error -- unable to read config @ '${cfg}' or '${fcfg}' ";
-  exit -4;
+  echo "cannot read config @ '${fcfg}' ";
+  exit 13;
 fi
 
 if ! echo "${fcfg}" | grep -i ${sys_nm} >/dev/null 2>&1; then
   echo "error -- expected config name '${fcfg}' would include system name '${sys_nm}'";
-  exit -5;
+  exit 14;
 fi
 
 echo "BEGIN"                            && \
-  ${sudo} ./apachectl.sh stop           && \
+  ${sudo} ${cp_use} stop                && \
   echo "Apache stopped"                 && \
     ./configure.py --load=${fcfg}       && \
     echo "configure[.py]'d"             && \
       echo "  pause for httpd stop..."  && \
       sleep 1                           && \
-  ${sudo} ./apachectl.sh start          && \
+  ${sudo} ${cp_use} start               && \
   echo "Apache restarted"               && \
 echo "DONE"                             && \
 exit 0;
 
-# vi:set tabstop=4 shiftwidth=4 expandtab syntax=sh foldmethod=marker foldmarker={{,}} :
+# vi:set tabstop=4 shiftwidth=4 expandtab syntax=sh foldmethod=marker foldmarker={{{,}}} :
 

@@ -16,8 +16,6 @@
       , "wise/cryo_3band"
       , "wise/merge"
       , "wise/neowiser"
-      , "wise/pass1" 
-      , "wise/pass2" 
       , "wise/postcryo"
       , "wise/prelim" 
       , "wise/prelim_postcryo" 
