@@ -22,9 +22,14 @@
     <description>NEOWISER Year2 L1b Images</description>
 
     <!--
-    NEVER PUBLIC
-    -->
+    LAST
     <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/neowiser_i1bm_frm/current/merge.ci"       />
+    -->
+
+    <!--
+    NOW PUBLIC
+    -->
+    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/wise_neowiser/yr2_p1bm_frm/current/merge.ci"       />
 
     <corners radius="0.75"/>
     <center ra="crval1" dec="crval2"/>
@@ -664,7 +669,15 @@
 
     <description>NEOWISER Year2 Images</description>
 
+    <!--
+    LAST
     <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/i1bs_psd/current/merge.ci" />
+    -->
+
+    <!--
+    NOW PUBLIC
+    -->
+    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/wise_neowiser/yr2_p1bs_psd/current/merge.ci" />
 
     <unique refs="cntr" />
     <unique refs="source_id" />

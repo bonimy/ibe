@@ -22,7 +22,7 @@
     <description>NEOWISER Year3 L1b Images</description>
 
     <!--
-    NEVER PUBLIC
+    NOT PUBLIC
     -->
     <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/neowiser_i1bm_frm/current/merge.ci"       />
 
@@ -662,6 +662,9 @@
 
     <description>NEOWISER Year3 Images</description>
 
+    <!--
+    NOT PUBLIC
+    -->
     <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/i1bs_psd/current/merge.ci" />
 
     <unique refs="cntr" />
