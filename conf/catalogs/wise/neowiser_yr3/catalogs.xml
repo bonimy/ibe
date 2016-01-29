@@ -6,20 +6,20 @@
 
 <!-- {  ____________________________________________________
       /                                                      \
-     |   NEOWISER Year3                                       | -->
+     |   NEOWISER Year 3                                       | -->
 
 
 <schema name="neowiser_yr3" engine="wise_neowiser_yr3">
 
- <description>NEOWISER Year3 L1b Tables</description>
+ <description>NEOWISER Year 3 L1b Tables</description>
 
 
 
- <!-- neowiser_yr3_i1bm_frm - NEOWISER Year3 L1b image inventory      -->
+ <!-- neowiser_yr3_i1bm_frm - NEOWISER Year 3 L1b image inventory      -->
 
   <table name="yr3_i1bm_frm" dbname="neowiser_yr3_i1bm_frm">
 
-    <description>NEOWISER Year3 L1b Images</description>
+    <description>NEOWISER Year 3 L1b Images</description>
 
     <!--
     NOT PUBLIC
@@ -656,11 +656,11 @@
 </table>
 
 
-  <!-- neowiser_yr3_i1bs_psd - NEOWISER Year3 L1b source table        -->
+  <!-- neowiser_yr3_i1bs_psd - NEOWISER Year 3 L1b source table        -->
 
   <table name="yr3_i1bs_psd" dbname="neowiser_yr3_i1bs_psd">
 
-    <description>NEOWISER Year3 Images</description>
+    <description>NEOWISER Year 3 Images</description>
 
     <!--
     NOT PUBLIC
