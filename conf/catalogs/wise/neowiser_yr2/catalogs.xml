@@ -6,29 +6,30 @@
 
 <!-- {  ____________________________________________________
       /                                                      \
-     |   NEOWISER Year2                                       | -->
+     |   NEOWISER Year 2                                       | -->
 
 
 <schema name="neowiser_yr2" engine="wise_neowiser_yr2">
 
- <description>NEOWISER Year2 L1b Tables</description>
+ <description>NEOWISER Year 2 L1b Tables</description>
 
 
 
- <!-- neowiser_yr2_i1bm_frm - NEOWISER Year2 L1b image inventory      -->
+ <!-- neowiser_yr2_i1bm_frm - NEOWISER Year 2 L1b image inventory      -->
 
   <table name="yr2_i1bm_frm" dbname="neowiser_yr2_i1bm_frm">
 
-    <description>NEOWISER Year2 L1b Images</description>
+    <description>NEOWISER Year 2 L1b Images</description>
 
     <!--
     LAST  <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/neowiser_i1bm_frm/current/merge.ci"       />
+    LAST  <chunk_index path="/stage/irsa-wise-xpf/chunk_index/wise_neowiser/yr2_p1bm_frm/current/merge.ci"       />
     -->
 
     <!--
     NOW PUBLIC
     -->
-    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/wise_neowiser/yr2_p1bm_frm/current/merge.ci"       />
+    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/neowiser_i1bm_frm/current/merge.ci"       />
 
     <corners radius="0.75"/>
     <center ra="crval1" dec="crval2"/>
@@ -662,20 +663,21 @@
 </table>
 
 
-  <!-- neowiser_yr2_i1bs_psd - NEOWISER Year2 L1b source table        -->
+  <!-- neowiser_yr2_i1bs_psd - NEOWISER Year 2 L1b source table        -->
 
   <table name="yr2_i1bs_psd" dbname="neowiser_yr2_i1bs_psd">
 
-    <description>NEOWISER Year2 Images</description>
+    <description>NEOWISER Year 2 Images</description>
 
     <!--
     LAST  <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/i1bs_psd/current/merge.ci" />
+    LAST  <chunk_index path="/stage/irsa-wise-xpf/chunk_index/wise_neowiser/yr2_p1bs_psd/current/merge.ci" />
     -->
 
     <!--
     NOW PUBLIC
     -->
-    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/wise_neowiser/yr2_p1bs_psd/current/merge.ci" />
+    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/i1bs_psd/current/merge.ci" />
 
     <unique refs="cntr" />
     <unique refs="source_id" />
