@@ -101,7 +101,7 @@
 
     <!--
     -->
-    <products rootpath="/stage/irsa-wise-links-ops/links-neowiser/l1b"        />
+    <products rootpath="/stage/irsa-wise-links-ops/links-neowiser/l1b-yr2"        />
 
 
         <column name="band" principal="true">
