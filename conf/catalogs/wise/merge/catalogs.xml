@@ -50,8 +50,9 @@
     <sia writer="ibe.lib.sia.WiseSiaWriter" />
 
     <!--
+    NEXT  <products rootpath="/stage/irsa-wise-links-public/links-merge/l1b" />
     -->
-    <products rootpath="/stage/irsa-wise-links-public/links-merge/l1b" />
+    <products rootpath="/stage/irsa-wise-links-public/links-merge/q1b" />
 
 
     <column name="band" principal="true">
