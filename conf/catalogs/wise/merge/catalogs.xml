@@ -15,13 +15,13 @@
 
  <!-- Merge L1b image metadata -->
 
-  <table name="merge_p1bm_frm" dbname="neowiser_merge_p1bm_frm">
+  <table name="merge_q1bm_frm" dbname="neowiser_merge_q1bm_frm">
 
     <description>WISE Merge L1b Images</description>
 
     <!--
     -->
-    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_merge/merge_p1bm_frm/index.ci" />
+    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_merge/merge_q1bm_frm/index.ci" />
 
     <corners radius="0.75"/>
     <center ra="crval1" dec="crval2"/>
