@@ -7,6 +7,9 @@
 
 <schema_group id="wise">
 
+
+
+
 <schema name="merge" engine="wise_neowiser">
 
   <description>WISE Merge Tables</description>
@@ -2263,6 +2266,9 @@
 </table>
 
 </schema>
+
+
+
 
 </schema_group>
 </catalogs>
