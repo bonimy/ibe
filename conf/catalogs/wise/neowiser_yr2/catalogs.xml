@@ -40,7 +40,10 @@
     <!--
     NOW PUBLIC
     -->
-    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/yr2_p1bm_frm_/index.ci"       />
+    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/yr2_p1bm_frm/current/merge.ci"       />
+    <!--
+    NEXT  <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/yr2_p1bm_frm_/index.ci"       />
+    -->
 
     <corners radius="0.75"/>
     <center ra="crval1" dec="crval2"/>
