@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-# $Id: re_ibe,v 20160120.99121400 2016/01/20 20:14:00 irsawise unknown $
+# $Id: re_ibe,v 20160219.99170329 2016/02/20 01:03:30 irsawise unknown $
 
 # {{{  # hdr
 
@@ -31,9 +31,9 @@
     # 
     # # or this (ops):
     # # 
-    # [sudo] /etc/init.d/irsa_web stop     && \
+    # [sudo] /etc/init.d/ibe_ws stop     && \
     # ./configure.py --load=${fcfg}        && \
-    # [sudo] /etc/init.d/irsa_web start           
+    # [sudo] /etc/init.d/ibe_ws start           
 
 # }}}
 
@@ -98,7 +98,7 @@
     dflt=${inst}/${typ}.${suff};
 
     cp_dev=./apachectl.sh;
-    cp_ops=/etc/init.d/irsa_web;
+    cp_ops=/etc/init.d/ibe_ws;
 
     cp_use=${cp_dev};
 
@@ -199,6 +199,8 @@
 
 # }}}
 
+rtn=0;
+
 echo "BEGIN"                            && \
   ${sudo} ${cp_use} stop                && \
   echo "Apache stopped"                 && \
@@ -209,7 +211,13 @@ echo "BEGIN"                            && \
   ${sudo} ${cp_use} start               && \
   echo "Apache restarted"               && \
 echo "DONE"                             && \
-exit 0;
+exit ${rtn};
+
+rtn=$?;
+
+echo "( ${rtn} )";
+
+exit ${rtn};
 
 # vi:set tabstop=4 shiftwidth=4 expandtab syntax=sh foldmethod=marker foldmarker={{{,}}} :
 
