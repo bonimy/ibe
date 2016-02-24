@@ -10,7 +10,7 @@
 
 <!--  all of NEOWISER is ~ 2-Band  -->
 
-<schema name="neowiser" engine="wise_neowiser">
+<schema name="neowiser_pub" engine="wise_neowiser">
 
  <description>NEOWISER L1b Tables</description>
 
