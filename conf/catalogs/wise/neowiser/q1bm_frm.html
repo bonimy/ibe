@@ -23,8 +23,8 @@
 <h3>Quick Links</h3>
 
 <ul>
-	<li><a href="../../../../search/wise/neowiser/q1bm_frm?FORMAT=METADATA&amp;ct=html">Available Columns</a></li>
-	<li><a href="../../../../data/wise/neowiser/q1bm_frm/">Browse NEOWISER Level 1b Data</a></li>
+	<li><a href="../../../../search/wise/neowsier_int/q1bm_frm?FORMAT=METADATA&amp;ct=html">Available Columns</a></li>
+	<li><a href="../../../../data/wise/neowsier_int/q1bm_frm/">Browse NEOWISER Level 1b Data</a></li>
 </ul>
 
 <h3>Associated Data Products</h3>
@@ -53,11 +53,11 @@
 <p>Metadata queries can be issued at the following URL:</p>
 
 <div class="path">
-	<span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/search/wise/neowiser/q1bm_frm?<span class="param">&lt;parameters&gt;</span>
+	<span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/search/wise/neowsier_int/q1bm_frm?<span class="param">&lt;parameters&gt;</span>
 </div>
 
 <p>
-	For example, <a href="../../../../search/wise/neowiser/q1bm_frm?POS=0,0"><span class="root">&lt;root&gt;</span>/search/wise/neowiser/q1bm_frm?POS=0,0</a>
+	For example, <a href="../../../../search/wise/neowsier_int/q1bm_frm?POS=0,0"><span class="root">&lt;root&gt;</span>/search/wise/neowsier_int/q1bm_frm?POS=0,0</a>
 	returns metadata for images containing (RA,Dec) = (0, 0).
 	Query parameters are documented <a href="../../../../queries.html">here</a>.
 </p>
@@ -84,16 +84,16 @@
 <dd>
 	<p>These are located at:</p>
 	<div class="path">
-		<span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/data/wise/neowiser/q1bm_frm/{<span class="col">scangrp</span>:s}/{<span class="col">scan_id</span>:s}/{<span class="col">frame_num</span>:03d}/{<span class="col">scan_id</span>:s}{<span class="col">frame_num</span>:03d}-w{<span class="col">band</span>:1d}-int-1b.fits
+		<span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/data/wise/neowsier_int/q1bm_frm/{<span class="col">scangrp</span>:s}/{<span class="col">scan_id</span>:s}/{<span class="col">frame_num</span>:03d}/{<span class="col">scan_id</span>:s}{<span class="col">frame_num</span>:03d}-w{<span class="col">band</span>:1d}-int-1b.fits
 	</div>
 	<p>Examples:</p>
 	<ul>
-		<li><a href="../../../../data/wise/neowiser/q1bm_frm/3b/44213b/121/44213b121-w1-int-1b.fits"><span class="root">&lt;root&gt;</span>/data/wise/neowiser/q1bm_frm/3b/44213b/121/44213b121-w1-int-1b.fits</a></li>
-		<li><a href="../../../../data/wise/neowiser/q1bm_frm/8b/53318b/014/53318b014-w1-int-1b.fits"><span class="root">&lt;root&gt;</span>/data/wise/neowiser/q1bm_frm/8b/53318b/014/53318b014-w1-int-1b.fits</a></li>
+		<li><a href="../../../../data/wise/neowsier_int/q1bm_frm/3b/44213b/121/44213b121-w1-int-1b.fits"><span class="root">&lt;root&gt;</span>/data/wise/neowsier_int/q1bm_frm/3b/44213b/121/44213b121-w1-int-1b.fits</a></li>
+		<li><a href="../../../../data/wise/neowsier_int/q1bm_frm/8b/53318b/014/53318b014-w1-int-1b.fits"><span class="root">&lt;root&gt;</span>/data/wise/neowsier_int/q1bm_frm/8b/53318b/014/53318b014-w1-int-1b.fits</a></li>
 	</ul>
 	<p>
 		By appending <span class="param">center</span> and <span class="param">size</span> parameters
-		(e.g <a href="../../../../data/wise/neowiser/q1bm_frm/8b/53318b/014/53318b014-w1-int-1b.fits?center=87.634636,-69.267708&size=200pix"><span class="root">&lt;root&gt;</span>/data/wise/neowiser/q1bm_frm/8b/53318b/014/53318b014-w1-int-1b.fits?center=87.634636,-69.267708&size=200pix</a>),
+		(e.g <a href="../../../../data/wise/neowsier_int/q1bm_frm/8b/53318b/014/53318b014-w1-int-1b.fits?center=87.634636,-69.267708&size=200pix"><span class="root">&lt;root&gt;</span>/data/wise/neowsier_int/q1bm_frm/8b/53318b/014/53318b014-w1-int-1b.fits?center=87.634636,-69.267708&size=200pix</a>),
 		one can also download cutouts (see the <a href="../../../../cutouts.html">detailed documentation</a>).
 	</p>
 	<a name="sample_code" />
@@ -107,7 +107,7 @@ params['scangrp'] = params['scan_id'][-2:]
 path = str.format(
     '{scangrp:s}/{scan_id:s}/{frame_num:03d}/{scan_id:s}{frame_num:03d}-w{band:1d}-int-1b.fits',
     **params)
-url = '<span class="server">server</span><span class="root">root</span>/data/wise/neowiser/q1bm_frm/' + path</pre>
+url = '<span class="server">server</span><span class="root">root</span>/data/wise/neowsier_int/q1bm_frm/' + path</pre>
 
 	<p>C code to build a URL:</p>
 	<pre class="prettyprint lang-c linenums">
@@ -117,7 +117,7 @@ const char *server = "<span class="server">server</span><span class="root">root<
 int frame_num = 102;
 int band = 2;
 snprintf(url, sizeof(url),
-         "%s/data/wise/neowiser/q1bm_frm/%s/%s/%03d/%s%03d-w%1d-int-1b.fits",
+         "%s/data/wise/neowsier_int/q1bm_frm/%s/%s/%03d/%s%03d-w%1d-int-1b.fits",
          server, scan_id + (strlen(scan_id) - 2), scan_id, frame_num,
          scan_id, frame_num, band);</pre>
 
@@ -127,7 +127,7 @@ String scan_id = "00717b";
 String server = "<span class="server">server</span><span class="root">root</span>";
 int frame_num = 102;
 int band = 2;
-String url = String.format("%1$s/data/wise/neowiser/q1bm_frm/%2$s/%3$s/%4$03d/%3$s%4$03d-w%5$1d-int-1b.fits",
+String url = String.format("%1$s/data/wise/neowsier_int/q1bm_frm/%2$s/%3$s/%4$03d/%3$s%4$03d-w%5$1d-int-1b.fits",
                            server, scan_id.substring(scan_id.length() - 2), scan_id, frame_num, band);</pre>
 
 </dd>
@@ -136,12 +136,12 @@ String url = String.format("%1$s/data/wise/neowiser/q1bm_frm/%2$s/%3$s/%4$03d/%3
 <dd>
 	<p>These are located at:</p>
 	<div class="path">
-		<span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/data/wise/neowiser/q1bm_frm/{<span class="col">scangrp</span>:s}/{<span class="col">scan_id</span>:s}/{<span class="col">frame_num</span>:03d}/{<span class="col">scan_id</span>:s}{<span class="col">frame_num</span>:03d}-w{<span class="col">band</span>:1d}-unc-1b.fits.gz
+		<span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/data/wise/neowsier_int/q1bm_frm/{<span class="col">scangrp</span>:s}/{<span class="col">scan_id</span>:s}/{<span class="col">frame_num</span>:03d}/{<span class="col">scan_id</span>:s}{<span class="col">frame_num</span>:03d}-w{<span class="col">band</span>:1d}-unc-1b.fits.gz
 	</div>
 	<p>Examples:</p>
 	<ul>
-		<li><a href="../../../../data/wise/neowiser/q1bm_frm/3b/44213b/121/44213b121-w1-unc-1b.fits.gz"><span class="root">&lt;root&gt;</span>/data/wise/neowiser/q1bm_frm/3b/44213b/121/44213b121-w1-unc-1b.fits.gz</a></li>
-		<li><a href="../../../../data/wise/neowiser/q1bm_frm/8b/53318b/014/53318b014-w1-unc-1b.fits.gz"><span class="root">&lt;root&gt;</span>/data/wise/neowiser/q1bm_frm/8b/53318b/014/53318b014-w1-unc-1b.fits.gz</a></li>
+		<li><a href="../../../../data/wise/neowsier_int/q1bm_frm/3b/44213b/121/44213b121-w1-unc-1b.fits.gz"><span class="root">&lt;root&gt;</span>/data/wise/neowsier_int/q1bm_frm/3b/44213b/121/44213b121-w1-unc-1b.fits.gz</a></li>
+		<li><a href="../../../../data/wise/neowsier_int/q1bm_frm/8b/53318b/014/53318b014-w1-unc-1b.fits.gz"><span class="root">&lt;root&gt;</span>/data/wise/neowsier_int/q1bm_frm/8b/53318b/014/53318b014-w1-unc-1b.fits.gz</a></li>
 	</ul>
 	<p>
 		Append <span class="param">center</span> and <span class="param">size</span>
@@ -159,12 +159,12 @@ String url = String.format("%1$s/data/wise/neowiser/q1bm_frm/%2$s/%3$s/%4$03d/%3
 <dd>
 	<p>These are located at:</p>
 	<div class="path">
-		<span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/data/wise/neowiser/q1bm_frm/{<span class="col">scangrp</span>:s}/{<span class="col">scan_id</span>:s}/{<span class="col">frame_num</span>:03d}/{<span class="col">scan_id</span>:s}{<span class="col">frame_num</span>:03d}-w{<span class="col">band</span>:1d}-msk-1b.fits.gz
+		<span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/data/wise/neowsier_int/q1bm_frm/{<span class="col">scangrp</span>:s}/{<span class="col">scan_id</span>:s}/{<span class="col">frame_num</span>:03d}/{<span class="col">scan_id</span>:s}{<span class="col">frame_num</span>:03d}-w{<span class="col">band</span>:1d}-msk-1b.fits.gz
 	</div>
 	<p>Examples:</p>
 	<ul>
-		<li><a href="../../../../data/wise/neowiser/q1bm_frm/3b/44213b/121/44213b121-w1-msk-1b.fits.gz"><span class="root">&lt;root&gt;</span>/data/wise/neowiser/q1bm_frm/3b/44213b/121/44213b121-w1-msk-1b.fits.gz</a></li>
-		<li><a href="../../../../data/wise/neowiser/q1bm_frm/8b/53318b/014/53318b014-w1-msk-1b.fits.gz"><span class="root">&lt;root&gt;</span>/data/wise/neowiser/q1bm_frm/8b/53318b/014/53318b014-w1-msk-1b.fits.gz</a></li>
+		<li><a href="../../../../data/wise/neowsier_int/q1bm_frm/3b/44213b/121/44213b121-w1-msk-1b.fits.gz"><span class="root">&lt;root&gt;</span>/data/wise/neowsier_int/q1bm_frm/3b/44213b/121/44213b121-w1-msk-1b.fits.gz</a></li>
+		<li><a href="../../../../data/wise/neowsier_int/q1bm_frm/8b/53318b/014/53318b014-w1-msk-1b.fits.gz"><span class="root">&lt;root&gt;</span>/data/wise/neowsier_int/q1bm_frm/8b/53318b/014/53318b014-w1-msk-1b.fits.gz</a></li>
 	</ul>
 	<p>
 		Append <span class="param">center</span> and <span class="param">size</span>
@@ -190,12 +190,12 @@ String url = String.format("%1$s/data/wise/neowiser/q1bm_frm/%2$s/%3$s/%4$03d/%3
 		The tables are located at:
 	</p>
 	<div class="path">
-		<span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/data/wise/neowiser/q1bm_frm/{<span class="col">scangrp</span>:s}/{<span class="col">scan_id</span>:s}/{<span class="col">frame_num</span>:03d}/{<span class="col">scan_id</span>:s}{<span class="col">frame_num</span>:03d}-art-w{<span class="col">band</span>:1d}-D.tbl
+		<span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/data/wise/neowsier_int/q1bm_frm/{<span class="col">scangrp</span>:s}/{<span class="col">scan_id</span>:s}/{<span class="col">frame_num</span>:03d}/{<span class="col">scan_id</span>:s}{<span class="col">frame_num</span>:03d}-art-w{<span class="col">band</span>:1d}-D.tbl
 	</div>
 	<p>Examples:</p>
 	<ul>
-		<li><a href="../../../../data/wise/neowiser/q1bm_frm/3b/44213b/121/44213b121-art-w1-D.tbl"><span class="root">&lt;root&gt;</span>/data/wise/neowiser/q1bm_frm/3b/44213b/121/44213b121-art-w1-D.tbl</a></li>
-		<li><a href="../../../../data/wise/neowiser/q1bm_frm/8b/53318b/014/53318b014-art-w1-D.tbl"><span class="root">&lt;root&gt;</span>/data/wise/neowiser/q1bm_frm/8b/53318b/014/53318b014-art-w1-D.tbl</a></li>
+		<li><a href="../../../../data/wise/neowsier_int/q1bm_frm/3b/44213b/121/44213b121-art-w1-D.tbl"><span class="root">&lt;root&gt;</span>/data/wise/neowsier_int/q1bm_frm/3b/44213b/121/44213b121-art-w1-D.tbl</a></li>
+		<li><a href="../../../../data/wise/neowsier_int/q1bm_frm/8b/53318b/014/53318b014-art-w1-D.tbl"><span class="root">&lt;root&gt;</span>/data/wise/neowsier_int/q1bm_frm/8b/53318b/014/53318b014-art-w1-D.tbl</a></li>
 	</ul>
 	<p>
 		A trivial change to the format string in the sample
@@ -216,11 +216,11 @@ String url = String.format("%1$s/data/wise/neowiser/q1bm_frm/%2$s/%3$s/%4$03d/%3
 		The tables are located at:
 	</p>
 	<div class="path">
-		<span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/data/wise/neowiser/q1bm_frm/{<span class="col">scangrp</span>:s}/{<span class="col">scan_id</span>:s}/{<span class="col">frame_num</span>:03d}/{<span class="col">scan_id</span>:s}{<span class="col">frame_num</span>:03d}-art-w{<span class="col">band</span>:1d}-O.tbl
+		<span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/data/wise/neowsier_int/q1bm_frm/{<span class="col">scangrp</span>:s}/{<span class="col">scan_id</span>:s}/{<span class="col">frame_num</span>:03d}/{<span class="col">scan_id</span>:s}{<span class="col">frame_num</span>:03d}-art-w{<span class="col">band</span>:1d}-O.tbl
 	</div>
 	<p>Examples:</p>
 	<ul>
-		<li><a href="../../../../data/wise/neowiser/q1bm_frm/3b/44213b/121/44213b121-art-w2-O.tbl"><span class="root">&lt;root&gt;</span>/data/wise/neowiser/q1bm_frm/3b/44213b/121/44213b121-art-w2-O.tbl</a></li>
+		<li><a href="../../../../data/wise/neowsier_int/q1bm_frm/3b/44213b/121/44213b121-art-w2-O.tbl"><span class="root">&lt;root&gt;</span>/data/wise/neowsier_int/q1bm_frm/3b/44213b/121/44213b121-art-w2-O.tbl</a></li>
 	</ul>
 	<p>
 		A trivial change to the format string in the sample
@@ -241,12 +241,12 @@ String url = String.format("%1$s/data/wise/neowiser/q1bm_frm/%2$s/%3$s/%4$03d/%3
 		The tables are located at:
 	</p>
 	<div class="path">
-		<span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/data/wise/neowiser/q1bm_frm/{<span class="col">scangrp</span>:s}/{<span class="col">scan_id</span>:s}/{<span class="col">frame_num</span>:03d}/{<span class="col">scan_id</span>:s}{<span class="col">frame_num</span>:03d}-art-w{<span class="col">band</span>:1d}-P.tbl
+		<span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/data/wise/neowsier_int/q1bm_frm/{<span class="col">scangrp</span>:s}/{<span class="col">scan_id</span>:s}/{<span class="col">frame_num</span>:03d}/{<span class="col">scan_id</span>:s}{<span class="col">frame_num</span>:03d}-art-w{<span class="col">band</span>:1d}-P.tbl
 	</div>
 	<p>Examples:</p>
 	<ul>
-		<li><a href="../../../../data/wise/neowiser/q1bm_frm/3b/44213b/121/44213b121-art-w1-P.tbl"><span class="root">&lt;root&gt;</span>/data/wise/neowiser/q1bm_frm/3b/44213b/121/44213b121-art-w1-P.tbl</a></li>
-		<li><a href="../../../../data/wise/neowiser/q1bm_frm/8b/53318b/014/53318b014-art-w1-P.tbl"><span class="root">&lt;root&gt;</span>/data/wise/neowiser/q1bm_frm/8b/53318b/014/53318b014-art-w1-P.tbl</a></li>
+		<li><a href="../../../../data/wise/neowsier_int/q1bm_frm/3b/44213b/121/44213b121-art-w1-P.tbl"><span class="root">&lt;root&gt;</span>/data/wise/neowsier_int/q1bm_frm/3b/44213b/121/44213b121-art-w1-P.tbl</a></li>
+		<li><a href="../../../../data/wise/neowsier_int/q1bm_frm/8b/53318b/014/53318b014-art-w1-P.tbl"><span class="root">&lt;root&gt;</span>/data/wise/neowsier_int/q1bm_frm/8b/53318b/014/53318b014-art-w1-P.tbl</a></li>
 	</ul>
 	<p>
 		A trivial change to the format string in the sample
@@ -267,12 +267,12 @@ String url = String.format("%1$s/data/wise/neowiser/q1bm_frm/%2$s/%3$s/%4$03d/%3
 		The tables are located at:
 	</p>
 	<div class="path">
-		<span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/data/wise/neowiser/q1bm_frm/{<span class="col">scangrp</span>:s}/{<span class="col">scan_id</span>:s}/{<span class="col">frame_num</span>:03d}/{<span class="col">scan_id</span>:s}{<span class="col">frame_num</span>:03d}-art-w{<span class="col">band</span>:1d}-H.tbl
+		<span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/data/wise/neowsier_int/q1bm_frm/{<span class="col">scangrp</span>:s}/{<span class="col">scan_id</span>:s}/{<span class="col">frame_num</span>:03d}/{<span class="col">scan_id</span>:s}{<span class="col">frame_num</span>:03d}-art-w{<span class="col">band</span>:1d}-H.tbl
 	</div>
 	<p>Examples:</p>
 	<ul>
-		<li><a href="../../../../data/wise/neowiser/q1bm_frm/3b/44213b/121/44213b121-art-w1-H.tbl"><span class="root">&lt;root&gt;</span>/data/wise/neowiser/q1bm_frm/3b/44213b/121/44213b121-art-w1-H.tbl</a></li>
-		<li><a href="../../../../data/wise/neowiser/q1bm_frm/8b/53318b/014/53318b014-art-w1-H.tbl"><span class="root">&lt;root&gt;</span>/data/wise/neowiser/q1bm_frm/8b/53318b/014/53318b014-art-w1-H.tbl</a></li>
+		<li><a href="../../../../data/wise/neowsier_int/q1bm_frm/3b/44213b/121/44213b121-art-w1-H.tbl"><span class="root">&lt;root&gt;</span>/data/wise/neowsier_int/q1bm_frm/3b/44213b/121/44213b121-art-w1-H.tbl</a></li>
+		<li><a href="../../../../data/wise/neowsier_int/q1bm_frm/8b/53318b/014/53318b014-art-w1-H.tbl"><span class="root">&lt;root&gt;</span>/data/wise/neowsier_int/q1bm_frm/8b/53318b/014/53318b014-art-w1-H.tbl</a></li>
 	</ul>
 	<p>
 		A trivial change to the format string in the sample
