@@ -10,7 +10,7 @@
 
 <!--  all of NEOWISER is ~ 2-Band  -->
 
-<schema name="neowiser" engine="wise_neowiser">
+<schema name="neowiser_pub" engine="wise_neowiser">
 
  <description>NEOWISER L1b Tables</description>
 
@@ -21,7 +21,10 @@
 
     <description>NEOWISER L1b Images</description>
 
-    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/q1bm_frm/current/merge.ci" />
+    <!--
+    LAST  <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/q1bm_frm/current/merge.ci" />
+    -->
+    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/q1bm_frm/index.ci" />
 
     <corners radius="0.75"/>
     <center ra="crval1" dec="crval2"/>
@@ -650,7 +653,10 @@
 
     <description>NEOWISER L1b Images</description>
 
-    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/q1bs_psd/current/merge.ci" />
+    <!--
+    LAST  <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/q1bs_psd/current/merge.ci" />
+    -->
+    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/q1bs_psd/current/merge.ci" />
 
     <unique refs="cntr" />
     <unique refs="source_id" />
