@@ -78,7 +78,7 @@
 
     <sia writer="ibe.lib.sia.WiseSiaWriter" />
 
-    <products rootpath="/stage/irsa-wise-links-public/links-neowiser/l1b"     />
+    <products rootpath="/stage/irsa-wise-links-public/links-neowiser-new/l1b"     />
 
         <column name="band" principal="true">
           <description>WISE band number</description>
