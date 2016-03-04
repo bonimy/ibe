@@ -15,13 +15,16 @@
  <description>NEOWISER L1b Tables</description>
 
 
-  <!-- neowiser_p1bm_frm - NEOWISER Public L1b Tables        -->
+  <!-- neowiser_q1bm_frm - NEOWISER  * after release *  Public L1b Tables        -->
 
-  <table name="p1bm_frm" dbname="neowiser_p1bm_frm">
+  <table name="p1bm_frm" dbname="neowiser_q1bm_frm">
 
     <description>NEOWISER L1b Images</description>
 
-    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/p1bm_frm/current/merge.ci" />
+    <!--
+    LAST  <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/q1bm_frm/current/merge.ci" />
+    -->
+    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/q1bm_frm/index.ci" />
 
     <corners radius="0.75"/>
     <center ra="crval1" dec="crval2"/>
@@ -32,14 +35,16 @@
 
     <image_set refs="scan_id frame_num" />
 
-    <reference from="scan_id"   to="wise.neowiser.i1bm_frm.scan_id"         />
-    <reference from="frame_num" to="wise.neowiser.i1bm_frm.frame_num"       />
+    <reference from="scan_id"   to="wise.neowiser_int.i1bm_frm.scan_id"         />
+    <reference from="frame_num" to="wise.neowiser_int.i1bm_frm.frame_num"       />
 
-    <reference from="scan_id"   to="wise.neowiser.i1bs_psd.scan_id"         />
-    <reference from="frame_num" to="wise.neowiser.i1bs_psd.frame_num"       />
+    <reference from="scan_id"   to="wise.neowiser_int.i1bs_psd.scan_id"         />
+    <reference from="frame_num" to="wise.neowiser_int.i1bs_psd.frame_num"       />
 
+    <!--
     <reference from="scan_id"   to="wise.neowiser.p1bm_frm.scan_id"         />
     <reference from="frame_num" to="wise.neowiser.p1bm_frm.frame_num"       />
+    -->
 
     <reference from="scan_id"   to="wise.neowiser.p1bs_psd.scan_id"         />
     <reference from="frame_num" to="wise.neowiser.p1bs_psd.frame_num"       />
@@ -644,39 +649,35 @@
 </table>
 
 
-  <!-- neowiser_p1bs_psd - NEOWISER Public L1b image metadata -->
+  <!-- neowiser_q1bs_psd - NEOWISER  * after release * Public L1b image metadata -->
 
-  <table name="p1bs_psd" dbname="neowiser_p1bs_psd">
+  <table name="p1bs_psd" dbname="neowiser_q1bs_psd">
 
     <description>NEOWISER L1b Images</description>
 
-    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/p1bs_psd/current/merge.ci" />
+    <!--
+    LAST  <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/q1bs_psd/current/merge.ci" />
+    -->
+    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/q1bs_psd/current/merge.ci" />
 
     <unique refs="cntr" />
     <unique refs="source_id" />
 
     <image_set refs="scan_id frame_num" />
 
-    <reference from="scan_id"   to="wise.neowiser.i1bm_frm.scan_id"         />
-    <reference from="frame_num" to="wise.neowiser.i1bm_frm.frame_num"       />
+    <reference from="scan_id"   to="wise.neowiser_int.i1bm_frm.scan_id"         />
+    <reference from="frame_num" to="wise.neowiser_int.i1bm_frm.frame_num"       />
 
-    <reference from="scan_id"   to="wise.neowiser.i1bs_psd.scan_id"         />
-    <reference from="frame_num" to="wise.neowiser.i1bs_psd.frame_num"       />
+    <reference from="scan_id"   to="wise.neowiser_int.i1bs_psd.scan_id"         />
+    <reference from="frame_num" to="wise.neowiser_int.i1bs_psd.frame_num"       />
 
     <reference from="scan_id"   to="wise.neowiser.p1bm_frm.scan_id"         />
     <reference from="frame_num" to="wise.neowiser.p1bm_frm.frame_num"       />
 
+    <!--
     <reference from="scan_id"   to="wise.neowiser.p1bs_psd.scan_id"         />
     <reference from="frame_num" to="wise.neowiser.p1bs_psd.frame_num"       />
-
-    <reference from="scan_id"   to="wise.neowiser.p1bm_frm.scan_id"     />
-    <reference from="frame_num" to="wise.neowiser.p1bm_frm.frame_num"   />
-
-    <!--
-    <reference from="scan_id"   to="wise.neowiser.p1bs_psd.scan_id"     />
-    <reference from="frame_num" to="wise.neowiser.p1bs_psd.frame_num"   />
     -->
-
 
     <reference from="scan_id"   to="wise.allsky.2band_p1bs_psd.scan_id"     />
     <reference from="frame_num" to="wise.allsky.2band_p1bs_psd.frame_num"   />

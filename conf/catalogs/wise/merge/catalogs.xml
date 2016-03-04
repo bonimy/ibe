@@ -13,15 +13,16 @@
 
 <!--  Merge  -->
 
+
  <!-- Merge L1b image metadata -->
 
-  <table name="merge_p1bm_frm" dbname="neowiser_merge_p1bm_frm">
+  <table name="merge_p1bm_frm" dbname="neowiser_merge_q1bm_frm">
 
     <description>WISE Merge L1b Images</description>
 
     <!--
     -->
-    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_merge/merge_p1bm_frm/index.ci" />
+    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_merge/merge_q1bm_frm/index.ci" />
 
     <corners radius="0.75"/>
     <center ra="crval1" dec="crval2"/>
@@ -32,20 +33,26 @@
 
     <image_set refs="scan_id frame_num"           />  
 
+    <reference from="scan_id"   to="wise.merge.i1bs_psd.scan_id"   />  
+    <reference from="frame_num" to="wise.merge.i1bs_psd.frame_num" />  
+
     <reference from="scan_id"   to="wise.allwise.i3am_cdd.scan_id"   />  
     <reference from="frame_num" to="wise.allwise.i3am_cdd.frame_num" />  
 
-    <reference from="scan_id"   to="wise.allsky.4band_p1bs_psd.scan_id"   />  
-    <reference from="frame_num" to="wise.allsky.4band_p1bs_psd.frame_num" />  
+    <reference from="scan_id"   to="wise.merge.p1bs_psd.scan_id"   />  
+    <reference from="frame_num" to="wise.merge.p1bs_psd.frame_num" />  
 
-    <reference from="scan_id"   to="wise.allsky.3band_p1bs_psd.scan_id"   />  
-    <reference from="frame_num" to="wise.allsky.3band_p1bs_psd.frame_num" />  
+    <reference from="scan_id"   to="wise.allsky.4band_q1bs_psd.scan_id"   />  
+    <reference from="frame_num" to="wise.allsky.4band_q1bs_psd.frame_num" />  
 
-    <reference from="scan_id"   to="wise.allsky.2band_p1bs_psd.scan_id"   />  
-    <reference from="frame_num" to="wise.allsky.2band_p1bs_psd.frame_num" />  
+    <reference from="scan_id"   to="wise.allsky.3band_q1bs_psd.scan_id"   />  
+    <reference from="frame_num" to="wise.allsky.3band_q1bs_psd.frame_num" />  
 
-    <reference from="scan_id"   to="wise.postcryo.2band_p1bs_psd.scan_id"   />  
-    <reference from="frame_num" to="wise.postcryo.2band_p1bs_psd.frame_num" />  
+    <reference from="scan_id"   to="wise.allsky.2band_q1bs_psd.scan_id"   />  
+    <reference from="frame_num" to="wise.allsky.2band_q1bs_psd.frame_num" />  
+
+    <reference from="scan_id"   to="wise.postcryo.2band_q1bs_psd.scan_id"   />  
+    <reference from="frame_num" to="wise.postcryo.2band_q1bs_psd.frame_num" />  
 
     <sia writer="ibe.lib.sia.WiseSiaWriter" />
 
@@ -1129,6 +1136,7 @@
 
 
 </table>
+
 
 </schema>
 
