@@ -1,4 +1,6 @@
 {
+    "User": "irsadmin",
+    "Group": "irsa",
     "WSGIProcesses": "8",
     "datasets": [
         "ptf/images" 

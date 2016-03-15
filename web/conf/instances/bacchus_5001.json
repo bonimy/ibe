@@ -1,4 +1,5 @@
 {
+    "Group": "irsa",
     "WSGIProcesses": "2", 
     "datasets": [
         "ptf/images" 
