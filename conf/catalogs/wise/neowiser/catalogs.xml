@@ -23,8 +23,9 @@
 
     <!--
     LAST  <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/q1bm_frm/current/merge.ci" />
+    LAST  <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/q1bm_frm/index.ci" />
     -->
-    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/q1bm_frm/index.ci" />
+    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/p1bm_frm/index.ci" />
 
     <corners radius="0.75"/>
     <center ra="crval1" dec="crval2"/>
@@ -657,8 +658,9 @@
 
     <!--
     LAST  <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/q1bs_psd/current/merge.ci" />
+    LAST  <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/q1bs_psd/current/merge.ci" />
     -->
-    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/q1bs_psd/current/merge.ci" />
+    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/p1bs_psd/current/merge.ci" />
 
     <unique refs="cntr" />
     <unique refs="source_id" />
