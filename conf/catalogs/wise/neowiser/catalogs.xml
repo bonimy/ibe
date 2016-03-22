@@ -15,16 +15,12 @@
  <description>NEOWISER L1b Tables</description>
 
 
-  <!-- neowiser_q1bm_frm - NEOWISER  * after release *  Public L1b Tables        -->
+  <!-- neowiser_p1bm_frm - Public L1b Tables        -->
 
-  <table name="p1bm_frm" dbname="neowiser_q1bm_frm">
+  <table name="p1bm_frm" dbname="neowiser_p1bm_frm">
 
     <description>NEOWISER L1b Images</description>
 
-    <!--
-    LAST  <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/q1bm_frm/current/merge.ci" />
-    LAST  <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/q1bm_frm/index.ci" />
-    -->
     <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/p1bm_frm/index.ci" />
 
     <corners radius="0.75"/>
@@ -650,16 +646,12 @@
 </table>
 
 
-  <!-- neowiser_q1bs_psd - NEOWISER  * after release * Public L1b image metadata -->
+  <!-- neowiser_p1bs_psd - Public L1b image metadata -->
 
-  <table name="p1bs_psd" dbname="neowiser_q1bs_psd">
+  <table name="p1bs_psd" dbname="neowiser_p1bs_psd">
 
     <description>NEOWISER L1b Images</description>
 
-    <!--
-    LAST  <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/q1bs_psd/current/merge.ci" />
-    LAST  <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/q1bs_psd/current/merge.ci" />
-    -->
     <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/p1bs_psd/current/merge.ci" />
 
     <unique refs="cntr" />
