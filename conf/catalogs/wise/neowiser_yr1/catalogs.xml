@@ -22,8 +22,9 @@
     <description>NEOWISER Year1 L1b Images</description>
 
     <!--
+    LAST  <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/yr1_p1bm_frm_sep/index.ci" />
     -->
-    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/yr1_p1bm_frm_sep/index.ci" />
+    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/yr1_p1bm_frm_/index.ci" />
 
     <corners radius="0.75"/>
     <center ra="crval1" dec="crval2"/>
