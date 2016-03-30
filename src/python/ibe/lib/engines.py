@@ -1,5 +1,6 @@
 import lxml.etree as etree
 import sqlalchemy
+import sqlalchemy.pool
 
 import ibe.lib.utils as utils
 
@@ -23,12 +24,24 @@ class Engine(object):
             self.pool_recycle = int(element.get("pool_recycle"))
         self.url = element[0].text
         self.paramstyle = element[1].text
-        # For now, create engines eagerly
+        # For now, create engines eagerly.
+        #
+        # Note that after a long idle period (~1 hour) connections between
+        # some IBE and database servers seem to be cleaned up by another
+        # party - a firewall or the database server. When IBE attempts to
+        # use a stale connection, even just to close it (as in the connection
+        # recycling case), the result is a very long (~15 min) timeout of as
+        # yet unidentified origin. One way to mitigate would be to close
+        # connections asynchronously in another thread, another would be
+        # do do active cache invalidation.
+        #
+        # Since connection pooling happens inside sqlalchemy, for now take the
+        # easy way out and turn off connection pooling completely.
         self._sa_engine = sqlalchemy.create_engine(self.url,
                                                    echo=self.echo,
                                                    echo_pool=self.echo_pool,
-                                                   pool_recycle=self.pool_recycle,
-                                                   paramstyle=self.paramstyle)
+                                                   paramstyle=self.paramstyle,
+                                                   poolclass=sqlalchemy.pool.NullPool)
         self._sa_engine.execution_options(autocommit=False)
         def no(*args, **kw):
             return False
