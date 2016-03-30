@@ -10,14 +10,14 @@
       , "twomass/full"
       , "twomass/sixxfull"
       , "twomass/sixxcat"
+      , "wise/allsky"
       , "wise/allwise"
+      , "wise/cryo_3band"
       , "wise/merge"
       , "wise/neowiser"
-      , "wise/allsky"
-      , "wise/cryo_3band"
       , "wise/postcryo"
-      , "wise/prelim_postcryo" 
       , "wise/prelim" 
+      , "wise/prelim_postcryo" 
       , "ptf/images" 
     ],
     "MaxSpareServers": "8",
