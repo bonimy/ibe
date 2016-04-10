@@ -26,7 +26,7 @@
     "host": "http://irsa.ipac.caltech.edu",
     "workspace_root": "/work",
     "StartServers": "4",
-    "MaxClients": "256",
+    "MaxClients": "2048",
     "Port": "8000",
     "ErrorLog": "\"|rotatelogs -l /irsadata/logs/www_ops/zeus1_ibe_error_%Y%m%d.log 604800\"",
     "CombinedLog": "\"|rotatelogs -l /irsadata/logs/www_ops/zeus1_ibe_combined_%Y%m%d.log 604800\""
