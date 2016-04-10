@@ -21,6 +21,7 @@ KeepAliveTimeout 15
 StartServers         ${ibe.StartServers}
 MinSpareServers      ${ibe.MinSpareServers}
 MaxSpareServers      ${ibe.MaxSpareServers}
+ServerLimit          2048
 MaxClients           ${ibe.MaxClients}
 MaxRequestsPerChild  20
 </IfModule>
