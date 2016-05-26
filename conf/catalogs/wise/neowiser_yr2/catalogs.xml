@@ -13,22 +13,13 @@
 
  <description>NEOWISER Year 2 L1b Tables</description>
 
-
-    <!--
-    LAST  neowiser_yr2_i1bm_frm - NEOWISER Year 2 L1b image inventory      
-    LAST  
-    LAST  <table name="yr2_i1bm_frm" dbname="neowiser_yr2_i1bm_frm">
-    LAST  
-    -->
-
-
- <!-- neowiser_yr2_p1bm_frm - NEOWISER Year 2 L1b image inventory      -->
+  <!-- neowiser_yr2_p1bm_frm - NEOWISER Year 2 L1b image inventory      -->
 
   <table name="yr2_p1bm_frm" dbname="neowiser_yr2_p1bm_frm">
 
     <description>NEOWISER Year 2 L1b Images</description>
 
-    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/yr2_p1bm_frm_/index.ci"       />
+    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/neowiser/yr2_p1bm_frm_/index.ci"       />
 
     <corners radius="0.75"/>
     <center ra="crval1" dec="crval2"/>
@@ -88,8 +79,6 @@
 
     <sia writer="ibe.lib.sia.WiseSiaWriter" />
 
-    <!--
-    -->
     <products rootpath="/stage/irsa-wise-links-ops/links-neowiser/l1b-yr2"        />
 
 
@@ -661,30 +650,13 @@
 
 </table>
 
-
-  <!-- 
-  LAST  neowiser_yr2_i1bs_psd - NEOWISER Year 2 L1b source table        
-  LAST  
-  LAST  <table name="yr2_i1bs_psd" dbname="neowiser_yr2_i1bs_psd">
-  LAST  
-  -->
-
   <!-- neowiser_yr2_p1bs_psd - NEOWISER Year 2 L1b source table        -->
 
   <table name="yr2_p1bs_psd" dbname="neowiser_yr2_p1bs_psd">
 
     <description>NEOWISER Year 2 Images</description>
 
-    <!--
-    LAST  <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/i1bs_psd/current/merge.ci" />
-    LAST  <chunk_index path="/stage/irsa-wise-xpf/chunk_index/wise_neowiser/yr2_p1bs_psd/current/merge.ci" />
-    LAST  <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/yr2_p1bs_psd/current/merge.ci" />
-    -->
-
-    <!--
-    NOW PUBLIC
-    -->
-    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/yr2_p1bs_psd/current/merge.ci" />
+    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/neowiser/yr2_p1bs_psd/current/merge.ci" />
 
     <unique refs="cntr" />
     <unique refs="source_id" />
