@@ -54,9 +54,7 @@
 
     <sia writer="ibe.lib.sia.WiseSiaWriter" />
 
-    <!--
-    -->
-    <products rootpath="/stage/irsa-wise-links-public/links-merge-new/l1b" />
+    <products rootpath="/stage/irsa-wise-links-public/links-merge/l1b" />
 
 
     <column name="band" principal="true">
@@ -655,8 +653,6 @@
 
     <sia writer="ibe.lib.sia.WiseSiaWriter" />
 
-    <!--
-    -->
     <products rootpath="/stage/irsa-wise-links-public/links-merge/l3a" />
 
 

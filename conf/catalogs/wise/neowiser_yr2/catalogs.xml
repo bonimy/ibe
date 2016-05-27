@@ -79,7 +79,7 @@
 
     <sia writer="ibe.lib.sia.WiseSiaWriter" />
 
-    <products rootpath="/stage/irsa-wise-links-ops/links-neowiser/l1b-yr2"        />
+    <products rootpath="/stage/irsa-wise-links-public/links-neowiser/l1b-yr2"        />
 
 
         <column name="band" principal="true">
