@@ -24,10 +24,10 @@ distclean : clean
 	rm -rf dist/ ibe.egg_info/ Paste*
 
 build :
-	source $(CM_IBE_DIR)/env/bin/activate; python setup.py build
+	. $(CM_IBE_DIR)/env/bin/activate; python setup.py build
 
 install :
-	source $(CM_IBE_DIR)/env/bin/activate; python setup.py install
+	. $(CM_IBE_DIR)/env/bin/activate; python setup.py install
 
 # ================================================================
 
