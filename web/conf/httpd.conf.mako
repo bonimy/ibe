@@ -17,6 +17,29 @@ KeepAliveTimeout 15
 # MaxSpareServers: maximum number of server processes which are kept spare
 # MaxClients: maximum number of server processes allowed to start
 # MaxRequestsPerChild: maximum number of requests a server process serves
+
+Include /etc/apache2/mods-available/access_compat.load
+Include /etc/apache2/mods-available/alias.load
+Include /etc/apache2/mods-available/authz_host.load
+Include /etc/apache2/mods-available/authz_core.load
+Include /etc/apache2/mods-available/authn_core.load
+Include /etc/apache2/mods-available/autoindex.load
+Include /etc/apache2/mods-available/env.load
+Include /etc/apache2/mods-available/setenvif.load
+Include /etc/apache2/mods-available/dir.load
+Include /etc/apache2/mods-available/include.load
+Include /etc/apache2/mods-available/mime.load
+Include /etc/apache2/mods-available/mime_magic.load
+Include /etc/apache2/mods-available/mpm_prefork.load
+Include /etc/apache2/mods-available/negotiation.load
+Include /etc/apache2/mods-available/rewrite.load
+Include /etc/apache2/mods-available/status.load
+Include /etc/apache2/mods-available/wsgi.load
+Include /etc/apache2/mods-available/cgi.load
+
+Include /etc/apache2/mods-available/mime.conf
+Include /etc/apache2/mods-available/mime_magic.conf
+
 <IfModule prefork.c>
 StartServers         ${ibe.StartServers}
 MinSpareServers      ${ibe.MinSpareServers}
@@ -44,11 +67,11 @@ AccessFileName .htaccess
 </Files>
 
 # Location of the mime.types file (or equivalent) 
-TypesConfig ${ibe.environ['CM_ENV_DIR']}/apache2/conf/mime.types
-DefaultType text/plain
-<IfModule mod_mime_magic.c>
-    MIMEMagicFile ${ibe.environ['CM_ENV_DIR']}/apache2/conf/magic
-</IfModule>
+# TypesConfig ${ibe.environ['CM_ENV_DIR']}/apache2/conf/mime.types
+# DefaultType text/plain
+# <IfModule mod_mime_magic.c>
+#     MIMEMagicFile ${ibe.environ['CM_ENV_DIR']}/apache2/conf/magic
+# </IfModule>
 
 HostnameLookups Off
 
@@ -121,9 +144,6 @@ PassEnv LD_LIBRARY_PATH
 PassEnv PYTHONPATH
 
 ScriptAlias /cgi-bin ${ibe.Dir}/web/cgi-bin
-
-#WSGI setup
-LoadModule wsgi_module ${ibe.environ['CM_ENV_DIR']}/apache2/modules/mod_wsgi.so
 
 WSGIPythonHome ${ibe.Dir}/env
 WSGISocketPrefix ${ibe.WSGISocketPrefix}
