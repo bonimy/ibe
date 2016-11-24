@@ -15,7 +15,7 @@
 
  <!-- 4-Band AllSky Atlas (L1b) Images -->
 
-  <table name="4band_p1bm_frm" dbname="wise_allsky_4band_p1bm_frm">
+  <table name="4band_p1bm_frm" dbname="allsky_4band_p1bm_frm">
 
     <description>WISE 4-Band AllSky Atlas (L1b) Images</description>
 
@@ -618,7 +618,7 @@
 
   <!-- 4-Band AllSky Atlas (L3a) Images -->
 
-  <table name="4band_p3am_cdd" dbname="wise_allsky_4band_p3am_cdd">
+  <table name="4band_p3am_cdd" dbname="allsky_4band_p3am_cdd">
 
     <description>WISE 4-Band AllSky Atlas (L3a) Images</description>
 
@@ -1111,7 +1111,7 @@
 
   <!-- 4-Band AllSky Atlas (L1b) Sources -->
 
-  <table name="4band_p1bs_psd" dbname="wise_allsky_4band_p1bs_psd">
+  <table name="4band_p1bs_psd" dbname="allsky_4band_p1bs_psd">
 
     <description>WISE 4-Band AllSky Atlas (L1b) Sources</description>
 
@@ -1164,7 +1164,7 @@
 
   <!-- reference only -->
 
-  <table name="4band_p3as_psd" dbname="wise_allsky_4band_p3as_psd">
+  <table name="4band_p3as_psd" dbname="allsky_4band_p3as_psd">
 
     <description>WISE 4-Band AllSky Atlas (L3a) Sources</description>
 

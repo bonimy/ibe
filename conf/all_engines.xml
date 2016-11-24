@@ -73,20 +73,19 @@
   <paramstyle>named</paramstyle>
 </engine>
 
-<engine id="wise_allwise" echo="false" echo_pool="false">
-  <url>informix://irsadmin@rmt_dbms18b/wise_allwise?autocommit=false</url>
-  <paramstyle>qmark</paramstyle>
+<engine id="wise_allwise" echo="false" echo_pool="false" pool_recycle="300">
+  <url>oracle://wise_allwise_app:wiseALLWISEapp@wise1</url>
+  <paramstyle>named</paramstyle>
 </engine>
 
-<engine id="wise_allsky" echo="false" echo_pool="false">
-  <url>informix://irsadmin@rmt_dbms18/wise_allsky?autocommit=false</url>
-  <paramstyle>qmark</paramstyle>
+<engine id="wise_allsky" echo="false" echo_pool="false" pool_recycle="300">
+  <url>oracle://wise_allsky_app:wiseALLSKYapp@wise1</url>
+  <paramstyle>named</paramstyle>
 </engine>
 
-
-<engine id="wise_prelim" echo="false" echo_pool="false">
-  <url>informix://irsadmin@rmt_dbms18/wise_prelim?autocommit=false</url>
-  <paramstyle>qmark</paramstyle>
+<engine id="wise_prelim" echo="false" echo_pool="false" pool_recycle="300">
+  <url>oracle://wise_prelim_app:WISEappPRELIM@wise1</url>
+  <paramstyle>named</paramstyle>
 </engine>
 
 <engine id="wise_pass1" echo="false" echo_pool="false">
