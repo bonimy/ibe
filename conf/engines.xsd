@@ -33,7 +33,7 @@
   </xs:annotation>
 
   <xs:sequence>
-    <xs:element name="url" type="xs:anyURI">
+    <xs:element name="url" type="xs:string">
       <xs:annotation>
         <xs:documentation>SQL alchemy connection URL</xs:documentation>
       </xs:annotation>
