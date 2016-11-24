@@ -22,7 +22,7 @@ LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${ibe.environ['CM_ENV_DIR']}/apache2/lib:${ibe
 PYTHONPATH="${ibe.environ['CM_BASE_DIR']}/lib/python"
 
 # the path to the httpd binary, including options if necessary
-HTTPD="${ibe.environ['CM_ENV_DIR']}/apache2/bin/httpd"
+HTTPD="/usr/sbin/apache2"
 
 # These environment variables are needed by mod_wsgi applications
 % if 'INFORMIXDIR' in ibe.environ:
