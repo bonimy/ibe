@@ -19,7 +19,7 @@
     ],
     "MaxSpareServers": "2",
     "MinSpareServers": "1",
-    "proxied": true,
+    "proxied": false,
     "host": "http://bacchus1.ipac.caltech.edu:5000",
     "workspace_root": "/stage/irsa-work-dev-bacchus/work/bacchus1_5000",
     "StartServers": "2",
