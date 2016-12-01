@@ -66,13 +66,6 @@ AccessFileName .htaccess
     Deny from all
 </Files>
 
-# Location of the mime.types file (or equivalent) 
-# TypesConfig ${ibe.environ['CM_ENV_DIR']}/apache2/conf/mime.types
-# DefaultType text/plain
-# <IfModule mod_mime_magic.c>
-#     MIMEMagicFile ${ibe.environ['CM_ENV_DIR']}/apache2/conf/magic
-# </IfModule>
-
 HostnameLookups Off
 
 LogFormat "%h %l %u %t \"%r\" %>s %b %T \"%{Referer}i\" \"%{User-Agent}i\" id=%{UNIQUE_ID}e #%P" combined
@@ -133,9 +126,8 @@ SetEnv USER           ${ibe.User}
 SetEnv INFORMIXDIR    ${ibe.environ['INFORMIXDIR']}
 SetEnv INFORMIXSERVER ${ibe.environ['INFORMIXSERVER']}
 % endif
-% if 'ORACLE_HOME' in ibe.environ:
-SetEnv ORACLE_HOME    ${ibe.environ['ORACLE_HOME']}
-% endif
+SetEnv ORACLE_HOME    /usr/lib/oracle/10.2.0.5/client64
+
 SetEnv SSO_SESSION_ID_ENV JOSSO_SESSIONID
 SetEnv SSO_IDM_ENDPOINT ${ibe.sso_idm_endpoint}
 

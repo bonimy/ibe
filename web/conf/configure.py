@@ -26,11 +26,8 @@ _ibe_root = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir, o
 # required environment variables
 _env_vars = ['INFORMIXDIR',
              'INFORMIXSERVER',
-             'ORACLE_HOME',
              'CM_STK_DIR',
              'CM_BASE_DIR',
-             'CM_TPS_DIR',
-             'CM_ENV_DIR',
             ]
 
 # If terminal supports colored text, print warning messages in RED.
