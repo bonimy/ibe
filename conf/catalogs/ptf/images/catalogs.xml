@@ -9,7 +9,7 @@
   <description>PTF Tables</description>
 
   <!-- Processed exposure metadata -->
-  <table name="level1" dbname="new_ptf_procimg">
+  <table name="level1" dbname="ptf_procimg">
     <description>PTF Level 1 Processed Images</description>
 
     <chunk_index path="/xpf/chunk_index/ptf2/images/level1/index.ci" />
