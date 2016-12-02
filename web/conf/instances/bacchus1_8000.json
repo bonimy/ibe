@@ -1,5 +1,5 @@
 {
-    "WSGISocketPrefix": "/var/log/ibe/wsgi",
+    "WSGISocketPrefix": "/var/run/ibe/wsgi",
     "WSGIProcesses": "2",
     "datasets": [
         "twomass/mosaic"
