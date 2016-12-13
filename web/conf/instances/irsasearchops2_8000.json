@@ -2,7 +2,7 @@
    "User": "irsadmin",
    "Group": "irsa",
    "WSGIProcesses": "8",
-   "WSGISocketPrefix": "/opt/ibe/logs/wsgi",
+   "WSGISocketPrefix": "/var/run/ibe/wsgi",
    "datasets": [
        "twomass/mosaic"
      , "twomass/calibration"

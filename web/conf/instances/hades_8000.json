@@ -2,7 +2,7 @@
     "User": "irsadmin",
     "Group": "irsa",
     "WSGIProcesses": "8",
-    "WSGISocketPrefix": "/local2/ibe/logs/wsgi",
+    "WSGISocketPrefix": "/var/run/ibe/wsgi",
     "datasets": [
         "ptf/images" 
       , "twomass/allsky"

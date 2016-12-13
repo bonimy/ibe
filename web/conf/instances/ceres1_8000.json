@@ -2,6 +2,7 @@
     "User": "irsadmin",
     "Group": "irsa",
     "WSGIProcesses": "8",
+    "WSGISocketPrefix": "/var/run/ibe/wsgi",
     "datasets": [
         "ptf/images" 
       , "wise/allsky"
