@@ -15,7 +15,7 @@
 
  <!-- WISE AllWISE Atlas (L3a) Images -->
 
-  <table name="p3am_cdd" dbname="wise_allwise_p3am_cdd">
+  <table name="p3am_cdd" dbname="allwise_p3am_cdd">
 
     <description>WISE AllWISE Atlas (L3a) Images</description>
 
@@ -487,7 +487,7 @@
 
   <!--  reference only -->
 
-  <table name="p3as_psd" dbname="wise_allwise_p3as_psd">
+  <table name="p3as_psd" dbname="allwise_p3as_psd">
 
     <description>WISE AllWISE Atlas (L3a) Sources</description>
 

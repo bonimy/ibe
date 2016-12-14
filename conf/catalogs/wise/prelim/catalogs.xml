@@ -10,7 +10,7 @@
 
   <!-- L1b image metadata -->
 
-  <table name="p1bm_frm" dbname="wise_prelim_p1bm_frm">
+  <table name="p1bm_frm" dbname="prelim_p1bm_frm">
 
     <description>WISE Prelim L1b Images</description>
 
@@ -523,7 +523,7 @@
 
   <!-- L3a image metadata -->
 
-  <table name="p3am_cdd" dbname="wise_prelim_p3am_cdd">
+  <table name="p3am_cdd" dbname="prelim_p3am_cdd">
 
     <description>WISE Prelim Atlas Images</description>
 
@@ -953,7 +953,7 @@
 
   <!-- L1b sources -->
 
-  <table name="p1bs_psd" dbname="wise_prelim_p1bs_psd">
+  <table name="p1bs_psd" dbname="prelim_p1bs_psd">
 
     <description>WISE Prelim L1b Sources</description>
 
@@ -1001,7 +1001,7 @@
 
   <!-- L3a sources -->
 
-  <table name="p3as_psd" dbname="wise_prelim_p3as_psd">
+  <table name="p3as_psd" dbname="prelim_p3as_psd">
 
     <description>WISE Prelim Atlas Sources</description>
 

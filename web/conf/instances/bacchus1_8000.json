@@ -1,8 +1,6 @@
 {
-    "User": "irsadmin",
-    "Group": "irsa",
-    "WSGIProcesses": "8",
     "WSGISocketPrefix": "/var/run/ibe/wsgi",
+    "WSGIProcesses": "2",
     "datasets": [
         "twomass/mosaic"
       , "twomass/calibration"
@@ -18,17 +16,14 @@
       , "wise/postcryo"
       , "wise/prelim" 
       , "wise/prelim_postcryo" 
-      , "ptf/images" 
+      , "ptf/images"
     ],
-    "MaxSpareServers": "8",
+    "MaxSpareServers": "2",
     "MinSpareServers": "1",
     "proxied": true,
-    "host": "http://irsa.ipac.caltech.edu",
-    "workspace_root": "/work",
-    "StartServers": "4",
-    "MaxClients": "2048",
-    "Port": "8000",
-    "ErrorLog": "\"|rotatelogs -l /irsadata/logs/www_ops/zeus2_ibe_error_%Y%m%d.log 604800\"",
-    "CombinedLog": "\"|rotatelogs -l /irsadata/logs/www_ops/zeus2_ibe_combined_%Y%m%d.log 604800\""
+    "host": "http://bacchus1.ipac.caltech.edu:8000",
+    "workspace_root": "/stage/irsa-work-dev-bacchus/work/bacchus1_8000",
+    "StartServers": "2",
+    "MaxClients": "100",
+    "Port": "8000"
 }
-

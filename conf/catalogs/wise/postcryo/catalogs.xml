@@ -17,7 +17,7 @@
 
  <!-- 2band_p1bm_frm - 2-Band PostCryo L1bm image metadata -->
 
-  <table name="2band_p1bm_frm" dbname="wise_allsky_2band_p1bm_frm">
+  <table name="2band_p1bm_frm" dbname="allsky_2band_p1bm_frm">
 
     <description>WISE 2-Band PostCryo L1b Images</description>
 
@@ -627,7 +627,7 @@
 
  <!-- 2band_p1bs_psd - 2-Band PostCryo L1b image metadata -->
 
-  <table name="2band_p1bs_psd" dbname="wise_allsky_2band_p1bs_psd">
+  <table name="2band_p1bs_psd" dbname="allsky_2band_p1bs_psd">
 
     <description>WISE 2-Band PostCryo L1bs Images</description>
 

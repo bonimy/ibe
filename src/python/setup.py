@@ -1,3 +1,4 @@
+import sys
 try:
     from setuptools import setup, find_packages
 except ImportError:
@@ -12,7 +13,8 @@ setup(
     author='',
     author_email='',
     url='',
-    install_requires=["Pylons==0.9.7",
+    install_requires=["funcsigs==1.0.0",
+                      "Pylons==0.9.7",
                       "webob==1.0.8",
                       "webtest==1.2",
                       "LEPL==5.1.3",
