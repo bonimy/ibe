@@ -6,7 +6,7 @@ ARGV="$@"
 umask 2
 
 # Setup path
-PATH="${ibe.environ['CM_STK_DIR']}/bin:${ibe.environ['CM_TPS_DIR']}/bin:${ibe.environ['CM_ENV_DIR']}/apache2/bin:${ibe.environ['CM_ENV_DIR']}/core/bin:/usr/bin:/bin"
+PATH="${ibe.environ['CM_STK_DIR']}/bin:/usr/bin:/bin"
 
 # Setup load library path
 LD_LIBRARY_PATH="${ibe.Dir}/env/lib"
@@ -14,23 +14,19 @@ LD_LIBRARY_PATH="${ibe.Dir}/env/lib"
 % if 'INFORMIXDIR' in ibe.environ:
 LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${ibe.environ['INFORMIXDIR']}/lib:${ibe.environ['INFORMIXDIR']}/lib/esql"
 % endif
-% if 'ORACLE_HOME' in ibe.environ:
-LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${ibe.environ['ORACLE_HOME']}/lib"
-%endif
-LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${ibe.environ['CM_ENV_DIR']}/apache2/lib:${ibe.environ['CM_ENV_DIR']}/core/lib64:${ibe.environ['CM_ENV_DIR']}/core/lib"
+# Must use an ancient version (10.2.0.5) of Oracle libraries to be compatiable with cx_Oracle
+ORACLE_HOME="/usr/lib/oracle/10.2.0.5/client64"
+LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$ORACLE_HOME/lib"
 
 PYTHONPATH="${ibe.environ['CM_BASE_DIR']}/lib/python"
 
 # the path to the httpd binary, including options if necessary
-HTTPD="${ibe.environ['CM_ENV_DIR']}/apache2/bin/httpd"
+HTTPD="/usr/sbin/apache2"
 
 # These environment variables are needed by mod_wsgi applications
 % if 'INFORMIXDIR' in ibe.environ:
 INFORMIXDIR="${ibe.environ['INFORMIXDIR']}"
 INFORMIXSERVER="${ibe.environ['INFORMIXSERVER']}"
-% endif
-% if 'ORACLE_HOME' in ibe.environ:
-ORACLE_HOME="${ibe.environ['ORACLE_HOME']}"
 % endif
 
 # Set this variable to a command that increases the maximum
@@ -43,9 +39,7 @@ export PATH LD_LIBRARY_PATH PYTHONPATH
 % if 'INFORMIXDIR' in ibe.environ:
 export INFORMIXDIR INFORMIXSERVER
 % endif
-% if 'ORACLE_HOME' in ibe.environ:
 export ORACLE_HOME
-%endif
 
 # Set the maximum number of file descriptors allowed per child process.
 if [ "x$ULIMIT_MAX_FILES" != "x" ] ; then

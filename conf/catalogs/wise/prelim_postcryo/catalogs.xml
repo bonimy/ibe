@@ -9,7 +9,7 @@
   <description>WISE Preliminary 2-band Post Cryo Tables</description>
 
   <!-- 2 band L1b image metadata -->
-  <table name="p1bm_frm" dbname="wise_prelim_2band_p1bm_frm">
+  <table name="p1bm_frm" dbname="prelim_2band_p1bm_frm">
     <description>WISE Preliminary 2-band Post Cryo L1b Images</description>
 
     <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_prelim/2band_p1bm_frm/index.ci" />
@@ -517,7 +517,7 @@
   </table>
 
   <!-- 2 band L1b sources -->
-  <table name="p1bs_psd" dbname="wise_prelim_2band_p1bs_psd">
+  <table name="p1bs_psd" dbname="prelim_2band_p1bs_psd">
     <description>WISE Preliminary 2-band Post Cryo Level 1b Sources</description>
 
     <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_prelim/2band_p1bs_psd/index.ci" />

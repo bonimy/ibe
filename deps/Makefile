@@ -16,7 +16,7 @@ compile-cfitsio: setup-cfitsio
 compile-wcslib: setup-wcslib
 	make -C wcslib-4.14/
 compile-sqlalchemy: setup-sqlalchemy
-	source $(TGTDIR)/bin/activate; cd SQLAlchemy-0.8.3; python setup.py build
+	. $(TGTDIR)/bin/activate; cd SQLAlchemy-0.8.3; python setup.py build
 
 install: $(TGTDIR) install-cfitsio install-wcslib install-sqlalchemy
 install-cfitsio: compile-cfitsio
@@ -29,7 +29,7 @@ install-wcslib: compile-wcslib
 	rm $(TGTDIR)/include/wcslib
 	ln -s $(TGTDIR)/include/wcslib-4.14 $(TGTDIR)/include/wcslib
 install-sqlalchemy: compile-sqlalchemy
-	source $(TGTDIR)/bin/activate; cd SQLAlchemy-0.8.3; python setup.py install
+	. $(TGTDIR)/bin/activate; cd SQLAlchemy-0.8.3; python setup.py install
 
 clean: clean-cfitsio clean-wcslib clean-sqlalchemy
 clean-cfitsio:
