@@ -3,8 +3,7 @@
     "Group": "irsa",
     "WSGIProcesses": "8",
     "datasets": [
-        "ptf/images" 
-      , "wise/allsky"
+        "wise/allsky"
       , "wise/allwise"
       , "wise/cryo_3band"
       , "wise/merge"
