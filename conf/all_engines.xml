@@ -73,6 +73,11 @@
   <paramstyle>named</paramstyle>
 </engine>
 
+<engine id="wise_neowiser_yr4" echo="false" echo_pool="false" pool_recycle="300">
+  <url>oracle://neowiser_app:NEOappWISER@nwrops1</url>
+  <paramstyle>named</paramstyle>
+</engine>
+
 <engine id="wise_allwise" echo="false" echo_pool="false" pool_recycle="300">
   <url>oracle://wise_allwise_app:wiseALLWISEapp@wise1</url>
   <paramstyle>named</paramstyle>

@@ -4,8 +4,7 @@
     "WSGIProcesses": "8",
     "WSGISocketPrefix": "/var/run/ibe/wsgi",
     "datasets": [
-        "ptf/images" 
-      , "wise/allsky"
+        "wise/allsky"
       , "wise/allwise"
       , "wise/cryo_3band"
       , "wise/merge"
@@ -17,6 +16,7 @@
       , "wise/neowiser_yr1"
       , "wise/neowiser_yr2"
       , "wise/neowiser_yr3"
+      , "wise/neowiser_yr4"
       , "wise/pass1"
       , "wise/pass2"
       , "wise/postcryo"
