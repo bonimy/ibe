@@ -30,5 +30,7 @@
     "workspace_root": "/work",
     "StartServers": "4",
     "MaxClients": "100",
-    "Port": "8000"
+    "Port": "8000",
+    "ErrorLog": "\"|/usr/bin/rotatelogs -l /irsadata/logs/www_ops/ceres1_ibe_error_%Y%m%d.log 604800\"",
+    "CombinedLog": "\"|/usr/bin/rotatelogs -l /irsadata/logs/www_ops/ceres1_ibe_combined_%Y%m%d.log 604800\""
 }
