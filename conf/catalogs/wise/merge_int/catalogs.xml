@@ -632,7 +632,7 @@
 
   <!-- Merge AllWISE Atlas (L3a) Images -->
 
-  <table name="merge_p3am_cdd" dbname="wise_allwise_merge_p3am_cdd" engine="wise_allwise">
+  <table name="merge_p3am_cdd" dbname="allwise_merge_p3am_cdd" engine="wise_allwise">
 
     <description>WISE Merge AllWISE Atlas (L3a) Images</description>
 
