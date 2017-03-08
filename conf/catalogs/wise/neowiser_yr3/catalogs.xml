@@ -13,8 +13,6 @@
 
  <description>NEOWISER Year 3 L1b Tables</description>
 
-
-
  <!-- neowiser_yr3_i1bm_frm - NEOWISER Year 3 L1b image inventory      -->
 
   <table name="yr3_i1bm_frm" dbname="neowiser_yr3_i1bm_frm">
@@ -24,7 +22,15 @@
     <!--
     NOT PUBLIC
     -->
-    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/i1bm_frm/current/merge.ci"       />
+    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/yr3_i1bm_frm/current/merge.ci" />
+
+    <!--
+    PUBLIC SOON
+    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/neowiser/yr3_p1bm_frm/current/merge.ci" />
+    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/neowiser/yr3_p1bm_frm/index.ci" />
+    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/neowiser/yr3_p1bm_frm_/current/merge.ci" />
+    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/neowiser/yr3_p1bm_frm_/index.ci" />
+    -->
 
     <corners radius="0.75"/>
     <center ra="crval1" dec="crval2"/>
@@ -35,28 +41,39 @@
 
     <image_set refs="scan_id frame_num" />
 
-    <!--
+
     <reference from="scan_id"   to="wise.neowiser.i1bm_frm.scan_id"         />
     <reference from="frame_num" to="wise.neowiser.i1bm_frm.frame_num"       />
-    -->
-
-    <reference from="scan_id"   to="wise.neowiser.i1bs_psd.scan_id"         />
-    <reference from="frame_num" to="wise.neowiser.i1bs_psd.frame_num"       />
 
     <reference from="scan_id"   to="wise.neowiser.p1bm_frm.scan_id"         />
     <reference from="frame_num" to="wise.neowiser.p1bm_frm.frame_num"       />
 
-    <reference from="scan_id"   to="wise.neowiser.p1bs_psd.scan_id"         />
-    <reference from="frame_num" to="wise.neowiser.p1bs_psd.frame_num"       />
-
     <reference from="scan_id"   to="wise.neowiser.yr1_p1bm_frm.scan_id"     />
     <reference from="frame_num" to="wise.neowiser.yr1_p1bm_frm.frame_num"   />
+
 
     <reference from="scan_id"   to="wise.neowiser.yr2_p1bm_frm.scan_id"     />
     <reference from="frame_num" to="wise.neowiser.yr2_p1bm_frm.frame_num"   />
 
+
+    <!--
+    <reference from="scan_id"   to="wise.neowiser.yr3_p1bm_frm.scan_id"     />
+    <reference from="frame_num" to="wise.neowiser.yr3_p1bm_frm.frame_num"   />
+    -->
+
+
+    <reference from="scan_id"   to="wise.neowiser.i1bs_psd.scan_id"         />
+    <reference from="frame_num" to="wise.neowiser.i1bs_psd.frame_num"       />
+
+    <reference from="scan_id"   to="wise.neowiser.p1bs_psd.scan_id"         />
+    <reference from="frame_num" to="wise.neowiser.p1bs_psd.frame_num"       />
+
+
     <reference from="scan_id"   to="wise.neowiser.yr1_p1bs_psd.scan_id"     />
     <reference from="frame_num" to="wise.neowiser.yr1_p1bs_psd.frame_num"   />
+
+    <reference from="scan_id"   to="wise.neowiser.yr2_p1bs_psd.scan_id"     />
+    <reference from="frame_num" to="wise.neowiser.yr2_p1bs_psd.frame_num"   />
 
     <reference from="scan_id"   to="wise.neowiser.yr2_p1bs_psd.scan_id"     />
     <reference from="frame_num" to="wise.neowiser.yr2_p1bs_psd.frame_num"   />
@@ -83,8 +100,14 @@
     <sia writer="ibe.lib.sia.WiseSiaWriter" />
 
     <!--
+    NOT PUBLIC
     -->
     <products rootpath="/stage/irsa-wise-links-ops/links-neowiser/l1b-yr3"  />
+
+    <!--
+    PUBLIC SOON
+    <products rootpath="/stage/irsa-wise-links-public/links-neowiser/l1b-yr3"  />
+    -->
 
 
         <column name="band" principal="true">
@@ -655,17 +678,21 @@
 
 </table>
 
-
   <!-- neowiser_yr3_i1bs_psd - NEOWISER Year 3 L1b source table        -->
 
-  <table name="yr3_i1bs_psd" dbname="neowiser_yr3_i1bs_psd">
+   <table name="yr3_i1bs_psd" dbname="neowiser_yr3_i1bs_psd">
 
     <description>NEOWISER Year 3 Images</description>
 
     <!--
     NOT PUBLIC
     -->
-    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/i1bs_psd/current/merge.ci" />
+    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/yr3_i1bs_psd/current/merge.ci" />
+
+    <!--
+    PUBLIC SOON
+    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/neowiser/yr3_p1bs_psd/current/merge.ci" />
+    -->
 
     <unique refs="cntr" />
     <unique refs="source_id" />

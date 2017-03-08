@@ -15,11 +15,11 @@
 
   <!-- neowiser_yr2_p1bm_frm - NEOWISER Year 2 L1b image inventory      -->
 
-  <table name="yr2_p1bm_frm" dbname="neowiser_yr2_p1bm_frm">
+   <table name="yr2_p1bm_frm" dbname="neowiser_yr2_p1bm_frm">
 
     <description>NEOWISER Year 2 L1b Images</description>
 
-    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/neowiser/yr2_p1bm_frm_/index.ci"       />
+    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/neowiser/yr2_p1bm_frm_/index.ci" />
 
     <corners radius="0.75"/>
     <center ra="crval1" dec="crval2"/>
@@ -30,19 +30,12 @@
 
     <image_set refs="scan_id frame_num" />
 
-    <!--
+
     <reference from="scan_id"   to="wise.neowiser.i1bm_frm.scan_id"         />
     <reference from="frame_num" to="wise.neowiser.i1bm_frm.frame_num"       />
-    -->
-
-    <reference from="scan_id"   to="wise.neowiser.i1bs_psd.scan_id"         />
-    <reference from="frame_num" to="wise.neowiser.i1bs_psd.frame_num"       />
 
     <reference from="scan_id"   to="wise.neowiser.p1bm_frm.scan_id"         />
     <reference from="frame_num" to="wise.neowiser.p1bm_frm.frame_num"       />
-
-    <reference from="scan_id"   to="wise.neowiser.p1bs_psd.scan_id"         />
-    <reference from="frame_num" to="wise.neowiser.p1bs_psd.frame_num"       />
 
     <reference from="scan_id"   to="wise.neowiser.yr1_p1bm_frm.scan_id"     />
     <reference from="frame_num" to="wise.neowiser.yr1_p1bm_frm.frame_num"   />
@@ -52,11 +45,25 @@
     <reference from="frame_num" to="wise.neowiser.yr2_p1bm_frm.frame_num"   />
     -->
 
+    <reference from="scan_id"   to="wise.neowiser.yr3_p1bm_frm.scan_id"     />
+    <reference from="frame_num" to="wise.neowiser.yr3_p1bm_frm.frame_num"   />
+
+
+    <reference from="scan_id"   to="wise.neowiser.i1bs_psd.scan_id"         />
+    <reference from="frame_num" to="wise.neowiser.i1bs_psd.frame_num"       />
+
+    <reference from="scan_id"   to="wise.neowiser.p1bs_psd.scan_id"         />
+    <reference from="frame_num" to="wise.neowiser.p1bs_psd.frame_num"       />
+
+
     <reference from="scan_id"   to="wise.neowiser.yr1_p1bs_psd.scan_id"     />
     <reference from="frame_num" to="wise.neowiser.yr1_p1bs_psd.frame_num"   />
 
     <reference from="scan_id"   to="wise.neowiser.yr2_p1bs_psd.scan_id"     />
     <reference from="frame_num" to="wise.neowiser.yr2_p1bs_psd.frame_num"   />
+
+    <reference from="scan_id"   to="wise.neowiser.yr3_p1bs_psd.scan_id"     />
+    <reference from="frame_num" to="wise.neowiser.yr3_p1bs_psd.frame_num"   />
 
 
     <reference from="scan_id"   to="wise.allsky.2band_p1bs_psd.scan_id"     />
@@ -652,7 +659,7 @@
 
   <!-- neowiser_yr2_p1bs_psd - NEOWISER Year 2 L1b source table        -->
 
-  <table name="yr2_p1bs_psd" dbname="neowiser_yr2_p1bs_psd">
+   <table name="yr2_p1bs_psd" dbname="neowiser_yr2_p1bs_psd">
 
     <description>NEOWISER Year 2 Images</description>
 
