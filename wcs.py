@@ -30,13 +30,11 @@ def configure(conf):
 
     if not wcs_libs:
         found_wcs=False
-        for wcs_lib in ['wcs','wcstools']:
+        for wcs_lib in ['wcs']:
             msg="Checking for " + wcs_lib
             includes=wcs_incdir
-            if wcs_lib=='wcs' and not wcs_incdir:
+            if not wcs_incdir:
                 includes="/usr/include/wcslib"
-            if wcs_lib=='wcstools' and not wcs_incdir:
-                includes="/usr/include/wcstools"
             try:
                 conf.check_cxx(msg=msg,
                                header_name='wcs.h',
