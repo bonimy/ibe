@@ -26,3 +26,46 @@ def build(bld):
 
     bld.install_files(bld.env.HTML_DIR + '/ibe',bld.path.ant_glob("html/**"),
                       cwd=bld.path.find_dir('html'), relative_trick=True);
+
+    data_dir = bld.env.HTML_DIR + '/ibe/data/'
+    bld.symlink_as(data_dir + 'twomass/sixxcat/sixxcat',
+                   '/stage/tmass-data/links/sixxcatalog')
+    bld.symlink_as(data_dir + 'twomass/calibration/calibration',
+                   '/stage/tmass-data/links/calibration')
+    bld.symlink_as(data_dir + 'twomass/allsky/allsky',
+                   '/stage/tmass-data/links/allsky')
+    bld.symlink_as(data_dir + 'twomass/full/full',
+                   '/stage/tmass-data/links/full')
+    bld.symlink_as(data_dir + 'twomass/sixxfull/sixxfull',
+                   '/stage/tmass-data/links/sixxfull')
+    bld.symlink_as(data_dir + 'twomass/mosaic/sixdeg',
+                   '/stage/irsa-data-2mass-mosaic/links/mosaic/sixdeg')
+    bld.symlink_as(data_dir + 'wise/neowiser/p1bm_frm',
+                   '/stage/irsa-wise-links-public/links-neowiser/l1b')
+    bld.symlink_as(data_dir + 'wise/prelim_postcryo/p1bm_frm',
+                   '/stage/irsa-wise-links-public/links-prelim-postcryo/l1b-2band')
+    bld.symlink_as(data_dir + 'wise/cryo_3band/3band_p3am_cdd',
+                   '/stage/irsa-wise-links-public/links-3band/l3a-3band')
+    bld.symlink_as(data_dir + 'wise/cryo_3band/3band_p1bm_frm',
+                   '/stage/irsa-wise-links-public/links-3band/l1b-3band')
+    bld.symlink_as(data_dir + 'wise/postcryo/2band_p1bm_frm',
+                   '/stage/irsa-wise-links-public/links-postcryo/l1b-2band')
+    bld.symlink_as(data_dir + 'wise/prelim/p1bm_frm',
+                   '/stage/irsa-wise-links-public/links-prelim/l1b')
+    bld.symlink_as(data_dir + 'wise/prelim/p3am_cdd',
+                   '/stage/irsa-wise-links-public/links-prelim/l3a')
+    bld.symlink_as(data_dir + 'wise/allsky/4band_p3am_cdd',
+                   '/stage/irsa-wise-links-public/links-allsky/l3a-4band')
+    bld.symlink_as(data_dir + 'wise/allsky/4band_p1bm_frm',
+                   '/stage/irsa-wise-links-public/links-allsky/l1b-4band')
+    bld.symlink_as(data_dir + 'wise/allwise/p3am_cdd',
+                   '/stage/irsa-wise-links-public/links-allwise/l3a')
+    bld.symlink_as(data_dir + 'wise/merge/merge_p1bm_frm',
+                   '/stage/irsa-wise-links-public/links-merge/l1b')
+    bld.symlink_as(data_dir + 'wise/merge/merge_p3am_cdd',
+                   '/stage/irsa-wise-links-public/links-merge/l3a')
+    bld.symlink_as(data_dir + 'ptf/images/level1',
+                   '/stage/irsa-ptf-links/')
+    bld.symlink_as(data_dir + 'ptf/images/level2',
+                   '/stage/irsa-ptf-links/refims-links')
+
