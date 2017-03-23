@@ -1,6 +1,0 @@
-To Start IBE on bacchus1:5000:
-
-    cd web/conf
-    ./apachectl.sh stop                                && \
-    ./configure.py --load=instances/bacchus1_5000.json  && \
-    ./apachectl.sh start                               
