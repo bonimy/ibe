@@ -68,4 +68,10 @@ def build(bld):
                    '/stage/irsa-ptf-links/')
     bld.symlink_as(data_dir + 'ptf/images/level2',
                    '/stage/irsa-ptf-links/refims-links')
+    bld.symlink_as(data_dir + 'ztf/products/raw',
+                   '/stage/irsa-ztf-links/ingest-test/raw')
+    bld.symlink_as(data_dir + 'ztf/products/cal',
+                   '/stage/irsa-ztf-links/ingest-test/cal')
+    bld.symlink_as(data_dir + 'ztf/products/sci',
+                   '/stage/irsa-ztf-links/ingest-test/sci')
 
