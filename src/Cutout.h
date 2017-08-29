@@ -12,6 +12,7 @@ extern "C" {
 }
 #include "wcslib/wcs.h"
 #include "wcslib/wcshdr.h"
+#include "wcslib/wcserr.h"
 
 #include "boost/filesystem.hpp"
 
