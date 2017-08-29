@@ -463,13 +463,10 @@ void streamSubimage (boost::filesystem::path const &path, Coords const &center,
                                  "FITS file contains image HDU with "
                                  "NAXIS != 2");
             }
-          // 1. Read all header keywords; filter out PVi_m since PTF
-          // uses them in a way that wreaks havoc with wcslib.
+          // 1. Read all header keywords
           nkeys = 0;
           hdr = 0;
-          char pv[6] = { 'P', 'V', '?', '_', '*', '\0' };
-          char *excl = pv;
-          fits_convert_hdr2str (f, 0, &excl, 1, &hdr, &nkeys, &status);
+          fits_convert_hdr2str (f, 0, NULL, 0, &hdr, &nkeys, &status);
           boost::shared_ptr<char> h (hdr, std::free);
           checkFitsError (status);
           // 2. Compute coordinate box for cutout
