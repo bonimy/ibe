@@ -2,11 +2,11 @@ import os
 
 def options(opt):
     opt.load(['compiler_c','compiler_cxx','gnu_dirs','ipac','irsa',
-              'sqlite','cfitsio','boost','wcs','gsoap'])
+              'pqxx','cfitsio','boost','wcs','gsoap'])
 
 def configure(conf):
     conf.load(['compiler_c','compiler_cxx','gnu_dirs','ipac','irsa',
-               'sqlite','cfitsio','boost','wcs','gsoap'])
+               'pqxx','cfitsio','boost','wcs','gsoap'])
     conf.check_boost(lib='filesystem system regex')
     
 def build(bld):
@@ -16,11 +16,10 @@ def build(bld):
     bld.program(source=['src/Access.cpp',
                         'src/Cgi.cpp',
                         'src/Cutout.cpp',
-                        'src/Sqlite.cpp',
                         'src/nph-serve.cpp'],
                 target='nph-ibe_data',
                 cxxflags=default_flags,
-                use=['BOOST','ipac','irsa_sso','sqlite','cfitsio','wcs','gsoap'],
+                use=['BOOST','ipac','irsa_sso','pqxx','cfitsio','wcs','gsoap'],
                 install_path=bld.env.WEB_CGI_DIR + '/ibe'
     )
 

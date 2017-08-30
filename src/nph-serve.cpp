@@ -3,6 +3,8 @@
 #include <sys/sendfile.h>
 #include <fcntl.h>
 
+#include <pqxx/pqxx>
+
 #include <cstdio>
 #include <iostream>
 #include <set>
@@ -76,7 +78,8 @@ void validate (ibe::Environment const &env)
   allowed.insert ("policy");
   allowed.insert ("mission");
   allowed.insert ("group");
-  allowed.insert ("fsdb");
+  allowed.insert ("pgconn");
+  allowed.insert ("pgtable");
   allowed.insert ("path");
   allowed.insert ("center");
   allowed.insert ("size");
@@ -206,66 +209,126 @@ vector<string> const getDirEntries (fs::path const &diskpath,
   switch (access.getPolicy ())
     {
     case Access::GRANTED:
-      sql = "SELECT h.file_name, h.is_dir FROM\n"
-            "    Paths     AS p INNER JOIN\n"
-            "    Hierarchy AS h ON (p.path_id = h.parent_path_id)\n"
-            "WHERE\n"
-            "    p.path = '" + dbpath + "'";
-      break;
+        if (dbpath == "") 
+        {
+            sql = "SELECT c.path_name, c.is_dir FROM\n"
+                  "    " + access.getPgTable() + " AS c\n"
+                  "WHERE\n"
+                  "    c.parent_path_id = 0\n";
+        }
+        else  
+        {
+            sql = "SELECT c.path_name, c.is_dir FROM\n"
+                  "    " + access.getPgTable() + " AS p INNER JOIN\n"
+                  "    " + access.getPgTable() + " AS c ON (p.path_id = c.parent_path_id)\n"
+                  "WHERE\n"
+                  "    p.path_name = '" + dbpath + "'";
+        }
+        break;
     case Access::DATE_ONLY:
-      sql = "SELECT h.file_name, h.is_dir FROM\n"
-            "    Paths     AS p INNER JOIN\n"
-            "    Hierarchy AS h ON (p.path_id = h.parent_path_id)\n"
-            "WHERE\n"
-            "    p.path = '" + dbpath
-            + "' AND\n"
-              "    h.min_pub_date < CURRENT_TIMESTAMP";
-      break;
+        if (dbpath == "") 
+        {
+            sql = "SELECT c.path_name, c.is_dir FROM\n"
+                  "    " + access.getPgTable() + " AS c\n"
+                  "WHERE\n"
+                  "    c.parent_path_id = 0 AND\n"
+                  "    (\n"
+                  "        c.ipac_pub_date < CURRENT_TIMESTAMP OR\n"
+                  "        c.is_dir = true\n"
+                  "    )";
+        }
+        else 
+        {
+            sql = "SELECT c.path_name, c.is_dir FROM\n"
+                  "    " + access.getPgTable() + " AS p INNER JOIN\n"
+                  "    " + access.getPgTable() + " AS c ON (p.path_id = c.parent_path_id)\n"
+                  "WHERE\n"
+                  "    p.path_name = '" + dbpath + "' AND\n"
+                  "    (\n"
+                  "        c.ipac_pub_date < CURRENT_TIMESTAMP OR\n"
+                  "        c.is_dir = true\n"
+                  "    )";
+        }
+        break;
     case Access::ROW_ONLY:
-      sql = "SELECT DISTINCT h.file_name, h.is_dir FROM\n"
-            "    Paths     AS p INNER JOIN\n"
-            "    Hierarchy AS h ON (p.path_id = h.parent_path_id) INNER JOIN\n"
-            "    Groups    AS g ON (h.path_id = g.path_id)\n"
-            "WHERE\n"
-            "    p.path = '" + dbpath + "' AND\n"
-                                        "    g.group_id IN ("
-            + groupString (access) + ")";
-      break;
+        if (dbpath == "") 
+        {
+            sql = "SELECT DISTINCT c.path_name, c.is_dir FROM\n"
+                  "    " + access.getPgTable() + " AS c\n"
+                  "WHERE\n"
+                  "    c.parent_path_id = 0 AND\n"
+                  "    (\n"
+                  "        c.ipac_gid IN (" + groupString(access) + ") OR\n"
+                  "        c.is_dir = true\n"
+                  "    )";
+        }
+        else 
+        {
+            sql = "SELECT DISTINCT c.path_name, c.is_dir FROM\n"
+                  "    " + access.getPgTable() + " AS p INNER JOIN\n"
+                  "    " + access.getPgTable() + " AS c ON (p.path_id = c.parent_path_id)\n"
+                  "WHERE\n"
+                  "    p.path_name = '" + dbpath + "' AND\n"
+                  "    (\n"
+                  "        c.ipac_gid IN (" + groupString(access) + ") OR\n"
+                  "        c.is_dir = true\n"
+                  "    )";
+        }
+        break;
     case Access::ROW_DATE:
-      sql = "SELECT DISTINCT h.file_name, h.is_dir FROM\n"
-            "    Paths     AS p INNER JOIN\n"
-            "    Hierarchy AS h ON (p.path_id = h.parent_path_id) INNER JOIN\n"
-            "    Groups    AS g ON (h.path_id = g.path_id)\n"
-            "WHERE\n"
-            "    p.path = '" + dbpath + "' AND\n"
-                                        "    (\n"
-                                        "        g.group_id IN ("
-            + groupString (access)
-            + ") OR\n"
-              "        h.min_pub_date < CURRENT_TIMESTAMP\n"
-              "    )";
-      break;
+        if (dbpath == "") 
+        {
+            sql = "SELECT DISTINCT c.path_name, c.is_dir FROM\n"
+                  "    " + access.getPgTable() + " AS c\n"
+                  "WHERE\n"
+                  "    c.parent_path_id = 0 AND\n"
+                  "    (\n"
+                  "        c.ipac_gid IN (" + groupString(access) + ") OR\n"
+                  "        c.ipac_pub_date < CURRENT_TIMESTAMP OR\n"
+                  "        c.is_dir = true\n"
+                  "    )";
+        }
+        else 
+        {
+            sql = "SELECT DISTINCT c.path_name, c.is_dir FROM\n"
+                  "    " + access.getPgTable() + " AS p INNER JOIN\n"
+                  "    " + access.getPgTable() + " AS c ON (p.path_id = c.parent_path_id)\n"
+                  "WHERE\n"
+                  "    p.path_name = '" + dbpath + "' AND\n"
+                  "    (\n"
+                  "        c.ipac_gid IN (" + groupString(access) + ") OR\n"
+                  "        c.ipac_pub_date < CURRENT_TIMESTAMP OR\n"
+                  "        c.is_dir = true\n"
+                  "    )";
+        }
+        break;
     default:
       throw HTTP_EXCEPT (HttpResponseCode::INTERNAL_SERVER_ERROR,
                          "Invalid access config");
     }
-  SqliteDb db (access.getFsDb ());
-  SqliteStmt stmt (db, sql);
-  vector<string> entries;
-  for (stmt.exec (); stmt.haveRow (); stmt.step ())
+    pqxx::connection conn(access.getPgConn());
+    pqxx::work transaction(conn);
+
+    pqxx::result resultset = transaction.exec(sql);
+
+    vector<string> entries;
+    bool isdir;
+
+    for(pqxx::result::const_iterator row = resultset.begin(); row != resultset.end(); ++row) 
     {
-      string f = stmt.getString (0).first;
-      if (!fs::exists (diskpath / f))
-        {
-          continue;
+        fs::path ff (row[0].c_str());
+        fs::path fn = ff.filename();
+        string f = fn.string();
+        if (!fs::exists(diskpath / f)) {
+           continue;
         }
-      if (stmt.getInt (1).first != 0)
-        {
-          f += '/';
+        row[1].to(isdir);
+        if (isdir) {
+            f += '/';
         }
-      entries.push_back (f);
+        entries.push_back(f);
     }
-  return entries;
+    return entries;
 }
 
 // Strip the three leading path elements (<schema_group>/<schema>/table/) from
@@ -299,7 +362,7 @@ string const getDirListing (fs::path const &path, Environment const &env,
 {
   ostringstream oss;
   vector<string> entries;
-  if (access.getPolicy () == Access::GRANTED && access.getFsDb ().empty ())
+  if (access.getPolicy () == Access::GRANTED && access.getPgConn ().empty ())
     {
       entries = getDirEntries (fs::path (IBE_DATA_ROOT) / path);
     }
@@ -363,56 +426,50 @@ void checkAccess (fs::path path, Access const &access)
       throw HTTP_EXCEPT (HttpResponseCode::NOT_FOUND);
     }
   else if (access.getPolicy () != Access::GRANTED
-           || !access.getFsDb ().empty ())
+           || !access.getPgConn ().empty ())
     {
       string const dbpath = getDbPath (path);
       string sql;
       switch (access.getPolicy ())
         {
         case Access::GRANTED:
-          sql = "SELECT COUNT(*) FROM Paths "
-                "WHERE path = '" + dbpath + "'";
+          sql = "SELECT COUNT(*) FROM " + access.getPgTable() + "\n"
+                "WHERE path_name = '" + dbpath + "'";
           break;
         case Access::DATE_ONLY:
-          sql = "SELECT COUNT(*) FROM\n"
-                "    Paths     AS p INNER JOIN\n"
-                "    Hierarchy AS h ON (p.path_id = h.path_id)\n"
+          sql = "SELECT COUNT(*) FROM " + access.getPgTable() + "\n"
                 "WHERE\n"
-                "    p.path = '" + dbpath
-                + "' AND\n"
-                  "    h.min_pub_date < CURRENT_TIMESTAMP";
+                "    path_name = '" + dbpath + "' AND\n"
+                "    (ipac_pub_date < CURRENT_TIMESTAMP OR is_dir = true)";
           break;
         case Access::ROW_ONLY:
-          sql = "SELECT COUNT(*) FROM\n"
-                "    Paths  AS p INNER JOIN\n"
-                "    Groups AS g ON (p.path_id = g.path_id)\n"
+          sql = "SELECT COUNT(*) FROM " + access.getPgTable() + "\n"
                 "WHERE\n"
-                "    p.path = '" + dbpath + "' AND\n"
-                                            "    g.group_id IN ("
-                + groupString (access) + ")";
+                "    path_name = '" + dbpath + "' AND\n"
+                "    (ipac_gid IN (" + groupString(access) + ") OR is_dir = true)";
           break;
         case Access::ROW_DATE:
-          sql = "SELECT COUNT(*) FROM\n"
-                "    Paths     AS p INNER JOIN\n"
-                "    Hierarchy AS h ON (p.path_id = h.path_id) INNER JOIN\n"
-                "    Groups    AS g ON (h.path_id = g.path_id)\n"
+          sql = "SELECT COUNT(*) FROM " + access.getPgTable() + "\n"
                 "WHERE\n"
-                "    p.path = '" + dbpath + "' AND\n"
-                                            "    (\n"
-                                            "        g.group_id IN ("
-                + groupString (access)
-                + ") OR\n"
-                  "        h.min_pub_date < CURRENT_TIMESTAMP\n"
-                  "    )";
+                "    path_name = '" + dbpath + "' AND\n"
+                "    (\n"
+                "        ipac_gid IN (" + groupString(access) + ") OR\n"
+                "        ipac_pub_date < CURRENT_TIMESTAMP OR\n"
+                "        is_dir = true\n"
+                "    )";
           break;
         default:
           throw HTTP_EXCEPT (HttpResponseCode::INTERNAL_SERVER_ERROR,
                              "Invalid access config");
         }
-      SqliteDb db (access.getFsDb ());
-      SqliteStmt stmt (db, sql);
-      stmt.exec ();
-      if (stmt.getInt (0).first == 0)
+        pqxx::connection conn(access.getPgConn());
+        pqxx::work transaction(conn);
+        
+        pqxx::result resultset = transaction.exec(sql);
+        
+        int count;
+        resultset.at(0).at(0).to(count);
+        if (count == 0)
         {
           throw HTTP_EXCEPT (HttpResponseCode::NOT_FOUND);
         }

@@ -40,17 +40,19 @@ public:
   /// Return the groups the requestor belongs to.
   std::set<int> const getGroups () const;
 
-  /// Return the SQLite3 database file containing file-system metadata,
-  /// which is valid only for the access policies requiring row-level
-  /// security checks.
-  std::string const getFsDb () const { return _fsDb; }
+  /// Return the Postgres database connection URI and table containing 
+  /// file-system metadata, which is valid only for the access policies 
+  /// requiring row-level security checks.
+  std::string const getPgConn () const { return _pgConn; }
+  std::string const getPgTable () const { return _pgTable; }
 
 private:
   Policy _policy;
   int _mission;
   int _group;
   std::string _session;
-  std::string _fsDb;
+  std::string _pgConn;
+  std::string _pgTable;
   mutable std::set<int> _groups;
   mutable bool _groupsValid;
 };

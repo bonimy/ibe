@@ -146,7 +146,8 @@ set<int> const getUserGroups (string const &session, int mission)
 Access::Access (Environment const &env)
     : _policy (DENIED), _mission (parseInteger (env, "mission", MISSION_NONE)),
       _group (parseInteger (env, "group", GROUP_NONE)),
-      _session (getSession (env)), _fsDb (), _groups (), _groupsValid (false)
+      _session (getSession (env)), _pgConn (), _pgTable (), _groups (), 
+      _groupsValid (false)
 {
   // get access related CGI parameters and sanity check them
   string const policy = env.getValue ("policy", "ACCESS_GRANTED");
@@ -198,7 +199,8 @@ Access::Access (Environment const &env)
                              "Invalid server configuration");
         }
       _policy = DATE_ONLY;
-      _fsDb = env.getValue ("fsdb");
+      _pgConn = env.getValue ("pgconn");
+      _pgTable = env.getValue ("pgtable");
     }
   else if (policy == "ACCESS_ROW_ONLY" || policy == "ACCESS_ROW_DATE")
     {
@@ -221,7 +223,8 @@ Access::Access (Environment const &env)
         {
           _policy = (policy == "ACCESS_ROW_ONLY") ? ROW_ONLY : ROW_DATE;
         }
-      _fsDb = env.getValue ("fsdb");
+      _pgConn = env.getValue ("pgconn");
+      _pgTable = env.getValue ("pgtable");
     }
   else
     {
