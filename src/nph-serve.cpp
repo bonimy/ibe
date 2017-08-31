@@ -17,7 +17,6 @@
 #include "Access.h"
 #include "Cgi.h"
 #include "Cutout.h"
-#include "Sqlite.h"
 
 using std::make_pair;
 using std::ostream;
@@ -39,8 +38,6 @@ using ibe::HttpException;
 using ibe::HttpResponseCode;
 using ibe::MemoryWriter;
 using ibe::parseCoords;
-using ibe::SqliteDb;
-using ibe::SqliteStmt;
 
 namespace
 {
