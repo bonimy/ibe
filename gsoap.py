@@ -20,7 +20,7 @@ def configure(conf):
     if conf.options.gsoap_libs:
         gsoap_libs=conf.options.gsoap_libs.split()
     else:
-        gsoap_libs=['gsoap++']
+        gsoap_libs=['gsoap']
 
 
     fragment='''#include <stdsoap2.h>
