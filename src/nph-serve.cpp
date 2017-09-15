@@ -373,12 +373,6 @@ string const getDirListing (fs::path const &path, Environment const &env,
         {
           entries = getDirEntries (diskpath, dbpath, access);
         }
-      if (entries.empty () && !dbpath.empty ())
-        {
-          // don't serve empty directories, except possibly
-          // for the table specific root.
-          throw HTTP_EXCEPT (HttpResponseCode::NOT_FOUND);
-        }
     }
   // sort directory entries by name
   std::sort (entries.begin (), entries.end ());
