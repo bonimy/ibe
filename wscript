@@ -74,3 +74,7 @@ def build(bld):
     bld.symlink_as(data_dir + 'ztf/products/sci',
                    '/stage/irsa-ztf-links/ingest-test/sci')
 
+    bld.symlink_as(data_dir + 'spitzer/seip_science/images',
+                   '/irsadata/SPITZER/Enhanced/SEIP/images')
+    bld.symlink_as(data_dir + 'spitzer/seip_ancillary/images',
+                   '/irsadata/SPITZER/Enhanced/SEIP/images')
