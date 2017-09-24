@@ -326,35 +326,35 @@ def build(bld):
     
     # COSMOS
     bld.symlink_as(data_dir + 'cosmos/cosmos_acs_2_0/images',
-                   '/irsadata/COSMOS$/images')
+                   '/irsadata/COSMOS/images')
     bld.symlink_as(data_dir + 'cosmos/cosmos_cfht/images',
-                   '/irsadata/COSMOS$/images')
+                   '/irsadata/COSMOS/images')
     bld.symlink_as(data_dir + 'cosmos/cosmos_chandra_merged/images',
-                   '/irsadata/COSMOS$/images')
+                   '/irsadata/COSMOS/images')
     bld.symlink_as(data_dir + 'cosmos/cosmos_galex/images',
-                   '/irsadata/COSMOS$/images')
+                   '/irsadata/COSMOS/images')
     bld.symlink_as(data_dir + 'cosmos/cosmos_irac/images',
-                   '/irsadata/COSMOS$/images')
+                   '/irsadata/COSMOS/images')
     bld.symlink_as(data_dir + 'cosmos/cosmos_mips/images',
-                   '/irsadata/COSMOS$/images')
+                   '/irsadata/COSMOS/images')
     bld.symlink_as(data_dir + 'cosmos/cosmos_kpno/images',
-                   '/irsadata/COSMOS$/images')
+                   '/irsadata/COSMOS/images')
     bld.symlink_as(data_dir + 'cosmos/cosmos_nicmos/images',
-                   '/irsadata/COSMOS$/images')
+                   '/irsadata/COSMOS/images')
     bld.symlink_as(data_dir + 'cosmos/cosmos_sdss/images',
-                   '/irsadata/COSMOS$/images')
+                   '/irsadata/COSMOS/images')
     bld.symlink_as(data_dir + 'cosmos/cosmos_subaru/images',
-                   '/irsadata/COSMOS$/images')
+                   '/irsadata/COSMOS/images')
     bld.symlink_as(data_dir + 'cosmos/cosmos_ukirt/images',
-                   '/irsadata/COSMOS$/images')
+                   '/irsadata/COSMOS/images')
     bld.symlink_as(data_dir + 'cosmos/cosmos_vla/images',
-                   '/irsadata/COSMOS$/images')
+                   '/irsadata/COSMOS/images')
     bld.symlink_as(data_dir + 'cosmos/cosmos_wfpc/images',
-                   '/irsadata/COSMOS$/images')
+                   '/irsadata/COSMOS/images')
     bld.symlink_as(data_dir + 'cosmos/cosmos_xmm/images',
-                   '/irsadata/COSMOS$/images')
+                   '/irsadata/COSMOS/images')
     bld.symlink_as(data_dir + 'cosmos/cosmos_ultravista/images',
-                   '/irsadata/COSMOS$/images')
+                   '/irsadata/COSMOS/images')
 
     # Herschel
     bld.symlink_as(data_dir + 'herschel/acmc_images/images',
@@ -362,7 +362,7 @@ def build(bld):
     bld.symlink_as(data_dir + 'herschel/coldcores_images/images',
                    '/irsadata/Herschel/ColdCores/images')
     bld.symlink_as(data_dir + 'herschel/dunes_mosaic/images',
-                   '/irsadata/Herschel/dunes_mosaic/images')
+                   '/irsadata/Herschel/DUNES/images')
     bld.symlink_as(data_dir + 'herschel/dunes_scan/images',
                    '/irsadata/Herschel/DUNES/images')
     bld.symlink_as(data_dir + 'herschel/dunes_chopnod/images',
