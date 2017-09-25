@@ -27,58 +27,23 @@ fireflyToolbar= {
 	<p>
 		The IRSA Image Server provides low-level, program friendly methods
 		for querying astronomical image metadata tables, including support for the
-		<a href="http://www.ivoa.net">IVOA</a>
+		<a href="http://www.ivoa.net">IVOA's</a>
 		<a href="http://www.ivoa.net/Documents/SIA/">Simple Image Access</a>
-		protocol. Images and image cutouts are available for direct download
+		protocol and <a href="http://www.ivoa.net/Documents/SIA/">Table Access Protocol</a> . Images and image cutouts are available for direct download
 		(e.g. via <a href="http://www.gnu.org/software/wget/">wget</a> or
 		<a href="http://curl.haxx.se/">curl</a>), and are laid out in
 		<a href="data/">browsable directories</a>.
 	</p>
-	<p>
-		Image metadata tables may be queried by appending a
-		<a href="http://en.wikipedia.org/wiki/Query_string">query string</a>
-		to a base URL identifying the table. For SIA queries, these base
-		URLs have the following structure:
-	</p>
-	<div class="path">
-		<span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/sia/{mission}/{data-set}/{table-name}
-	</div>
-	<p>
-		For queries returning data in simpler formats
-		(<a href="https://irsa.ipac.caltech.edu/applications/DDGEN/Doc/ipac_tbl.html">IPAC ASCII</a>,
-		CSV, TSV), the base URLs look like:
-	</p>
-	<div class="path">
-		<span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/search/{mission}/{data-set}/{table-name}
-	</div>
-	<p>
-		Data products associated with the table (mostly images) are URL accessible
-		from:
-	</p>
-	<div class="path">
-		<span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/data/{mission}/{data-set}/{table-name}
-	</div>
-	<p>
-		Finally, the URL structure of these data products is documented by:
-	</p>
-	<div class="path">
-		<span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/docs/{mission}/{data-set}/{table-name}
-	</div>
-</div>
-
-<h3>Explore</h3>
-<div>
 	<p>
 		Visit the following links to browse the available data
 		and for in-depth explanations of how to use this service:
 	</p>
 	<ul>
 		<li><a href="sia.html">SIA queries</a></li>
-		<li><a href="queries.html">Image queries</a></li>
+		<li><a href="/docs/program_interface/TAP.html">Table Access Protocol (TAP) queries</a></li>
 		<li><a href="cutouts.html">Image cutouts</a></li>
 		<li><a href="search/">Browse available data-sets</a></li>
 		<li><a href="data/">Browse data</a></li>
-		<li><a href="docs/">Browse data URL documentation</a></li>
 	</ul>
 </div>
 

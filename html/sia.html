@@ -4,7 +4,7 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>IRSA Image Server - SIA Queries</title>
+	<title>IRSA Image Server - SIA v2 Queries</title>
 	<link href="docs.css" type="text/css" rel="stylesheet" />
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
 </head>
@@ -23,14 +23,13 @@ fireflyToolbar= {
 
 <div class="content">
 
-<h1><a href="index.html">IRSA Image Server</a> - SIA Queries</h1>
+<h1><a href="index.html">IRSA Image Server</a> - SIA v2 Queries</h1>
 
 <ul>
 	<li><a href="#avail">Available data-sets</a></li>
 	<li><a href="#overview">Overview</a></li>
 	<li><a href="#metadata">Metadata queries</a></li>
-	<li><a href="#spatial">Spatial queries</a></li>
-	<li><a href="#ext">Extensions and non-standard behavior</a></li>
+	<li><a href="#constraints">Query Constraints</a></li>
 	<li><a href="#examples">Examples</a></li>
 	<li><a href="#help">Getting Help</a></li>
 </ul>
@@ -42,56 +41,61 @@ fireflyToolbar= {
 <div>
         <table>
 
-
-        <tr><td colspan="4"><strong>WISE AllWISE Release</strong></td></tr>
-        <tr><th>Data-set</th><th>SIA base URL</th><th>METADATA</th><th>Max SIZE</th></tr>
+        <tr><td colspan="4"><strong>Spitzer Heritage Archive (SHA)</strong></td></tr>
+        <tr><th>Data-set</th><th>Collection Name</th><th>Calibration Level</th></tr>
 
         <tr>
-                <td><a href="docs/wise/allwise/p3am_cdd">AllWISE Atlas Coadds</a></td>
-                <td><span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/sia/wise/allwise/p3am_cdd</td>
-                <td><a href="sia/wise/allwise/p3am_cdd?FORMAT=METADATA"><span class="root">&lt;root&gt;</span>/sia/wise/allwise/p3am_cdd?FORMAT=METADATA</a></td>
-                <td>5 deg</td>
+          <td>Spitzer Heritage Archive</a></td>
+          <td>spitzer_sha</td>
+          <td>1, 2, and 3</td>
+        </tr>
+
+	<tr><td>&nbsp;</td></tr>
+
+
+        <tr><td colspan="4"><strong>WISE AllWISE Release</strong></td></tr>
+        <tr><th>Data-set</th><th>Collection Name</th><th>Calibration Level</th></tr>
+
+        <tr>
+          <td><a href="docs/wise/allwise/p3am_cdd">AllWISE Atlas Coadds</a></td>
+          <td>wise_allwise</td>
+          <td>3</td>
         </tr>
 
 	<tr><td>&nbsp;</td></tr>
 
 
         <tr><td colspan="4"><strong>WISE AllSky Release</strong></td></tr>
-        <tr><th>Data-set</th><th>SIA base URL</th><th>METADATA</th><th>Max SIZE</th></tr>
+        <tr><th>Data-set</th><th>Collection Name</th><th>Calibration Level</th></tr>
 
         <tr>
                 <td><a href="docs/wise/allsky/4band_p3am_cdd">4-band Atlas Coadds</a></td>
-                <td><span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/sia/wise/allsky/4band_p3am_cdd</td>
-                <td><a href="sia/wise/allsky/4band_p3am_cdd?FORMAT=METADATA"><span class="root">&lt;root&gt;</span>/sia/wise/allsky/4band_p3am_cdd?FORMAT=METADATA</a></td>
-                <td>5 deg</td>
+                <td>wise_allsky</td>
+                <td>3</td>
         </tr>
 
         <tr>
                 <td><a href="docs/wise/allsky/4band_p1bm_frm">4-band Level 1B Frames</a></td>
-                <td><span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/sia/wise/allsky/4band_p1bm_frm</td>
-                <td><a href="sia/wise/allsky/4band_p1bm_frm?FORMAT=METADATA"><span class="root">&lt;root&gt;</span>/sia/wise/allsky/4band_p1bm_frm?FORMAT=METADATA</a></td>
-                <td>5 deg</td>
+                <td>wise_allsky</td>
+                <td>2</td>
         </tr>
 
         <tr>
                 <td><a href="docs/wise/cryo_3band/3band_p3am_cdd">Cryo_3band Atlas Coadds</a></td>
-                <td><span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/sia/wise/cryo_3band/3band_p3am_cdd</td>
-                <td><a href="sia/wise/cryo_3band/3band_p3am_cdd?FORMAT=METADATA"><span class="root">&lt;root&gt;</span>/sia/wise/cryo_3band/3band_p3am_cdd?FORMAT=METADATA</a></td>
-                <td>5 deg</td>
+                <td>wise_3bandcryo</td>
+                <td>3</td>
         </tr>
 
         <tr>
                 <td><a href="docs/wise/cryo_3band/3band_p1bm_frm">Cryo_3band Level 1B Frames</a></td>
-                <td><span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/sia/wise/cryo_3band/3band_p1bm_frm</td>
-                <td><a href="sia/wise/cryo_3band/3band_p1bm_frm?FORMAT=METADATA"><span class="root">&lt;root&gt;</span>/sia/wise/cryo_3band/3band_p1bm_frm?FORMAT=METADATA</a></td>
-                <td>5 deg</td>
+                <td>wise_3bandcryo</td>
+                <td>2</td>
         </tr>
 
         <tr>
                 <td><a href="docs/wise/postcryo/2band_p1bm_frm">Postcryo (2-band) Level 1B Frames</a></td>
-                <td><span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/sia/wise/postcryo/2band_p1bm_frm</td>
-                <td><a href="sia/wise/postcryo/2band_p1bm_frm?FORMAT=METADATA"><span class="root">&lt;root&gt;</span>/sia/wise/postcryo/2band_p1bm_frm?FORMAT=METADATA</a></td>
-                <td>5 deg</td>
+                <td>wise_2band</td>
+                <td>2</td>
         </tr>
 
 	<tr><td>&nbsp;</td></tr>
@@ -99,88 +103,77 @@ fireflyToolbar= {
 
 
 	<tr><td colspan="4"><strong>WISE Preliminary Release</strong></td></tr>
-	<tr><th>Data-set</th><th>SIA base URL</th><th>METADATA</th><th>Max SIZE</th></tr>
+        <tr><th>Data-set</th><th>Collection Name</th><th>Calibration Level</th></tr>
 
 	<tr>
                 <td><a href="docs/wise/prelim/p3am_cdd">Atlas Coadds</a></td>
-		<td><span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/sia/wise/prelim/p3am_cdd</td>
-		<td><a href="sia/wise/prelim/p3am_cdd?FORMAT=METADATA"><span class="root">&lt;root&gt;</span>/sia/wise/prelim/p3am_cdd?FORMAT=METADATA</a></td>
-		<td>5 deg</td>
+                <td>wise_prelim</td>
+                <td>3</td>
 	</tr>
 
 	<tr>
                 <td><a href="docs/wise/prelim/p1bm_frm">Level 1B Frames</a></td>
-		<td><span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/sia/wise/prelim/p1bm_frm</td>
-		<td><a href="sia/wise/prelim/p1bm_frm?FORMAT=METADATA"><span class="root">&lt;root&gt;</span>/sia/wise/prelim/p1bm_frm?FORMAT=METADATA</a></td>
-		<td>5 deg</td>
+                <td>wise_prelim</td>
+                <td>2</td>
 	</tr>
 
 	<tr>
                 <td><a href="docs/wise/prelim_postcryo/p1bm_frm">Postcryo 2B</a></td>
-		<td><span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/sia/wise/prelim_postcryo/2band_p1bm_frm</td>
-		<td><a href="sia/wise/prelim_postcryo/2band_p1bm_frm?FORMAT=METADATA"><span class="root">&lt;root&gt;</span>/sia/wise/prelim_postcryo/2band_p1bm_frm?FORMAT=METADATA</a></td>
-		<td>5 deg</td>
+                <td>wise_prelimpostcryo</td>
+                <td>2</td>
 	</tr>
 
 	<tr><td>&nbsp;</td></tr>
 
 
 	<tr><td colspan="4"><strong>WISE Merged Datasets</strong></td></tr>
-	<tr><th>Data-set</th><th>SIA base URL</th><th>METADATA</th><th>Max SIZE</th></tr>
+        <tr><th>Data-set</th><th>Collection Name</th><th>Calibration Level</th></tr>
 
         <tr>
                 <td><a href="docs/wise/merge/merge_p3am_cdd">Atlas Coadds</a></td>
-                <td><span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/sia/wise/merge/merge_p3am_cdd</td>
-                <td><a href="sia/wise/merge/merge_p3am_cdd?FORMAT=METADATA"><span class="root">&lt;root&gt;</span>/sia/wise/merge/merge_p3am_cdd?FORMAT=METADATA</a></td>
-                <td>5 deg</td>
+                <td>wise_merge</td>
+                <td>3</td>
         </tr>
         <tr>
                 <td><a href="docs/wise/merge/merge_p1bm_frm">Level 1B Frames</a></td>
-                <td><span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/sia/wise/merge/merge_p1bm_frm</td>
-                <td><a href="sia/wise/merge/merge_p1bm_frm?FORMAT=METADATA"><span class="root">&lt;root&gt;</span>/sia/wise/merge/merge_p1bm_frm?FORMAT=METADATA</a></td>
-                <td>5 deg</td>
+                <td>wise_merge</td>
+                <td>2</td>
         </tr>
 
 	<tr><td>&nbsp;</td></tr>
 
         <tr><td colspan="4"><strong>2MASS Datasets</strong></td></tr>
-        <tr><th>Data-set</th><th>SIA base URL</th><th>METADATA</th><th>Max SIZE</th></tr>
+        <tr><th>Data-set</th><th>Collection Name</th><th>Calibration Level</th></tr>
 
         <tr>
                 <td><a href="docs/twomass/allsky/allsky">2MASS All-Sky Data Release Images</a></td>
-                <td><span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/sia/twomass/allsky/allsky</td>
-                <td><a href="sia/twomass/allsky/allsky?FORMAT=METADATA"><span class="root">&lt;root&gt;</span>/sia/twomass/allsky/allsky?FORMAT=METADATA</a></td>
-                <td>5 deg</td>
+                <td>twomass_allsky</td>
+                <td>2</td>
         </tr>
         <tr>
                 <td><a href="docs/twomass/full/full">2MASS Full Survey Images</a></td>
-                <td><span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/sia/twomass/full/full</td>
-                <td><a href="sia/twomass/full/full?FORMAT=METADATA"><span class="root">&lt;root&gt;</span>/sia/twomass/full/full?FORMAT=METADATA</a></td>
-                <td>5 deg</td>
+                <td>twomass_full</td>
+                <td>2</td>
         </tr>
         <tr>
                 <td><a href="docs/twomass/sixxcat/sixxcat">2MASS 6X Catalog Images</a></td>
-                <td><span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/sia/twomass/sixxcat/sixxcat</td>
-                <td><a href="sia/twomass/sixxcat/sixxcat?FORMAT=METADATA"><span class="root">&lt;root&gt;</span>/sia/twomass/sixxcat/sixxcat?FORMAT=METADATA</a></td>
-                <td>5 deg</td>
+                <td>twomass_sixxcat</td>
+                <td>2</td>
         </tr>
         <tr>
                 <td><a href="docs/twomass/sixxfull/sixxfull">2MASS Full 6X Images</a></td>
-                <td><span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/sia/twomass/sixxfull/sixxfull</td>
-                <td><a href="sia/twomass/sixxfull/sixxfull?FORMAT=METADATA"><span class="root">&lt;root&gt;</span>/sia/twomass/sixxfull/sixxfull?FORMAT=METADATA</a></td>
-                <td>5 deg</td>
+                <td>twomass_sixxfull</td>
+                <td>2</td>
         </tr>
         <tr>
                 <td><a href="docs/twomass/calibration/calibration">2MASS Calibration Images</a></td>
-                <td><span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/sia/twomass/calibration/calibration</td>
-                <td><a href="sia/twomass/calibration/calibration?FORMAT=METADATA"><span class="root">&lt;root&gt;</span>/sia/twomass/calibration/calibration?FORMAT=METADATA</a></td>
-                <td>5 deg</td>
+                <td>twomass_calibration</td>
+                <td>2</td>
         </tr>
         <tr>
                 <td><a href="docs/twomass/mosaic/sixdeg">2MASS 6-Degree Mosaics</a></td>
-                <td><span class="server">&lt;server&gt;</span><span class="root">&lt;root&gt;</span>/sia/twomass/mosaic/sixdeg</td>
-                <td><a href="sia/twomass/mosaic/sixdeg?FORMAT=METADATA"><span class="root">&lt;root&gt;</span>/sia/twomass/mosaic/sixdeg?FORMAT=METADATA</a></td>
-                <td>5 deg</td>
+                <td>twomass_sixdeg</td>
+                <td>3</td>
         </tr>
 
         <tr><td>&nbsp;</td></tr>
@@ -194,12 +187,9 @@ fireflyToolbar= {
 <h3>Overview</h3>
 
 <p>
-	An overview of how to perform SIA queries is provided below - for full
+	An overview of how to perform SIA v2 queries is provided below - for full
 	details, please see the <a href="http://www.ivoa.net">IVOA</a>
-	<a href="http://www.ivoa.net/Documents/SIA/20091116/REC-SIA-1.0.pdf">SIA specification</a>.
-	Note that the SIA services provided here fall under the Atlas/Pointed
-	Image Archive categories (as defined by the SIA standard). That is, no
-	facilities for performing image cutouts or mosaicing are provided.
+	<a href="http://www.ivoa.net/documents/SIA/">SIA v2 specification</a>.
 </p>
 
 <a name="metadata" />
@@ -207,104 +197,76 @@ fireflyToolbar= {
 <h3>Metadata queries</h3>
 
 <p>
-	An SIA metadata query returns a
-	<a href="http://www.ivoa.net/Documents/VOTable/">VOTable</a> describing
-	both the SIA service input parameters and the image metadata columns that
-	are returned by actual queries. The output of a metadata query is exactly
-	identical to the output of an SIA query returning no images.
+	To perform a metadata query,
+	visit <a href="/SIA?FORMAT=METADATA">/SIA?FORMAT=METADATA</a>.
+	The result will be a
+	<a href="http://www.ivoa.net/Documents/VOTable/">VOTable</a>
+	describing the image metadata columns that are returned by
+	actual queries.  All of IRSA's SIA v2 datasets have been
+	regularized and are contained in the same table.
 </p>
 
-<p>
-	To perform a metadata query, simply append the <span class="param">FORMAT</span>
-	argument with a value of METADATA to the SIA service URL. For example,
-	<a href="sia/wise/allsky/4band_p3am_cdd?FORMAT=METADATA"><span class="root">&lt;root&gt;</span>/sia/wise/allsky/4band_p3am_cdd?FORMAT=METADATA</a>
-	is a metadata query against the WISE All-Sky Release Atlas Coadds.
-</p>
+<a name="constraints" />
 
-<a name="spatial" />
-
-<h3>Spatial queries</h3>
+<h3>Query Constraints</h3>
 
 <p>
-	An SIA query returns a <a href="http://www.ivoa.net/Documents/VOTable/">VOTable</a>
-	of images satisfying a spatial constraint. The constraint involves a
-	search region, specified via the <span class="param">POS</span> and
-	<span class="param">SIZE</span> parameters, and a spatial predicate,
-	specified via the <span class="param">INTERSECT</span> parameter.
+	An SIA v2 query returns
+	a <a href="http://www.ivoa.net/Documents/VOTable/">VOTable</a>
+	of images satisfying any number of constraints.  By default,
+	queries return results from all datasets.  IRSA's SIA v2
+	holdings contain almost a billion records, so searches without
+	constraints will time out.  Common constraints are spatial
+	(using the <a href="#POS">POS</a> keyword), dataset (using
+	the <a href="#COLLECTION">COLLECTION</a> keyword), and/or
+	calibration level (using the <a href="#CALIB">CALIB</a>
+	keyword) which we describe below.  In addition, the type of
+	output can be specified with
+	the <a href="#RESPONSEFORMAT">RESPONSEFORMAT</a> keyword.  The
+	complete list of parameters supported by IRSA's SIA v2
+	implementation are
+
+        <ul>
+          <li>POS</li>
+          <li>BAND</li>
+          <li>TIME</li>
+          <li>POL</li>
+          <li>FOV</li>
+          <li>SPATRES</li>
+          <li>SPECRP</li>
+          <li>EXPTIME</li>
+          <li>TIMERES</li>
+          <li>ID</li>
+          <li>COLLECTION</li>
+          <li>FACILITY</li>
+          <li>INSTRUMENT</li>
+          <li>DPTYPE</li>
+          <li>CALIB</li>
+          <li>TARGET</li>
+          <li>FORMAT</li>
+          <li>MAXREC</li>
+          <li>UPLOAD</li>
+          <li>RESPONSEFORMAT</li>
+        </ul>
 </p>
 
 <dl>
-	<dt><span class="param">POS</span>=ra,dec</dt>
+        <a name="POS"></a>
+        <dt><span class="param">POS</span></dt>
 	<dd>
 		<p>
-			The <span class="param">POS</span> parameter value must consist of 
-			an ICRS right ascension and declination in decimal degrees. It identifies
-			the point which returned images must contain, or the center of the search
-			region. The coordinate values must be separated by a comma; no embedded
-			whitespace is allowed.
-		</p>
-		<p>This parameter is <strong>required</strong>.</p>
-		<p>Examples:</p>
-		<ul>
-			<li class="param">POS=359,10</li>
-			<li class="param">POS=10,-89.5</li>
-		</ul>
-	</dd>
-	<dt><span class="param">SIZE</span>=width[,height]</dt>
-	<dd>
-		<p>
-			The <span class="param">SIZE</span> parameter consists of one or two
-			(comma separated) values in decimal degrees. The first SIZE value
-			is taken to be the full-width of the search region along the east axis
-			at <span class="param">POS</span>, and the second is taken to be the
-			full-height along the north axis. Taken together,
-			<span class="param">POS</span> and <span class="param">SIZE</span>
-			define a convex spherical polygon on the sky with great circle edges -
-			the search region. During a query, this region is compared against the
-			convex spherical polygons formed by connecting the 4 corners of each
-			image in a data-set to determine which images should be returned.
-		</p>
-		<p>
-			If only one size value is specified, it is used as both the full-width
-			and full-height. Negative sizes are illegal, and a width and height
-			of zero indicate that the search region is a point.
-		</p>
-		<p>
-			<span class="param">SIZE</span> is an optional parameter.
-			If unspecified, the default search region width and height
-			is 0 (i.e. the search region is just the point
-			<span class="param">POS</span>). Note also that if
-			<span class="param">INTERSECT</span>=CENTER (see below),
-			<span class="param">SIZE</span> is ignored.
+			The <span class="param">POS</span> parameter
+			value must consist of a shape described by
+			ICRS coordinates in decimal degrees. It
+			identifies the shape which returned images
+			must intersect with.
 		</p>
 		<p>Examples:</p>
 		<ul>
-			<li class="param">SIZE=0.1</li>
-			<li class="param">SIZE=1,2</li>
+			<li class="param">POS=circle -164.7 -5.8 1</li>
+			<li class="param">POS=polygon -164 -5 -165 -5 -165 -6 -164 -6</li>
+			<li class="param">POS=range -105 -104 -22 -12</li>
 		</ul>
-	</dd>
-	<dt><span class="param">INTERSECT</span>=value</dt>
-	<dd>
-		<p>
-			The <span class="param">INTERSECT</span> parameter specifies a
-			spatial predicate that specifies how the search region S and the
-			spatial extents of a candidate image X must be related.
-			Four values are allowed:
-		</p>
-		<ul>
-			<li><strong>COVERS</strong>: X must completely contain S.
-				Equivalent to CENTER and OVERLAPS if S is a point.</li>
-			<li><strong>ENCLOSED</strong>: S must completely contain X. If
-				S is a point, the query will always return an empty image table.</li>
-			<li><strong>CENTER</strong>: X must contain the center of S.
-				If S is a point, this is equivalent to COVERS and OVERLAPS.</li>
-			<li><strong>OVERLAPS</strong>: The intersection of S and X is non-empty.
-				If S is a point, this is equivalent to CENTER and COVERS.</li>
-		</ul>
-		<p>
-			The <span class="param">INTERSECT</span> parameter is optional;
-			if unspecified, it defaults to OVERLAPS.
-		</p>
 		<p>
 			The spatial extent of an image is approximated by connecting
 			its corners with great circles to form a spherical convex polygon.
@@ -322,48 +284,106 @@ fireflyToolbar= {
 			our approximations are accurate enough to be useful.
 		</p>
 	</dd>
+        <a name="COLLECTION"></a>
+	<dt><span class="param">COLLECTION</span></dt>
+	<dd>
+		<p>
+		  The <span class="param">COLLECTION</span> parameter identifies
+		  the group of data that an observation belongs to.
+		<p>Examples:</p>
+		<ul>
+			<li class="param">COLLECTION=spitzer_sha</li>
+			<li class="param">COLLECTION=wise_allwise</li>
+			<li class="param">COLLECTION=twomass_allsky</li>
+		</ul>
+
+
+	</dd>
+        <a name="CALIB"></a>
+	<dt><span class="param">CALIB</span></dt>
+	<dd>
+		<p>
+		  The <span class="param">CALIB</span> parameter
+		  identifies the calibration level of an observation.
+		  This is useful for distinguishing between raw,
+		  processed, and highly processed data that are all
+		  part of the same collection.  The specific meaning
+		  for the different levels are specified in
+		  the <a href="http://www.ivoa.net/documents/ObsCore/index.html">IVOA
+		    ObsCore</a> standard:
+
+		<ul>
+		  <li><b>Level 0</b>: Raw instrumental data, in a proprietary or internal data-provider defined format, that
+                    needs instrument specific tools to be handled.</li>
+		  <li><b>Level 1</b>: Instrumental data in a standard format (FITS, VOTable, SDFITS, ASDM, etc.) which
+                    could be manipulated with standard astronomical packages.</li>
+		  <li><b>Level 2</b>: Calibrated, science ready data with the instrument signature removed.</li>
+		  <li><b>Level 3</b>: Enhanced data products like mosaics, resampled or drizzled images, or heavily
+                    processed survey fields. Level 3 data products may represent the combination of data from
+                    multiple primary observations.</li>
+                </ul>
+		<p>Examples:</p>
+		<ul>
+			<li class="param">CALIB=1</li>
+			<li class="param">CALIB=2</li>
+			<li class="param">CALIB=3</li>
+		</ul>
+
+
+	</dd>
+        <a name="RESPONSEFORMAT"></a>
+	<dt><span class="param">RESPONSEFORMAT</span></dt>
+	<dd>
+		<p>
+		  The <span class="param">RESPONSEFORMAT</span>
+		  parameter specifies what type of output the service
+		  will return.  The default is VOTable, but many
+		  options are available:
+
+		<ul>
+		  <li>FITS: <a href="https://fits.gsfc.nasa.gov/">Flexible Image Transport System</a></li>
+		  <li>IPAC_TABLE: <a href="http://irsa.ipac.caltech.edu/applications/DDGEN/Doc/ipac_tbl.html">IPAC's Table Format</a></li>
+		  <li>HDF5: <a href="https://www.hdfgroup.org/">Hierarchical Data Format v5</a></li>
+		  <li>VOTABLE: <a href="http://www.ivoa.net/Documents/VOTable/">IVOA VOTable</a></li>
+		  <li>JSON: <a href="http://json.org">JavaScript Object Notation</a></li>
+		  <li>CSV: Comma Separated Values (suitable for loading into spreadsheets)</li>
+		  <li>TSV: Tab Separated Values (suitable for loading into spreadsheets)</li>
+		  <li>TEXT: Plain text</li>
+		  <li>HTML: HTML table suitable for embedding within another page</li>
+		  <li>POSTGRES: SQL for loading the result into <a href="https://www.postgresql.org/">Postgres</a></li>
+		  <li>SQLITE: SQL for loading the result into <a href="http://www.sqlite.org/">SQLite</a></li>
+		  <li>ORACLE: SQL for loading the result into <a href="https://www.oracle.com/database/index.html">Oracle</a></li>
+		  <li>DB: Raw SQLite database</li>
+                </ul>
+		<p>Examples:</p>
+		<ul>
+			<li class="param">RESPONSEFORMAT=FITS</li>
+			<li class="param">RESPONSEFORMAT=JSON</li>
+			<li class="param">RESPONSEFORMAT=TEXT</li>
+		</ul>
+
+
+	</dd>
 </dl>
-
-<a name="ext" />
-
-<h3>Extensions and non-standard behavior</h3>
-
-<p>
-	As an extension to the SIA standard, one can specify the
-	<span class="param">mcen</span> parameter. This parameter requires no
-	value; if one is nevertheless specified, it is ignored. The presence
-	of <span class="param">mcen</span> in a query indicates that only the
-	most centered image/image set (with respect to <span class="param">POS</span>)
-	should be returned, rather than all images/image sets containing
-	<span class="param">POS</span>. If the <span class="param">SIZE</span>
-	parameter is specified and non-zero, the <span class="param">mcen</span>
-	parameter is ignored (except when <span class="param">INTERSECT</span>=CENTER).
-</p>
-
-<p>
-	Note that the definition of the <span class="param">SIZE</span>
-	parameter differs from the SIA standard. The latter defines the SIZE
-	values as widths/heights in coordinate angle instead of true angle,
-	leading to search regions that are boxes in spherical coordinate space
-	rather than polygons on the sphere.
-</p>
 
 <a name="examples" />
 
 <h3>Examples</h3>
 
-<p>Here is an SIA query returning all WISE All-Sky Release Level 1b Frames 
-   containing (ra,dec) = (20,40):
+<p>Here is an SIA v2 query returning all WISE All-Sky Release Level 1b
+   Frames intersecting a circle centered on (ra=20,dec=40) with a
+   radius of about 10 arcseconds.  Note that we usually have to URL
+   encode the spaces as pluses '+', though your browser may do that
+   for you.
 </p>
 
-<ul><li><a href="sia/wise/allsky/4band_p1bm_frm?POS=20,40"><span class="root">&lt;root&gt;</span>/sia/wise/allsky/4band_p1bm_frm?POS=20,40</a></li></ul>
+<ul><li><a href="/SIA?COLLECTION=wise_allsky&CALIB=2&POS=CIRCLE+20+40+0.00277">/SIA?COLLECTION=wise_allsky&amp;CALIB=2&amp;POS=CIRCLE+20+40+0.00277</a></li></ul>
 
 <p>And here is a query returning all WISE Preliminary Release Atlas coadds
-   overlapping a search rectangle centered on (ra,dec) = (20,40) with width
-   and height of 1.5 degrees:
+   overlapping a search rectangle with corners at (19.25,39.25) (20.75,39.25) (20.75,40.75) (19.25,40.75).  The file returned will be in FITS format.
 </p>
 
-<ul><li><a href="sia/wise/prelim/p3am_cdd?POS=20,40&amp;SIZE=1.5"><span class="root">&lt;root&gt;</span>/sia/wise/prelim/p3am_cdd?POS=20,40&amp;SIZE=1.5</a></li></ul>
+<ul><li><a href="/SIA?COLLECTION=wise_prelim&CALIB=3&RESPONSEFORMAT=FITS&POS=POLYGON+19.25+39.25+20.75+39.25+20.75+40.75+19.25+40.75">/SIA?COLLECTION=wise_prelim&amp;CALIB=3&amp;RESPONSEFORMAT=FITS&amp;POS=POLYGON+19.25+39.25+20.75+39.25+20.75+40.75+19.25+40.75</a></li></ul>
 
 <a name="help" />
 
