@@ -198,8 +198,8 @@ fireflyToolbar= {
 
 <p>
 	To perform a metadata query,
-	visit <a href="/SIA?FORMAT=METADATA">/SIA?FORMAT=METADATA</a>.
-	The result will be a
+	visit <a href="/SIA?MAXREC=0">/SIA?MAXREC=0</a>.  The result
+	will be a
 	<a href="http://www.ivoa.net/Documents/VOTable/">VOTable</a>
 	describing the image metadata columns that are returned by
 	actual queries.  All of IRSA's SIA v2 datasets have been
@@ -222,9 +222,10 @@ fireflyToolbar= {
 	calibration level (using the <a href="#CALIB">CALIB</a>
 	keyword) which we describe below.  In addition, the type of
 	output can be specified with
-	the <a href="#RESPONSEFORMAT">RESPONSEFORMAT</a> keyword.  The
-	complete list of parameters supported by IRSA's SIA v2
-	implementation are
+	the <a href="#RESPONSEFORMAT">RESPONSEFORMAT</a> keyword, and
+	the number of rows can be limited with
+	the <a href="#MAXREC">MAXREC</a> keyword.  The complete list
+	of parameters supported by IRSA's SIA v2 implementation is
 
         <ul>
           <li>POS</li>
@@ -251,119 +252,135 @@ fireflyToolbar= {
 </p>
 
 <dl>
-        <a name="POS"></a>
-        <dt><span class="param">POS</span></dt>
-	<dd>
-		<p>
-			The <span class="param">POS</span> parameter
-			value must consist of a shape described by
-			ICRS coordinates in decimal degrees. It
-			identifies the shape which returned images
-			must intersect with.
-		</p>
-		<p>Examples:</p>
-		<ul>
-			<li class="param">POS=circle -164.7 -5.8 1</li>
-			<li class="param">POS=polygon -164 -5 -165 -5 -165 -6 -164 -6</li>
-			<li class="param">POS=range -105 -104 -22 -12</li>
-		</ul>
-		<p>
-			The spatial extent of an image is approximated by connecting
-			its corners with great circles to form a spherical convex polygon.
-			The search region as defined by this service is also a spherical
-			convex polygon (or a point). Spatial predicate evaluation
-			is performed on pairs of spherical convex polygons without
-			recourse to any performance motivated short-cuts. Nevertheless,
-			the implementation uses floating point arithmetic and results are
-			therefore not guaranteed to be mathematically exact. Note also
-			that the spatial extent of an image with a non-gnomonic projection
-			(or large distortion terms) may not be well approximated by
-			the technique employed. However, the images currently
-			being served have gnomonic or orthographic projections, are of
-			small area and have small distortion terms - hence, we believe
-			our approximations are accurate enough to be useful.
-		</p>
-	</dd>
-        <a name="COLLECTION"></a>
-	<dt><span class="param">COLLECTION</span></dt>
-	<dd>
-		<p>
-		  The <span class="param">COLLECTION</span> parameter identifies
-		  the group of data that an observation belongs to.
-		<p>Examples:</p>
-		<ul>
-			<li class="param">COLLECTION=spitzer_sha</li>
-			<li class="param">COLLECTION=wise_allwise</li>
-			<li class="param">COLLECTION=twomass_allsky</li>
-		</ul>
+  <a name="POS"></a>
+  <dt><span class="param">POS</span></dt>
+  <dd>
+    <p>
+      The <span class="param">POS</span> parameter
+      value must consist of a shape described by
+      ICRS coordinates in decimal degrees. It
+      identifies the shape which returned images
+      must intersect with.
+    </p>
+    <p>Examples:</p>
+    <ul>
+      <li class="param">POS=circle -164.7 -5.8 1</li>
+      <li class="param">POS=polygon -164 -5 -165 -5 -165 -6 -164 -6</li>
+      <li class="param">POS=range -105 -104 -22 -12</li>
+    </ul>
+    <p>
+      The spatial extent of an image is approximated by connecting
+      its corners with great circles to form a spherical convex polygon.
+      The search region as defined by this service is also a spherical
+      convex polygon (or a point). Spatial predicate evaluation
+      is performed on pairs of spherical convex polygons without
+      recourse to any performance motivated short-cuts. Nevertheless,
+      the implementation uses floating point arithmetic and results are
+      therefore not guaranteed to be mathematically exact. Note also
+      that the spatial extent of an image with a non-gnomonic projection
+      (or large distortion terms) may not be well approximated by
+      the technique employed. However, the images currently
+      being served have gnomonic or orthographic projections, are of
+      small area and have small distortion terms - hence, we believe
+      our approximations are accurate enough to be useful.
+    </p>
+  </dd>
 
+  <a name="COLLECTION"></a>
+  <dt><span class="param">COLLECTION</span></dt>
+  <dd>
+    <p>
+      The <span class="param">COLLECTION</span> parameter identifies
+      the group of data that an observation belongs to.</p>
+    <p>Examples:</p>
+    <ul>
+      <li class="param">COLLECTION=spitzer_sha</li>
+      <li class="param">COLLECTION=wise_allwise</li>
+      <li class="param">COLLECTION=twomass_allsky</li>
+    </ul>
+  </dd>
 
-	</dd>
-        <a name="CALIB"></a>
-	<dt><span class="param">CALIB</span></dt>
-	<dd>
-		<p>
-		  The <span class="param">CALIB</span> parameter
-		  identifies the calibration level of an observation.
-		  This is useful for distinguishing between raw,
-		  processed, and highly processed data that are all
-		  part of the same collection.  The specific meaning
-		  for the different levels are specified in
-		  the <a href="http://www.ivoa.net/documents/ObsCore/index.html">IVOA
-		    ObsCore</a> standard:
+  <a name="CALIB"></a>
+  <dt><span class="param">CALIB</span></dt>
+  <dd>
+    <p>
+      The <span class="param">CALIB</span> parameter
+      identifies the calibration level of an observation.
+      This is useful for distinguishing between raw,
+      processed, and highly processed data that are all
+      part of the same collection.  The specific meaning
+      for the different levels are specified in
+      the <a href="http://www.ivoa.net/documents/ObsCore/index.html">IVOA
+	ObsCore</a> standard:</p>
 
-		<ul>
-		  <li><b>Level 0</b>: Raw instrumental data, in a proprietary or internal data-provider defined format, that
-                    needs instrument specific tools to be handled.</li>
-		  <li><b>Level 1</b>: Instrumental data in a standard format (FITS, VOTable, SDFITS, ASDM, etc.) which
-                    could be manipulated with standard astronomical packages.</li>
-		  <li><b>Level 2</b>: Calibrated, science ready data with the instrument signature removed.</li>
-		  <li><b>Level 3</b>: Enhanced data products like mosaics, resampled or drizzled images, or heavily
-                    processed survey fields. Level 3 data products may represent the combination of data from
-                    multiple primary observations.</li>
-                </ul>
-		<p>Examples:</p>
-		<ul>
-			<li class="param">CALIB=1</li>
-			<li class="param">CALIB=2</li>
-			<li class="param">CALIB=3</li>
-		</ul>
+    <ul>
+      <li><b>Level 0</b>: Raw instrumental data, in a proprietary or internal data-provider defined format, that
+        needs instrument specific tools to be handled.</li>
+      <li><b>Level 1</b>: Instrumental data in a standard format (FITS, VOTable, SDFITS, ASDM, etc.) which
+        could be manipulated with standard astronomical packages.</li>
+      <li><b>Level 2</b>: Calibrated, science ready data with the instrument signature removed.</li>
+      <li><b>Level 3</b>: Enhanced data products like mosaics, resampled or drizzled images, or heavily
+        processed survey fields. Level 3 data products may represent the combination of data from
+        multiple primary observations.</li>
+    </ul>
+    <p>Examples:</p>
+    <ul>
+      <li class="param">CALIB=1</li>
+      <li class="param">CALIB=2</li>
+      <li class="param">CALIB=3</li>
+    </ul>
+  </dd>
 
+  <a name="RESPONSEFORMAT"></a>
+  <dt><span class="param">RESPONSEFORMAT</span></dt>
+  <dd>
+    <p>
+      The <span class="param">RESPONSEFORMAT</span>
+      parameter specifies what type of output the service
+      will return.  The default is VOTable, but many
+      options are available:</p>
 
-	</dd>
-        <a name="RESPONSEFORMAT"></a>
-	<dt><span class="param">RESPONSEFORMAT</span></dt>
-	<dd>
-		<p>
-		  The <span class="param">RESPONSEFORMAT</span>
-		  parameter specifies what type of output the service
-		  will return.  The default is VOTable, but many
-		  options are available:
+    <ul>
+      <li>FITS: <a href="https://fits.gsfc.nasa.gov/">Flexible Image Transport System</a></li>
+      <li>IPAC_TABLE: <a href="http://irsa.ipac.caltech.edu/applications/DDGEN/Doc/ipac_tbl.html">IPAC's Table Format</a></li>
+      <li>HDF5: <a href="https://www.hdfgroup.org/">Hierarchical Data Format v5</a></li>
+      <li>VOTABLE: <a href="http://www.ivoa.net/Documents/VOTable/">IVOA VOTable</a></li>
+      <li>JSON: <a href="http://json.org">JavaScript Object Notation</a></li>
+      <li>CSV: Comma Separated Values (suitable for loading into spreadsheets)</li>
+      <li>TSV: Tab Separated Values (suitable for loading into spreadsheets)</li>
+      <li>TEXT: Plain text</li>
+      <li>HTML: HTML table suitable for embedding within another page</li>
+      <li>POSTGRES: SQL for loading the result into <a href="https://www.postgresql.org/">Postgres</a></li>
+      <li>SQLITE: SQL for loading the result into <a href="http://www.sqlite.org/">SQLite</a></li>
+      <li>ORACLE: SQL for loading the result into <a href="https://www.oracle.com/database/index.html">Oracle</a></li>
+      <li>DB: Raw SQLite database</li>
+    </ul>
+    <p>Examples:</p>
+    <ul>
+      <li class="param">RESPONSEFORMAT=FITS</li>
+      <li class="param">RESPONSEFORMAT=JSON</li>
+      <li class="param">RESPONSEFORMAT=TEXT</li>
+    </ul>
+  </dd>
+  
+  <a name="MAXREC"></a>
+  <dt><span class="param">MAXREC</span></dt>
+  <dd>
+    <p>
+      The <span class="param">MAXREC</span> parameter specifies the
+      maximum number of records to retrieve.  The default is
+      unlimited.  However, any jobs taking longer than 5 minutes will
+      be canceled.  For larger jobs, please
+      use <a href="/docs/program_interface/TAP.html">TAP</a>
+    </p>
 
-		<ul>
-		  <li>FITS: <a href="https://fits.gsfc.nasa.gov/">Flexible Image Transport System</a></li>
-		  <li>IPAC_TABLE: <a href="http://irsa.ipac.caltech.edu/applications/DDGEN/Doc/ipac_tbl.html">IPAC's Table Format</a></li>
-		  <li>HDF5: <a href="https://www.hdfgroup.org/">Hierarchical Data Format v5</a></li>
-		  <li>VOTABLE: <a href="http://www.ivoa.net/Documents/VOTable/">IVOA VOTable</a></li>
-		  <li>JSON: <a href="http://json.org">JavaScript Object Notation</a></li>
-		  <li>CSV: Comma Separated Values (suitable for loading into spreadsheets)</li>
-		  <li>TSV: Tab Separated Values (suitable for loading into spreadsheets)</li>
-		  <li>TEXT: Plain text</li>
-		  <li>HTML: HTML table suitable for embedding within another page</li>
-		  <li>POSTGRES: SQL for loading the result into <a href="https://www.postgresql.org/">Postgres</a></li>
-		  <li>SQLITE: SQL for loading the result into <a href="http://www.sqlite.org/">SQLite</a></li>
-		  <li>ORACLE: SQL for loading the result into <a href="https://www.oracle.com/database/index.html">Oracle</a></li>
-		  <li>DB: Raw SQLite database</li>
-                </ul>
-		<p>Examples:</p>
-		<ul>
-			<li class="param">RESPONSEFORMAT=FITS</li>
-			<li class="param">RESPONSEFORMAT=JSON</li>
-			<li class="param">RESPONSEFORMAT=TEXT</li>
-		</ul>
-
-
-	</dd>
+    <p>Examples:</p>
+    <ul>
+      <li class="param">MAXREC=0</li>
+      <li class="param">MAXREC=100</li>
+      <li class="param">MAXREC=1000000</li>
+    </ul>
+  </dd>
 </dl>
 
 <a name="examples" />
