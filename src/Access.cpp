@@ -168,6 +168,8 @@ Access::Access (Environment const &env)
   else if (policy == "ACCESS_GRANTED")
     {
       _policy = GRANTED;
+      _pgConn = env.getValue ("pgconn", "");
+      _pgTable = env.getValue ("pgtable", "");
     }
   else if (policy == "ACCESS_TABLE")
     {
