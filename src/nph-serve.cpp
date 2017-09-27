@@ -547,6 +547,12 @@ main (int argc, char const *const *argv)
       validate (env);
       Access access (env);
       fs::path path (env.getValue ("path"));
+      // References to the parent directory are not allowed for security
+      // reasons
+      if (path.generic_string ().find ("..") != std::string::npos)
+        {
+          throw HTTP_EXCEPT (HttpResponseCode::BAD_REQUEST);
+        }
       fs::path diskpath (IBE_DATA_ROOT);
       diskpath /= path;
 
