@@ -1,7 +1,7 @@
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/sendfile.h>
 #include <fcntl.h>
+#include <sys/sendfile.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 
 #include <pqxx/pqxx>
 
@@ -43,7 +43,8 @@ namespace
 {
 
 // Return a vector of (filename extension, MIME content-type) pairs.
-vector<pair<string, string> > const getContentTypes ()
+vector<pair<string, string> > const
+getContentTypes ()
 {
   vector<pair<string, string> > v;
   v.push_back (make_pair (".zip", "application/zip"));
@@ -61,7 +62,8 @@ vector<pair<string, string> > const getContentTypes ()
 
 // Perform basic sanity checking of the CGI environment, including common query
 // parameters.
-void validate (ibe::Environment const &env)
+void
+validate (ibe::Environment const &env)
 {
   if (env.getServerProtocol () != "HTTP/1.1"
       && env.getServerProtocol () != "HTTP/1.0")
@@ -93,7 +95,8 @@ void validate (ibe::Environment const &env)
 }
 
 // Check that cutout parameters are/are not present.
-void validateCutoutParams (ibe::Environment const &env, bool isCutout)
+void
+validateCutoutParams (ibe::Environment const &env, bool isCutout)
 {
   size_t n = env.getNumValues ("center");
   if (isCutout && n != 1)
@@ -131,7 +134,8 @@ void validateCutoutParams (ibe::Environment const &env, bool isCutout)
 }
 
 // Return the boolean value of the given query parameter or defaultValue.
-bool parseBool (Environment const &env, string const &key, bool defaultValue)
+bool
+parseBool (Environment const &env, string const &key, bool defaultValue)
 {
   static boost::regex const trueRe ("^\\s*(1|on?|y(es)?|t(rue)?)\\s*",
                                     boost::regex::icase);
@@ -160,7 +164,8 @@ bool parseBool (Environment const &env, string const &key, bool defaultValue)
 }
 
 // Return a directory listing obtained from the file system.
-vector<string> const getDirEntries (fs::path const &path)
+vector<string> const
+getDirEntries (fs::path const &path)
 {
   vector<string> entries;
   for (fs::directory_iterator d = fs::directory_iterator (path),
@@ -180,7 +185,8 @@ vector<string> const getDirEntries (fs::path const &path)
 }
 
 // Return a comma separated list of the requestors groups
-string const groupString (Access const &access)
+string const
+groupString (Access const &access)
 {
   ostringstream oss;
   set<int> const groups (access.getGroups ());
@@ -199,34 +205,44 @@ string const groupString (Access const &access)
 }
 
 // Return a directory listing obtained from the file system metadata database.
-vector<string> const getDirEntries (fs::path const &diskpath,
-                                    string const &dbpath, Access const &access)
+vector<string> const
+getDirEntries (fs::path const &diskpath, string const &dbpath,
+               Access const &access)
 {
   string sql;
   switch (access.getPolicy ())
     {
     case Access::GRANTED:
-        if (dbpath == "") 
+      if (dbpath == "")
         {
-            sql = "SELECT c.path_name, c.is_dir FROM\n"
-                  "    " + access.getPgTable() + " AS c\n"
+          sql = "SELECT c.path_name, c.is_dir FROM\n"
+                "    "
+                + access.getPgTable ()
+                + " AS c\n"
                   "WHERE\n"
                   "    c.parent_path_id = 0\n";
         }
-        else  
+      else
         {
-            sql = "SELECT c.path_name, c.is_dir FROM\n"
-                  "    " + access.getPgTable() + " AS p INNER JOIN\n"
-                  "    " + access.getPgTable() + " AS c ON (p.path_id = c.parent_path_id)\n"
+          sql = "SELECT c.path_name, c.is_dir FROM\n"
+                "    "
+                + access.getPgTable ()
+                + " AS p INNER JOIN\n"
+                  "    "
+                + access.getPgTable ()
+                + " AS c ON (p.path_id = c.parent_path_id)\n"
                   "WHERE\n"
-                  "    p.path_name = '" + dbpath + "'";
+                  "    p.path_name = '"
+                + dbpath + "'";
         }
-        break;
+      break;
     case Access::DATE_ONLY:
-        if (dbpath == "") 
+      if (dbpath == "")
         {
-            sql = "SELECT c.path_name, c.is_dir FROM\n"
-                  "    " + access.getPgTable() + " AS c\n"
+          sql = "SELECT c.path_name, c.is_dir FROM\n"
+                "    "
+                + access.getPgTable ()
+                + " AS c\n"
                   "WHERE\n"
                   "    c.parent_path_id = 0 AND\n"
                   "    (\n"
@@ -234,104 +250,138 @@ vector<string> const getDirEntries (fs::path const &diskpath,
                   "        c.is_dir = true\n"
                   "    )";
         }
-        else 
+      else
         {
-            sql = "SELECT c.path_name, c.is_dir FROM\n"
-                  "    " + access.getPgTable() + " AS p INNER JOIN\n"
-                  "    " + access.getPgTable() + " AS c ON (p.path_id = c.parent_path_id)\n"
+          sql = "SELECT c.path_name, c.is_dir FROM\n"
+                "    "
+                + access.getPgTable ()
+                + " AS p INNER JOIN\n"
+                  "    "
+                + access.getPgTable ()
+                + " AS c ON (p.path_id = c.parent_path_id)\n"
                   "WHERE\n"
-                  "    p.path_name = '" + dbpath + "' AND\n"
+                  "    p.path_name = '"
+                + dbpath
+                + "' AND\n"
                   "    (\n"
                   "        c.ipac_pub_date < CURRENT_TIMESTAMP OR\n"
                   "        c.is_dir = true\n"
                   "    )";
         }
-        break;
+      break;
     case Access::ROW_ONLY:
-        if (dbpath == "") 
+      if (dbpath == "")
         {
-            sql = "SELECT DISTINCT c.path_name, c.is_dir FROM\n"
-                  "    " + access.getPgTable() + " AS c\n"
+          sql = "SELECT DISTINCT c.path_name, c.is_dir FROM\n"
+                "    "
+                + access.getPgTable ()
+                + " AS c\n"
                   "WHERE\n"
                   "    c.parent_path_id = 0 AND\n"
                   "    (\n"
-                  "        c.ipac_gid IN (" + groupString(access) + ") OR\n"
+                  "        c.ipac_gid IN ("
+                + groupString (access)
+                + ") OR\n"
                   "        c.is_dir = true\n"
                   "    )";
         }
-        else 
+      else
         {
-            sql = "SELECT DISTINCT c.path_name, c.is_dir FROM\n"
-                  "    " + access.getPgTable() + " AS p INNER JOIN\n"
-                  "    " + access.getPgTable() + " AS c ON (p.path_id = c.parent_path_id)\n"
+          sql = "SELECT DISTINCT c.path_name, c.is_dir FROM\n"
+                "    "
+                + access.getPgTable ()
+                + " AS p INNER JOIN\n"
+                  "    "
+                + access.getPgTable ()
+                + " AS c ON (p.path_id = c.parent_path_id)\n"
                   "WHERE\n"
-                  "    p.path_name = '" + dbpath + "' AND\n"
+                  "    p.path_name = '"
+                + dbpath
+                + "' AND\n"
                   "    (\n"
-                  "        c.ipac_gid IN (" + groupString(access) + ") OR\n"
+                  "        c.ipac_gid IN ("
+                + groupString (access)
+                + ") OR\n"
                   "        c.is_dir = true\n"
                   "    )";
         }
-        break;
+      break;
     case Access::ROW_DATE:
-        if (dbpath == "") 
+      if (dbpath == "")
         {
-            sql = "SELECT DISTINCT c.path_name, c.is_dir FROM\n"
-                  "    " + access.getPgTable() + " AS c\n"
+          sql = "SELECT DISTINCT c.path_name, c.is_dir FROM\n"
+                "    "
+                + access.getPgTable ()
+                + " AS c\n"
                   "WHERE\n"
                   "    c.parent_path_id = 0 AND\n"
                   "    (\n"
-                  "        c.ipac_gid IN (" + groupString(access) + ") OR\n"
+                  "        c.ipac_gid IN ("
+                + groupString (access)
+                + ") OR\n"
                   "        c.ipac_pub_date < CURRENT_TIMESTAMP OR\n"
                   "        c.is_dir = true\n"
                   "    )";
         }
-        else 
+      else
         {
-            sql = "SELECT DISTINCT c.path_name, c.is_dir FROM\n"
-                  "    " + access.getPgTable() + " AS p INNER JOIN\n"
-                  "    " + access.getPgTable() + " AS c ON (p.path_id = c.parent_path_id)\n"
+          sql = "SELECT DISTINCT c.path_name, c.is_dir FROM\n"
+                "    "
+                + access.getPgTable ()
+                + " AS p INNER JOIN\n"
+                  "    "
+                + access.getPgTable ()
+                + " AS c ON (p.path_id = c.parent_path_id)\n"
                   "WHERE\n"
-                  "    p.path_name = '" + dbpath + "' AND\n"
+                  "    p.path_name = '"
+                + dbpath
+                + "' AND\n"
                   "    (\n"
-                  "        c.ipac_gid IN (" + groupString(access) + ") OR\n"
+                  "        c.ipac_gid IN ("
+                + groupString (access)
+                + ") OR\n"
                   "        c.ipac_pub_date < CURRENT_TIMESTAMP OR\n"
                   "        c.is_dir = true\n"
                   "    )";
         }
-        break;
+      break;
     default:
       throw HTTP_EXCEPT (HttpResponseCode::INTERNAL_SERVER_ERROR,
                          "Invalid access config");
     }
-    pqxx::connection conn(access.getPgConn());
-    pqxx::work transaction(conn);
+  pqxx::connection conn (access.getPgConn ());
+  pqxx::work transaction (conn);
 
-    pqxx::result resultset = transaction.exec(sql);
+  pqxx::result resultset = transaction.exec (sql);
 
-    vector<string> entries;
-    bool isdir;
+  vector<string> entries;
+  bool isdir;
 
-    for(pqxx::result::const_iterator row = resultset.begin(); row != resultset.end(); ++row) 
+  for (pqxx::result::const_iterator row = resultset.begin ();
+       row != resultset.end (); ++row)
     {
-        fs::path ff (row[0].c_str());
-        fs::path fn = ff.filename();
-        string f = fn.string();
-        if (!fs::exists(diskpath / f)) {
-           continue;
+      fs::path ff (row[0].c_str ());
+      fs::path fn = ff.filename ();
+      string f = fn.string ();
+      if (!fs::exists (diskpath / f))
+        {
+          continue;
         }
-        row[1].to(isdir);
-        if (isdir) {
-            f += '/';
+      row[1].to (isdir);
+      if (isdir)
+        {
+          f += '/';
         }
-        entries.push_back(f);
+      entries.push_back (f);
     }
-    return entries;
+  return entries;
 }
 
 // Strip the three leading path elements (<schema_group>/<schema>/table/) from
 // path,
 // as well as any trailing slash.
-string const getDbPath (fs::path const &path)
+string const
+getDbPath (fs::path const &path)
 {
   string dbpath = path.string ();
   size_t i = dbpath.find ('/', 0);
@@ -354,8 +404,9 @@ string const getDbPath (fs::path const &path)
 // The path name stored in the file system metadata database (if there is one)
 // is <f_1>/<f_2>/.../<f_i>, where the empty string corresponds to the root
 // directory.
-string const getDirListing (fs::path const &path, Environment const &env,
-                            Access const &access)
+string const
+getDirListing (fs::path const &path, Environment const &env,
+               Access const &access)
 {
   ostringstream oss;
   vector<string> entries;
@@ -390,13 +441,15 @@ string const getDirListing (fs::path const &path, Environment const &env,
          "\"http://www.w3.org/TR/html4/strict.dtd\">\n"
          "<html>\n"
          "<head>\n"
-         "<title>Index of " << url.string () << "</title>\n"
+         "<title>Index of "
+      << url.string () << "</title>\n"
       << "</head>\n"
          "<body>\n"
-         "<h1>Index of " << url.string () << "</h1>\n"
+         "<h1>Index of "
+      << url.string () << "</h1>\n"
       << "<ul>\n"
-         "<li><a href=\"" << parent.string ()
-      << "/\">Parent Directory</a></li>\n";
+         "<li><a href=\""
+      << parent.string () << "/\">Parent Directory</a></li>\n";
   for (vector<string>::const_iterator i = entries.begin (), e = entries.end ();
        i != e; ++i)
     {
@@ -410,7 +463,8 @@ string const getDirListing (fs::path const &path, Environment const &env,
 
 // Check whether access to path is permitted.
 // If not, respond to HTTP request with a 404 Not Found.
-void checkAccess (fs::path path, Access const &access)
+void
+checkAccess (fs::path path, Access const &access)
 {
   if (access.getPolicy () == Access::DENIED)
     {
@@ -424,43 +478,57 @@ void checkAccess (fs::path path, Access const &access)
       switch (access.getPolicy ())
         {
         case Access::GRANTED:
-          sql = "SELECT COUNT(*) FROM " + access.getPgTable() + "\n"
-                "WHERE path_name = '" + dbpath + "'";
+          sql = "SELECT COUNT(*) FROM " + access.getPgTable ()
+                + "\n"
+                  "WHERE path_name = '"
+                + dbpath + "'";
           break;
         case Access::DATE_ONLY:
-          sql = "SELECT COUNT(*) FROM " + access.getPgTable() + "\n"
-                "WHERE\n"
-                "    path_name = '" + dbpath + "' AND\n"
-                "    (ipac_pub_date < CURRENT_TIMESTAMP OR is_dir = true)";
+          sql = "SELECT COUNT(*) FROM " + access.getPgTable ()
+                + "\n"
+                  "WHERE\n"
+                  "    path_name = '"
+                + dbpath
+                + "' AND\n"
+                  "    (ipac_pub_date < CURRENT_TIMESTAMP OR is_dir = true)";
           break;
         case Access::ROW_ONLY:
-          sql = "SELECT COUNT(*) FROM " + access.getPgTable() + "\n"
-                "WHERE\n"
-                "    path_name = '" + dbpath + "' AND\n"
-                "    (ipac_gid IN (" + groupString(access) + ") OR is_dir = true)";
+          sql = "SELECT COUNT(*) FROM " + access.getPgTable ()
+                + "\n"
+                  "WHERE\n"
+                  "    path_name = '"
+                + dbpath
+                + "' AND\n"
+                  "    (ipac_gid IN ("
+                + groupString (access) + ") OR is_dir = true)";
           break;
         case Access::ROW_DATE:
-          sql = "SELECT COUNT(*) FROM " + access.getPgTable() + "\n"
-                "WHERE\n"
-                "    path_name = '" + dbpath + "' AND\n"
-                "    (\n"
-                "        ipac_gid IN (" + groupString(access) + ") OR\n"
-                "        ipac_pub_date < CURRENT_TIMESTAMP OR\n"
-                "        is_dir = true\n"
-                "    )";
+          sql = "SELECT COUNT(*) FROM " + access.getPgTable ()
+                + "\n"
+                  "WHERE\n"
+                  "    path_name = '"
+                + dbpath
+                + "' AND\n"
+                  "    (\n"
+                  "        ipac_gid IN ("
+                + groupString (access)
+                + ") OR\n"
+                  "        ipac_pub_date < CURRENT_TIMESTAMP OR\n"
+                  "        is_dir = true\n"
+                  "    )";
           break;
         default:
           throw HTTP_EXCEPT (HttpResponseCode::INTERNAL_SERVER_ERROR,
                              "Invalid access config");
         }
-        pqxx::connection conn(access.getPgConn());
-        pqxx::work transaction(conn);
-        
-        pqxx::result resultset = transaction.exec(sql);
-        
-        int count;
-        resultset.at(0).at(0).to(count);
-        if (count == 0)
+      pqxx::connection conn (access.getPgConn ());
+      pqxx::work transaction (conn);
+
+      pqxx::result resultset = transaction.exec (sql);
+
+      int count;
+      resultset.at (0).at (0).to (count);
+      if (count == 0)
         {
           throw HTTP_EXCEPT (HttpResponseCode::NOT_FOUND);
         }
@@ -469,7 +537,8 @@ void checkAccess (fs::path path, Access const &access)
 
 } // unnamed namespace
 
-int main (int argc, char const *const *argv)
+int
+main (int argc, char const *const *argv)
 {
   bool sentHeader = false;
   try
@@ -490,13 +559,14 @@ int main (int argc, char const *const *argv)
           string listing = getDirListing (path, env, access);
           sentHeader = true;
           // write HTTP header
-          if (std::fprintf (
-                  ::stdout, "%s 200 OK\r\n"
+          if (std::fprintf (::stdout,
+                            "%s 200 OK\r\n"
                             "Content-Type: text/html; charset=utf-8\r\n"
                             "Content-Length: %llu\r\n"
                             "\r\n",
-                  env.getServerProtocol ().c_str (),
-                  static_cast<unsigned long long>(listing.size ())) < 0)
+                            env.getServerProtocol ().c_str (),
+                            static_cast<unsigned long long> (listing.size ()))
+              < 0)
             {
               throw HTTP_EXCEPT (HttpResponseCode::INTERNAL_SERVER_ERROR,
                                  "failed to write to standard out");
@@ -564,14 +634,16 @@ int main (int argc, char const *const *argv)
                   env.getServerProtocol ().c_str (),
                   (isGzip ? "application/gzip" : "application/fits"),
                   filename.string ().c_str (), (isGzip ? ".gz" : ""),
-                  static_cast<unsigned long long>(wr.getContentLength ())) < 0)
+                  static_cast<unsigned long long> (wr.getContentLength ()))
+              < 0)
             {
               throw HTTP_EXCEPT (HttpResponseCode::INTERNAL_SERVER_ERROR,
                                  "failed to write to standard out");
             }
           // send back data
           if (std::fwrite (wr.getContent (), wr.getContentLength (), 1,
-                           ::stdout) != 1)
+                           ::stdout)
+              != 1)
             {
               throw HTTP_EXCEPT (HttpResponseCode::INTERNAL_SERVER_ERROR,
                                  "failed to write to standard out");
@@ -599,7 +671,7 @@ int main (int argc, char const *const *argv)
         }
       static size_t const blocksz = 1024 * 1024;
       uintmax_t sz = fs::file_size (diskpath);
-      if (sz == static_cast<uintmax_t>(-1))
+      if (sz == static_cast<uintmax_t> (-1))
         {
           throw HTTP_EXCEPT (HttpResponseCode::INTERNAL_SERVER_ERROR,
                              "failed to determine size of requested file");
@@ -619,13 +691,15 @@ int main (int argc, char const *const *argv)
         }
       // send back header
       sentHeader = true;
-      if (std::fprintf (::stdout, "%s 200 OK\r\n"
-                                  "Content-Type: %s\r\n"
-                                  "Content-Length: %llu\r\n"
-                                  "\r\n",
+      if (std::fprintf (::stdout,
+                        "%s 200 OK\r\n"
+                        "Content-Type: %s\r\n"
+                        "Content-Length: %llu\r\n"
+                        "\r\n",
                         env.getServerProtocol ().c_str (),
                         contentType.c_str (),
-                        static_cast<unsigned long long>(sz)) < 0)
+                        static_cast<unsigned long long> (sz))
+          < 0)
         {
           throw HTTP_EXCEPT (HttpResponseCode::INTERNAL_SERVER_ERROR,
                              "failed to write to standard out");

@@ -1,7 +1,7 @@
 /** @file
-  * @brief  FITS image cutout implementation.
-  * @author Serge Monkewitz
-  */
+ * @brief  FITS image cutout implementation.
+ * @author Serge Monkewitz
+ */
 #include "Cutout.h"
 
 #include <endian.h>
@@ -27,7 +27,8 @@ namespace
 {
 
 // Check if CFITSIO has failed and throw an internal server error if so.
-void checkFitsError (int status)
+void
+checkFitsError (int status)
 {
   char statMsg[32];
   char errMsg[96];
@@ -44,7 +45,8 @@ void checkFitsError (int status)
 }
 
 // Return the angular separation in radians between 2 vectors in R3.
-inline double dist (const double *v1, const double *v2)
+inline double
+dist (const double *v1, const double *v2)
 {
   double cs = v1[0] * v2[0] + v1[1] * v2[1] + v1[2] * v2[2];
   double x = v1[1] * v2[2] - v1[2] * v2[1];
@@ -55,7 +57,8 @@ inline double dist (const double *v1, const double *v2)
 }
 
 // Convert spherical coordinates (deg) to a vector in R3.
-inline void s2c (const double *sky, double *v)
+inline void
+s2c (const double *sky, double *v)
 {
   v[0] = std::cos (RAD_PER_DEG * sky[0]) * std::cos (RAD_PER_DEG * sky[1]);
   v[1] = std::sin (RAD_PER_DEG * sky[0]) * std::cos (RAD_PER_DEG * sky[1]);
@@ -64,7 +67,11 @@ inline void s2c (const double *sky, double *v)
 
 // Return the center coordinate of the pixel containing x, FITS conventions.
 // Pixel N has center coordinate N, and spans [N - 0.5, N + 0.5).
-inline double pixcen (double x) { return std::floor (x + 0.5); }
+inline double
+pixcen (double x)
+{
+  return std::floor (x + 0.5);
+}
 
 // Return the closest x or y coordinate separated by at least size radians from
 // the given center in the given direction.
@@ -220,10 +227,10 @@ cutoutPixelBox (Coords center, // Cutout center.
     }
 
   // store pixel-space cutout bounds in box
-  box[0] = static_cast<long>(std::max (1.0, xmin));
-  box[1] = static_cast<long>(std::max (1.0, ymin));
-  box[2] = static_cast<long>(std::min (static_cast<double>(naxis[0]), xmax));
-  box[3] = static_cast<long>(std::min (static_cast<double>(naxis[1]), ymax));
+  box[0] = static_cast<long> (std::max (1.0, xmin));
+  box[1] = static_cast<long> (std::max (1.0, ymin));
+  box[2] = static_cast<long> (std::min (static_cast<double> (naxis[0]), xmax));
+  box[3] = static_cast<long> (std::min (static_cast<double> (naxis[1]), ymax));
   return true;
 }
 
@@ -242,8 +249,9 @@ boost::regex const _radRe ("^rad(ians?)?\\s*$");
       "point numbers, followed by an optional units specification.",          \
       key.c_str (), requirePair ? "2" : "1 or 2")
 
-Coords const parseCoords (Environment const &env, string const &key,
-                          Units defaultUnits, bool requirePair)
+Coords const
+parseCoords (Environment const &env, string const &key, Units defaultUnits,
+             bool requirePair)
 {
   Coords coords;
   char *s = 0;
@@ -266,7 +274,7 @@ Coords const parseCoords (Environment const &env, string const &key,
       for (; std::isspace (*s); ++s)
         {
         }
-      if (static_cast<string::size_type>(s - value.c_str ()) != comma)
+      if (static_cast<string::size_type> (s - value.c_str ()) != comma)
         {
           throw HTTP_EXCEPT (HttpResponseCode::BAD_REQUEST, PP_MSG);
         }
@@ -327,7 +335,7 @@ Coords const parseCoords (Environment const &env, string const &key,
 Wcs::Wcs (char *hdr, int nkeys) : _wcs (0), _nwcs (0)
 {
   int nreject = 0;
-  ::wcserr_enable(1);
+  ::wcserr_enable (1);
   if (::wcspih (hdr, nkeys, WCSHDR_all, 0, &nreject, &_nwcs, &_wcs) != 0)
     {
       throw HTTP_EXCEPT (HttpResponseCode::INTERNAL_SERVER_ERROR,
@@ -387,7 +395,8 @@ Wcs::~Wcs ()
     }
 }
 
-void Wcs::pixelToSky (const double *pix, double *world)
+void
+Wcs::pixelToSky (const double *pix, double *world)
 {
   double imgcrd[2], phi[1], theta[1];
   int stat;
@@ -409,7 +418,8 @@ void Wcs::pixelToSky (const double *pix, double *world)
     }
 }
 
-void Wcs::skyToPixel (const double *sky, double *pix)
+void
+Wcs::skyToPixel (const double *sky, double *pix)
 {
   double imgcrd[2], phi[1], theta[1], world[2];
   int stat, ret;
@@ -448,8 +458,9 @@ FitsFile::~FitsFile ()
     }
 }
 
-void streamSubimage (boost::filesystem::path const &path, Coords const &center,
-                     Coords const &size, Writer &writer)
+void
+streamSubimage (boost::filesystem::path const &path, Coords const &center,
+                Coords const &size, Writer &writer)
 {
   unsigned char padding[2880];
   char keyname[FLEN_KEYWORD];
@@ -582,14 +593,14 @@ void streamSubimage (boost::filesystem::path const &path, Coords const &center,
             {
               card[i] = ' ';
             }
-          writer.write (reinterpret_cast<unsigned char *>(card), 80u);
+          writer.write (reinterpret_cast<unsigned char *> (card), 80u);
           numBytes += 80;
         }
       if ((numBytes % 2880) != 0)
         {
           // pad header with spaces till its size is a multiple of 2880.
           size_t nb = 2880 - (numBytes % 2880);
-          std::memset (padding, static_cast<int>(' '), nb);
+          std::memset (padding, static_cast<int> (' '), nb);
           writer.write (padding, nb);
           numBytes += nb;
         }
@@ -604,7 +615,7 @@ void streamSubimage (boost::filesystem::path const &path, Coords const &center,
 
       // allocate memory for one pixel row
       long rowsz = box[2] - box[0] + 1;
-      size_t bufsz = static_cast<size_t>(rowsz) * std::abs (bitpix) / 8;
+      size_t bufsz = static_cast<size_t> (rowsz) * std::abs (bitpix) / 8;
       boost::shared_ptr<void> buf (std::malloc (bufsz), std::free);
       if (!buf)
         {
@@ -620,18 +631,18 @@ void streamSubimage (boost::filesystem::path const &path, Coords const &center,
             {
             case 8:
               fits_read_img_byt (f, 0, firstpix, rowsz, 0,
-                                 static_cast<unsigned char *>(buf.get ()),
+                                 static_cast<unsigned char *> (buf.get ()),
                                  &anynul, &status);
               checkFitsError (status);
               break;
             case 16:
               fits_read_img_sht (f, 0, firstpix, rowsz, 0,
-                                 static_cast<short *>(buf.get ()), &anynul,
+                                 static_cast<short *> (buf.get ()), &anynul,
                                  &status);
               checkFitsError (status);
 #if __BYTE_ORDER == __LITTLE_ENDIAN
               {
-                uint16_t *b = static_cast<uint16_t *>(buf.get ());
+                uint16_t *b = static_cast<uint16_t *> (buf.get ());
                 for (long j = 0; j < rowsz; ++j)
                   {
                     uint16_t v = b[j];
@@ -642,12 +653,12 @@ void streamSubimage (boost::filesystem::path const &path, Coords const &center,
               break;
             case 32:
               fits_read_img_int (f, 0, firstpix, rowsz, 0,
-                                 static_cast<int *>(buf.get ()), &anynul,
+                                 static_cast<int *> (buf.get ()), &anynul,
                                  &status);
               checkFitsError (status);
 #if __BYTE_ORDER == __LITTLE_ENDIAN
               {
-                int32_t *b = static_cast<int32_t *>(buf.get ());
+                int32_t *b = static_cast<int32_t *> (buf.get ());
                 for (long j = 0; j < rowsz; ++j)
                   {
                     b[j] = __builtin_bswap32 (b[j]);
@@ -657,12 +668,12 @@ void streamSubimage (boost::filesystem::path const &path, Coords const &center,
               break;
             case -32:
               fits_read_img_flt (f, 0, firstpix, rowsz, 0.0,
-                                 static_cast<float *>(buf.get ()), &anynul,
+                                 static_cast<float *> (buf.get ()), &anynul,
                                  &status);
               checkFitsError (status);
 #if __BYTE_ORDER == __LITTLE_ENDIAN
               {
-                int32_t *b = static_cast<int32_t *>(buf.get ());
+                int32_t *b = static_cast<int32_t *> (buf.get ());
                 for (long j = 0; j < rowsz; ++j)
                   {
                     b[j] = __builtin_bswap32 (b[j]);
@@ -672,12 +683,12 @@ void streamSubimage (boost::filesystem::path const &path, Coords const &center,
               break;
             case 64:
               fits_read_img_lnglng (f, 0, firstpix, rowsz, 0,
-                                    static_cast<LONGLONG *>(buf.get ()),
+                                    static_cast<LONGLONG *> (buf.get ()),
                                     &anynul, &status);
               checkFitsError (status);
 #if __BYTE_ORDER == __LITTLE_ENDIAN
               {
-                int64_t *b = static_cast<int64_t *>(buf.get ());
+                int64_t *b = static_cast<int64_t *> (buf.get ());
                 for (long j = 0; j < rowsz; ++j)
                   {
                     b[j] = __builtin_bswap64 (b[j]);
@@ -687,12 +698,12 @@ void streamSubimage (boost::filesystem::path const &path, Coords const &center,
               break;
             case -64:
               fits_read_img_dbl (f, 0, firstpix, rowsz, 0.0,
-                                 static_cast<double *>(buf.get ()), &anynul,
+                                 static_cast<double *> (buf.get ()), &anynul,
                                  &status);
               checkFitsError (status);
 #if __BYTE_ORDER == __LITTLE_ENDIAN
               {
-                int64_t *b = static_cast<int64_t *>(buf.get ());
+                int64_t *b = static_cast<int64_t *> (buf.get ());
                 for (long j = 0; j < rowsz; ++j)
                   {
                     b[j] = __builtin_bswap64 (b[j]);
@@ -704,7 +715,7 @@ void streamSubimage (boost::filesystem::path const &path, Coords const &center,
               throw HTTP_EXCEPT (HttpResponseCode::INTERNAL_SERVER_ERROR,
                                  "Invalid BITPIX value in image HDU");
             }
-          writer.write (static_cast<unsigned char *>(buf.get ()), bufsz);
+          writer.write (static_cast<unsigned char *> (buf.get ()), bufsz);
           numBytes += bufsz;
         }
       if ((numBytes % 2880) != 0)

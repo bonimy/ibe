@@ -1,11 +1,11 @@
 /** @file
-  * @brief  Minimalistic CGI request handling library implementation.
-  * @author Serge Monkewitz
-  */
+ * @brief  Minimalistic CGI request handling library implementation.
+ * @author Serge Monkewitz
+ */
 #include "Cgi.h"
 
-#include <cstdlib>
 #include <cstdio>
+#include <cstdlib>
 #include <cstring>
 #include <iostream>
 
@@ -27,26 +27,29 @@ namespace ibe
 
 namespace
 {
-string const getEnv (char const *name)
+string const
+getEnv (char const *name)
 {
   char const *value = std::getenv (name);
   return value ? string (value) : string ();
 }
 
-template <typename T> T getEnv (char const *name, T def)
+template <typename T>
+T
+getEnv (char const *name, T def)
 {
   char const *value = std::getenv (name);
   if (value)
     {
       try
         {
-          return boost::lexical_cast<T>(value);
+          return boost::lexical_cast<T> (value);
         }
       catch (...)
         {
           throw HTTP_EXCEPT (HttpResponseCode::BAD_REQUEST,
                              format ("%s could not be converted to a %s", name,
-                                     typeid(T).name ()));
+                                     typeid (T).name ()));
         }
     }
   else
@@ -59,8 +62,9 @@ template <typename T> T getEnv (char const *name, T def)
 HttpResponseCode const HttpResponseCode::OK (200, "OK",
                                              "The request has succeeded.");
 HttpResponseCode const HttpResponseCode::BAD_REQUEST (
-    400, "Bad Request", "The request could not be understood by the "
-                        "server due to malformed syntax.");
+    400, "Bad Request",
+    "The request could not be understood by the "
+    "server due to malformed syntax.");
 HttpResponseCode const HttpResponseCode::UNAUTHORIZED (
     401, "Unauthorized", "The request requires user authentication.");
 HttpResponseCode const
@@ -78,14 +82,17 @@ HttpResponseCode const HttpResponseCode::NOT_ACCEPTABLE (
     "characteristics not acceptable according to the accept headers sent "
     "in the request.");
 HttpResponseCode const HttpResponseCode::CONFLICT (
-    409, "Conflict", "The request could not be completed due to a conflict "
-                     "with the current state of the resource.");
+    409, "Conflict",
+    "The request could not be completed due to a conflict "
+    "with the current state of the resource.");
 HttpResponseCode const HttpResponseCode::GONE (
-    410, "Gone", "The requested resource is no longer available at the "
-                 "server and no forwarding address is known. ");
+    410, "Gone",
+    "The requested resource is no longer available at the "
+    "server and no forwarding address is known. ");
 HttpResponseCode const HttpResponseCode::LENGTH_REQUIRED (
-    411, "Length Required", "The server refuses to accept the request "
-                            "without a defined Content- Length.");
+    411, "Length Required",
+    "The server refuses to accept the request "
+    "without a defined Content- Length.");
 HttpResponseCode const HttpResponseCode::PRECONDITION_FAILED (
     412, "Precondition Failed",
     "The precondition given in one or more of "
@@ -111,17 +118,19 @@ HttpResponseCode const HttpResponseCode::INTERNAL_SERVER_ERROR (
     "The server encountered an unexpected "
     "condition which prevented it from fulfilling the request.");
 HttpResponseCode const HttpResponseCode::NOT_IMPLEMENTED (
-    501, "Not Implemented", "The server does not support the functionality "
-                            "required to fulfill the request.");
+    501, "Not Implemented",
+    "The server does not support the functionality "
+    "required to fulfill the request.");
 HttpResponseCode const HttpResponseCode::BAD_GATEWAY (
     502, "Bad Gateway",
     "The server, while acting as a gateway or proxy, "
     "received an invalid response from the upstream server it accessed in "
     "attempting to fulfill the request.");
 HttpResponseCode const HttpResponseCode::SERVICE_UNAVAILABLE (
-    503, "Service Unavailable", "The server is currently unable to handle "
-                                "the request due to a temporary overloading "
-                                "or maintenance of the server.");
+    503, "Service Unavailable",
+    "The server is currently unable to handle "
+    "the request due to a temporary overloading "
+    "or maintenance of the server.");
 HttpResponseCode const HttpResponseCode::GATEWAY_TIMEOUT (
     504, "Gateway Timeout",
     "The server, while acting as a gateway or proxy, "
@@ -145,14 +154,14 @@ HttpResponseCode::~HttpResponseCode () {}
 // == HttpException implementation ----
 
 /** Creates an HttpException from throw-site information.
-  *
-  * @param[in] file  Filename. Must be a compile-time string,
-  *                  automatically passed in by HTTP_EXCEPT.
-  * @param[in] line  Line number. Automatically passed in by HTTP_EXCEPT.
-  * @param[in] func  Function name. Must be a compile-time string,
-  *                  automatically passed in by HTTP_EXCEPT.
-  * @param[in] msg   Informational string.
-  */
+ *
+ * @param[in] file  Filename. Must be a compile-time string,
+ *                  automatically passed in by HTTP_EXCEPT.
+ * @param[in] line  Line number. Automatically passed in by HTTP_EXCEPT.
+ * @param[in] func  Function name. Must be a compile-time string,
+ *                  automatically passed in by HTTP_EXCEPT.
+ * @param[in] msg   Informational string.
+ */
 HttpException::HttpException (char const *file, int line, char const *func,
                               HttpResponseCode const &code, string const &msg)
     : _file (file), _line (line), _func (func), _code (code), _msg (msg),
@@ -167,40 +176,46 @@ HttpException::HttpException (char const *file, int line, char const *func,
 {
 }
 
-HttpException::~HttpException () throw() {}
+HttpException::~HttpException () throw () {}
 
 /** Writes a HTML representation of this exception to the given stream.
-  *
-  * @param[in] stream Reference to an output stream.
-  * @return Reference to the output \c stream.
-  */
-void HttpException::writeErrorResponse (ostream &stream) const
+ *
+ * @param[in] stream Reference to an output stream.
+ * @return Reference to the output \c stream.
+ */
+void
+HttpException::writeErrorResponse (ostream &stream) const
 {
   int const c = _code.getCode ();
   ostringstream oss;
   oss << "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" "
          "\"http://www.w3.org/TR/html4/strict.dtd\">\n"
          "<html>\n"
-         "<head><title>" << c << " " << _code.getSummary ()
+         "<head><title>"
+      << c << " " << _code.getSummary ()
       << "</title></head>\n"
          "<body>\n"
-         "<h1>" << c << " " << _code.getSummary () << "</h1>\n"
+         "<h1>"
+      << c << " " << _code.getSummary () << "</h1>\n"
       << _code.getDescription ();
   // omit exception origin for 401, 403, 404 responses
   if (c != 401 && c != 403 && c != 404)
     {
       oss << "<br /><br />\n"
-             "<tt>" << getTypeName () << "</tt> thrown at <tt>" << _file
-          << ": " << _line << "</tt> in <tt>" << _func << "</tt>:<br/>\n"
+             "<tt>"
+          << getTypeName () << "</tt> thrown at <tt>" << _file << ": " << _line
+          << "</tt> in <tt>" << _func << "</tt>:<br/>\n"
           << _msg;
     }
   oss << "</body>\n"
          "</html>\n";
   string content = oss.str ();
   stream << getEnv ("SERVER_PROTOCOL") << " " << c << " "
-         << _code.getSummary () << "\r\n"
-                                   "Content-Language: en\r\n"
-                                   "Content-Length: " << content.length ()
+         << _code.getSummary ()
+         << "\r\n"
+            "Content-Language: en\r\n"
+            "Content-Length: "
+         << content.length ()
          << "\r\n"
             "Content-Type: text/html; charset=utf-8\r\n"
             "Cache-Control: no-cache\r\n\r\n";
@@ -209,11 +224,12 @@ void HttpException::writeErrorResponse (ostream &stream) const
 }
 
 /** Returns a character string representing this exception.  Falls back on
-  * getTypeName() if an exception is thrown.
-  *
-  * @return String representation of this exception; must not be deleted.
-  */
-char const *HttpException::what () const throw()
+ * getTypeName() if an exception is thrown.
+ *
+ * @return String representation of this exception; must not be deleted.
+ */
+char const *
+HttpException::what () const throw ()
 {
   try
     {
@@ -226,35 +242,43 @@ char const *HttpException::what () const throw()
 }
 
 /** Returns the fully-qualified type name of the exception.  This must be
-  * overridden by derived classes.
-  *
-  * @return Fully qualified exception type name; must not be deleted.
-  */
-char const *HttpException::getTypeName () const throw()
+ * overridden by derived classes.
+ *
+ * @return Fully qualified exception type name; must not be deleted.
+ */
+char const *
+HttpException::getTypeName () const throw ()
 {
   return "ibe::HttpException";
 }
 
-void writeErrorResponse (std::ostream &stream, std::exception const &e)
+void
+writeErrorResponse (std::ostream &stream, std::exception const &e)
 {
   HttpResponseCode const &c = HttpResponseCode::INTERNAL_SERVER_ERROR;
   ostringstream oss;
   oss << "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" "
          "\"http://www.w3.org/TR/html4/strict.dtd\">\n"
          "<html>\n"
-         "<head><title>" << c.getCode () << " " << c.getSummary ()
+         "<head><title>"
+      << c.getCode () << " " << c.getSummary ()
       << "</title></head>\n"
          "<body>\n"
-         "<h1>" << c.getCode () << " " << c.getSummary () << "</h1>\n"
-      << c.getDescription () << "<br /><br />\n"
-                                "Caught <tt>std::exception</tt>:<br/>\n"
-      << e.what () << "</body>\n"
-                      "</html>\n";
+         "<h1>"
+      << c.getCode () << " " << c.getSummary () << "</h1>\n"
+      << c.getDescription ()
+      << "<br /><br />\n"
+         "Caught <tt>std::exception</tt>:<br/>\n"
+      << e.what ()
+      << "</body>\n"
+         "</html>\n";
   string content = oss.str ();
   stream << getEnv ("SERVER_PROTOCOL") << " " << c.getCode () << " "
-         << c.getSummary () << "\r\n"
-                               "Content-Language: en\r\n"
-                               "Content-Length: " << content.length ()
+         << c.getSummary ()
+         << "\r\n"
+            "Content-Language: en\r\n"
+            "Content-Length: "
+         << content.length ()
          << "\r\n"
             "Content-Type: text/html; charset=utf-8\r\n"
             "Cache-Control: no-cache\r\n\r\n";
@@ -262,26 +286,32 @@ void writeErrorResponse (std::ostream &stream, std::exception const &e)
   stream.flush ();
 }
 
-void writeErrorResponse (std::ostream &stream)
+void
+writeErrorResponse (std::ostream &stream)
 {
   HttpResponseCode const &c = HttpResponseCode::INTERNAL_SERVER_ERROR;
   ostringstream oss;
   oss << "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" "
          "\"http://www.w3.org/TR/html4/strict.dtd\">\n"
          "<html>\n"
-         "<head><title>" << c.getCode () << " " << c.getSummary ()
+         "<head><title>"
+      << c.getCode () << " " << c.getSummary ()
       << "</title></head>\n"
          "<body>\n"
-         "<h1>" << c.getCode () << " " << c.getSummary () << "</h1>\n"
-      << c.getDescription () << "<br /><br />\n"
-                                "Unexpected exception.\n"
-                                "</body>\n"
-                                "</html>\n";
+         "<h1>"
+      << c.getCode () << " " << c.getSummary () << "</h1>\n"
+      << c.getDescription ()
+      << "<br /><br />\n"
+         "Unexpected exception.\n"
+         "</body>\n"
+         "</html>\n";
   string content = oss.str ();
   stream << getEnv ("SERVER_PROTOCOL") << " " << c.getCode () << " "
-         << c.getSummary () << "\r\n"
-                               "Content-Language: en\r\n"
-                               "Content-Length: " << content.length ()
+         << c.getSummary ()
+         << "\r\n"
+            "Content-Language: en\r\n"
+            "Content-Length: "
+         << content.length ()
          << "\r\n"
             "Content-Type: text/html; charset=utf-8\r\n"
             "Cache-Control: no-cache\r\n\r\n";
@@ -290,9 +320,10 @@ void writeErrorResponse (std::ostream &stream)
 }
 
 /** Returns a formatted string obtained by passing @c fmt and any trailing
-  * arguments to the C @c vsnprintf function.
-  */
-string const format (char const *fmt, ...)
+ * arguments to the C @c vsnprintf function.
+ */
+string const
+format (char const *fmt, ...)
 {
   static string const FAILED = "Failed to format message";
   struct VarArgs
@@ -307,17 +338,18 @@ string const format (char const *fmt, ...)
   VarArgs args (list);
   // Try formatting using a stack allocated buffer
   va_start (list, fmt);
-  int n = ::vsnprintf (buf, sizeof(buf), fmt, list);
+  int n = ::vsnprintf (buf, sizeof (buf), fmt, list);
   try
     {
-      if (n >= static_cast<int>(sizeof(buf)))
+      if (n >= static_cast<int> (sizeof (buf)))
         {
           // buf was too small, allocate the necessary memory on the heap
           boost::scoped_array<char> bigbuf (new char[n + 1]);
           va_end (list);
           va_start (list, fmt);
-          if (::vsnprintf (bigbuf.get (), static_cast<size_t>(n + 1), fmt,
-                           list) >= 0)
+          if (::vsnprintf (bigbuf.get (), static_cast<size_t> (n + 1), fmt,
+                           list)
+              >= 0)
             {
               return string (bigbuf.get ());
             }
@@ -336,8 +368,8 @@ string const format (char const *fmt, ...)
 // == Environment implementation ----
 
 Environment::Environment (int argc, char const *const *argv)
-    : _contentLength (getEnv<size_t>("CONTENT_LENGTH", 0)),
-      _serverPort (getEnv<uint16_t>("SERVER_PORT", 0)),
+    : _contentLength (getEnv<size_t> ("CONTENT_LENGTH", 0)),
+      _serverPort (getEnv<uint16_t> ("SERVER_PORT", 0)),
       _isHTTPS (getEnv ("HTTPS") == "on"),
       _serverName (getEnv ("SERVER_NAME")),
       _gatewayInterface (getEnv ("GATEWAY_INTERFACE")),
@@ -387,8 +419,9 @@ Environment::Environment (int argc, char const *const *argv)
 Environment::~Environment () {}
 
 /** Returns a vector of all the query parameter names.
-  */
-vector<string> const Environment::getKeys () const
+ */
+vector<string> const
+Environment::getKeys () const
 {
   vector<string> keys;
   keys.reserve (_kvMap.size ());
@@ -405,8 +438,9 @@ vector<string> const Environment::getKeys () const
 }
 
 /** Returns the first value of the query parameter with the given name.
-  */
-string const &Environment::getValue (string const &key) const
+ */
+string const &
+Environment::getValue (string const &key) const
 {
   size_t n = getNumValues (key);
   if (n == 0)
@@ -425,9 +459,10 @@ string const &Environment::getValue (string const &key) const
 }
 
 /** Returns the first value of the query parameter with the given name, or
-  * the specified default if the parameter is unavailable.
-  */
-string const Environment::getValue (string const &key, string const &def) const
+ * the specified default if the parameter is unavailable.
+ */
+string const
+Environment::getValue (string const &key, string const &def) const
 {
   size_t n = getNumValues (key);
   if (n == 0)
@@ -444,9 +479,10 @@ string const Environment::getValue (string const &key, string const &def) const
 }
 
 /** Returns the vector of values associated with the query parameter
-  * of the given name.
-  */
-vector<string> const Environment::getValues (string const &key) const
+ * of the given name.
+ */
+vector<string> const
+Environment::getValues (string const &key) const
 {
   vector<string> values;
   pair<KeyValueIter, KeyValueIter> const range = _kvMap.equal_range (key);
@@ -458,8 +494,9 @@ vector<string> const Environment::getValues (string const &key) const
 }
 
 /** Returns a vector of all the cookie names.
-  */
-vector<string> const Environment::getCookieNames () const
+ */
+vector<string> const
+Environment::getCookieNames () const
 {
   vector<string> names;
   names.reserve (_cookieMap.size ());
@@ -471,8 +508,9 @@ vector<string> const Environment::getCookieNames () const
 }
 
 /** Returns the value of the cookie with the given name.
-  */
-string const &Environment::getCookie (string const &name) const
+ */
+string const &
+Environment::getCookie (string const &name) const
 {
   CookieIter i = _cookieMap.find (name);
   if (i == _cookieMap.end ())
@@ -484,10 +522,10 @@ string const &Environment::getCookie (string const &name) const
 }
 
 /** Returns the value of the cookie with the given name, or the specified
-  * default if no such cookie is available.
-  */
-string const Environment::getCookie (string const &name,
-                                     string const &def) const
+ * default if no such cookie is available.
+ */
+string const
+Environment::getCookie (string const &name, string const &def) const
 {
   CookieIter i = _cookieMap.find (name);
   return (i == _cookieMap.end ()) ? def : i->second;
@@ -495,8 +533,9 @@ string const Environment::getCookie (string const &name,
 
 /** Returns a vector of all cookie (name, value) pairs sent along with the
  * request.
-  */
-std::vector<HttpCookie> const Environment::getCookies () const
+ */
+std::vector<HttpCookie> const
+Environment::getCookies () const
 {
   vector<HttpCookie> cookies;
   cookies.reserve (_cookieMap.size ());
@@ -507,7 +546,8 @@ std::vector<HttpCookie> const Environment::getCookies () const
   return cookies;
 }
 
-string const Environment::urlDecode (string const &src)
+string const
+Environment::urlDecode (string const &src)
 {
   string result;
   result.reserve (src.size ());
@@ -535,13 +575,14 @@ string const Environment::urlDecode (string const &src)
                   i += 2;
                 }
             }
-          result.append (1, static_cast<char>(c));
+          result.append (1, static_cast<char> (c));
         }
     }
   return result;
 }
 
-void Environment::parseInput (string const &data)
+void
+Environment::parseInput (string const &data)
 {
   if (data.empty ())
     {
@@ -579,7 +620,8 @@ void Environment::parseInput (string const &data)
     }
 }
 
-void Environment::parsePostInput (string const &data)
+void
+Environment::parsePostInput (string const &data)
 {
   static string const boundary = "boundary=";
   static string const headEnd = "\r\n\r\n";
@@ -674,7 +716,8 @@ void Environment::parsePostInput (string const &data)
     }
 }
 
-void Environment::parseCookies (string const &data)
+void
+Environment::parseCookies (string const &data)
 {
   for (string::size_type i = 0, j = 0; j != string::npos; i = j + 1)
     {
@@ -712,13 +755,14 @@ Writer::~Writer () {}
 
 ChunkedWriter::~ChunkedWriter () {}
 
-void ChunkedWriter::write (unsigned char const *const buf, size_t const len)
+void
+ChunkedWriter::write (unsigned char const *const buf, size_t const len)
 {
   if (buf == 0 || len == 0)
     {
       return;
     }
-  if (std::printf ("%llX\r\n", static_cast<unsigned long long>(len)) < 0)
+  if (std::printf ("%llX\r\n", static_cast<unsigned long long> (len)) < 0)
     {
       throw HTTP_EXCEPT (HttpResponseCode::INTERNAL_SERVER_ERROR,
                          "failed to write to standard out");
@@ -735,7 +779,8 @@ void ChunkedWriter::write (unsigned char const *const buf, size_t const len)
     }
 }
 
-void ChunkedWriter::finish ()
+void
+ChunkedWriter::finish ()
 {
   if (std::fwrite ("0\r\n\r\n", 5, 1, ::stdout) != 1)
     {
@@ -760,7 +805,8 @@ MemoryWriter::MemoryWriter ()
 
 MemoryWriter::~MemoryWriter () { std::free (_content); }
 
-void MemoryWriter::write (unsigned char const *const buf, size_t const len)
+void
+MemoryWriter::write (unsigned char const *const buf, size_t const len)
 {
   if (_contentLength + len < _contentLength)
     {
@@ -783,7 +829,10 @@ void MemoryWriter::write (unsigned char const *const buf, size_t const len)
   _contentLength += len;
 }
 
-void MemoryWriter::finish () {}
+void
+MemoryWriter::finish ()
+{
+}
 
 // == GZIPWriter implementation ----
 
@@ -794,7 +843,8 @@ GZIPWriter::GZIPWriter (Writer &writer, size_t const chunkSize)
   // setup zlib (15 window bits, add 16 to indicate a gzip compatible header is
   // desired)
   if (::deflateInit2 (&_stream, 1, Z_DEFLATED, MAX_WBITS + 16, MAX_MEM_LEVEL,
-                      Z_DEFAULT_STRATEGY) != Z_OK)
+                      Z_DEFAULT_STRATEGY)
+      != Z_OK)
     {
       throw HTTP_EXCEPT (
           HttpResponseCode::INTERNAL_SERVER_ERROR,
@@ -807,13 +857,14 @@ GZIPWriter::GZIPWriter (Writer &writer, size_t const chunkSize)
 
 GZIPWriter::~GZIPWriter () { ::deflateEnd (&_stream); }
 
-void GZIPWriter::write (unsigned char const *const buf, size_t const len)
+void
+GZIPWriter::write (unsigned char const *const buf, size_t const len)
 {
   if (buf == 0 || len == 0)
     {
       return;
     }
-  _stream.next_in = const_cast<Bytef *>(buf);
+  _stream.next_in = const_cast<Bytef *> (buf);
   _stream.avail_in = len;
   // deflate/write until the buffer passed in by the user has been consumed
   do
@@ -842,7 +893,8 @@ void GZIPWriter::write (unsigned char const *const buf, size_t const len)
   while (_stream.avail_in != 0);
 }
 
-void GZIPWriter::finish ()
+void
+GZIPWriter::finish ()
 {
   if (_stream.avail_out == 0)
     {

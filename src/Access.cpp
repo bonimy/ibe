@@ -1,7 +1,7 @@
 /** @file
-  * @brief  Access control utility implementation.
-  * @author Serge Monkewitz
-  */
+ * @brief  Access control utility implementation.
+ * @author Serge Monkewitz
+ */
 #include "Access.h"
 
 #include <cstdlib>
@@ -35,7 +35,8 @@ int const MISSION_NONE = -1;
 int const MISSION_ALL = -99;
 
 // Return the user session ID or an empty string.
-string const getSession (Environment const &env)
+string const
+getSession (Environment const &env)
 {
   char const *cookie = getenv ("SSO_SESSION_ID_ENV");
   if (cookie == 0)
@@ -46,7 +47,8 @@ string const getSession (Environment const &env)
 }
 
 // Return the integer value of the given parameter or the given default.
-int parseInteger (Environment const &env, string const &key, int def)
+int
+parseInteger (Environment const &env, string const &key, int def)
 {
   size_t n = env.getNumValues (key);
   if (n > 1)
@@ -75,11 +77,12 @@ int parseInteger (Environment const &env, string const &key, int def)
           HttpResponseCode::BAD_REQUEST,
           format ("%s parameter value is out of range", key.c_str ()));
     }
-  return static_cast<int>(i);
+  return static_cast<int> (i);
 }
 
 // Return the set of mission-specific groups the user belongs to.
-set<int> const getUserGroups (string const &session, int mission)
+set<int> const
+getUserGroups (string const &session, int mission)
 {
   if (mission < 0)
     {
@@ -101,7 +104,7 @@ set<int> const getUserGroups (string const &session, int mission)
   sso_init (idmEndpoint, 0, 0, 0, 0, 0, 0);
   // get user session context
   boost::shared_ptr<sso_sessionContext_t> ctx (
-      sso_openUsingSessionId (const_cast<char *>(session.c_str ())),
+      sso_openUsingSessionId (const_cast<char *> (session.c_str ())),
       sso_close);
   if (!ctx || ctx->status != SSO_OK)
     {
@@ -110,7 +113,7 @@ set<int> const getUserGroups (string const &session, int mission)
     }
   // iterate over user groups for mission
   sso_node_t *missionNode = 0, *groupNode = 0, *tmpNode = 0;
-  HASH_FIND (hhalt, ctx->rolesById, &mission, sizeof(int), missionNode);
+  HASH_FIND (hhalt, ctx->rolesById, &mission, sizeof (int), missionNode);
   if (missionNode != 0)
     {
       HASH_ITER (hhalt, missionNode->subalt, groupNode, tmpNode)
@@ -128,11 +131,11 @@ set<int> const getUserGroups (string const &session, int mission)
   // anything), and if so include GROUP_ALL in the IDs returned.
   missionNode = groupNode = tmpNode = 0;
   mission = MISSION_ALL;
-  HASH_FIND (hhalt, ctx->rolesById, &mission, sizeof(int), missionNode);
+  HASH_FIND (hhalt, ctx->rolesById, &mission, sizeof (int), missionNode);
   if (missionNode != 0)
     {
       int group = GROUP_ALL;
-      HASH_FIND (hhalt, missionNode->subalt, &group, sizeof(int), groupNode);
+      HASH_FIND (hhalt, missionNode->subalt, &group, sizeof (int), groupNode);
       if (groupNode != 0)
         {
           groups.insert (GROUP_ALL);
@@ -146,7 +149,7 @@ set<int> const getUserGroups (string const &session, int mission)
 Access::Access (Environment const &env)
     : _policy (DENIED), _mission (parseInteger (env, "mission", MISSION_NONE)),
       _group (parseInteger (env, "group", GROUP_NONE)),
-      _session (getSession (env)), _pgConn (), _pgTable (), _groups (), 
+      _session (getSession (env)), _pgConn (), _pgTable (), _groups (),
       _groupsValid (false)
 {
   // get access related CGI parameters and sanity check them
@@ -235,7 +238,8 @@ Access::Access (Environment const &env)
 
 Access::~Access () {}
 
-set<int> const Access::getGroups () const
+set<int> const
+Access::getGroups () const
 {
   if (!_groupsValid)
     {

@@ -1,7 +1,7 @@
 /** @file
-  * @brief  Minimalistic CGI request handling library.
-  * @author Serge Monkewitz
-  */
+ * @brief  Minimalistic CGI request handling library.
+ * @author Serge Monkewitz
+ */
 #ifndef CGI_H_
 #define CGI_H_
 
@@ -14,8 +14,8 @@
 #include <cstdarg>
 #include <exception>
 #include <iosfwd>
-#include <string>
 #include <map>
+#include <string>
 #include <vector>
 
 #include "boost/current_function.hpp"
@@ -27,16 +27,16 @@ namespace ibe
 #define EXCEPT_HERE __FILE__, __LINE__, BOOST_CURRENT_FUNCTION
 
 /** Creates an HttpException with the given response code and
-  * informational message.
-  *
-  * @param[in] code   An HttpResponseCode.
-  * @param[in] msg    Informational message.
-  */
+ * informational message.
+ *
+ * @param[in] code   An HttpResponseCode.
+ * @param[in] msg    Informational message.
+ */
 #define HTTP_EXCEPT(...) ::ibe::HttpException (EXCEPT_HERE, __VA_ARGS__)
 
 /** A subset of the available HTTP response codes (those most likely to be
-  * useful from a CGI application).
-  */
+ * useful from a CGI application).
+ */
 class HttpResponseCode
 {
 public:
@@ -62,15 +62,27 @@ public:
 
   ~HttpResponseCode ();
 
-  int getCode () const { return _code; }
-  char const *getSummary () const { return _summary; }
-  char const *getDescription () const { return _description; }
+  int
+  getCode () const
+  {
+    return _code;
+  }
+  char const *
+  getSummary () const
+  {
+    return _summary;
+  }
+  char const *
+  getDescription () const
+  {
+    return _description;
+  }
 
 private:
   HttpResponseCode (int code, char const *summary, char const *description);
   // disable copy construction and assignment
   HttpResponseCode (HttpResponseCode const &);
-  HttpResponseCode &operator=(HttpResponseCode const &);
+  HttpResponseCode &operator= (HttpResponseCode const &);
 
   int _code;
   char const *_summary;
@@ -78,7 +90,7 @@ private:
 };
 
 /** An Exception class with an associated HTTP response code.
-  */
+ */
 class HttpException : public std::exception
 {
 public:
@@ -86,17 +98,37 @@ public:
                  HttpResponseCode const &code, std::string const &msg);
   HttpException (char const *file, int line, char const *func,
                  HttpResponseCode const &code, char const *msg = "");
-  virtual ~HttpException () throw();
+  virtual ~HttpException () throw ();
 
   virtual void writeErrorResponse (std::ostream &stream) const;
-  virtual char const *what () const throw();
-  virtual char const *getTypeName () const throw();
+  virtual char const *what () const throw ();
+  virtual char const *getTypeName () const throw ();
 
-  char const *getFile () const throw() { return _file; }
-  int getLine () const throw() { return _line; }
-  char const *getFunction () const throw() { return _func; }
-  HttpResponseCode const &getResponseCode () const throw() { return _code; }
-  std::string const &getMessage () const throw() { return _msg; }
+  char const *
+  getFile () const throw ()
+  {
+    return _file;
+  }
+  int
+  getLine () const throw ()
+  {
+    return _line;
+  }
+  char const *
+  getFunction () const throw ()
+  {
+    return _func;
+  }
+  HttpResponseCode const &
+  getResponseCode () const throw ()
+  {
+    return _code;
+  }
+  std::string const &
+  getMessage () const throw ()
+  {
+    return _msg;
+  }
 
 private:
   char const *_file;
@@ -112,11 +144,11 @@ void writeErrorResponse (std::ostream &stream);
 std::string const format (char const *fmt, ...);
 
 /** A name value pair.
-  */
+ */
 typedef std::pair<std::string, std::string> HttpCookie;
 
 /** Class encapsulating the CGI environment of a request.
-  */
+ */
 class Environment
 {
 public:
@@ -126,53 +158,111 @@ public:
   /// \name Server environment
   //@{
   /// Returns the host name or IP address of the HTTP server.
-  std::string const &getServerName () const { return _serverName; }
+  std::string const &
+  getServerName () const
+  {
+    return _serverName;
+  }
   /// Returns the name and version of the gateway interface (usually @c
   /// CGI/1.1).
-  std::string const &getGatewayInterface () const { return _gatewayInterface; }
+  std::string const &
+  getGatewayInterface () const
+  {
+    return _gatewayInterface;
+  }
   /// Returns the name and version of the protocol (usually @c HTTP/1.0 or @c
   /// HTTP/1.1).
-  std::string const &getServerProtocol () const { return _serverProtocol; }
+  std::string const &
+  getServerProtocol () const
+  {
+    return _serverProtocol;
+  }
   /// Returns the HTTP server port number.
-  uint16_t getServerPort () const { return _serverPort; }
+  uint16_t
+  getServerPort () const
+  {
+    return _serverPort;
+  }
   /// Returns @c true if this is an HTTPS request.
-  bool isHTTPS () const { return _isHTTPS; }
+  bool
+  isHTTPS () const
+  {
+    return _isHTTPS;
+  }
   //@}
 
   /// \name CGI environment
   //@{
   /// Returns the request method, usually @c GET or @c POST.
-  std::string const &getRequestMethod () const { return _requestMethod; }
+  std::string const &
+  getRequestMethod () const
+  {
+    return _requestMethod;
+  }
   /// Returns path information for this request.
-  std::string const &getPathInfo () const { return _pathInfo; }
+  std::string const &
+  getPathInfo () const
+  {
+    return _pathInfo;
+  }
   /// Returns translated path information for this request.
-  std::string const &getPathTranslated () const { return _pathTranslated; }
+  std::string const &
+  getPathTranslated () const
+  {
+    return _pathTranslated;
+  }
   /// Returns the full path to this CGI application.
-  std::string const &getScriptName () const { return _scriptName; }
+  std::string const &
+  getScriptName () const
+  {
+    return _scriptName;
+  }
   /// Returns the query string for the request; usually only valid for a @c
   /// GET.
-  std::string const &getQueryString () const { return _queryString; }
+  std::string const &
+  getQueryString () const
+  {
+    return _queryString;
+  }
   /// Returns the number of characters to read from standard input; usually
   /// only valid for a @c POST.
-  size_t getContentLength () const { return _contentLength; }
+  size_t
+  getContentLength () const
+  {
+    return _contentLength;
+  }
   /// Returns the MIME type of the content submitted by a @c POST; usually
   /// @c application/x-www-form-urlencoded.
-  std::string const &getContentType () const { return _contentType; }
+  std::string const &
+  getContentType () const
+  {
+    return _contentType;
+  }
   /// Returns the cookies sent along with the request.
-  std::string const &getCookieString () const { return _cookieString; }
+  std::string const &
+  getCookieString () const
+  {
+    return _cookieString;
+  }
   //@}
 
   /// \name CGI Parameters
   //@{
   /// Returns the total number of query parameter values.
-  size_t getNumValues () const { return _kvMap.size (); }
+  size_t
+  getNumValues () const
+  {
+    return _kvMap.size ();
+  }
   /// Returns the number of values for the query parameter with the given name.
-  size_t getNumValues (std::string const &key) const
+  size_t
+  getNumValues (std::string const &key) const
   {
     return _kvMap.count (key);
   }
   /// Returns @c true if a query parameter with the given name exists.
-  bool hasKey (std::string const &key) const
+  bool
+  hasKey (std::string const &key) const
   {
     return getNumValues (key) != 0;
   }
@@ -186,9 +276,14 @@ public:
   /// \name Cookies
   //@{
   /// Returns the total number of cookies.
-  size_t getNumCookies () const { return _cookieMap.size (); }
+  size_t
+  getNumCookies () const
+  {
+    return _cookieMap.size ();
+  }
   /// Returns @c true if a cookie with the given name exists.
-  bool hasCookie (std::string const &name) const
+  bool
+  hasCookie (std::string const &name) const
   {
     return _cookieMap.count (name) != 0;
   }
@@ -211,7 +306,7 @@ private:
 
   // Disable copying and assignment
   Environment (Environment const &);
-  Environment &operator=(Environment const &);
+  Environment &operator= (Environment const &);
 
   void parseInput (std::string const &data);
   void parsePostInput (std::string const &data);
@@ -237,7 +332,7 @@ private:
 };
 
 /** Base class for output writers.
-  */
+ */
 class Writer
 {
 public:
@@ -248,7 +343,7 @@ public:
 };
 
 /** Writes chunked output to standard out.
-  */
+ */
 class ChunkedWriter : public Writer
 {
 public:
@@ -261,11 +356,11 @@ public:
 private:
   // disable copy construction and assignment
   ChunkedWriter (ChunkedWriter const &);
-  ChunkedWriter &operator=(ChunkedWriter const &);
+  ChunkedWriter &operator= (ChunkedWriter const &);
 };
 
 /** Writes output to an in-memory buffer.
-  */
+ */
 class MemoryWriter : public Writer
 {
 public:
@@ -274,13 +369,21 @@ public:
 
   virtual void write (unsigned char const *const buf, size_t const len);
   virtual void finish ();
-  size_t getContentLength () const { return _contentLength; }
-  unsigned char const *getContent () const { return _content; }
+  size_t
+  getContentLength () const
+  {
+    return _contentLength;
+  }
+  unsigned char const *
+  getContent () const
+  {
+    return _content;
+  }
 
 private:
   // disable copy construction and assignment
   MemoryWriter (MemoryWriter const &);
-  MemoryWriter &operator=(MemoryWriter const &);
+  MemoryWriter &operator= (MemoryWriter const &);
 
   size_t _contentLength;
   size_t _cap;
@@ -288,7 +391,7 @@ private:
 };
 
 /** Writes chunked, GZIP compressed output to another writer.
-  */
+ */
 class GZIPWriter : public Writer
 {
 public:
@@ -298,12 +401,16 @@ public:
   virtual void write (unsigned char const *const buf, size_t const size);
   virtual void finish ();
 
-  size_t getChunkSize () const { return _chunkSize; }
+  size_t
+  getChunkSize () const
+  {
+    return _chunkSize;
+  }
 
 private:
   // disable copy construction and assignment
   GZIPWriter (GZIPWriter const &);
-  GZIPWriter &operator=(GZIPWriter const &);
+  GZIPWriter &operator= (GZIPWriter const &);
 
   Writer *_writer;
   size_t const _chunkSize;                    ///< output granularity
