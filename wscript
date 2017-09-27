@@ -8,7 +8,7 @@ def configure(conf):
     conf.load(['compiler_c','compiler_cxx','gnu_dirs','ipac','irsa',
                'pqxx','cfitsio','boost','wcs','gsoap'])
     conf.check_boost(lib='filesystem system regex')
-    
+
 def build(bld):
     default_flags=['-Wall', '-Wextra', '-O2']
     default_flags.append('-DIBE_DATA_ROOT="' + bld.env.IRSA_DIR + '/web/html/ibe/data"')
@@ -44,7 +44,7 @@ def build(bld):
                    '/irsadata/2MASS/LGA/images')
     bld.symlink_as(data_dir + 'twomass/lh/images',
                    '/irsadata/LH/images')
-    
+
     # WISE
     bld.symlink_as(data_dir + 'wise/neowiser/p1bm_frm',
                    '/stage/irsa-wise-links-public/links-neowiser/l1b')
@@ -87,7 +87,7 @@ def build(bld):
 
     # Spitzer
     bld.symlink_as(data_dir + 'spitzer/sha/archive',
-                   '/irsadata/SPITZER/SHA/archive')
+                   '/stage/sha/archive')
 
     bld.symlink_as(data_dir + 'spitzer/seip_science/images',
                    '/irsadata/SPITZER/Enhanced/SEIP/images')
@@ -95,7 +95,7 @@ def build(bld):
                    '/irsadata/SPITZER/Enhanced/SEIP/images')
     bld.symlink_as(data_dir + 'spitzer/abell1763_images/images',
                    '/irsadata/SPITZER/Abell1763/images')
-    
+
     bld.symlink_as(data_dir + 'spitzer/c2d_images_irac_all/images',
                    '/irsadata/SPITZER/C2D/images')
     bld.symlink_as(data_dir + 'spitzer/c2d_images_mips_all/images',
@@ -104,22 +104,22 @@ def build(bld):
                    '/irsadata/SPITZER/C2D/images')
     bld.symlink_as(data_dir + 'spitzer/c2d_images_bolocam/images',
                    '/irsadata/SPITZER/C2D/images')
-    
+
     bld.symlink_as(data_dir + 'spitzer/clash_images/images',
                    '/irsadata/SPITZER/CLASH/images')
-    
+
     bld.symlink_as(data_dir + 'spitzer/cygnus_x_images_mosaics/images',
                    '/irsadata/SPITZER/Cygnus-X/images')
     bld.symlink_as(data_dir + 'spitzer/cygnus_x_images_tiles/images',
                    '/irsadata/SPITZER/Cygnus-X/images')
     bld.symlink_as(data_dir + 'spitzer/cygnus_x_images_phot_mos/images',
                    '/irsadata/SPITZER/Cygnus-X/images')
-    
+
     bld.symlink_as(data_dir + 'spitzer/dustings_images/galaxies',
                    '/irsadata/SPITZER/DUSTiNGS/galaxies')
     bld.symlink_as(data_dir + 'spitzer/feps_images/images',
                    '/irsadata/SPITZER/FEPS/images')
-    
+
     bld.symlink_as(data_dir + 'spitzer/fls_gbt_hi/images',
                    '/irsadata/SPITZER/FLS/images')
     bld.symlink_as(data_dir + 'spitzer/fls_irac/images',
@@ -132,14 +132,14 @@ def build(bld):
                    '/irsadata/SPITZER/FLS/images')
     bld.symlink_as(data_dir + 'spitzer/fls_vla/images',
                    '/irsadata/SPITZER/FLS/images')
-    
+
     bld.symlink_as(data_dir + 'spitzer/fidel_images_24um/images',
                    '/irsadata/SPITZER/FIDEL/images')
     bld.symlink_as(data_dir + 'spitzer/fidel_images_70um/images',
                    '/irsadata/SPITZER/FIDEL/images')
     bld.symlink_as(data_dir + 'spitzer/fidel_images_160um/images',
                    '/irsadata/SPITZER/FIDEL/images')
-    
+
     bld.symlink_as(data_dir + 'spitzer/glimpsei_0_6/images',
                    '/irsadata/SPITZER/GLIMPSE/images')
     bld.symlink_as(data_dir + 'spitzer/glimpsei_1_2/images',
@@ -193,7 +193,7 @@ def build(bld):
 
     bld.symlink_as(data_dir + 'spitzer/iudf_mosaic/images',
                    '/irsadata/SPITZER/IUDF/images')
-    
+
     bld.symlink_as(data_dir + 'spitzer/lvl_mips/images',
                    '/irsadata/SPITZER/LVL/images')
     bld.symlink_as(data_dir + 'spitzer/lvl_irac/images',
@@ -202,7 +202,7 @@ def build(bld):
                    '/irsadata/SPITZER/LVL/images')
     bld.symlink_as(data_dir + 'spitzer/lvl_galex/images',
                    '/irsadata/SPITZER/LVL/images')
-    
+
     bld.symlink_as(data_dir + 'spitzer/m31irac_image/images',
                    '/irsadata/SPITZER/M31IRAC/images')
     bld.symlink_as(data_dir + 'spitzer/mips_lg_images/images',
@@ -311,7 +311,7 @@ def build(bld):
     # MSX
     bld.symlink_as(data_dir + 'msx/msx_images/images',
                    '/irsadata/MSX/images')
-    
+
     # IRAS
     bld.symlink_as(data_dir + 'iras/issa_images/ISSA_complete_v2',
                    '/irsadata/IRAS/ISSA/ISSA_complete_v2')
@@ -323,7 +323,7 @@ def build(bld):
                    '/irsadata/IRAS/IRIS/images')
     bld.symlink_as(data_dir + 'iras/miga_images/images',
                    '/irsadata/IRAS/MIGA/images')
-    
+
     # COSMOS
     bld.symlink_as(data_dir + 'cosmos/cosmos_acs_2_0/images',
                    '/irsadata/COSMOS/images')
