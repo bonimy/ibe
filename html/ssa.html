@@ -45,7 +45,7 @@ fireflyToolbar= {
         <tr><th>Data-set</th><th>Collection Name</th><th>Calibration Level</th></tr>
 
         <tr>
-          <td><a href="https://irsa.ipac.caltech.edu/data/SPITZER/docs/">Spitzer Heritage Archive<br>Public data taken before 02-Mar-2017</a></td>
+          <td><a href="/data/SPITZER/docs/">Spitzer Heritage Archive<br>Public data taken before 02-Mar-2017</a></td>
           <td>spitzer_sha</td>
           <td>1, 2, and 3</td>
         </tr>
@@ -62,7 +62,7 @@ fireflyToolbar= {
 <p>
 
 An overview of how to perform SSA queries is provided below. For full
-details, please see the <a href = "www.ivoa.net">IVOA</a> <a href = "http://www.ivoa.net/documents/SSA/">SSA</a> specification.
+details, please see the <a href = "http://www.ivoa.net">IVOA</a> <a href = "http://www.ivoa.net/documents/SSA/">SSA</a> specification.
 
 </p>
 
@@ -73,7 +73,7 @@ details, please see the <a href = "www.ivoa.net">IVOA</a> <a href = "http://www.
 <p>
 
 To perform a metadata query, visit <a href =
-"https://irsa.ipac.caltech.edu/SSA?FORMAT=METADATA">https://irsa.ipac.caltech.edu/SSA?FORMAT=METADATA</a>. The
+"/SSA?FORMAT=METADATA">/SSA?FORMAT=METADATA</a>. The
 result will be a <a href = "http://www.ivoa.net/documents/VOTable/">VOTable</a> describing the image metadata columns that
 are returned by actual queries. All of IRSA's SSA datasets have been
 regularized and are contained in the same table.
@@ -88,7 +88,7 @@ regularized and are contained in the same table.
 
 
 An SSA query returns a <a href =
-"www.ivoa.net/documents/VOTable/">VOTable</a> of images satisfying any
+"http://www.ivoa.net/documents/VOTable/">VOTable</a> of images satisfying any
 number of constraints. By default, queries return results from all
 datasets.
 
@@ -115,13 +115,11 @@ The complete list of parameters supported by IRSA's SSA implementation is:
   <dd>
 
 <p>The POS parameter defines the center of the search region. The
-coordinate values are specified in list format (comma separated) with
-no embedded white space.
+coordinate values must be specified as a comma-separated pair with no
+white space.
 
 <p>Coordinates default to right-ascension and declination in decimal
-degrees in the ICRS coordinate system. A coordinate system reference
-frame may optionally be specified to specify a coordinate system other
-than ICRS. The reference frame is specified as a list format modifier.</p>
+degrees in the ICRS coordinate system.</p>
 
 <p>Coordinates requiring more than two values are possible merely by
 having more than two comma-delimited values before the qualifier.  It
@@ -141,9 +139,10 @@ is an error if an unsupported coordinate reference frame is specified.</p>
 <dd>
 <p>
 
-The diameter of the search region specified in decimal degrees.  A
-valid query does not have to specify a SIZE parameter. If SIZE is
-omitted in a positional query, the default value is 10 arcseconds.
+  The POS parameter specifies the search region diameter in decimal
+  degrees.  A valid query does not have to specify a SIZE
+  parameter. If SIZE is omitted in a positional query, the default
+  value is 10 arcseconds.
 
 
 </p>
@@ -160,22 +159,20 @@ omitted in a positional query, the default value is 10 arcseconds.
 <dd>
 <p>
 
-<p>The spectral bandpass is given in range-list format, with each list
-element specified numerically as a wavelength value or range in units
-of meters.</p>
+<p>The BAND parameter specifies the desired wavelength range in units of meters.</p>
 
 <p>If a single numerical value is specified, it matches any spectrum
 for which the spectral coverage includes the specified value.</p>
 
-<p>If a two valued range is given, a dataset matches if any portion of
-it overlaps the given spectral region.</p>
+<p>If a range of wavelengths is given, a dataset matches if any portion of its spectral range overlaps the given spectral range. Ranges are specified as min/max.</p>
 
 
 </p>
 
 <p>Examples:</p>
 <ul>
-<li class="param">BAND=1E-7/3E-6</li>
+<li class="param">BAND=10e-6</li>
+<li class="param">BAND=8e-6/12e-6</li>
 </ul>
 </dd>
 
@@ -328,7 +325,7 @@ responseformat parameter. </p>
 
     <ul>
       <li>FITS: <a href="https://fits.gsfc.nasa.gov/">Flexible Image Transport System</a></li>
-      <li>IPAC_TABLE: <a href="http://irsa.ipac.caltech.edu/applications/DDGEN/Doc/ipac_tbl.html">IPAC's Table Format</a></li>
+      <li>IPAC_TABLE: <a href="/applications/DDGEN/Doc/ipac_tbl.html">IPAC's Table Format</a></li>
       <li>HDF5: <a href="https://www.hdfgroup.org/">Hierarchical Data Format v5</a></li>
       <li>VOTABLE: <a href="http://www.ivoa.net/Documents/VOTable/">IVOA VOTable</a></li>
       <li>JSON: <a href="http://json.org">JavaScript Object Notation</a></li>
@@ -357,7 +354,7 @@ responseformat parameter. </p>
 
 <li>Here is an SSA query returning all data in the Spitzer Heritage Archive that lie within a circular region centered on (ra = 314.304167, dec = +77.596667) and with a radius of 0.5 degrees. Note that we usually have to URL encode the spaces as pluses '+',  though your browser may do that for you.<BR><BR>
 
-curl -o irsa_ssa_example1.csv -v "https://irsadev.ipac.caltech.edu/SSA?COLLECTION=spitzer_sha&RESPONSEFORMAT=csv&POS=+314.304167,+77.596667&SIZE=+0.5"
+curl -o irsa_ssa_example1.csv -v "https://irsa.ipac.caltech.edu/SSA?COLLECTION=spitzer_sha&RESPONSEFORMAT=csv&POS=+314.304167,+77.596667&SIZE=+0.5"
 
 </ol>
 
