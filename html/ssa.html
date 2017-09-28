@@ -354,7 +354,7 @@ responseformat parameter. </p>
   <li> <p>Search for Spitzer spectra of the ULIRG Arp 220.</p>
 
     <pre class="prettyprint lang-bsh">
-curl -o example1.csv "<span class="server">server</span><span class="root">root</span>/SSA?COLLECTION=spitzer_sha&amp;RESPONSEFORMAT=csv&amp;POS=233.738563,23.503139"</pre>
+curl -o example1.csv "https://irsa.ipac.caltech.edu/SSA?COLLECTION=spitzer_sha&amp;RESPONSEFORMAT=csv&amp;POS=233.738563,23.503139"</pre>
 
     <p>
       Since we did not specify the size of the search region, the results
@@ -372,7 +372,7 @@ curl -o example1.csv "<span class="server">server</span><span class="root">root<
       220, as well as some sky observations.</p>
 
     <pre class="prettyprint lang-bsh">
-curl -o example2.csv "<span class="server">server</span><span class="root">root</span>/SSA?COLLECTION=spitzer_sha&amp;RESPONSEFORMAT=csv&amp;POS=233.738563,23.503139&amp;SIZE=0.5"</pre>
+curl -o example2.csv "https://irsa.ipac.caltech.edu/SSA?COLLECTION=spitzer_sha&amp;RESPONSEFORMAT=csv&amp;POS=233.738563,23.503139&amp;SIZE=0.5"</pre>
   </li>
   <li>
     <p>
@@ -380,7 +380,7 @@ curl -o example2.csv "<span class="server">server</span><span class="root">root<
       feature at the redshift of Arp 220 (z = 0.018126).
     </p>
     <pre class="prettyprint lang-bsh">
-wget -O example3.csv "<span class="server">server</span><span class="root">root</span>/SSA?COLLECTION=spitzer_sha&amp;RESPONSEFORMAT=csv&amp;POS=233.738563,23.503139&amp;SIZE=0.5&amp;BAND=8e-6/12e-6"</pre>
+wget -O example3.csv "https://irsa.ipac.caltech.edu/SSA?COLLECTION=spitzer_sha&amp;RESPONSEFORMAT=csv&amp;POS=233.738563,23.503139&amp;SIZE=0.5&amp;BAND=8e-6/12e-6"</pre>
   </li>
 </ol>
 
