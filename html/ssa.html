@@ -351,11 +351,37 @@ responseformat parameter. </p>
 <h3>Examples</h3>
 
 <ol>
+  <li> <p>Search for Spitzer spectra of the ULIRG Arp 220.</p>
 
-<li>Here is an SSA query returning all data in the Spitzer Heritage Archive that lie within a circular region centered on (ra = 314.304167, dec = +77.596667) and with a radius of 0.5 degrees. Note that we usually have to URL encode the spaces as pluses '+',  though your browser may do that for you.<BR><BR>
+    <pre class="prettyprint lang-bsh">
+curl -o example1.csv "<span class="server">server</span><span class="root">root</span>/SSA?COLLECTION=spitzer_sha&amp;RESPONSEFORMAT=csv&amp;POS=233.738563,23.503139"</pre>
 
-curl -o irsa_ssa_example1.csv -v "https://irsa.ipac.caltech.edu/SSA?COLLECTION=spitzer_sha&RESPONSEFORMAT=csv&POS=+314.304167,+77.596667&SIZE=+0.5"
+    <p>
+      Since we did not specify the size of the search region, the results
+      (output into a comma-separated value file) will be include all spectral
+      observations that are within 10 arcseconds of the specified position.
+    </p>
+    <p>
+      Examining the search results, the target_name column indicates that
+      all of these observations were meant to target Arp 220.
+    </p>
+  </li>
+  <li>
+    <p>Widen the search radius a little, to about half a degree, to
+      increase the likelihood of getting all the available spectra of Arp
+      220, as well as some sky observations.</p>
 
+    <pre class="prettyprint lang-bsh">
+curl -o example2.csv "<span class="server">server</span><span class="root">root</span>/SSA?COLLECTION=spitzer_sha&amp;RESPONSEFORMAT=csv&amp;POS=233.738563,23.503139&amp;SIZE=0.5"</pre>
+  </li>
+  <li>
+    <p>
+      Only return spectra that cover the 9.7 micron silicate absorption
+      feature at the redshift of Arp 220 (z = 0.018126).
+    </p>
+    <pre class="prettyprint lang-bsh">
+wget -O example3.csv "<span class="server">server</span><span class="root">root</span>/SSA?COLLECTION=spitzer_sha&amp;RESPONSEFORMAT=csv&amp;POS=233.738563,23.503139&amp;SIZE=0.5&amp;BAND=8e-6/12e-6"</pre>
+  </li>
 </ol>
 
 
