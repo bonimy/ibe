@@ -396,20 +396,33 @@
 
       <h3>Examples</h3>
 
-      <p>Here is an SIA v2 query returning all WISE All-Sky Release Level 1b
-        Frames intersecting a circle centered on (ra=20,dec=40) with a
-        radius of about 10 arcseconds.  Note that we usually have to URL
-        encode the spaces as pluses '+', though your browser may do that
-        for you.
-      </p>
 
-      <ul><li><a href="/SIA?COLLECTION=wise_allsky&CALIB=2&POS=CIRCLE+20+40+0.00277">/SIA?COLLECTION=wise_allsky&amp;CALIB=2&amp;POS=CIRCLE+20+40+0.00277</a></li></ul>
-
-      <p>And here is a query returning all WISE Preliminary Release Atlas coadds
-        overlapping a search rectangle with corners at (19.25,39.25) (20.75,39.25) (20.75,40.75) (19.25,40.75).  The file returned will be in FITS format.
-      </p>
-
-      <ul><li><a href="/SIA?COLLECTION=wise_prelim&CALIB=3&RESPONSEFORMAT=FITS&POS=POLYGON+19.25+39.25+20.75+39.25+20.75+40.75+19.25+40.75">/SIA?COLLECTION=wise_prelim&amp;CALIB=3&amp;RESPONSEFORMAT=FITS&amp;POS=POLYGON+19.25+39.25+20.75+39.25+20.75+40.75+19.25+40.75</a></li></ul>
+      <ol>
+        <li>
+          <p>
+            Search for ALLWISE images within 10 arcseconds of ra,dec =
+            (19.005875, -5.084472). Return the result as in
+            comma-separated value format.
+          </p>
+          <pre class="prettyprint lang-bsh">
+            wget -O example1.csv "https://irsa.ipac.caltech.edu/SIA?COLLECTION=wise_allwise&amp;POS=circle+-164.7+-5.8+0.002777&amp;RESPONSEFORMAT=CSV"</pre>
+        </li>
+        <li>
+          <p>
+            Return only the WISE channel 1 data products.
+          </p>
+          <pre class="prettyprint lang-bsh">
+            wget -O example2.csv "https://irsa.ipac.caltech.edu/SIA?COLLECTION=wise_allwise&amp;POS=circle+-164.7+-5.8+0.002777&amp;RESPONSEFORMAT=CSV&amp;BAND=3.4e-6"</pre>
+        </li>
+        <li>
+          <p>
+            Return only data products that are FITS images (as opposed
+            to gzipped files or text files).
+          </p>
+          <pre class="prettyprint lang-bsh">
+            wget -O example3.csv "https://irsa.ipac.caltech.edu/SIA?COLLECTION=wise_allwise&amp;POS=circle+-164.7+-5.8+0.002777&amp;RESPONSEFORMAT=CSV&amp;BAND=3.4e-6&amp;FORMAT=image/fits"</pre>
+        </li>
+      </ol>
 
       <a name="help" />
 
