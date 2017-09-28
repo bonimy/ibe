@@ -280,6 +280,42 @@
           </p>
         </dd>
 
+        <a name="BAND"></a>
+        <dt><span class="param">BAND</span></dt>
+        <dd>
+          <p>
+            The <span class="param">BAND</span> parameter defines the
+            wavelength interval(s) in meters to be searched for data. The value is
+            an open or closed energy interval. The interval always includes the
+            bounding values. A BAND constraint is satisfied if the interval
+            intersects the wavelength coverage of the observation as returned in
+            the em_min, em_max columns.
+          </p>
+          <p>Examples:</p>
+          <ul>
+            <li>Find only J-band data, which covers the wavelength range 1.154--1.316 micron:
+              <p>
+                <span class="param">BAND=1.154e-6 1.316e-6</span>
+              </p>
+            </li>
+            <li>Find data with wavelength longer than 1.4 micron:
+              <p>
+                <span class="param">BAND=1.4e-6 Inf</span>
+              </p>
+            </li>
+            <li>Find data with wavelength shorter than 1.4 micron:
+              <p>
+                <span class="param">BAND=-Inf 1.4e-6</span>
+              </p>
+            </li>
+            <li>Find data that includes 2.2 micron:
+              <p>
+                <span class="param">BAND=2.2e-6</span>
+              </p>
+            </li>
+          </ul>
+        </dd>
+
         <a name="COLLECTION"></a>
         <dt><span class="param">COLLECTION</span></dt>
         <dd>
