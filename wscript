@@ -23,9 +23,6 @@ def build(bld):
                 install_path=bld.env.WEB_CGI_DIR + '/ibe'
     )
 
-    bld.install_files(bld.env.HTML_DIR + '/ibe',bld.path.ant_glob("html/**"),
-                      cwd=bld.path.find_dir('html'), relative_trick=True);
-
     data_dir = bld.env.HTML_DIR + '/ibe/data/'
     # 2MASS
     bld.symlink_as(data_dir + 'twomass/sixxcat/sixxcat',
