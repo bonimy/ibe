@@ -76,11 +76,11 @@ def build(bld):
 
     # ZTF
     bld.symlink_as(data_dir + 'ztf/products/raw',
-                   '/stage/irsa-ztf-links/ingest-test/raw')
+                   '/stage/irsa-ztf-links/archive/raw')
     bld.symlink_as(data_dir + 'ztf/products/cal',
-                   '/stage/irsa-ztf-links/ingest-test/cal')
+                   '/stage/irsa-ztf-links/archive/cal')
     bld.symlink_as(data_dir + 'ztf/products/sci',
-                   '/stage/irsa-ztf-links/ingest-test/sci')
+                   '/stage/irsa-ztf-links/archive/sci')
 
     # Spitzer
     bld.symlink_as(data_dir + 'spitzer/sha/archive',
