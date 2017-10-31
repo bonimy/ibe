@@ -404,7 +404,7 @@ def build(bld):
                    '/irsadata/Herschel/HHLI/images')
 
     # AKARI
-    bld.symlink_as(data_dir + 'akari/images',
+    bld.symlink_as(data_dir + 'akari/akari_images/images',
                    '/irsadata/AKARI/images')
 
     # FIXME: No scrapbook.  That is served by a cgi program hst_preview.
