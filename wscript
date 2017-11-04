@@ -15,6 +15,10 @@ def build(bld):
 
     bld.program(source=['src/Access.cxx',
                         'src/Cgi.cxx',
+                        'src/Wcs/Wcs.cxx',
+                        'src/Wcs/Wcs_destructor.cxx',
+                        'src/Wcs/skyToPixel.cxx',
+                        'src/Wcs/pixelToSky.cxx',
                         'src/Cutout/Cutout.cxx',
                         'src/streamSubImage/streamSubImage.cxx',
                         'src/streamSubImage/cutoutPixelBox/cutoutPixelBox.cxx',
