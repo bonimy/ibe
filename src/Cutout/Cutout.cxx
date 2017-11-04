@@ -2,7 +2,10 @@
  * @brief  FITS image cutout implementation.
  * @author Serge Monkewitz
  */
-#include "../Cutout.hxx"
+#include "../Coords.hxx"
+#include "../Cgi.hxx"
+#include "../Wcs.hxx"
+
 
 #include <endian.h>
 #include <stdint.h>

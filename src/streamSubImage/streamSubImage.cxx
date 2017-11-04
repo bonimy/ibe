@@ -1,6 +1,9 @@
 #include "../checkFitsError.hxx"
 #include "../FitsFile.hxx"
-#include "../Cutout.hxx"
+#include "../Coords.hxx"
+#include "../Cgi.hxx"
+
+#include <boost/filesystem.hpp>
 
 namespace ibe
 {

@@ -1,6 +1,6 @@
 #include "RAD_PER_DEG.hxx"
 #include "pixcen.hxx"
-#include "../../Cutout.hxx"
+#include "../../Wcs.hxx"
 
 namespace ibe
 {

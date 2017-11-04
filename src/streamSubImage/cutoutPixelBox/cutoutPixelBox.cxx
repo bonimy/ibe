@@ -1,6 +1,10 @@
 #include "RAD_PER_DEG.hxx"
 #include "pixcen.hxx"
-#include "../../Cutout.hxx"
+#include "../../Cgi.hxx"
+#include "../../Wcs.hxx"
+#include "../../Coords.hxx"
+
+#include <iostream>
 
 namespace ibe
 {

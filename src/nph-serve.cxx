@@ -16,7 +16,7 @@
 
 #include "Access.hxx"
 #include "Cgi.hxx"
-#include "Cutout.hxx"
+#include "Coords.hxx"
 
 using std::make_pair;
 using std::ostream;
@@ -37,7 +37,6 @@ using ibe::GZIPWriter;
 using ibe::HttpException;
 using ibe::HttpResponseCode;
 using ibe::MemoryWriter;
-using ibe::parseCoords;
 
 namespace
 {
@@ -536,6 +535,14 @@ checkAccess (fs::path path, Access const &access)
 }
 
 } // unnamed namespace
+
+namespace ibe
+{
+void streamSubimage (boost::filesystem::path const &path, Coords const &center,
+                     Coords const &size, Writer &writer);
+Coords const parseCoords (Environment const &env, std::string const &key,
+                          Units defaultUnits, bool requirePair);
+}
 
 int
 main (int argc, char const *const *argv)
