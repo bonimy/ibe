@@ -2,7 +2,7 @@
  * @brief  Minimalistic CGI request handling library implementation.
  * @author Serge Monkewitz
  */
-#include "Cgi.h"
+#include "Cgi.hxx"
 
 #include <cstdio>
 #include <cstdlib>

@@ -2,13 +2,12 @@
  * @brief  Utilities for access control.
  * @author Serge Monkewitz
  */
-#ifndef ACCESS_H_
-#define ACCESS_H_
+#pragma once
 
 #include <set>
 #include <string>
 
-#include "Cgi.h"
+#include "Cgi.hxx"
 
 namespace ibe
 {
@@ -70,5 +69,3 @@ private:
 };
 
 } // namespace ibe
-
-#endif // ACCESS_H_

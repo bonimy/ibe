@@ -2,24 +2,30 @@ import os
 
 def options(opt):
     opt.load(['compiler_c','compiler_cxx','gnu_dirs','ipac','irsa',
-              'pqxx','cfitsio','boost','wcs','gsoap'])
+              'pqxx','cfitsio','boost','wcs','gsoap','cxx14'])
 
 def configure(conf):
     conf.load(['compiler_c','compiler_cxx','gnu_dirs','ipac','irsa',
-               'pqxx','cfitsio','boost','wcs','gsoap'])
+               'pqxx','cfitsio','boost','wcs','gsoap','cxx14'])
     conf.check_boost(lib='filesystem system regex')
 
 def build(bld):
     default_flags=['-Wall', '-Wextra', '-O2']
     default_flags.append('-DIBE_DATA_ROOT="' + bld.env.IRSA_DIR + '/web/html/ibe/data"')
 
-    bld.program(source=['src/Access.cpp',
-                        'src/Cgi.cpp',
-                        'src/Cutout.cpp',
-                        'src/nph-serve.cpp'],
+    bld.program(source=['src/Access.cxx',
+                        'src/Cgi.cxx',
+                        'src/Cutout/Cutout.cxx',
+                        'src/streamSubImage/streamSubImage.cxx',
+                        'src/streamSubImage/cutoutPixelBox/cutoutPixelBox.cxx',
+                        'src/streamSubImage/cutoutPixelBox/search.cxx',
+                        'src/checkFitsError.cxx',
+                        'src/FitsFile.cxx',
+                        'src/nph-serve.cxx'],
                 target='nph-ibe_data',
                 cxxflags=default_flags,
-                use=['BOOST','ipac','irsa_sso','pqxx','cfitsio','wcs','gsoap'],
+                use=['BOOST','ipac','irsa_sso','pqxx','cfitsio','wcs','gsoap',
+                     'cxx14'],
                 install_path=bld.env.WEB_CGI_DIR + '/ibe'
     )
 
@@ -403,9 +409,9 @@ def build(bld):
     bld.symlink_as(data_dir + 'herschel/hhli_spire_par/images',
                    '/irsadata/Herschel/HHLI/images')
 
-    # AKARI
-    bld.symlink_as(data_dir + 'akari/akari_images/images',
-                   '/irsadata/AKARI/images')
+    # # AKARI
+    # bld.symlink_as(data_dir + 'akari/akari_images/images',
+    #                '/irsadata/AKARI/images')
 
     # FIXME: No scrapbook.  That is served by a cgi program hst_preview.
     # FIXME: No NED.  It is served by going to NED.

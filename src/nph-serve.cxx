@@ -14,9 +14,9 @@
 #include "boost/filesystem.hpp"
 #include "boost/regex.hpp"
 
-#include "Access.h"
-#include "Cgi.h"
-#include "Cutout.h"
+#include "Access.hxx"
+#include "Cgi.hxx"
+#include "Cutout.hxx"
 
 using std::make_pair;
 using std::ostream;
@@ -556,6 +556,10 @@ main (int argc, char const *const *argv)
       fs::path diskpath (IBE_DATA_ROOT);
       diskpath /= path;
 
+          std::cout << "HTTP/1.1 200 OK\r\n\r\n"
+                    << "diskpath: " << diskpath << "\n"
+                    << std::boolalpha
+                    << fs::is_directory (diskpath) << "\n";
       // -------------------------
       // Serve a directory listing
       // -------------------------

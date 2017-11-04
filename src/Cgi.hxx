@@ -2,8 +2,7 @@
  * @brief  Minimalistic CGI request handling library.
  * @author Serge Monkewitz
  */
-#ifndef CGI_H_
-#define CGI_H_
+#pragma once
 
 #include <stdint.h>
 #include <zlib.h>
@@ -419,5 +418,3 @@ private:
 };
 
 } // namespace ibe
-
-#endif // CGI_H_

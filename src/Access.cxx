@@ -2,7 +2,7 @@
  * @brief  Access control utility implementation.
  * @author Serge Monkewitz
  */
-#include "Access.h"
+#include "Access.hxx"
 
 #include <cstdlib>
 #include <limits>
