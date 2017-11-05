@@ -29,10 +29,6 @@ cutoutPixelBox (Coords center, // Cutout center.
                 long *box) // Pixel-space cutout box; must point to an array of
                            // at least 4 longs.
 {
-  std::cout << "cutout: " << center.c[0] << " " << center.c[1] << " "
-            << center.units << "\n"
-            << "size: " << size.c[0] << " " << size.c[1] << " " << size.units
-            << "\n";
   double xmin, xmax, ymin, ymax;
   if (center.units != PIX || size.units != PIX)
     {
@@ -127,9 +123,6 @@ cutoutPixelBox (Coords center, // Cutout center.
       ymax = pixcen (center.c[1] + size.c[1] * 0.5);
     }
 
-  std::cout << "xyminmax: " << xmin << " " << ymin << " " << xmax << " "
-            << ymax << " "
-            << "\n";
   // make sure sub-image overlaps image
   if (xmin > naxis[0] || ymin > naxis[1] || xmax < 1 || ymax < 1)
     {
