@@ -18,8 +18,8 @@ namespace ibe
 bool cutoutPixelBox (Coords center, Coords size, char *hdr, int nkeys,
                      long const *naxis, long *box);
 
-void streamSubimage (boost::filesystem::path const &path, Coords const &center,
-                     Coords const &size, Writer &writer)
+void stream_subimage (boost::filesystem::path const &path,
+                      Coords const &center, Coords const &size, Writer &writer)
 {
   unsigned char padding[2880];
   char keyname[FLEN_KEYWORD];
