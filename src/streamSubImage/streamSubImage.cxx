@@ -3,6 +3,14 @@
 #include "../Coords.hxx"
 #include "../Cgi.hxx"
 
+#include <endian.h>
+#include <stdint.h>
+#if __BYTE_ORDER == __LITTLE_ENDIAN
+#include <byteswap.h>
+#elif __BYTE_ORDER != __BIG_ENDIAN
+#error Unknown byte order!
+#endif
+
 #include <boost/filesystem.hpp>
 
 namespace ibe

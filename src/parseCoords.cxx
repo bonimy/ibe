@@ -1,29 +1,13 @@
-/** @file
- * @brief  FITS image cutout implementation.
- * @author Serge Monkewitz
- */
-#include "../Coords.hxx"
-#include "../Cgi.hxx"
-#include "../Wcs.hxx"
+#include "Coords.hxx"
+#include "Cgi.hxx"
 
-
-#include <endian.h>
-#include <stdint.h>
-#if __BYTE_ORDER == __LITTLE_ENDIAN
-#include <byteswap.h>
-#elif __BYTE_ORDER != __BIG_ENDIAN
-#error Unknown byte order!
-#endif
-
-#include "boost/regex.hpp"
-#include "boost/shared_ptr.hpp"
+#include <boost/regex.hpp>
+#include <boost/shared_ptr.hpp>
 
 using std::string;
 
 namespace ibe
 {
-
-// == Helper functions ----
 
 namespace
 {
