@@ -540,7 +540,7 @@ namespace ibe
 {
 void streamSubimage (boost::filesystem::path const &path, Coords const &center,
                      Coords const &size, Writer &writer);
-Coords const parseCoords (Environment const &env, std::string const &key,
+Coords const parse_coords (Environment const &env, std::string const &key,
                           Units defaultUnits, bool requirePair);
 }
 
@@ -618,8 +618,8 @@ main (int argc, char const *const *argv)
           // 2. Serve a FITS cutout
           validateCutoutParams (env, true);
           bool const isGzip = parseBool (env, "gzip", true);
-          Coords center = parseCoords (env, "center", DEG, true);
-          Coords size = parseCoords (env, "size", DEG, false);
+          Coords center = parse_coords (env, "center", DEG, true);
+          Coords size = parse_coords (env, "size", DEG, false);
           // Use ChunkedWriter for HTTP 1.1? But then... no way
           // to come back with an error message when something fails in
           // the middle of a sub-image operation.

@@ -27,9 +27,8 @@ boost::regex const _radRe ("^rad(ians?)?\\s*$");
       "point numbers, followed by an optional units specification.",          \
       key.c_str (), requirePair ? "2" : "1 or 2")
 
-Coords const
-parseCoords (Environment const &env, string const &key, Units defaultUnits,
-             bool requirePair)
+Coords const parse_coords (Environment const &env, string const &key,
+                           Units defaultUnits, bool requirePair)
 {
   Coords coords;
   char *s = 0;
@@ -52,7 +51,7 @@ parseCoords (Environment const &env, string const &key, Units defaultUnits,
       for (; std::isspace (*s); ++s)
         {
         }
-      if (static_cast<string::size_type> (s - value.c_str ()) != comma)
+      if (static_cast<string::size_type>(s - value.c_str ()) != comma)
         {
           throw HTTP_EXCEPT (HttpResponseCode::BAD_REQUEST, PP_MSG);
         }

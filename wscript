@@ -19,7 +19,7 @@ def build(bld):
                         'src/Wcs/Wcs_destructor.cxx',
                         'src/Wcs/skyToPixel.cxx',
                         'src/Wcs/pixelToSky.cxx',
-                        'src/parseCoords.cxx',
+                        'src/parse_coords.cxx',
                         'src/streamSubImage/streamSubImage.cxx',
                         'src/streamSubImage/cutoutPixelBox/cutoutPixelBox.cxx',
                         'src/streamSubImage/cutoutPixelBox/search.cxx',
