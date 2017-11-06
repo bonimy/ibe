@@ -399,7 +399,7 @@ def build(bld):
     bld.symlink_as(data_dir + 'herschel/pep_images/images',
                    '/irsadata/Herschel/PEP/images')
     # bld.symlink_as(data_dir + 'herschel/observations/images',
-    #                '/irsadata/Herschel//images')
+    #                '/irsadata/Herschel/images')
     bld.symlink_as(data_dir + 'herschel/vngs_images/images',
                    '/irsadata/Herschel/VNGS/images')
     bld.symlink_as(data_dir + 'herschel/vngs_spectra/spectra',
@@ -413,9 +413,9 @@ def build(bld):
     bld.symlink_as(data_dir + 'herschel/hhli_spire_par/images',
                    '/irsadata/Herschel/HHLI/images')
 
-    # # AKARI
-    # bld.symlink_as(data_dir + 'akari/akari_images/images',
-    #                '/irsadata/AKARI/images')
+    # AKARI
+    bld.symlink_as(data_dir + 'akari/akari_images/images',
+                   '/irsadata/AKARI/images')
 
     # FIXME: No scrapbook.  That is served by a cgi program hst_preview.
     # FIXME: No NED.  It is served by going to NED.
