@@ -69,17 +69,8 @@ void validate (ibe::Environment const &env)
                          "Invalid protocol: use either HTTP/1.0 or HTTP/1.1");
     }
   vector<string> keys = env.getKeys ();
-  set<string> allowed;
-  allowed.insert ("url_root");
-  allowed.insert ("policy");
-  allowed.insert ("mission");
-  allowed.insert ("group");
-  allowed.insert ("pgconn");
-  allowed.insert ("pgtable");
-  allowed.insert ("path");
-  allowed.insert ("center");
-  allowed.insert ("size");
-  allowed.insert ("gzip");
+  set<string> allowed ({ "url_root", "policy", "mission", "group", "pgconn",
+                         "pgtable", "path", "center", "size", "gzip" });
   for (vector<string>::const_iterator i = keys.begin (), e = keys.end ();
        i != e; ++i)
     {
