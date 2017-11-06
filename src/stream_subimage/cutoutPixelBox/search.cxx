@@ -41,7 +41,7 @@ double search (Wcs &wcs,            // WCS for 2D image to search
   scale = 2.0;
   while (std::fabs (inc) >= 1.0 && !std::isinf (p[0]) && !std::isinf (p[1]))
     {
-      wcs.pixelToSky (p, s);
+      wcs.pixel_to_sky (p, s);
       s2c (s, v);
       d = dist (cen, v);
       if (d < size)

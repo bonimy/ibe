@@ -17,8 +17,8 @@ def build(bld):
                         'src/Cgi.cxx',
                         'src/Wcs/Wcs.cxx',
                         'src/Wcs/Wcs_destructor.cxx',
-                        'src/Wcs/skyToPixel.cxx',
-                        'src/Wcs/pixelToSky.cxx',
+                        'src/Wcs/sky_to_pixel.cxx',
+                        'src/Wcs/pixel_to_sky.cxx',
                         'src/parse_coords.cxx',
                         'src/stream_subimage/stream_subimage.cxx',
                         'src/stream_subimage/cutoutPixelBox/cutoutPixelBox.cxx',
@@ -28,8 +28,8 @@ def build(bld):
                         'src/nph-serve.cxx'],
                 target='nph-ibe_data',
                 cxxflags=default_flags,
-                use=['BOOST','ipac','irsa_sso','pqxx','cfitsio','wcs','gsoap',
-                     'cxx14'],
+                use=['BOOST','ipac','irsa_sso','pqxx','cfitsio','wcs',
+                     'gsoap','cxx14'],
                 install_path=bld.env.WEB_CGI_DIR + '/ibe'
     )
 

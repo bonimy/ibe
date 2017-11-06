@@ -15,7 +15,7 @@
 
 namespace ibe
 {
-bool cutoutPixelBox (Coords center, Coords size, char *hdr, int nkeys,
+bool cutoutPixelBox (Coords center, Coords size, char *hdr,
                      long const *naxis, long *box);
 
 void stream_subimage (boost::filesystem::path const &path,
@@ -73,7 +73,7 @@ void stream_subimage (boost::filesystem::path const &path,
           boost::shared_ptr<char> h (hdr, std::free);
           checkFitsError (status);
           // 2. Compute coordinate box for cutout
-          if (!cutoutPixelBox (center, size, hdr, nkeys, naxis, box))
+          if (!cutoutPixelBox (center, size, hdr, naxis, box))
             {
               // no overlap
               throw HTTP_EXCEPT (HttpResponseCode::INTERNAL_SERVER_ERROR,

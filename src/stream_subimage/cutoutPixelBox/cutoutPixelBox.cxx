@@ -24,7 +24,6 @@ bool
 cutoutPixelBox (Coords center, // Cutout center.
                 Coords size,   // Cutout size.
                 char *hdr,     // FITS header string (as returned by CFITSIO).
-                int nkeys,     // Number of FITS header cards.
                 long const *naxis, // Image dimensions (NAXIS1 and  NAXIS2).
                 long *box) // Pixel-space cutout box; must point to an array of
                            // at least 4 longs.
@@ -33,11 +32,11 @@ cutoutPixelBox (Coords center, // Cutout center.
   if (center.units != PIX || size.units != PIX)
     {
       // need to map center and/or size to pixel coordinates
-      Wcs wcs (hdr, nkeys);
+      Wcs wcs (hdr);
       double sky[2];
       if (center.units == PIX)
         {
-          wcs.pixelToSky (center.c, sky);
+          wcs.pixel_to_sky (center.c, sky);
         }
       else
         {
@@ -76,7 +75,7 @@ cutoutPixelBox (Coords center, // Cutout center.
             }
           sky[0] = center.c[0];
           sky[1] = center.c[1];
-          wcs.skyToPixel (sky, center.c);
+          wcs.sky_to_pixel (sky, center.c);
         }
       if (size.c[0] < 0.0 || size.c[1] < 0.0)
         {

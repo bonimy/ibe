@@ -1,8 +1,6 @@
 #pragma once
 
-#include <wcslib/wcs.h>
-#include <wcslib/wcserr.h>
-#include <wcslib/wcshdr.h>
+#include <wcstools/wcs.h>
 
 namespace ibe
 {
@@ -10,19 +8,17 @@ namespace ibe
 class Wcs
 {
 public:
-  Wcs (char *hdr, int nkeys);
+  Wcs (char *fits_header);
   ~Wcs ();
 
-  void pixelToSky (const double *pix, double *sky);
-  void skyToPixel (const double *sky, double *pix);
+  void pixel_to_sky (const double *pix, double *sky);
+  void sky_to_pixel (const double *sky, double *pix);
 
 private:
   // disable copy construction/assignment
   Wcs (Wcs const &) = delete;
   Wcs &operator=(Wcs const &);
 
-  struct ::wcsprm *_wcs;
-  int _nwcs;
+  struct WorldCoor *_wcs = nullptr;
 };
-
 }
