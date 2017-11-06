@@ -605,11 +605,18 @@ Environment::parseInput (string const &data)
       i = data.find_first_of ('&', prev);
       if (i == string::npos)
         {
-          value = urlDecode (data.substr (prev));
+          value = data.substr (prev);
         }
       else
         {
-          value = urlDecode (data.substr (prev, i - prev));
+          value = data.substr (prev, i - prev);
+        }
+      /// Do not decode 'path' because it has already been decoded
+      /// once by Apache.  Double-decoding causes encoded plus '+'
+      /// characters to become spaces ' '.
+      if (key!="path")
+        {
+          value = urlDecode(value);
         }
       _kvMap.insert (std::make_pair (key, value));
       if (i == string::npos)
