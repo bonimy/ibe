@@ -91,6 +91,8 @@ def build(bld):
                    '/stage/irsa-ztf-links/archive/cal')
     bld.symlink_as(data_dir + 'ztf/products/sci',
                    '/stage/irsa-ztf-links/archive/sci')
+    bld.symlink_as(data_dir + 'ztf/products/ref',
+                   '/stage/irsa-ztf-links/archive/ref')
 
     # Spitzer
     bld.symlink_as(data_dir + 'spitzer/sha/archive',
