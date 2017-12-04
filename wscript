@@ -419,5 +419,9 @@ def build(bld):
     bld.symlink_as(data_dir + 'akari/akari_images/images',
                    '/irsadata/AKARI/images')
 
+    # DSS
+    bld.symlink_as(data_dir + 'dss/dss_images/images',
+                   '/irsadata/DSS/images')
+    
     # FIXME: No scrapbook.  That is served by a cgi program hst_preview.
     # FIXME: No NED.  It is served by going to NED.
