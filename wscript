@@ -3,11 +3,15 @@ import os
 def options(opt):
     opt.load(['compiler_c','compiler_cxx','gnu_dirs','ipac','irsa',
               'pqxx','cfitsio','boost','wcs','gsoap','cxx14'])
+    optional_programs=opt.add_option_group('Optional Program Options')
+    optional_programs.add_option('--enable-ceres-internal', action='store_true',
+                                 help='Enable symlinks for ceres internal data')
 
 def configure(conf):
     conf.load(['compiler_c','compiler_cxx','gnu_dirs','ipac','irsa',
                'pqxx','cfitsio','boost','wcs','gsoap','cxx14'])
     conf.check_boost(lib='filesystem system regex')
+    conf.env.enable_ceres_internal=conf.options.enable_ceres_internal
 
 def build(bld):
     default_flags=['-Wall', '-Wextra', '-O2']
@@ -77,6 +81,32 @@ def build(bld):
                    '/stage/irsa-wise-links-public/links-merge/l1b')
     bld.symlink_as(data_dir + 'wise/merge/merge_p3am_cdd',
                    '/stage/irsa-wise-links-public/links-merge/l3a')
+
+    if (bld.env.enable_ceres_internal):
+        # merge_int
+        bld.symlink_as(data_dir + 'wise/merge_int/merge_i1bm_frm',
+                       '/stage/irsa-wise-links-ops/links-merge/l1b')
+        bld.symlink_as(data_dir + 'wise/merge_int/merge_p3am_cdd',
+                       '/stage/irsa-wise-links-public/links-merge/l3a')
+        
+        # neowiser_int, prov, pub
+        bld.symlink_as(data_dir + 'wise/neowiser_int/i1bm_frm',
+                       '/stage/irsa-wise-links-ops/links-neowiser/l1b')
+        bld.symlink_as(data_dir + 'wise/neowiser_prov/i1bm_frm',
+                       '/stage/irsa-wise-links-ops/links-nprov/l1b')
+        bld.symlink_as(data_dir + 'wise/neowiser_pub/p1bm_frm',
+                       '/stage/irsa-wise-links-public/links-neowiser/l1b')
+
+        # Year 1,2,3,4
+        bld.symlink_as(data_dir + 'wise/neowiser_yr1/yr1_p1bm_frm',
+                       '/stage/irsa-wise-links-public/links-neowiser/l1b-yr1')
+        bld.symlink_as(data_dir + 'wise/neowiser_yr2/yr2_p1bm_frm',
+                       '/stage/irsa-wise-links-public/links-neowiser/l1b-yr2')
+        bld.symlink_as(data_dir + 'wise/neowiser_yr3/yr3_p1bm_frm',
+                       '/stage/irsa-wise-links-public/links-neowiser/l1b-yr3')
+        
+        bld.symlink_as(data_dir + 'wise/neowiser_yr4/yr4_i1bm_frm',
+                       '/stage/irsa-wise-links-public/links-neowiser/l1b-yr4')
 
     # PTF
     bld.symlink_as(data_dir + 'ptf/images/level1',
