@@ -106,7 +106,7 @@ def build(bld):
                        '/stage/irsa-wise-links-public/links-neowiser/l1b-yr3')
         
         bld.symlink_as(data_dir + 'wise/neowiser_yr4/yr4_i1bm_frm',
-                       '/stage/irsa-wise-links-public/links-neowiser/l1b-yr4')
+                       '/stage/irsa-wise-links-ops/links-neowiser/l1b-yr4')
 
     # PTF
     bld.symlink_as(data_dir + 'ptf/images/level1',
