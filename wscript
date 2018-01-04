@@ -97,16 +97,17 @@ def build(bld):
         bld.symlink_as(data_dir + 'wise/neowiser_pub/p1bm_frm',
                        '/stage/irsa-wise-links-public/links-neowiser/l1b')
 
-        # Year 1,2,3,4
+        # Year 1,2,3,4,5
         bld.symlink_as(data_dir + 'wise/neowiser_yr1/yr1_p1bm_frm',
                        '/stage/irsa-wise-links-public/links-neowiser/l1b-yr1')
         bld.symlink_as(data_dir + 'wise/neowiser_yr2/yr2_p1bm_frm',
                        '/stage/irsa-wise-links-public/links-neowiser/l1b-yr2')
         bld.symlink_as(data_dir + 'wise/neowiser_yr3/yr3_p1bm_frm',
                        '/stage/irsa-wise-links-public/links-neowiser/l1b-yr3')
-        
-        bld.symlink_as(data_dir + 'wise/neowiser_yr4/yr4_i1bm_frm',
-                       '/stage/irsa-wise-links-ops/links-neowiser/l1b-yr4')
+        bld.symlink_as(data_dir + 'wise/neowiser_yr4/yr4_p1bm_frm',
+                       '/stage/irsa-wise-links-public/links-neowiser/l1b-yr4')
+        bld.symlink_as(data_dir + 'wise/neowiser_yr5/yr5_p1bm_frm',
+                       '/stage/irsa-wise-links-ops/links-neowiser/l1b-yr5')
 
     # PTF
     bld.symlink_as(data_dir + 'ptf/images/level1',
