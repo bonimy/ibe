@@ -91,7 +91,7 @@ def build(bld):
                        '/stage/irsa-wise-links-ops/links-merge/l1b')
         bld.symlink_as(data_dir + 'wise/merge_int/merge_p3am_cdd',
                        '/stage/irsa-wise-links-public/links-merge/l3a')
-        
+
         # neowiser_int, prov, pub
         bld.symlink_as(data_dir + 'wise/neowiser_int/i1bm_frm',
                        '/stage/irsa-wise-links-ops/links-neowiser/l1b')
@@ -456,6 +456,10 @@ def build(bld):
     # DSS
     bld.symlink_as(data_dir + 'dss/dss_images/images',
                    '/irsadata/DSS/images')
-    
+
+    # IRTF
+    bld.symlink_as(data_dir + 'IRTF',
+                   '/irsadata/IRTF')
+
     # FIXME: No scrapbook.  That is served by a cgi program hst_preview.
     # FIXME: No NED.  It is served by going to NED.
