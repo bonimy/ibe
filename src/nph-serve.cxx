@@ -32,11 +32,11 @@ using ibe::Access;
 using ibe::Coords;
 using ibe::DEG;
 using ibe::Environment;
+using ibe::format;
 using ibe::GZIPWriter;
 using ibe::HttpException;
 using ibe::HttpResponseCode;
 using ibe::MemoryWriter;
-using ibe::format;
 
 namespace
 {
@@ -236,142 +236,49 @@ vector<string> const
 getDirEntries (fs::path const &diskpath, fs::path const &path,
                Access const &access)
 {
-  string sql;
+  ostringstream sql;
   string dbpath = stripTrailingSlash (path);
+  sql << "SELECT path_name, is_dir FROM " << access.getPgTable ()
+      << " WHERE\n";
+  if (path.empty ())
+    {
+      sql << "    parent_path_id = 0";
+    }
+  else
+    {
+      sql << "    parent_path_id = (SELECT path_id FROM "
+          << access.getPgTable () << " WHERE path_name = '" << dbpath << "')";
+    }
+
   switch (access.getPolicy ())
     {
     case Access::GRANTED:
-      if (path.empty ())
-        {
-          sql = "SELECT c.path_name, c.is_dir FROM\n"
-                "    "
-                + access.getPgTable ()
-                + " AS c\n"
-                  "WHERE\n"
-                  "    c.parent_path_id = 0\n";
-        }
-      else
-        {
-          sql = "SELECT c.path_name, c.is_dir FROM\n"
-                "    "
-                + access.getPgTable ()
-                + " AS p INNER JOIN\n"
-                  "    "
-                + access.getPgTable ()
-                + " AS c ON (p.path_id = c.parent_path_id)\n"
-                  "WHERE\n"
-                  "    p.path_name = '"
-                + dbpath + "'";
-        }
       break;
     case Access::DATE_ONLY:
-      if (path.empty ())
-        {
-          sql = "SELECT c.path_name, c.is_dir FROM\n"
-                "    "
-                + access.getPgTable ()
-                + " AS c\n"
-                  "WHERE\n"
-                  "    c.parent_path_id = 0 AND\n"
-                  "    (\n"
-                  "        c.ipac_pub_date < CURRENT_TIMESTAMP OR\n"
-                  "        c.is_dir = true\n"
-                  "    )";
-        }
-      else
-        {
-          sql = "SELECT c.path_name, c.is_dir FROM\n"
-                "    "
-                + access.getPgTable ()
-                + " AS p INNER JOIN\n"
-                  "    "
-                + access.getPgTable ()
-                + " AS c ON (p.path_id = c.parent_path_id)\n"
-                  "WHERE\n"
-                  "    p.path_name = '"
-                + dbpath
-                + "' AND\n"
-                  "    (\n"
-                  "        c.ipac_pub_date < CURRENT_TIMESTAMP OR\n"
-                  "        c.is_dir = true\n"
-                  "    )";
-        }
+      sql << " AND\n"
+             "    (\n"
+             "        c.ipac_pub_date < CURRENT_TIMESTAMP OR\n"
+             "        c.is_dir = true\n"
+             "    )";
       break;
     case Access::ROW_ONLY:
-      if (path.empty ())
-        {
-          sql = "SELECT DISTINCT c.path_name, c.is_dir FROM\n"
-                "    "
-                + access.getPgTable ()
-                + " AS c\n"
-                  "WHERE\n"
-                  "    c.parent_path_id = 0 AND\n"
-                  "    (\n"
-                  "        c.ipac_gid IN ("
-                + groupString (access)
-                + ") OR\n"
-                  "        c.is_dir = true\n"
-                  "    )";
-        }
-      else
-        {
-          sql = "SELECT DISTINCT c.path_name, c.is_dir FROM\n"
-                "    "
-                + access.getPgTable ()
-                + " AS p INNER JOIN\n"
-                  "    "
-                + access.getPgTable ()
-                + " AS c ON (p.path_id = c.parent_path_id)\n"
-                  "WHERE\n"
-                  "    p.path_name = '"
-                + dbpath
-                + "' AND\n"
-                  "    (\n"
-                  "        c.ipac_gid IN ("
-                + groupString (access)
-                + ") OR\n"
-                  "        c.is_dir = true\n"
-                  "    )";
-        }
+      sql << " AND\n"
+             "    (\n"
+             "        c.ipac_gid IN ("
+          << groupString (access)
+          << ") OR\n"
+             "        c.is_dir = true\n"
+             "    )";
       break;
     case Access::ROW_DATE:
-      if (path.empty ())
-        {
-          sql = "SELECT DISTINCT c.path_name, c.is_dir FROM\n"
-                "    "
-                + access.getPgTable ()
-                + " AS c\n"
-                  "WHERE\n"
-                  "    c.parent_path_id = 0 AND\n"
-                  "    (\n"
-                  "        c.ipac_gid IN ("
-                + groupString (access)
-                + ") OR\n"
-                  "        c.ipac_pub_date < CURRENT_TIMESTAMP OR\n"
-                  "        c.is_dir = true\n"
-                  "    )";
-        }
-      else
-        {
-          sql = "SELECT DISTINCT c.path_name, c.is_dir FROM\n"
-                "    "
-                + access.getPgTable ()
-                + " AS p INNER JOIN\n"
-                  "    "
-                + access.getPgTable ()
-                + " AS c ON (p.path_id = c.parent_path_id)\n"
-                  "WHERE\n"
-                  "    p.path_name = '"
-                + dbpath
-                + "' AND\n"
-                  "    (\n"
-                  "        c.ipac_gid IN ("
-                + groupString (access)
-                + ") OR\n"
-                  "        c.ipac_pub_date < CURRENT_TIMESTAMP OR\n"
-                  "        c.is_dir = true\n"
-                  "    )";
-        }
+      sql << " AND\n"
+             "    (\n"
+             "        c.ipac_gid IN ("
+          << groupString (access)
+          << ") OR\n"
+             "        c.ipac_pub_date < CURRENT_TIMESTAMP OR\n"
+             "        c.is_dir = true\n"
+             "    )";
       break;
     default:
       throw HTTP_EXCEPT (HttpResponseCode::INTERNAL_SERVER_ERROR,
@@ -380,7 +287,7 @@ getDirEntries (fs::path const &diskpath, fs::path const &path,
   pqxx::connection conn (access.getPgConn ());
   pqxx::work transaction (conn);
 
-  pqxx::result resultset = transaction.exec (sql);
+  pqxx::result resultset = transaction.exec (sql.str ());
 
   vector<string> entries;
   bool isdir;
