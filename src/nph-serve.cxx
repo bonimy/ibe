@@ -250,39 +250,30 @@ getDirEntries (fs::path const &diskpath, fs::path const &path,
           << access.getPgTable () << " WHERE path_name = '" << dbpath << "')";
     }
 
-  switch (access.getPolicy ())
+  auto policy = access.getPolicy ();
+  if (policy != Access::GRANTED)
     {
-    case Access::GRANTED:
-      break;
-    case Access::DATE_ONLY:
       sql << " AND\n"
-             "    (\n"
-             "        c.ipac_pub_date < CURRENT_TIMESTAMP OR\n"
-             "        c.is_dir = true\n"
+             "    (\n";
+      switch (policy)
+        {
+        case Access::DATE_ONLY:
+          sql << "        ipac_pub_date < CURRENT_TIMESTAMP OR\n";
+          break;
+        case Access::ROW_ONLY:
+          sql << "        ipac_gid IN (" << groupString (access) << ") OR\n";
+          break;
+        case Access::ROW_DATE:
+          sql << "        ipac_gid IN (" << groupString (access)
+              << ") OR\n"
+                 "        ipac_pub_date < CURRENT_TIMESTAMP OR\n";
+          break;
+        default:
+          throw HTTP_EXCEPT (HttpResponseCode::INTERNAL_SERVER_ERROR,
+                             "Invalid access config");
+        }
+      sql << "        is_dir = true\n"
              "    )";
-      break;
-    case Access::ROW_ONLY:
-      sql << " AND\n"
-             "    (\n"
-             "        c.ipac_gid IN ("
-          << groupString (access)
-          << ") OR\n"
-             "        c.is_dir = true\n"
-             "    )";
-      break;
-    case Access::ROW_DATE:
-      sql << " AND\n"
-             "    (\n"
-             "        c.ipac_gid IN ("
-          << groupString (access)
-          << ") OR\n"
-             "        c.ipac_pub_date < CURRENT_TIMESTAMP OR\n"
-             "        c.is_dir = true\n"
-             "    )";
-      break;
-    default:
-      throw HTTP_EXCEPT (HttpResponseCode::INTERNAL_SERVER_ERROR,
-                         "Invalid access config");
     }
   pqxx::connection conn (access.getPgConn ());
   pqxx::work transaction (conn);
@@ -391,57 +382,41 @@ checkAccess (string const &path, Access const &access)
   else if (access.getPolicy () != Access::GRANTED
            || !access.getPgConn ().empty ())
     {
-      string sql;
-      switch (access.getPolicy ())
+      ostringstream sql;
+      sql << "SELECT COUNT(*) FROM " << access.getPgTable ()
+          << " WHERE\n"
+             "    path_name = '"
+          << path << "'";
+      auto policy = access.getPolicy ();
+      if (policy != Access::GRANTED)
         {
-        case Access::GRANTED:
-          sql = "SELECT COUNT(*) FROM " + access.getPgTable ()
-                + "\n"
-                  "WHERE path_name = '"
-                + path + "'";
-          break;
-        case Access::DATE_ONLY:
-          sql = "SELECT COUNT(*) FROM " + access.getPgTable ()
-                + "\n"
-                  "WHERE\n"
-                  "    path_name = '"
-                + path
-                + "' AND\n"
-                  "    (ipac_pub_date < CURRENT_TIMESTAMP OR is_dir = true)";
-          break;
-        case Access::ROW_ONLY:
-          sql = "SELECT COUNT(*) FROM " + access.getPgTable ()
-                + "\n"
-                  "WHERE\n"
-                  "    path_name = '"
-                + path
-                + "' AND\n"
-                  "    (ipac_gid IN ("
-                + groupString (access) + ") OR is_dir = true)";
-          break;
-        case Access::ROW_DATE:
-          sql = "SELECT COUNT(*) FROM " + access.getPgTable ()
-                + "\n"
-                  "WHERE\n"
-                  "    path_name = '"
-                + path
-                + "' AND\n"
-                  "    (\n"
-                  "        ipac_gid IN ("
-                + groupString (access)
-                + ") OR\n"
-                  "        ipac_pub_date < CURRENT_TIMESTAMP OR\n"
-                  "        is_dir = true\n"
-                  "    )";
-          break;
-        default:
-          throw HTTP_EXCEPT (HttpResponseCode::INTERNAL_SERVER_ERROR,
-                             "Invalid access config");
+          sql << " AND\n"
+                 "    (\n";
+          switch (policy)
+            {
+            case Access::DATE_ONLY:
+              sql << "        ipac_pub_date < CURRENT_TIMESTAMP OR\n";
+              break;
+            case Access::ROW_ONLY:
+              sql << "        ipac_gid IN (" << groupString (access)
+                  << ") OR\n";
+              break;
+            case Access::ROW_DATE:
+              sql << "        ipac_gid IN (" << groupString (access)
+                  << ") OR\n"
+                     "        ipac_pub_date < CURRENT_TIMESTAMP OR\n";
+              break;
+            default:
+              throw HTTP_EXCEPT (HttpResponseCode::INTERNAL_SERVER_ERROR,
+                                 "Invalid access config");
+            }
+          sql << "        is_dir = true\n"
+                 "    )";
         }
       pqxx::connection conn (access.getPgConn ());
       pqxx::work transaction (conn);
 
-      pqxx::result resultset = transaction.exec (sql);
+      pqxx::result resultset = transaction.exec (sql.str ());
 
       int count;
       resultset.at (0).at (0).to (count);
