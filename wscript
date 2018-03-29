@@ -58,7 +58,7 @@ def build(bld):
 
     # WISE
     bld.symlink_as(data_dir + 'wise/neowiser/p1bm_frm',
-                   '/stage/irsa-wise-links-public/links-neowiser/l1b')
+                   '/stage/irsa-wise-links-public/links-neowiser/l1b-yrs-1234')
     bld.symlink_as(data_dir + 'wise/prelim_postcryo/p1bm_frm',
                    '/stage/irsa-wise-links-public/links-prelim-postcryo/l1b-2band')
     bld.symlink_as(data_dir + 'wise/cryo_3band/3band_p3am_cdd',
@@ -78,14 +78,14 @@ def build(bld):
     bld.symlink_as(data_dir + 'wise/allwise/p3am_cdd',
                    '/stage/irsa-wise-links-public/links-allwise/l3a')
     bld.symlink_as(data_dir + 'wise/merge/merge_p1bm_frm',
-                   '/stage/irsa-wise-links-public/links-merge/l1b')
+                   '/stage/irsa-wise-links-public/links-merge/l1b-yrs-1234')
     bld.symlink_as(data_dir + 'wise/merge/merge_p3am_cdd',
                    '/stage/irsa-wise-links-public/links-merge/l3a')
 
     if (bld.env.enable_ceres_internal):
         # neowiser
         bld.symlink_as(data_dir + 'wise/neowiser/q1bm_frm',
-                       '/stage/irsa-wise-links-ops/links-neowiser/l1b-q')
+                       '/stage/irsa-wise-links-ops/links-neowiser/l1b-q_plus_wise')
         # merge_int
         bld.symlink_as(data_dir + 'wise/merge_int/merge_i1bm_frm',
                        '/stage/irsa-wise-links-ops/links-merge/l1b')
@@ -98,7 +98,7 @@ def build(bld):
         bld.symlink_as(data_dir + 'wise/neowiser_prov/i1bm_frm',
                        '/stage/irsa-wise-links-ops/links-nprov/l1b')
         bld.symlink_as(data_dir + 'wise/neowiser_pub/p1bm_frm',
-                       '/stage/irsa-wise-links-public/links-neowiser/l1b')
+                       '/stage/irsa-wise-links-public/links-neowiser/l1b-yrs-1234')
 
         # Year 1,2,3,4,5
         bld.symlink_as(data_dir + 'wise/neowiser_yr1/yr1_p1bm_frm',
@@ -107,8 +107,8 @@ def build(bld):
                        '/stage/irsa-wise-links-public/links-neowiser/l1b-yr2')
         bld.symlink_as(data_dir + 'wise/neowiser_yr3/yr3_p1bm_frm',
                        '/stage/irsa-wise-links-public/links-neowiser/l1b-yr3')
-        bld.symlink_as(data_dir + 'wise/neowiser_yr4/yr4_i1bm_frm',
-                       '/stage/irsa-wise-links-ops/links-neowiser/l1b-yr4')
+        bld.symlink_as(data_dir + 'wise/neowiser_yr4/yr4_p1bm_frm',
+                       '/stage/irsa-wise-links-public/links-neowiser/l1b-yr4-new')
         bld.symlink_as(data_dir + 'wise/neowiser_yr5/yr5_i1bm_frm',
                        '/stage/irsa-wise-links-ops/links-neowiser/l1b-yr5')
 
