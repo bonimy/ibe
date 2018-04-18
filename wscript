@@ -58,7 +58,7 @@ def build(bld):
 
     # WISE
     bld.symlink_as(data_dir + 'wise/neowiser/p1bm_frm',
-                   '/stage/irsa-wise-links-public/links-neowiser/l1b-yrs-1234')
+                   '/stage/irsa-wise-links-public/links-neowiser/l1b')
     bld.symlink_as(data_dir + 'wise/prelim_postcryo/p1bm_frm',
                    '/stage/irsa-wise-links-public/links-prelim-postcryo/l1b-2band')
     bld.symlink_as(data_dir + 'wise/cryo_3band/3band_p3am_cdd',
@@ -78,9 +78,7 @@ def build(bld):
     bld.symlink_as(data_dir + 'wise/allwise/p3am_cdd',
                    '/stage/irsa-wise-links-public/links-allwise/l3a')
     bld.symlink_as(data_dir + 'wise/merge/merge_p1bm_frm',
-                   '/stage/irsa-wise-links-public/links-merge/l1b-yrs-1234')
-    bld.symlink_as(data_dir + 'wise/merge/merge_q1bm_frm',
-                   '/stage/irsa-wise-links-public/links-merge/l1b-yrs-1234')
+                   '/stage/irsa-wise-links-public/links-merge/l1b')
     bld.symlink_as(data_dir + 'wise/merge/merge_p3am_cdd',
                    '/stage/irsa-wise-links-public/links-merge/l3a')
 
@@ -94,13 +92,11 @@ def build(bld):
         bld.symlink_as(data_dir + 'wise/merge_int/merge_p3am_cdd',
                        '/stage/irsa-wise-links-public/links-merge/l3a')
 
-        # neowiser_int, prov, pub
+        # neowiser_int, prov
         bld.symlink_as(data_dir + 'wise/neowiser_int/i1bm_frm',
                        '/stage/irsa-wise-links-ops/links-neowiser/l1b')
         bld.symlink_as(data_dir + 'wise/neowiser_prov/i1bm_frm',
                        '/stage/irsa-wise-links-ops/links-nprov/l1b')
-        bld.symlink_as(data_dir + 'wise/neowiser_pub/p1bm_frm',
-                       '/stage/irsa-wise-links-public/links-neowiser/l1b-yrs-1234')
 
         # Year 1,2,3,4,5
         bld.symlink_as(data_dir + 'wise/neowiser_yr1/yr1_p1bm_frm',
