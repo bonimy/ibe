@@ -20,10 +20,28 @@ namespace ibe
 bool cutoutPixelBox (Coords center, Coords size, char *hdr,
                      long const *naxis, long *box);
 
+size_t write_header_end(Writer &writer, size_t num_bytes)
+{
+  unsigned char block[2880];
+
+  // write the END header card
+  writer.write (reinterpret_cast<const unsigned char *>("END"), 3);
+  num_bytes += 3;
+  // pad header with spaces till its size is a multiple of 2880.
+  if ((num_bytes % sizeof(block)) != 0)
+    {
+      size_t n = sizeof(block) - (num_bytes % sizeof(block));
+      std::memset (block, static_cast<int>(' '), n);
+      writer.write (block, n);
+      num_bytes += n;
+    }
+  return num_bytes;
+}
+
 void stream_subimage (boost::filesystem::path const &path,
                       Coords const &center, Coords const &size, Writer &writer)
 {
-  unsigned char padding[2880];
+  unsigned char block[2880];
   char keyname[FLEN_KEYWORD];
   char valstring[FLEN_VALUE];
   char comment[FLEN_COMMENT];
@@ -52,10 +70,44 @@ void stream_subimage (boost::filesystem::path const &path,
           break;
         }
       checkFitsError (status);
+      fits_get_hdrspace (f, &nkeys, NULL, &status);
+      checkFitsError (status);
       if (hdutype != IMAGE_HDU)
         {
-          throw HTTP_EXCEPT (HttpResponseCode::INTERNAL_SERVER_ERROR,
-                             "FITS file contains non-image HDU");
+          // Copy the HDU. First copy the header, stripping away space
+          // reserved for additional header keywords.
+          for (int k = 1; k <= nkeys; ++k)
+            {
+              fits_read_record (f, k, card, &status);
+              checkFitsError (status);
+              for (size_t i = strlen (card); i < 80; ++i)
+                {
+                  card[i] = ' ';
+                }
+              writer.write (reinterpret_cast<unsigned char *>(card), 80u);
+              numBytes += 80;
+            }
+          numBytes = write_header_end(writer, numBytes);
+          // Copy the data.
+          LONGLONG data_start, data_end;
+          fits_get_hduaddrll (f,  NULL, &data_start, &data_end, &status);
+          checkFitsError (status);
+          long num_blocks = static_cast<long>((data_end - data_start) / 2880);
+          if (num_blocks > 0)
+            {
+              // Move to the initial copy position
+              ffmbyt (f, data_start, REPORT_EOF, &status);
+              checkFitsError (status);
+              for (long b = 0; b < num_blocks; b++)
+                {
+                  // Read input block
+                  ffgbyt (f, sizeof(block), block, &status);
+                  checkFitsError (status);
+                  writer.write (block, sizeof(block));
+                  numBytes += sizeof(block);
+                }
+            }
+          continue;
         }
       fits_get_img_param (f, 2, &bitpix, &naxes, naxis, &status);
       checkFitsError (status);
@@ -86,8 +138,6 @@ void stream_subimage (boost::filesystem::path const &path,
       // copy keywords from the input to the writer, but modify
       // NAXIS1, NAXIS2, LTV1, LTV2, CRPIX1, CRPIX2, CRPIX1Axx, CRPIX2Axx
       // to account for the subimage operation along the way.
-      fits_get_hdrspace (f, &nkeys, NULL, &status);
-      checkFitsError (status);
       for (int k = 1; k <= nkeys; ++k)
         {
           bool modified = false;
@@ -157,17 +207,7 @@ void stream_subimage (boost::filesystem::path const &path,
           writer.write (reinterpret_cast<unsigned char *>(card), 80u);
           numBytes += 80;
         }
-      // write the END header card
-      writer.write ("END", 3)
-      numBytes += 3
-      // pad header with spaces till its size is a multiple of 2880.
-      if ((numBytes % 2880) != 0)
-        {
-          size_t nb = 2880 - (numBytes % 2880);
-          std::memset (padding, static_cast<int>(' '), nb);
-          writer.write (padding, nb);
-          numBytes += nb;
-        }
+      numBytes = write_header_end(writer, numBytes);
       if (naxes == 0)
         {
           // No image data
@@ -282,11 +322,11 @@ void stream_subimage (boost::filesystem::path const &path,
           writer.write (static_cast<unsigned char *>(buf.get ()), bufsz);
           numBytes += bufsz;
         }
-      if ((numBytes % 2880) != 0)
+      if ((numBytes % sizeof(block)) != 0)
         {
-          size_t nb = 2880 - (numBytes % 2880);
-          std::memset (padding, 0, nb);
-          writer.write (padding, nb);
+          size_t nb = sizeof(block) - (numBytes % sizeof(block));
+          std::memset (block, 0, nb);
+          writer.write (block, nb);
           numBytes += nb;
         }
     }
