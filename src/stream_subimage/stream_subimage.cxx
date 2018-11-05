@@ -11,6 +11,8 @@
 #error Unknown byte order!
 #endif
 
+#include <memory>
+
 #include <boost/filesystem.hpp>
 
 namespace ibe
@@ -70,7 +72,7 @@ void stream_subimage (boost::filesystem::path const &path,
           nkeys = 0;
           hdr = 0;
           fits_convert_hdr2str (f, 0, NULL, 0, &hdr, &nkeys, &status);
-          boost::shared_ptr<char> h (hdr, std::free);
+          std::shared_ptr<char> h (hdr, std::free);
           checkFitsError (status);
           // 2. Compute coordinate box for cutout
           if (!cutoutPixelBox (center, size, hdr, naxis, box))
@@ -175,7 +177,7 @@ void stream_subimage (boost::filesystem::path const &path,
       // allocate memory for one pixel row
       long rowsz = box[2] - box[0] + 1;
       size_t bufsz = static_cast<size_t>(rowsz) * std::abs (bitpix) / 8;
-      boost::shared_ptr<void> buf (std::malloc (bufsz), std::free);
+      std::shared_ptr<void> buf (std::malloc (bufsz), std::free);
       if (!buf)
         {
           throw HTTP_EXCEPT (HttpResponseCode::INTERNAL_SERVER_ERROR,

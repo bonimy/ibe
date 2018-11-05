@@ -6,8 +6,7 @@
 
 #include <cstdlib>
 #include <limits>
-
-#include "boost/shared_ptr.hpp"
+#include <memory>
 
 extern "C" {
 #include "ssoclient.h"
@@ -103,7 +102,7 @@ getUserGroups (string const &session, int mission)
   // initialize ssoclient library
   sso_init (idmEndpoint, 0, 0, 0, 0, 0, 0);
   // get user session context
-  boost::shared_ptr<sso_sessionContext_t> ctx (
+  std::shared_ptr<sso_sessionContext_t> ctx (
       sso_openUsingSessionId (const_cast<char *> (session.c_str ())),
       sso_close);
   if (!ctx || ctx->status != SSO_OK)

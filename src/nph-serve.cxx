@@ -7,6 +7,7 @@
 
 #include <cstdio>
 #include <iostream>
+#include <memory>
 #include <set>
 #include <sstream>
 #include <utility>
@@ -577,14 +578,14 @@ main (int argc, char const *const *argv)
           throw HTTP_EXCEPT (HttpResponseCode::INTERNAL_SERVER_ERROR,
                              "failed to determine size of requested file");
         }
-      boost::shared_ptr<std::FILE> f (
+      std::shared_ptr<std::FILE> f (
           std::fopen (diskpath.string ().c_str (), "rb"), std::fclose);
       if (!f)
         {
           throw HTTP_EXCEPT (HttpResponseCode::INTERNAL_SERVER_ERROR,
                              "failed to open requested file");
         }
-      boost::shared_ptr<void> buf (std::malloc (blocksz), std::free);
+      std::shared_ptr<void> buf (std::malloc (blocksz), std::free);
       if (!buf)
         {
           throw HTTP_EXCEPT (HttpResponseCode::INTERNAL_SERVER_ERROR,
