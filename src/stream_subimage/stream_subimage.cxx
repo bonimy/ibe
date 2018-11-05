@@ -88,7 +88,7 @@ void stream_subimage (boost::filesystem::path const &path,
       // to account for the subimage operation along the way.
       fits_get_hdrspace (f, &nkeys, NULL, &status);
       checkFitsError (status);
-      for (int k = 1; k <= nkeys + 1; ++k)
+      for (int k = 1; k <= nkeys; ++k)
         {
           bool modified = false;
           if (naxes != 0)
@@ -157,9 +157,12 @@ void stream_subimage (boost::filesystem::path const &path,
           writer.write (reinterpret_cast<unsigned char *>(card), 80u);
           numBytes += 80;
         }
+      // write the END header card
+      writer.write ("END", 3)
+      numBytes += 3
+      // pad header with spaces till its size is a multiple of 2880.
       if ((numBytes % 2880) != 0)
         {
-          // pad header with spaces till its size is a multiple of 2880.
           size_t nb = 2880 - (numBytes % 2880);
           std::memset (padding, static_cast<int>(' '), nb);
           writer.write (padding, nb);
