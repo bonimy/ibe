@@ -492,7 +492,7 @@ main (int argc, char const *const *argv)
       checkAccess (path.string (), access); // 404 if file access isn't allowed
       fs::path filename = path.filename ();
       string extension = filename.extension ().string ();
-      if (extension == ".gz")
+      if (extension == ".gz" || extension == ".fz")
         {
           filename = filename.stem ();
           extension = filename.extension ().string ();
