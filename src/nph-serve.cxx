@@ -501,8 +501,8 @@ main (int argc, char const *const *argv)
       // -------------------
       // Serve a FITS cutout
       // -------------------
-      if (extension == ".fits" && env.getNumValues ("center") == 1
-          && env.getNumValues ("size") == 1)
+      if ((extension == ".fit" || extension == ".fits")
+          && env.getNumValues ("center") == 1 && env.getNumValues ("size") == 1)
         {
           // 2. Serve a FITS cutout
           validateCutoutParams (env, true);
