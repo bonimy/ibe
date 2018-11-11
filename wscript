@@ -215,6 +215,8 @@ def build(bld):
                    '/irsadata/SPITZER/GLIMPSE/images')
     bld.symlink_as(data_dir + 'spitzer/glimpse_cygx_1_2/images',
                    '/irsadata/SPITZER/GLIMPSE/images')
+    bld.symlink_as(data_dir + 'spitzer/glimpse_images/images',
+                   '/irsadata/SPITZER/GLIMPSE/images')
 
     bld.symlink_as(data_dir + 'spitzer/goals_herschel/images',
                    '/irsadata/SPITZER/GOALS/images')
@@ -302,10 +304,18 @@ def build(bld):
     bld.symlink_as(data_dir + 'spitzer/simple_images_epoch2/images',
                    '/irsadata/SPITZER/SIMPLE/images')
 
+    bld.symlink_as(data_dir + 'spitzer/smuvs_images/images',
+                   '/irsadata/SPITZER/SMUVS/images')
+
     bld.symlink_as(data_dir + 'spitzer/spies_images/images',
                    '/irsadata/SPITZER/SpIES/images')
+
     bld.symlink_as(data_dir + 'spitzer/spuds_images/images',
                    '/irsadata/SPITZER/SpUDS/images')
+
+    bld.symlink_as(data_dir + 'spitzer/ssdf_images/images',
+                   '/irsadata/SPITZER/SSDF/images')
+
     bld.symlink_as(data_dir + 'spitzer/swire_images/images',
                    '/irsadata/SPITZER/SWIRE/images')
 
@@ -410,34 +420,24 @@ def build(bld):
                    '/irsadata/Herschel/DUNES/images')
     bld.symlink_as(data_dir + 'herschel/dunes_singleext/images',
                    '/irsadata/Herschel/DUNES/images')
+    bld.symlink_as(data_dir + 'herschel/hatlas_images/images',
+                   '/irsadata/Herschel/H-ATLAS/images')
+    bld.symlink_as(data_dir + 'herschel/hevics_multi/images',
+                   '/irsadata/Herschel/HeVICS/images')
+    bld.symlink_as(data_dir + 'herschel/hevics_single/images',
+                   '/irsadata/Herschel/HeVICS/images')
+    bld.symlink_as(data_dir + 'herschel/hgbs_images/images',
+                   '/irsadata/Herschel/HGBS/images')
     bld.symlink_as(data_dir + 'herschel/hgoods_images/images',
                    '/irsadata/Herschel/GOODS/images')
     bld.symlink_as(data_dir + 'herschel/helga_images/images',
                    '/irsadata/Herschel/HELGA/images')
-    bld.symlink_as(data_dir + 'herschel/kingfish_images/galaxies',
-                   '/irsadata/Herschel/KINGFISH/galaxies')
     bld.symlink_as(data_dir + 'herschel/heritage_images/images',
                    '/irsadata/Herschel/HERITAGE/images')
     bld.symlink_as(data_dir + 'herschel/hermes_images/images',
                    '/irsadata/Herschel/HerMES/images')
     bld.symlink_as(data_dir + 'herschel/herm33es_images/images',
                    '/irsadata/Herschel/HerM33es/images')
-    bld.symlink_as(data_dir + 'herschel/hops_pacs/images',
-                   '/irsadata/Herschel/HOPS/images')
-    bld.symlink_as(data_dir + 'herschel/hops_spitzer/images',
-                   '/irsadata/Herschel/HOPS/images')
-    bld.symlink_as(data_dir + 'herschel/hpdp_images/spectra',
-                   '/irsadata/Herschel/HPDP/spectra')
-    bld.symlink_as(data_dir + 'herschel/mess_images/images',
-                   '/irsadata/Herschel/MESS/images')
-    bld.symlink_as(data_dir + 'herschel/pep_images/images',
-                   '/irsadata/Herschel/PEP/images')
-    # bld.symlink_as(data_dir + 'herschel/observations/images',
-    #                '/irsadata/Herschel/images')
-    bld.symlink_as(data_dir + 'herschel/vngs_images/images',
-                   '/irsadata/Herschel/VNGS/images')
-    bld.symlink_as(data_dir + 'herschel/vngs_spectra/spectra',
-                   '/irsadata/Herschel/VNGS/spectra')
     bld.symlink_as(data_dir + 'herschel/hhli_pacs_photo/images',
                    '/irsadata/Herschel/HHLI/images')
     bld.symlink_as(data_dir + 'herschel/hhli_pacs_par/images',
@@ -446,6 +446,30 @@ def build(bld):
                    '/irsadata/Herschel/HHLI/images')
     bld.symlink_as(data_dir + 'herschel/hhli_spire_par/images',
                    '/irsadata/Herschel/HHLI/images')
+    bld.symlink_as(data_dir + 'herschel/hops_pacs/images',
+                   '/irsadata/Herschel/HOPS/images')
+    bld.symlink_as(data_dir + 'herschel/hops_spitzer/images',
+                   '/irsadata/Herschel/HOPS/images')
+    bld.symlink_as(data_dir + 'herschel/hpdp_images/spectra',
+                   '/irsadata/Herschel/HPDP/spectra')
+    bld.symlink_as(data_dir + 'herschel/kingfish_images/galaxies',
+                   '/irsadata/Herschel/KINGFISH/galaxies')
+    bld.symlink_as(data_dir + 'herschel/mess_images/images',
+                   '/irsadata/Herschel/MESS/images')
+    bld.symlink_as(data_dir + 'herschel/pep_images/images',
+                   '/irsadata/Herschel/PEP/images')
+    bld.symlink_as(data_dir + 'herschel/phpdp_multi/images',
+                   '/irsadata/Herschel/PHPDP/images')
+    bld.symlink_as(data_dir + 'herschel/phpdp_single/images',
+                   '/irsadata/Herschel/PHPDP/images')
+    bld.symlink_as(data_dir + 'herschel/phpdp_unimap/images',
+                   '/irsadata/Herschel/PHPDP/images')
+    bld.symlink_as(data_dir + 'herschel/sag4_images/images',
+                   '/irsadata/Herschel/SAG-4/images')
+    bld.symlink_as(data_dir + 'herschel/vngs_images/images',
+                   '/irsadata/Herschel/VNGS/images')
+    bld.symlink_as(data_dir + 'herschel/vngs_spectra/spectra',
+                   '/irsadata/Herschel/VNGS/spectra')
 
     # AKARI
     bld.symlink_as(data_dir + 'akari/akari_images/images',
