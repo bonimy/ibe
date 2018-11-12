@@ -219,9 +219,9 @@ def build(bld):
                    '/irsadata/SPITZER/GLIMPSE/images')
 
     bld.symlink_as(data_dir + 'spitzer/goals_herschel/images',
-                   '/irsadata/SPITZER/GOALS/images')
+                   '/irsadata/GOALS/images')
     bld.symlink_as(data_dir + 'spitzer/goals_spitzer/images',
-                   '/irsadata/SPITZER/GOALS/images')
+                   '/irsadata/GOALS/images')
 
     bld.symlink_as(data_dir + 'spitzer/sgoods_irac_spitzer_dr3/images',
                    '/irsadata/SPITZER/GOODS/images')
