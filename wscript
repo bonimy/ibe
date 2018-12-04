@@ -218,8 +218,6 @@ def build(bld):
     bld.symlink_as(data_dir + 'spitzer/glimpse_images/images',
                    '/irsadata/SPITZER/GLIMPSE/images')
 
-    bld.symlink_as(data_dir + 'spitzer/goals_herschel/images',
-                   '/irsadata/GOALS/images')
     bld.symlink_as(data_dir + 'spitzer/goals_spitzer/images',
                    '/irsadata/GOALS/images')
 
@@ -420,6 +418,8 @@ def build(bld):
                    '/irsadata/Herschel/DUNES/images')
     bld.symlink_as(data_dir + 'herschel/dunes_singleext/images',
                    '/irsadata/Herschel/DUNES/images')
+    bld.symlink_as(data_dir + 'herschel/goals_images/images',
+                   '/irsadata/GOALS/images')
     bld.symlink_as(data_dir + 'herschel/hatlas_images/images',
                    '/irsadata/Herschel/H-ATLAS/images')
     bld.symlink_as(data_dir + 'herschel/hevics_multi/images',
