@@ -106,7 +106,7 @@ def build(bld):
         bld.symlink_as(data_dir + 'wise/neowiser_yr3/yr3_p1bm_frm',
                        '/stage/irsa-wise-links-public/links-neowiser/l1b-yr3')
         bld.symlink_as(data_dir + 'wise/neowiser_yr4/yr4_p1bm_frm',
-                       '/stage/irsa-wise-links-public/links-neowiser/l1b-yr4-new')
+                       '/stage/irsa-wise-links-public/links-neowiser/l1b-yr4')
         bld.symlink_as(data_dir + 'wise/neowiser_yr5/yr5_i1bm_frm',
                        '/stage/irsa-wise-links-ops/links-neowiser/l1b-yr5')
 
