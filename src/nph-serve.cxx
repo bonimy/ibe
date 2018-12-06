@@ -12,6 +12,7 @@
 #include <sstream>
 #include <utility>
 
+#include "boost/algorithm/string.hpp"
 #include "boost/filesystem.hpp"
 #include "boost/regex.hpp"
 
@@ -28,6 +29,8 @@ using std::string;
 using std::vector;
 
 namespace fs = boost::filesystem;
+
+using boost::algorithm::to_lower_copy;
 
 using ibe::Access;
 using ibe::Coords;
@@ -491,11 +494,11 @@ main (int argc, char const *const *argv)
       // path refers to a regular file
       checkAccess (path.string (), access); // 404 if file access isn't allowed
       fs::path filename = path.filename ();
-      string extension = filename.extension ().string ();
+      string extension = to_lower_copy (filename.extension ().string ());
       if (extension == ".gz" || extension == ".fz")
         {
           filename = filename.stem ();
-          extension = filename.extension ().string ();
+          extension = to_lower_copy (filename.extension ().string ());
         }
 
       // -------------------
@@ -558,7 +561,7 @@ main (int argc, char const *const *argv)
       // --------------------
       validateCutoutParams (env, false);
       filename = path.filename ();
-      extension = filename.extension ().string ();
+      extension = to_lower_copy (filename.extension ().string ());
       string contentType = "application/octet-stream";
       vector<pair<string, string> > const cts = getContentTypes ();
       for (vector<pair<string, string> >::const_iterator i = cts.begin (),
