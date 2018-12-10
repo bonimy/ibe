@@ -83,9 +83,6 @@ def build(bld):
                    '/stage/irsa-wise-links-public/links-merge/l3a')
 
     if (bld.env.enable_ceres_internal):
-        # neowiser
-        bld.symlink_as(data_dir + 'wise/neowiser/q1bm_frm',
-                       '/stage/irsa-wise-links-ops/links-neowiser/l1b-q')
         # merge_int
         bld.symlink_as(data_dir + 'wise/merge_int/merge_i1bm_frm',
                        '/stage/irsa-wise-links-ops/links-merge/l1b')
