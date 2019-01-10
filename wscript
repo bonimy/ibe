@@ -308,6 +308,9 @@ def build(bld):
     bld.symlink_as(data_dir + 'spitzer/spuds_images/images',
                    '/irsadata/SPITZER/SpUDS/images')
 
+    bld.symlink_as(data_dir + 'spitzer/srelics_images/images',
+                   '/irsadata/SPITZER/SRELICS/images')
+
     bld.symlink_as(data_dir + 'spitzer/ssdf_images/images',
                    '/irsadata/SPITZER/SSDF/images')
 
@@ -451,6 +454,8 @@ def build(bld):
                    '/irsadata/Herschel/HPDP/spectra')
     bld.symlink_as(data_dir + 'herschel/kingfish_images/galaxies',
                    '/irsadata/Herschel/KINGFISH/galaxies')
+    bld.symlink_as(data_dir + 'herschel/magcloudscplus_spectra/spectra',
+                   '/irsadata/Herschel/MAGCLOUDSCPLUS/spectra')
     bld.symlink_as(data_dir + 'herschel/mess_images/images',
                    '/irsadata/Herschel/MESS/images')
     bld.symlink_as(data_dir + 'herschel/pep_images/images',
