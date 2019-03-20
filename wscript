@@ -104,7 +104,7 @@ def build(bld):
         bld.symlink_as(data_dir + 'wise/neowiser_prov/i1bm_frm',
                        '/stage/irsa-wise-links-ops/links-nprov/l1b')
 
-        # Year 1,2,3,4,5
+        # Year 1,2,3,4,5,6
         bld.symlink_as(data_dir + 'wise/neowiser_yr1/yr1_p1bm_frm',
                        '/stage/irsa-wise-links-public/links-neowiser/l1b-yr1')
         bld.symlink_as(data_dir + 'wise/neowiser_yr2/yr2_p1bm_frm',
