@@ -78,16 +78,16 @@ def build(bld):
     bld.symlink_as(data_dir + 'wise/allwise/p3am_cdd',
                    '/stage/irsa-wise-links-public/links-allwise/l3a')
     bld.symlink_as(data_dir + 'wise/merge/merge_p1bm_frm',
-                   '/stage/irsa-wise-links-public/links-merge/l1b-q')
+                   '/stage/irsa-wise-links-public/links-merge/l1b')
     #               '/stage/irsa-wise-links-public/links-merge/l1b')
     bld.symlink_as(data_dir + 'wise/merge/merge_p3am_cdd',
                    '/stage/irsa-wise-links-public/links-merge/l3a')
 
     if (bld.env.enable_ceres_internal):
 
-        # q public
-        bld.symlink_as(data_dir + 'wise/neowiser/q1bm_frm',
-                        '/stage/irsa-wise-links-public/links-neowiser/l1b-q')
+        # p public
+        bld.symlink_as(data_dir + 'wise/neowiser/p1bm_frm',
+                        '/stage/irsa-wise-links-public/links-neowiser/l1b')
 
         # merge_int
         bld.symlink_as(data_dir + 'wise/merge_int/merge_i1bm_frm',
@@ -95,9 +95,9 @@ def build(bld):
         bld.symlink_as(data_dir + 'wise/merge_int/merge_p3am_cdd',
                        '/stage/irsa-wise-links-public/links-merge/l3a')
 
-        # merge_pub-q
-        bld.symlink_as(data_dir + 'wise/merge/merge_q1bm_frm',
-                   '/stage/irsa-wise-links-public/links-merge/l1b-q')
+        # merge_pub
+        bld.symlink_as(data_dir + 'wise/merge/merge_p1bm_frm',
+                   '/stage/irsa-wise-links-public/links-merge/l1b')
 
         # neowiser_int, prov
         bld.symlink_as(data_dir + 'wise/neowiser_int/i1bm_frm',
