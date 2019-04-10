@@ -94,10 +94,6 @@ def build(bld):
         bld.symlink_as(data_dir + 'wise/merge_int/merge_p3am_cdd',
                        '/stage/irsa-wise-links-public/links-merge/l3a')
 
-        # merge_pub
-        bld.symlink_as(data_dir + 'wise/merge/merge_p1bm_frm',
-                   '/stage/irsa-wise-links-public/links-merge/l1b')
-
         # neowiser_int, prov
         bld.symlink_as(data_dir + 'wise/neowiser_int/i1bm_frm',
                        '/stage/irsa-wise-links-ops/links-neowiser/l1b')
