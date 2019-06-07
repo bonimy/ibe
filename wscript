@@ -38,6 +38,8 @@ def build(bld):
     )
 
     data_dir = bld.env.HTML_DIR + '/ibe/data/'
+    print ( data_dir)
+
     # 2MASS
     bld.symlink_as(data_dir + 'twomass/sixxcat/sixxcat',
                    '/stage/tmass-data/links/sixxcatalog')
@@ -216,6 +218,11 @@ def build(bld):
                    '/irsadata/SPITZER/GLIMPSE/images')
     bld.symlink_as(data_dir + 'spitzer/glimpse_images/images',
                    '/irsadata/SPITZER/GLIMPSE/images')
+    bld.symlink_as(data_dir + 'spitzer/apoglimpse_0_6/images',
+                   '/irsadata/SPITZER/GLIMPSE/images')
+    bld.symlink_as(data_dir + 'spitzer/apoglimpse_1_2/images',
+                   '/irsadata/SPITZER/GLIMPSE/images')
+
 
     bld.symlink_as(data_dir + 'spitzer/goals_spitzer/images',
                    '/irsadata/GOALS/images')
