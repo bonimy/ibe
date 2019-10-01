@@ -494,5 +494,9 @@ def build(bld):
     bld.symlink_as(data_dir + 'IRTF',
                    '/irsadata/IRTF')
 
+    # SOFIA
+    bld.symlink_as(data_dir + 'SOFIA',
+                   '/irsadata/SOFIA')
+
     # FIXME: No scrapbook.  That is served by a cgi program hst_preview.
     # FIXME: No NED.  It is served by going to NED.
