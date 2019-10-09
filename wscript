@@ -361,7 +361,7 @@ def build(bld):
     # BOLOCAM GPS
     bld.symlink_as(data_dir + 'bolocam/bolocam_images_v1/images',
                    '/irsadata/BOLOCAM_GPS/images')
-    bld.symlink_as(data_dir + 'bolocam/bolocam_images_v3/images',
+    bld.symlink_as(data_dir + 'bolocam/bolocam_images_v2/images',
                    '/irsadata/BOLOCAM_GPS/images')
     bld.symlink_as(data_dir + 'bolocam/bolocam_sharc2/images',
                    '/irsadata/BOLOCAM_GPS/images')
