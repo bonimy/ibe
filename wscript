@@ -85,11 +85,16 @@ def build(bld):
                    '/stage/irsa-wise-links-public/links-merge/l3a')
 
     if (bld.env.enable_ceres_internal):
+
         # merge_int
         bld.symlink_as(data_dir + 'wise/merge_int/merge_i1bm_frm',
                        '/stage/irsa-wise-links-ops/links-merge/l1b')
         bld.symlink_as(data_dir + 'wise/merge_int/merge_p3am_cdd',
                        '/stage/irsa-wise-links-public/links-merge/l3a')
+
+        # q
+        bld.symlink_as(data_dir + 'wise/neowiser/q1bm_frm',
+                       '/stage/irsa-wise-links-ops/links-merge/l1b-q')
 
         # neowiser_int, prov
         bld.symlink_as(data_dir + 'wise/neowiser_int/i1bm_frm',
@@ -97,7 +102,7 @@ def build(bld):
         bld.symlink_as(data_dir + 'wise/neowiser_prov/i1bm_frm',
                        '/stage/irsa-wise-links-ops/links-nprov/l1b')
 
-        # Year 1,2,3,4,5,6
+        # Year 1,2,3,4,5,6,7
         bld.symlink_as(data_dir + 'wise/neowiser_yr1/yr1_p1bm_frm',
                        '/stage/irsa-wise-links-public/links-neowiser/l1b-yr1')
         bld.symlink_as(data_dir + 'wise/neowiser_yr2/yr2_p1bm_frm',
