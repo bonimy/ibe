@@ -95,6 +95,8 @@ def build(bld):
         # q
         bld.symlink_as(data_dir + 'wise/neowiser/q1bm_frm',
                        '/stage/irsa-wise-links-ops/links-merge/l1b-q')
+        bld.symlink_as(data_dir + 'wise/neowiser/merge_q1bm_frm',
+                       '/stage/irsa-wise-links-ops/links-merge/l1b-q')
 
         # neowiser_int, prov
         bld.symlink_as(data_dir + 'wise/neowiser_int/i1bm_frm',
@@ -113,13 +115,9 @@ def build(bld):
                        '/stage/irsa-wise-links-public/links-neowiser/l1b-yr4')
         bld.symlink_as(data_dir + 'wise/neowiser_yr5/yr5_p1bm_frm',
                        '/stage/irsa-wise-links-public/links-neowiser/l1b-yr5')
-        # 
+
         bld.symlink_as(data_dir + 'wise/neowiser_yr6/yr6_p1bm_frm',
                        '/stage/irsa-wise-links-ops/links-neowiser/l1b-yr6')
-        # # Yr 6 Release
-        # bld.symlink_as(data_dir + 'wise/neowiser_yr6/yr6_p1bm_frm',
-        #                '/stage/irsa-wise-links-public/links-neowiser/l1b-yr6')
-        # 
         bld.symlink_as(data_dir + 'wise/neowiser_yr7/yr7_i1bm_frm',
                        '/stage/irsa-wise-links-ops/links-neowiser/l1b-yr7')
 
