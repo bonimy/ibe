@@ -492,7 +492,9 @@ def build(bld):
     bld.symlink_as(data_dir + 'herschel/vngs_images/images',
                    '/irsadata/Herschel/VNGS/images')
     bld.symlink_as(data_dir + 'herschel/vngs_spectra/spectra',
-                   '/irsadata/Herschel/VNGS/spectra')
+                   '/irsadata/Herschel/VNGS/spectra'),
+    bld.symlink_as(data_dir + 'herschel/phpdp_single_plus_unimap/images',
+                   '/irsadata/Herschel/PHPDP/images')
 
     # AKARI
     bld.symlink_as(data_dir + 'akari/akari_images/images',
