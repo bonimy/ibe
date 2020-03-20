@@ -445,6 +445,10 @@ def build(bld):
                    '/irsadata/COSMOS/images')
     bld.symlink_as(data_dir + 'cosmos/cosmos_3dhst/images',
                    '/irsadata/COSMOS/images')
+    bld.symlink_as(data_dir + 'cosmos/candels_images/images',
+                   '/irsadata/COSMOS/images')
+    bld.symlink_as(data_dir + 'cosmos/candels_cutouts/images',
+                   '/irsadata/COSMOS/images')
 
     # Herschel
     bld.symlink_as(data_dir + 'herschel/acmc_images/images',
