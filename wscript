@@ -156,6 +156,10 @@ def build(bld):
                    '/irsadata/SPITZER/C2D/images')
     bld.symlink_as(data_dir + 'spitzer/c2d_images_bolocam/images',
                    '/irsadata/SPITZER/C2D/images')
+    bld.symlink_as(data_dir + 'spitzer/c2d_irac_iv_caom_core/images',
+                   '/irsadata/SPITZER/C2D/images')
+    bld.symlink_as(data_dir + 'spitzer/c2d_mips_caom_nofilter/images',
+                   '/irsadata/SPITZER/C2D/images')
 
     bld.symlink_as(data_dir + 'spitzer/clash_images/images',
                    '/irsadata/SPITZER/CLASH/images')
