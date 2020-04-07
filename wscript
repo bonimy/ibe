@@ -429,7 +429,7 @@ def build(bld):
                    '/irsadata/COSMOS/images')
     bld.symlink_as(data_dir + 'cosmos/cosmos_ultravista/images',
                    '/irsadata/COSMOS/images')
-    bld.symlink_as(data_dir + 'cosmos/cosmos_a3cosmos/images',
+    bld.symlink_as(data_dir + 'cosmos/a3cosmos_images/images',
                    '/irsadata/COSMOS/images')
     bld.symlink_as(data_dir + 'cosmos/cosmos_3dhst/images',
                    '/irsadata/COSMOS/images')
