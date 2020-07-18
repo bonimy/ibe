@@ -121,6 +121,10 @@ def build(bld):
         bld.symlink_as(data_dir + 'wise/neowiser_yr7/yr7_i1bm_frm',
                        '/stage/irsa-wise-links-ops/links-neowiser/l1b-yr7')
 
+    # unWISE
+    bld.symlink_as(data_dir + 'unwise/unwise_images',
+                   '/irsadata/WISE/unWISE/images')
+
     # PTF
     bld.symlink_as(data_dir + 'ptf/images/level1',
                    '/stage/irsa-ptf-links/')
@@ -372,6 +376,10 @@ def build(bld):
     bld.symlink_as(data_dir + 'irts/irts_images/MAPS',
                    '/irsadata/IRTS/MAPS')
 
+    # BOLOCAM LH
+    bld.symlink_as(data_dir + 'bolocam/bolocam_lockman_hole/images',
+                   '/irsadata/BOLOCAM/images')
+
     # BOLOCAM GPS
     bld.symlink_as(data_dir + 'bolocam/bolocam_images_v1/images',
                    '/irsadata/BOLOCAM_GPS/images')
@@ -381,6 +389,10 @@ def build(bld):
                    '/irsadata/BOLOCAM_GPS/images')
     bld.symlink_as(data_dir + 'bolocam/bolocam_images/images',
                    '/irsadata/BOLOCAM_GPS/images')
+
+    # BOLOCAM Planck
+    bld.symlink_as(data_dir + 'bolocam/planck_bolocam',
+                   '/irsadata/Planck/release_2/ancillary-data/bolocam')
 
     # MSX
     bld.symlink_as(data_dir + 'msx/msx_images/images',
