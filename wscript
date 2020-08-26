@@ -536,5 +536,9 @@ def build(bld):
     bld.symlink_as(data_dir + 'SOFIA',
                    '/irsadata/SOFIA')
 
+    # CONTRIBUTED
+    bld.symlink_as(data_dir + 'contributed/gpips_images/images',
+                   '/irsadata/GPIPS/images')
+
     # FIXME: No scrapbook.  That is served by a cgi program hst_preview.
     # FIXME: No NED.  It is served by going to NED.
