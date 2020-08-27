@@ -540,7 +540,7 @@ def build(bld):
     bld.symlink_as(data_dir + 'contributed/gpips_images/images',
                    '/irsadata/GPIPS/images')
 
-    # HERNO
+    # HERON
     bld.symlink_as(data_dir + 'heron/heron_images/images',
                    '/irsadata/HERON/images')
 
