@@ -122,7 +122,7 @@ def build(bld):
                        '/stage/irsa-wise-links-ops/links-neowiser/l1b-yr7')
 
     # unWISE
-    bld.symlink_as(data_dir + 'unwise/unwise_images',
+    bld.symlink_as(data_dir + 'unwise/unwise_neo3_images',
                    '/irsadata/WISE/unWISE/images')
 
     # PTF
