@@ -539,10 +539,16 @@ def build(bld):
     # CONTRIBUTED
     bld.symlink_as(data_dir + 'contributed/gpips_images/images',
                    '/irsadata/GPIPS/images')
+    bld.symlink_as(data_dir + 'contributed/z0mgs_images/images',
+                   '/irsadata/WISE/z0MGS/images')
 
     # HERON
     bld.symlink_as(data_dir + 'heron/heron_images/images',
                    '/irsadata/HERON/images')
+
+    bld.symlink_as(data_dir + 'heron/heron_images/images',
+                   '/irsadata/HERON/images')
+
 
 
     # FIXME: No scrapbook.  That is served by a cgi program hst_preview.
