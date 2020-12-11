@@ -363,6 +363,9 @@ def build(bld):
                    '/irsadata/SPITZER/Frontier/images')
     bld.symlink_as(data_dir + 'spitzer/elflock_atlas/images',
                    '/irsadata/ELFLock/images')
+    bld.symlink_as(data_dir + 'spitzer/deepdrill/images',
+                   '/irsadata/SPITZER/DeepDrill/images')
+
 
     # MUSYC
     bld.symlink_as(data_dir + 'musyc/musyc_images/images',
