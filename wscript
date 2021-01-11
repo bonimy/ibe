@@ -104,7 +104,7 @@ def build(bld):
         bld.symlink_as(data_dir + 'wise/neowiser_prov/i1bm_frm',
                        '/stage/irsa-wise-links-ops/links-nprov/l1b')
 
-        # Year 1,2,3,4,5,6,7
+        # Year 1,2,3,4,5,6,7,8
         bld.symlink_as(data_dir + 'wise/neowiser_yr1/yr1_p1bm_frm',
                        '/stage/irsa-wise-links-public/links-neowiser/l1b-yr1')
         bld.symlink_as(data_dir + 'wise/neowiser_yr2/yr2_p1bm_frm',
@@ -120,6 +120,8 @@ def build(bld):
 
         bld.symlink_as(data_dir + 'wise/neowiser_yr7/yr7_i1bm_frm',
                        '/stage/irsa-wise-links-ops/links-neowiser/l1b-yr7')
+        bld.symlink_as(data_dir + 'wise/neowiser_yr8/yr8_i1bm_frm',
+                       '/stage/irsa-wise-links-ops/links-neowiser/l1b-yr8')
 
     # unWISE
     bld.symlink_as(data_dir + 'unwise/unwise_neo3_images',
