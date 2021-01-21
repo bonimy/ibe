@@ -1,29 +1,28 @@
 #pragma once
 
-#include "fitsio.h"
 #include <string>
+
+#include "fitsio.h"
 extern "C" {
 #include "fitsio2.h"
 }
 
 
-namespace ibe
-{
+namespace ibe {
 /// RAII wrapper for a ::fitsfile pointer.
-class FitsFile
-{
+class FitsFile {
 public:
-  FitsFile (char const *path);
-  ~FitsFile ();
+    FitsFile(char const* path);
+    ~FitsFile();
 
-  // conversion operators
-  operator ::fitsfile *() { return _file; }
-  operator ::fitsfile const *() { return _file; }
+    // conversion operators
+    operator ::fitsfile*() { return _file; }
+    operator ::fitsfile const*() { return _file; }
 
 private:
-  FitsFile (FitsFile const &);
-  FitsFile &operator=(FitsFile const &);
+    FitsFile(FitsFile const&);
+    FitsFile& operator=(FitsFile const&);
 
-  ::fitsfile *_file;
+    ::fitsfile* _file;
 };
-}
+}  // namespace ibe
