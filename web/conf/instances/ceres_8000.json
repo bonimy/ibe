@@ -1,0 +1,23 @@
+{
+    "WSGIProcesses": "8",
+    "datasets": [
+        "wise/allsky"
+      , "wise/allwise"
+      , "wise/cryo_3band"
+      , "wise/merge"
+      , "wise/neowiser"
+      , "wise/pass1"
+      , "wise/pass2"
+      , "wise/prelim"
+      , "wise/prelim_postcryo"
+      , "ptf/images" 
+    ],
+    "MaxSpareServers": "8",
+    "MinSpareServers": "1",
+    "proxied": true,
+    "host": "https://ceres.ipac.caltech.edu",
+    "workspace_root": "/work",
+    "StartServers": "4",
+    "MaxClients": "100",
+    "Port": "8000"
+}

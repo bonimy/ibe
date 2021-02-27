@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- XML Schema for database table metadata -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+
+<xs:annotation>
+  <xs:documentation>
+    This is a serialization format for database table metadata. A collection
+    of XML files conforming to this XML schema are aggregated to produce a list
+    of tables query-able by the IRSA image service back-end.
+  </xs:documentation>
+</xs:annotation>
+
+<xs:simpleType name="TableName">
+  <xs:annotation>
+    <xs:documentation>
+      The exported name of database table (schema/view).
+      For now, this is limited to names containing only ASCII letters, numbers, or '_'.
+    </xs:documentation>
+  </xs:annotation>
+  <xs:restriction base="xs:token">
+    <xs:pattern value="[A-Za-z0-9_]*"/>
+    <xs:maxLength value="255"/>
+  </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="DbName">
+  <xs:annotation>
+    <xs:documentation>
+      The name of a database object (table schema, view, column).
+      For now, this is limited to names starting with an ASCII letter or
+      '_', and containing only ASCII letters, numbers, or '_'.
+    </xs:documentation>
+  </xs:annotation>
+  <xs:restriction base="xs:token">
+    <xs:pattern value="[A-Za-z_]+[A-Za-z0-9_]*"/>
+    <xs:maxLength value="255"/>
+  </xs:restriction>
+</xs:simpleType>
+
+
+<xs:simpleType name="FqColName">
+  <xs:annotation>
+    <xs:documentation>
+      A fully qualified table column name. This is a string of the form:
+      "schema_group.schema.table.column_name"
+    </xs:documentation>
+  </xs:annotation>
+  <xs:restriction base="xs:token">
+    <xs:pattern value="[A-Za-z_]+[A-Za-z0-9_]*\.[A-Za-z_]+[A-Za-z0-9_]*\.[A-Za-z0-9_]*\.[A-Za-z_]+[A-Za-z0-9_]*"/>
+    <xs:maxLength value="1023" />
+  </xs:restriction>
+</xs:simpleType>
+
+
+<xs:simpleType name="Token255">
+  <xs:annotation>
+    <xs:documentation>
+      An xs:token restricted to have 255 characters. This restriction is
+      imposed to facilitate storage of a value in a VARCHAR column (which
+      in some databases are limited to a maximum length of 255 characters).
+    </xs:documentation>
+  </xs:annotation>
+  <xs:restriction base="xs:token">
+    <xs:maxLength value="255"/>
+  </xs:restriction>
+</xs:simpleType>
+
+
+<xs:simpleType name="DataType">
+  <xs:annotation>
+    <xs:documentation>
+      The ADQL datatype of a table column. Mappings to the datatypes
+      supported in other standards shall be performed as defined by
+      those standards and is not currently configurable.
+    </xs:documentation>
+  </xs:annotation>
+  <xs:restriction base="xs:token">
+    <xs:pattern value="SMALLINT|INTEGER|BIGINT|REAL|DOUBLE|TIME|DATE|DATETIME|((CHAR|VARCHAR|BINARY|VARBINARY) ?\( ?[1-9]+[0-9]* ?\))|(DECIMAL ?\( ?[1-9]+[0-9]* ?, ?[0-9]+ ?\))" />
+  </xs:restriction>
+</xs:simpleType>
+
+
+<xs:simpleType name="TableType">
+  <xs:annotation>
+    <xs:documentation>The type of a database table.</xs:documentation>
+  </xs:annotation>
+  <xs:restriction base="xs:NMTOKEN">
+    <xs:enumeration value="table"/>
+    <xs:enumeration value="view"/>
+  </xs:restriction>
+</xs:simpleType>
+
+
+<xs:simpleType name="AccessPolicy">
+  <xs:annotation>
+    <xs:documentation>Table access policy.</xs:documentation>
+  </xs:annotation>
+  <xs:restriction base="xs:NMTOKEN">
+    <xs:enumeration value="ACCESS_DENIED"/>
+    <xs:enumeration value="ACCESS_GRANTED"/>
+    <xs:enumeration value="ACCESS_TABLE"/>
+    <xs:enumeration value="ACCESS_ROW_ONLY"/>
+    <xs:enumeration value="ACCESS_DATE_ONLY"/>
+    <xs:enumeration value="ACCESS_ROW_DATE"/>
+  </xs:restriction>
+</xs:simpleType>
+
+
+<xs:simpleType name="Ucd">
+  <xs:annotation>
+    <xs:documentation>
+      A UCD1+ controlled vocabulary entry. Old UCD1 unified content
+      descriptors (not containing '/', '+', or '%' characters) including
+      SIA conventions (with ':') are allowed.
+    </xs:documentation>
+  </xs:annotation>
+  <xs:restriction base="xs:token">
+    <xs:pattern value="[A-Za-z0-9_.:;\-]*" />
+    <xs:maxLength value="255" />
+  </xs:restriction>
+</xs:simpleType>
+
+
+<xs:simpleType name="FormatSpec">
+  <xs:annotation>
+    <xs:documentation>
+      Slightly restricted python formatting specification for a column value;
+      syntax restricted from http://docs.python.org/library/string.html#formatspec
+
+      format_spec ::=  [[fill]align][sign][#][0][width][.precision][type]
+      fill        ::=  &lt;a character other than '}'&gt;
+      align       ::=  "&lt;" | "&gt;" | "=" | "^"
+      sign        ::=  "+" | "-" | " "
+      width       ::=  integer
+      precision   ::=  integer
+      type        ::=  "b" | "c" | "d" | "e" | "E" | "f" | "F" | "g" | "G" | "s" | "x" | "X"
+      
+      The following python formatting features are not supported:
+      - "n" (number), "o" (octal), and "%" (percentage) type specifiers
+      - printing with thousands separators (",")
+    </xs:documentation>
+  </xs:annotation>
+  <xs:restriction base="xs:token">
+    <xs:pattern value="([^\}]?[&lt;&gt;=\^])?[+\- ]?#?0?([1-9]+[0-9]*)?(\.[1-9]+[0-9]*)?[bcdeEfFgGsxX]?" />
+    <xs:maxLength value="255" />
+  </xs:restriction>
+</xs:simpleType>
+
+
+<xs:complexType name="ChunkIndex">
+  <xs:annotation>
+    <xs:documentation>
+      Describes the on disk location of the chunk index for a table
+      (an index for performing spatial searches on points).
+    </xs:documentation>
+  </xs:annotation>
+  <xs:attribute name="path" type="xs:string">
+    <xs:annotation>
+      <xs:documentation>Path name of the chunk index file.</xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+</xs:complexType>
+
+<xs:complexType name="Center">
+  <xs:annotation>
+    <xs:documentation>
+      Identifies the logical columns corresponding to the FK5 J2000 position
+      of the center of an image in a table. The logical column names
+      corresponding to the center are specified by the "ra" and "dec"
+      attributes.
+    </xs:documentation>
+  </xs:annotation>
+  <!-- Attributes -->
+  <xs:attribute name="ra" type="DbName" default="ra" />
+  <xs:attribute name="dec" type="DbName" default="dec" />
+</xs:complexType>
+
+<xs:complexType name="Corners">
+  <xs:annotation>
+    <xs:documentation>
+      Identifies the logical columns corresponding to the FK5 J2000 positions
+      of the 4 corners of an image in a table. The corners columns may result
+      in polygons with vertices in either clockwise or counter-clockwise order.
+      Either all or none of these columns must be present in the table. If
+      none are, corners will be computed from WCS parameters in the table.
+
+      The logical column names corresponding to the corners are specified by
+      the "raX", "decX" attributes (where X = [1-4]).
+
+      If the table does not contain images, this element should be omitted.
+    </xs:documentation>
+  </xs:annotation>
+  <!-- Attributes -->
+  <xs:attribute name="radius" type="xs:decimal" use="required">
+    <xs:annotation>
+      <xs:documentation>
+        Maximum bounding circle radius in degrees for images in the table.
+        This is the minimal radius R such that for any image I
+        in the table, the circle (center(I), R) is a bounding circle for I.
+        Note that the columns corresponding to the image center are identified
+        by the spatial columns used to create a chunk index for the table.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+  <xs:attribute name="ra1" type="DbName" default="ra1" />
+  <xs:attribute name="dec1" type="DbName" default="dec1" />
+  <xs:attribute name="ra2" type="DbName" default="ra2" />
+  <xs:attribute name="dec2" type="DbName" default="dec2" />
+  <xs:attribute name="ra3" type="DbName" default="ra3" />
+  <xs:attribute name="dec3" type="DbName" default="dec3" />
+  <xs:attribute name="ra4" type="DbName" default="ra4" />
+  <xs:attribute name="dec4" type="DbName" default="dec4" />
+</xs:complexType>
+
+
+<xs:complexType name="Column">
+  <xs:annotation>
+    <xs:documentation>A column in a database table</xs:documentation>
+  </xs:annotation>
+
+  <!-- Elements -->
+  <xs:all>
+    <xs:element name="description" type="xs:token" minOccurs="0">
+      <xs:annotation>
+        <xs:documentation>Column description</xs:documentation>
+      </xs:annotation>
+    </xs:element>
+    <xs:element name="constant" type="xs:string" minOccurs="0">
+      <xs:annotation>
+        <xs:documentation>
+          If this element is specified, the column has a constant value
+          (specified by the contents of the element), and is not required
+          to exist in the underlying database table.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:element>
+    <xs:element name="ucd" type="Ucd" minOccurs="0">
+      <xs:annotation>
+        <xs:documentation>Column Unified Content Descriptor</xs:documentation>
+      </xs:annotation>
+    </xs:element>
+    <xs:element name="utype" type="Token255" minOccurs="0">
+      <xs:annotation>
+        <xs:documentation>
+          Column utype, i.e. a reference to type defined in a data model.
+          In particular, columns that correspond to positions or which define
+          parameters of a coordinate system should have their utype set to
+          the appropriate STC utype.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:element>
+    <xs:element name="xtype" type="Token255" minOccurs="0">
+      <xs:annotation>
+        <xs:documentation>
+          Column xtype (used in the VOTable format).
+        </xs:documentation>
+      </xs:annotation>
+    </xs:element>
+    <xs:element name="unit" type="Token255" minOccurs="0">
+      <xs:annotation>
+        <xs:documentation>
+          Column unit. Should conform to the unit syntax defined by
+          http://vizier.u-strasbg.fr/doc/catstd-3.2.htx. See also
+          Section 4 in Greisen and Calabretta 2002, A&amp;A 395, 1061;
+          and http://www.iau.org/science/publications/proceedings_rules/units/
+        </xs:documentation>
+      </xs:annotation>
+    </xs:element>
+    <xs:element name="null_value" type="Token255" minOccurs="0">
+      <xs:annotation>
+        <xs:documentation>
+          ASCII null value to emit if a table output format does
+          not define a null representation.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:element>
+    <xs:element name="datatype" type="DataType">
+      <xs:annotation>
+        <xs:documentation>ADQL datatype for column</xs:documentation>
+      </xs:annotation>
+    </xs:element>
+    <xs:element name="format_spec" type="FormatSpec" minOccurs="0">
+      <xs:annotation>
+        <xs:documentation>
+          Python formatting specification for mapping column values to strings.
+          For columns with a datatype of DECIMAL, TIMESTAMP, [VAR]CHAR,
+          and [VAR]BINARY, the appropriate format_spec is derived from the
+          datatype itself, and it is an error to specify one.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:element>
+  </xs:all>
+
+  <!-- Attributes -->
+  <xs:attribute name="name" type="DbName" use="required">
+    <xs:annotation>
+      <xs:documentation>
+        Logical column name, must be unique within the enclosing table. This
+        is the exported name of the column, i.e. the name used in output
+        tables.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+  <xs:attribute name="dbname" type="DbName">
+    <xs:annotation>
+      <xs:documentation>
+        Internal database column name. This is the name of the
+        column as it must appear in queries to the database table.
+        If omitted, the database name is taken to be identical to
+        the logical name.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+  <xs:attribute name="selectable" type="xs:boolean" default="true">
+    <xs:annotation>
+      <xs:documentation>True if the column may be returned by a query</xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+  <xs:attribute name="principal" type="xs:boolean" default="false">
+    <xs:annotation>
+      <xs:documentation>
+        True if this a principal column. This identifies the columns that
+        are returned by a query that does not include a list of selected
+        columns. Note that principal columns must be selectable.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+  <xs:attribute name="std" type="xs:boolean" default="false">
+    <xs:annotation>
+      <xs:documentation>
+        True if this column is defined by some standard, as opposed to
+        being a custom column defined by a particular service.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+</xs:complexType>
+
+
+<xs:complexType name="Sia">
+  <xs:annotation>
+    <xs:documentation>
+      Contains configuration data related to the SIA protocol.
+    </xs:documentation>
+  </xs:annotation>
+  <xs:attribute name="writer" type="xs:token" use="required">
+    <xs:annotation>
+      <xs:documentation>
+          The name of the Python class used to serve a table via the SIA protocol.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+</xs:complexType>
+
+
+<xs:complexType name="Products">
+  <xs:annotation>
+    <xs:documentation>
+      Describes the location of data products associated with a database table.
+    </xs:documentation>
+  </xs:annotation>
+  <xs:attribute name="rootpath" type="xs:token" use="required">
+    <xs:annotation>
+      <xs:documentation>
+          Top level on-disk location of products.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+</xs:complexType>
+
+
+<xs:complexType name="Access">
+  <xs:annotation>
+    <xs:documentation>
+      Access control information for the containing table.
+    </xs:documentation>
+  </xs:annotation>
+  <xs:attribute name="policy" type="AccessPolicy" default="ACCESS_GRANTED">
+    <xs:annotation>
+      <xs:documentation>
+          Access policy for the table.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+  <xs:attribute name="mission" type="xs:integer" default="-1">
+    <xs:annotation>
+      <xs:documentation>
+          Integer mission ID.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+  <xs:attribute name="group" type="xs:integer" default="-1">
+    <xs:annotation>
+      <xs:documentation>
+          Group ID of the table; required if the access level is "ACCESS_TABLE",
+          ignored otherwise.
+     </xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+  <xs:attribute name="fsdb" type="xs:token" default="">
+    <xs:annotation>
+      <xs:documentation>
+          Path to filesystem metadata database (used to produce security aware
+          data directory listing / file serving). Valid only if the access
+          level is one of: "ACCESS_ROW_ONLY", "ACCESS_DATE_ONLY", or "ACCESS_ROW_DATE".
+     </xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+</xs:complexType>
+
+
+<xs:complexType name="Unique">
+  <xs:annotation>
+    <xs:documentation>
+      A set of logical names for columns with values that are distinct for
+      every row in the underlying table. Analogous to a UNIQUE constraint
+      in database land.
+    </xs:documentation>
+  </xs:annotation>
+  <xs:attribute name="refs" type="xs:token" use="required">
+    <xs:annotation>
+      <xs:documentation>
+        A space separated list of the logical names in the UNIQUE constraint.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+</xs:complexType>
+
+
+<xs:complexType name="ImageSet">
+  <xs:annotation>
+    <xs:documentation>
+      A set of logical names for columns with values that are distinct for
+      an image set in the underlying table. This is used to allow
+      selection of images for all bands in a frame/coadd.
+    </xs:documentation>
+  </xs:annotation>
+  <xs:attribute name="refs" type="xs:token" use="required">
+    <xs:annotation>
+      <xs:documentation>
+        A space separated list of the logical column names identifying an image-set.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+</xs:complexType>
+
+<xs:complexType name="Reference">
+  <xs:annotation>
+    <xs:documentation>
+      A mapping from a column in a table to a column in another table.
+    </xs:documentation>
+  </xs:annotation>
+  <xs:attribute name="from" type="DbName" use="required">
+    <xs:annotation>
+      <xs:documentation>
+        The logical name of the column in the enclosing table.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+  <xs:attribute name="to" type="FqColName" use="required">
+    <xs:annotation>
+      <xs:documentation>
+        The fully qualified logical name of the column in the referenced table.
+        This must be of the form "schema_group.schema.table.logical_column_name".
+      </xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+</xs:complexType>
+
+
+<xs:complexType name="Table">
+  <xs:annotation>
+    <xs:documentation>A database table</xs:documentation>
+  </xs:annotation>
+
+  <xs:sequence>
+    <xs:element name="description" type="Token255" minOccurs="0" />
+    <xs:element name="chunk_index" type="ChunkIndex" minOccurs="0" />
+    <xs:element name="corners" type="Corners" minOccurs="0" />
+    <xs:element name="center" type="Center" minOccurs="0" />
+    <xs:element name="unique" type="Unique" minOccurs="0" maxOccurs="unbounded" />
+    <xs:element name="image_set" type="ImageSet" minOccurs="0" />
+    <xs:element name="reference" type="Reference" minOccurs="0" maxOccurs="unbounded" />
+    <xs:element name="sia" type="Sia" minOccurs="0" />
+    <xs:element name="products" type="Products" minOccurs="0" />
+    <xs:element name="access" type="Access" minOccurs="0" maxOccurs="1" />
+    <xs:element name="column" type="Column" minOccurs="1" maxOccurs="unbounded" />
+  </xs:sequence>
+
+  <xs:attribute name="name" type="TableName" use="required">
+    <xs:annotation>
+      <xs:documentation>
+        Logical table name; must be unique within the enclosing schema. The
+        table ID is equal to the schema ID + '.' + the logical table name.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+  <xs:attribute name="dbname" type="DbName" use="required">
+    <xs:annotation>
+      <xs:documentation>
+        Internal database table name - the name as it must appear in queries
+        issued by the back-end.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+  <xs:attribute name="type" type="TableType" default="table">
+    <xs:annotation>
+      <xs:documentation>Table type, one of "table" or "view"</xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+  <xs:attribute name="engine" type="xs:token">
+    <xs:annotation>
+      <xs:documentation>
+        Engine to use when accessing the table. If omitted, the default
+        engine for the enclosing schema is used.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+</xs:complexType>
+
+
+<xs:complexType name="Schema">
+  <xs:annotation>
+    <xs:documentation>
+      A collection of tables. This is conceptually the same as a database
+      on an RDBMS server, but is a logical grouping only. The tables in a
+      schema can live in different databases on the back-end.
+    </xs:documentation>
+  </xs:annotation>
+
+  <xs:sequence>
+    <xs:element name="description" type="Token255" minOccurs="0" />
+    <xs:element name="table" type="Table" minOccurs="0" maxOccurs="unbounded" />
+  </xs:sequence>
+
+  <xs:attribute name="name" type="DbName" use="required">
+    <xs:annotation>
+      <xs:documentation>
+        Logical schema name; must be unique within the enclosing schema_group.
+        The schema ID is the schema_group ID + '.' + the logical schema name.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+  <xs:attribute name="engine" type="xs:token">
+    <xs:annotation>
+      <xs:documentation>
+        Default engine to use when accessing tables in the schema.
+        If omitted, each table in the schema must specify its engine.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+</xs:complexType>
+
+
+<xs:complexType name="SchemaGroup">
+  <xs:annotation>
+    <xs:documentation>
+      A collection of schemas; this is conceptually the same as a collection
+      of databases living on an RDBMS server. For now, we do not require a
+      schema collection to map to a single RDBMS server. However, an eventual
+      TAP service implementation will require the tables in its schemas to be
+      joinable. Therefore, a single-server restriction may at some point have
+      to be imposed.
+    </xs:documentation>
+  </xs:annotation>
+  <xs:sequence>
+    <xs:element name="schema" type="Schema" minOccurs="1" maxOccurs="1" />
+  </xs:sequence>
+  <xs:attribute name="id" type="xs:ID" use="required">
+    <xs:annotation>
+      <xs:documentation>ID of the schema_group.</xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+</xs:complexType>
+
+
+<xs:element name="catalogs">
+  <xs:complexType>
+    <xs:annotation>
+      <xs:documentation>
+        Root element; contains a list of schema_group elements.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="schema_group" type="SchemaGroup" minOccurs="1" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+</xs:schema>

@@ -1,0 +1,15 @@
+{
+    "WSGIProcesses": "4",
+    "WSGISocketPrefix": "/local/ibe/logs/wsgi",
+    "datasets": [
+        "lcogt/test"
+    ],
+    "MaxSpareServers": "4",
+    "MinSpareServers": "1",
+    "proxied": true,
+    "host": "http://lcodev1.ipac.caltech.edu",
+    "workspace_root": "/work/lcoadmin_8000",
+    "StartServers": "4",
+    "MaxClients": "100",
+    "Port": "8000"
+}

@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--    ____________________________________________________
+      /                                                      \
+     |   LSST Summer 2012 Test Tables                         | -->
+<catalogs>
+<schema_group id="lsst">
+
+<schema name="summer2012" engine="lsst_dev">
+  <description>LSST Summer 2012 Test Tables</description>
+
+  <!-- Processed exposure metadata -->
+  <table name="good_seeing_coadd" dbname="s4s_1000_good_seeing_coadd">
+    <description>LSST Summer 2012: stripe 82, camcol 4, strip S good-seeing coadd exposures</description>
+
+    <chunk_index path="/xpf/chunk_index/lsst/dr-s2012/sdss/rr1000/s4S/good_seeing_coadd_hydra/index.ci" />
+    <corners radius="0.5" />
+    <center ra="ra" dec="dec"/>
+
+    <unique refs="goodSeeingCoaddId" />
+
+    <products rootpath="/irsadata/LSST/dr-s2012/sdss/coadd/rr1000/s4S" />
+
+    <column name="goodSeeingCoaddId" dbname="goodseeingcoaddid" principal="true">
+      <description>Primary key (unique identifier).</description>
+      <ucd>meta.id;obs.image</ucd>
+      <datatype>BIGINT</datatype>
+    </column>
+    <column name="tract" principal="true">
+      <description>Sky-tract number.</description>
+      <datatype>INTEGER</datatype>
+      <format_spec>2d</format_spec>
+    </column>
+    <column name="patch" principal="true">
+      <description>Sky-patch.</description>
+      <datatype>CHAR(8)</datatype>
+    </column>
+    <column name="filterId" dbname="filterid">
+      <description>Id of the filter for the band.</description>
+      <ucd>meta.id;instr.filter</ucd>
+      <datatype>INTEGER</datatype>
+    </column>
+    <column name="filterName" dbname="filtername" principal="true">
+      <description>Filter name.</description>
+      <ucd>instr.bandpass</ucd>
+      <datatype>CHAR(1)</datatype>
+    </column>
+    <column name="ra" principal="true">
+      <description>ICRS R.A. of image center, corresponding to FITS pixel coordinates ((NAXIS1 + 1)/2, (NAXIS2 + 1)/2).</description>
+      <ucd>pos.eq.ra</ucd>
+      <unit>deg</unit>
+      <datatype>DOUBLE</datatype>
+      <format_spec>13.9f</format_spec>
+    </column>
+    <column name="dec" principal="true">
+      <description>ICRS Dec. of image center, corresponding to FITS pixel coordinates ((NAXIS1 + 1)/2, (NAXIS2 + 1)/2).</description>
+      <ucd>pos.eq.dec</ucd>
+      <unit>deg</unit>
+      <datatype>DOUBLE</datatype>
+      <format_spec>13.9f</format_spec>
+    </column>
+    <column name="htmId20" dbname="htmid20">
+      <description>Level 20 HTM ID of (ra, dec)</description>
+      <ucd>pos.HTM</ucd>
+      <datatype>BIGINT</datatype>
+    </column>
+    <column name="equinox">
+      <description>Equinox of image WCS</description>
+      <ucd>pos.equinox</ucd>
+      <datatype>REAL</datatype>
+    </column>
+    <column name="raDeSys" dbname="radesys">
+      <description>Reference frame used for positions</description>
+      <ucd>pos.frame</ucd>
+      <datatype>CHAR(4)</datatype>
+    </column>
+    <column name="naxis" selectable="false">
+      <description>Number of array axes</description>
+      <ucd>pos.wcs.naxes</ucd>
+      <utype>fits:NAXIS;stc:PixelCoordSystem.PixelCoordFrame.CoordFlavor.coord_naxes</utype>
+      <datatype>INTEGER</datatype>
+      <format_spec>1d</format_spec>
+      <constant>2</constant>
+    </column>
+    <column name="naxis1" principal="true">
+      <description>Number of pixels in axis 1</description>
+      <utype>fits:NAXIS1;stc:PixelCoordArea.PixelCoord2VecInterval.HiLimit2Vec.C1</utype>
+      <ucd>pos.wcs.naxis</ucd>
+      <unit>pix</unit>
+      <datatype>INTEGER</datatype>
+      <format_spec>4d</format_spec>
+    </column>
+    <column name="naxis2" principal="true">
+      <description>Number of pixels in axis 2</description>
+      <utype>fits:NAXIS2;stc:PixelCoordArea.PixelCoord2VecInterval.HiLimit2Vec.C2</utype>
+      <ucd>pos.wcs.naxis</ucd>
+      <unit>pix</unit>
+      <datatype>INTEGER</datatype>
+      <format_spec>4d</format_spec>
+    </column>
+    <column name="ctype1">
+      <description>Type of RA WCS projection</description>
+      <utype>fits:CTYPE1</utype>
+      <ucd>pos.wcs.ctype</ucd>
+      <datatype>CHAR(8)</datatype>
+    </column>
+    <column name="ctype2">
+      <description>Type of Dec WCS projection</description>
+      <utype>fits:CTYPE2</utype>
+      <ucd>pos.wcs.ctype</ucd>
+      <datatype>CHAR(8)</datatype>
+    </column>
+    <column name="crpix1">
+      <description>Axis 1 reference pixel</description>
+      <utype>fits:CRPIX1;stc:PixelCoordSystem.PixelCoordFrame.ReferencePixel.Pixel2d.Value2.C1</utype>
+      <ucd>pos.wcs.crpix</ucd>
+      <unit>pix</unit>
+      <datatype>REAL</datatype>
+      <format_spec>10.5f</format_spec>
+    </column>
+    <column name="crpix2">
+      <description>Axis 2 reference pixel</description>
+      <ucd>pos.wcs.crpix</ucd>
+      <utype>fits:CRPIX2;stc:PixelCoordSystem.PixelCoordFrame.ReferencePixel.Pixel2d.Value2.C2</utype>
+      <unit>pix</unit>
+      <datatype>REAL</datatype>
+      <format_spec>10.5f</format_spec>
+    </column>
+    <column name="crval1">
+      <description>R.A. of reference pixel</description>
+      <ucd>pos.wcs.crval</ucd>
+      <utype>fits:CRVAL1;stc:PixelCoordSystem.PixelCoordFrame.CoordRefPos.Vector2DCoordinate.Value2.C1</utype>
+      <unit>deg</unit>
+      <datatype>DOUBLE</datatype>
+      <format_spec>11.7f</format_spec>
+    </column>
+    <column name="crval2">
+      <description>Dec. of reference pixel</description>
+      <ucd>pos.wcs.crval</ucd>
+      <utype>fits:CRVAL2;stc:PixelCoordSystem.PixelCoordFrame.CoordRefPos.Vector2DCoordinate.Value2.C2</utype>
+      <unit>deg</unit>
+      <datatype>DOUBLE</datatype>
+      <format_spec>11.7f</format_spec>
+    </column>
+    <column name="cd1_1">
+      <description>Change in R.A. per pixel along Axis 1, evaluated at the reference pixel.</description>
+      <utype>fits:CD1_1;stc:PixelCoordSystem.PixelCoordFrame.Cart2DRefFrame.Transform2Matrix.M11</utype>
+      <ucd>pos.wcs.cdmatrix</ucd>
+      <unit>deg/pix</unit>
+      <datatype>DOUBLE</datatype>
+      <format_spec>19.13e</format_spec>
+    </column>
+    <column name="cd1_2">
+      <description>Change in R.A. per pixel along Axis 2, evaluated at the reference pixel.</description>
+      <utype>fits:CD1_2;stc:PixelCoordSystem.PixelCoordFrame.Cart2DRefFrame.Transform2Matrix.M12</utype>
+      <ucd>pos.wcs.cdmatrix</ucd>
+      <unit>deg/pix</unit>
+      <datatype>DOUBLE</datatype>
+      <format_spec>19.13e</format_spec>
+    </column>
+    <column name="cd2_1">
+      <description>Change in Dec. per pixel along Axis 1, evaluated at the reference pixel.</description>
+      <utype>fits:CD2_1;stc:PixelCoordSystem.PixelCoordFrame.Cart2DRefFrame.Transform2Matrix.M21</utype>
+      <ucd>pos.wcs.cdmatrix</ucd>
+      <unit>deg/pix</unit>
+      <datatype>DOUBLE</datatype>
+      <format_spec>19.13e</format_spec>
+    </column>
+    <column name="cd2_2">
+      <description>Change in Dec. per pixel along Axis 2, evaluated at the reference pixel.</description>
+      <utype>fits:CD2_2;stc:PixelCoordSystem.PixelCoordFrame.Cart2DRefFrame.Transform2Matrix.M22</utype>
+      <ucd>pos.wcs.cdmatrix</ucd>
+      <unit>deg/pix</unit>
+      <datatype>DOUBLE</datatype>
+      <format_spec>19.13e</format_spec>
+    </column>
+    <column name="ra1" principal="true">
+      <description>ICRS RA of image corner 1, corresponding to FITS pixel coordinates (0.5, 0.5)</description>
+      <datatype>DOUBLE</datatype>
+      <format_spec>13.9f</format_spec>
+      <ucd>pos.eq.ra</ucd>
+      <unit>deg</unit>
+    </column>
+    <column name="dec1" principal="true">
+      <description>ICRS Dec of image corner 1, corresponding to FITS pixel coordinates (0.5, 0.5)</description>
+      <datatype>DOUBLE</datatype>
+      <format_spec>13.9f</format_spec>
+      <ucd>pos.eq.dec</ucd>
+      <unit>deg</unit>
+    </column>
+    <column name="ra2" principal="true">
+      <description>ICRS RA of image corner 2, corresponding to FITS pixel coordinates (0.5, NAXIS2 + 0.5)</description>
+      <datatype>DOUBLE</datatype>
+      <format_spec>13.9f</format_spec>
+      <ucd>pos.eq.ra</ucd>
+      <unit>deg</unit>
+    </column>
+    <column name="dec2" principal="true">
+      <description>ICRS Dec of image corner 2, corresponding to FITS pixel coordinates (0.5, NAXIS2 + 0.5)</description>
+      <datatype>DOUBLE</datatype>
+      <format_spec>13.9f</format_spec>
+      <ucd>pos.eq.dec</ucd>
+      <unit>deg</unit>
+    </column>
+    <column name="ra3" principal="true">
+      <description>ICRS RA of image corner 3, corresponding to FITS pixel coordinates (NAXIS1 + 0.5, NAXIS2 + 0.5)</description>
+      <datatype>DOUBLE</datatype>
+      <format_spec>13.9f</format_spec>
+      <ucd>pos.eq.ra</ucd>
+      <unit>deg</unit>
+    </column>
+    <column name="dec3" principal="true">
+      <description>ICRS Dec of image corner 3, corresponding to FITS pixel coordinates (NAXIS1 + 0.5, NAXIS2 + 0.5)</description>
+      <datatype>DOUBLE</datatype>
+      <format_spec>13.9f</format_spec>
+      <ucd>pos.eq.dec</ucd>
+      <unit>deg</unit>
+    </column>
+    <column name="ra4" principal="true">
+      <description>ICRS RA of image corner 4, corresponding to FITS pixel coordinates (NAXIS1 + 0.5, 0.5)</description>
+      <datatype>DOUBLE</datatype>
+      <format_spec>13.9f</format_spec>
+      <ucd>pos.eq.ra</ucd>
+      <unit>deg</unit>
+    </column>
+    <column name="dec4" principal="true">
+      <description>ICRS Dec of image corner 4, corresponding to FITS pixel coordinates (NAXIS1 + 0.5, 0.5)</description>
+      <datatype>DOUBLE</datatype>
+      <format_spec>13.9f</format_spec>
+      <ucd>pos.eq.dec</ucd>
+      <unit>deg</unit>
+    </column>
+    <column name="fluxMag0" dbname="fluxmag0" principal="true">
+      <description>Flux of a magnitude 0 object.</description>
+      <unit>dn</unit>
+      <datatype>REAL</datatype>
+    </column>
+    <column name="fluxMag0Sigma" dbname="fluxmag0sigma" principal="true">
+      <description>Error (standard deviation) of fluxMag0.</description>
+      <unit>dn</unit>
+      <ucd>stat.error</ucd>
+      <datatype>REAL</datatype>
+    </column>
+    <column name="matchedFwhm" dbname="matchedfwhm">
+      <description>FWHM computed from PSF that was matched to during coaddition. NULL if coadds were created with PSF-matching turned off.</description>
+      <unit>arcsec</unit>
+      <ucd>instr.obsty.seeing</ucd>
+      <datatype>DOUBLE</datatype>
+      <format_spec>.6f</format_spec>
+    </column>
+    <column name="measuredFwhm"  dbname="measuredfwhm" principal="true">
+      <description>FWHM computed from measured PSF.</description>
+      <unit>arcsec</unit>
+      <ucd>instr.obsty.seeing</ucd>
+      <datatype>DOUBLE</datatype>
+      <format_spec>.6f</format_spec>
+    </column>
+    <column name="path" principal="true">
+      <description>FITS file name</description>
+      <ucd>meta.file</ucd>
+      <datatype>VARCHAR(32)</datatype>
+    </column>
+  </table>
+
+</schema>
+
+</schema_group>
+</catalogs>
+<!-- |                                                        |
+      \ ____________________________________________________ /  -->
+

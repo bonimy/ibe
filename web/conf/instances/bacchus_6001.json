@@ -1,0 +1,24 @@
+{
+    "WSGIProcesses": "2", 
+    "datasets": [
+        "twomass/mosaic"
+      , "wise/merge"
+      , "wise/allsky"
+      , "wise/cryo_3band"
+      , "wise/postcryo"
+      , "wise/prelim_postcryo"
+      , "wise/prelim"
+      , "wise/pass2"
+      , "wise/pass1"
+      , "ptf/images" 
+      , "lsst/summer2012" 
+    ], 
+    "MaxSpareServers": "2", 
+    "MinSpareServers": "1", 
+    "proxied": false, 
+    "host": "http://bacchus.ipac.caltech.edu:6001", 
+    "workspace_root": "/work/irsadmin_6001", 
+    "StartServers": "2", 
+    "MaxClients": "100", 
+    "Port": "6001"
+}

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--    ____________________________________________________
+      /                                                      \
+     |   2MASS 6-Degree Mosaic Tables                         | -->
+
+<catalogs>
+
+<schema_group id="twomass">
+
+ <schema name="mosaic" engine="twomass_mosaic">
+
+  <description>2MASS 6-Degree Mosaic Tables</description>
+
+
+<!--  2MASS  -->
+
+  <!-- 2MASS 6-Degree Mosaic image metadata -->
+
+  <table name="sixdeg" dbname="twomass_mosaic_sixdeg">
+
+    <description>2MASS 6-Degree Mosaic Images</description>
+
+    <chunk_index path="/xpf/2mass/mosaic/chunk_index/index.ci" />
+    <corners radius="4.25"/>
+    <center ra="ra" dec="dec"/>
+
+    <unique refs="cntr" />
+    <unique refs="fname" />
+    <unique refs="filter seqnum" />
+
+    <image_set refs="seqnum" />
+
+    <sia writer="ibe.lib.sia.TwomassMosaicSiaWriter" />
+
+    <products rootpath="/stage/irsa-data-2mass-mosaic/links/mosaic/sixdeg" />
+
+    <column name="cntr" principal="true">
+      <description>Unique record ID</description>
+      <ucd>meta.record</ucd>
+      <datatype>DECIMAL(10,0)</datatype>
+    </column>
+
+    <column name="ra" principal="true">
+      <description>Right ascension at image center</description>
+      <ucd>pos.eq.ra</ucd>
+      <unit>deg</unit>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="dec" principal="true">
+      <description>Declination at image center</description>
+      <ucd>pos.eq.dec</ucd>
+      <unit>deg</unit>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="cra">
+      <description>Sexagesimal encoding of image center RA</description>
+      <ucd>pos.eq.ra</ucd>
+      <datatype>CHAR(15)</datatype>
+    </column>
+
+    <column name="cdec">
+      <description>Sexagesimal encoding of image center Dec</description>
+      <ucd>pos.eq.dec</ucd>
+      <datatype>CHAR(15)</datatype>
+    </column>
+
+    <column name="naxis1">
+      <description>Number of pixels in data axis 1</description>
+      <utype>fits:NAXIS1;stc:PixelCoordArea.PixelCoord2VecInterval.HiLimit2Vec.C1</utype>
+      <ucd>pos.wcs.naxis</ucd>
+      <datatype>DECIMAL(10,0)</datatype>
+    </column>
+
+    <column name="naxis2"> 
+      <description>Number of pixels in data axis 2</description>
+      <utype>fits:NAXIS2;stc:PixelCoordArea.PixelCoord2VecInterval.HiLimit2Vec.C2</utype>
+      <ucd>pos.wcs.naxis</ucd>
+      <datatype>DECIMAL(10,0)</datatype>
+    </column>
+
+    <column name="ctype1">
+      <description>projection type for axis 1</description>
+      <utype>fits:CTYPE1</utype>
+      <datatype>CHAR(9)</datatype>
+    </column>
+
+    <column name="ctype2">
+      <description>projection type for axis 2</description>
+      <utype>fits:CTYPE2</utype>
+      <datatype>CHAR(9)</datatype>
+    </column>
+
+    <column name="crpix1">
+      <description>reference pixel value for axis 1</description>
+      <utype>fits:CRPIX1;stc:PixelCoordSystem.PixelCoordFrame.ReferencePixel.Pixel2d.Value2.C1</utype>
+      <unit>pix</unit>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="crpix2">
+      <description>reference pixel value for axis 2</description>
+      <utype>fits:CRPIX2;stc:PixelCoordSystem.PixelCoordFrame.ReferencePixel.Pixel2d.Value2.C2</utype>
+      <unit>pix</unit>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="crval1">
+      <description>reference position RA (FK5 J2000) at crpix1,crpix2</description>
+      <ucd>pos.eq.ra</ucd>
+      <utype>fits:CRVAL1;stc:PixelCoordSystem.PixelCoordFrame.CoordRefPos.Vector2DCoordinate.Value2.C1</utype>
+      <unit>deg</unit>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="crval2">
+      <description>reference position Dec (FK5 J2000) at crpix1,crpix2</description>
+      <ucd>pos.eq.dec</ucd>
+      <utype>fits:CRVAL2;stc:PixelCoordSystem.PixelCoordFrame.CoordRefPos.Vector2DCoordinate.Value2.C2</utype>
+      <unit>deg</unit>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="cdelt1">
+      <description>deg/pix scale at crpix1,crpix2 for axis 1</description>
+      <utype>fits:CDELT1</utype>
+      <unit>deg/pix</unit>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="cdelt2">
+      <description>deg/pix scale at crpix1,crpix2 for axis 2</description>
+      <utype>fits:CDELT2</utype>
+      <unit>deg/pix</unit>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="crota2">
+      <description>image twist angle</description>
+      <utype>fits:CROTA2</utype>
+      <unit>deg</unit>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="equinox">
+      <unit>yr</unit>
+      <description>Equinox</description>
+      <datatype>DOUBLE</datatype>
+      <utype>fits:EQUINOX</utype>
+    </column>
+
+    <column name="ra1" principal="true">
+      <description>RA (FK5 J2000) of image corner 1</description>
+      <ucd>pos.eq.ra</ucd>
+      <unit>deg</unit>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="dec1" principal="true">
+      <description>Dec (FK5 J2000) of image corner 1</description>
+      <ucd>pos.eq.dec</ucd>
+      <unit>deg</unit>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="ra2" principal="true">
+      <description>RA (FK5 J2000) of image corner 2</description>
+      <ucd>pos.eq.ra</ucd>
+      <unit>deg</unit>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="dec2" principal="true">
+      <description>Dec (FK5 J2000) of image corner 2</description>
+      <ucd>pos.eq.dec</ucd>
+      <unit>deg</unit>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="ra3" principal="true">
+      <description>RA (FK5 J2000) of image corner 3</description>
+      <ucd>pos.eq.ra</ucd>
+      <unit>deg</unit>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="dec3" principal="true">
+      <description>Dec (FK5 J2000) of image corner 3</description>
+      <ucd>pos.eq.dec</ucd>
+      <unit>deg</unit>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="ra4" principal="true">
+      <description>RA (FK5 J2000) of image corner 4</description>
+      <ucd>pos.eq.ra</ucd>
+      <unit>deg</unit>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="dec4" principal="true">
+      <description>Dec (FK5 J2000) of image corner 4</description>
+      <ucd>pos.eq.dec</ucd>
+      <unit>deg</unit>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="xsize" principal="true">
+      <description></description>
+      <datatype>DECIMAL(10,0)</datatype>
+    </column>
+
+    <column name="hdu">
+      <description></description>
+      <datatype>DECIMAL(10,0)</datatype>
+    </column>
+
+    <column name="fname" principal="true">
+      <description>File Name</description>
+      <ucd>meta.file</ucd>
+      <datatype>CHAR(101)</datatype>
+    </column>
+
+    <column name="filter" principal="true">
+      <description>Filter</description>
+      <ucd>instr.filter</ucd>
+      <datatype>CHAR(5)</datatype>
+    </column>
+
+    <column name="seqnum" principal="true">
+      <description>Sequence Number</description>
+      <datatype>DECIMAL(10,0)</datatype>
+    </column>
+
+  </table>
+
+</schema>
+
+</schema_group>
+
+</catalogs>
+
+<!-- |                                                        |
+      \ ____________________________________________________ /  -->
+

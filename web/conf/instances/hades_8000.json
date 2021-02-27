@@ -1,0 +1,35 @@
+{
+    "User": "irsadmin",
+    "Group": "irsa",
+    "WSGIProcesses": "8",
+    "WSGISocketPrefix": "/local2/ibe/logs/wsgi",
+    "datasets": [
+        "twomass/mosaic"
+      , "twomass/calibration"
+      , "twomass/allsky"
+      , "twomass/full"
+      , "twomass/sixxfull"
+      , "twomass/sixxcat"
+      , "wise/allsky"
+      , "wise/allwise"
+      , "wise/cryo_3band"
+      , "wise/merge"
+      , "wise/neowiser"
+      , "wise/neowiser_prov"
+      , "wise/pass1" 
+      , "wise/pass2" 
+      , "wise/postcryo"
+      , "wise/prelim" 
+      , "wise/prelim_postcryo" 
+      , "ptf/images" 
+      , "lsst/summer2012" 
+    ], 
+    "MaxSpareServers": "2", 
+    "MinSpareServers": "1",
+    "proxied": true,
+    "host": "http://irsatest.ipac.caltech.edu:8000",
+    "workspace_root": "/work",
+    "StartServers": "4",
+    "MaxClients": "100",
+    "Port": "8000"
+}

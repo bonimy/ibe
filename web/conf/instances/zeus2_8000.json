@@ -1,0 +1,33 @@
+{
+    "User": "irsadmin",
+    "Group": "irsa",
+    "WSGIProcesses": "8",
+    "WSGISocketPrefix": "/opt/ibe/logs/wsgi",
+    "datasets": [
+        "twomass/calibration"
+      , "twomass/allsky"
+      , "twomass/full"
+      , "twomass/sixxfull"
+      , "twomass/sixxcat"
+      , "wise/allsky"
+      , "wise/allwise"
+      , "wise/cryo_3band"
+      , "wise/merge"
+      , "wise/neowiser"
+      , "wise/postcryo"
+      , "wise/prelim" 
+      , "wise/prelim_postcryo" 
+      , "ptf/images" 
+    ],
+    "MaxSpareServers": "8",
+    "MinSpareServers": "1",
+    "proxied": true,
+    "host": "http://irsa.ipac.caltech.edu",
+    "workspace_root": "/work",
+    "StartServers": "4",
+    "MaxClients": "256",
+    "Port": "8000",
+    "ErrorLog": "\"|rotatelogs -l /irsadata/logs/www_ops/zeus2_ibe_error_%Y%m%d.log 604800\"",
+    "CombinedLog": "\"|rotatelogs -l /irsadata/logs/www_ops/zeus2_ibe_combined_%Y%m%d.log 604800\""
+}
+

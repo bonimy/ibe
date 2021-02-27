@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+
+<xs:annotation>
+  <xs:documentation>
+    This is a serialization of configuration information related to
+    the database engines used by the IRSA image service back-end.
+  </xs:documentation>
+</xs:annotation>
+
+
+<xs:simpleType name="Paramstyle">
+  <xs:annotation>
+    <xs:documentation>
+      SQL alchemy database engine parameter style
+    </xs:documentation>
+  </xs:annotation>
+  <xs:restriction base="xs:token">
+    <xs:enumeration value="qmark" />
+    <xs:enumeration value="numeric" />
+    <xs:enumeration value="named" />
+  </xs:restriction>
+</xs:simpleType>
+
+
+<xs:complexType name="Engine">
+  <xs:annotation>
+    <xs:documentation>
+      SQL alchemy parameters required to connect
+      to a particular database on a particular server
+    </xs:documentation>
+  </xs:annotation>
+
+  <xs:sequence>
+    <xs:element name="url" type="xs:anyURI">
+      <xs:annotation>
+        <xs:documentation>SQL alchemy connection URL</xs:documentation>
+      </xs:annotation>
+    </xs:element>
+    <xs:element name="paramstyle" type="Paramstyle" />
+  </xs:sequence>
+
+  <xs:attribute name="id" type="xs:ID" use="required">
+    <xs:annotation>
+      <xs:documentation>Unique identifier for the engine</xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+  <xs:attribute name="echo" type="xs:boolean" default="false">
+    <xs:annotation>
+      <xs:documentation>Log SQL queries?</xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+  <xs:attribute name="echo_pool" type="xs:boolean" default="false">
+    <xs:annotation>
+      <xs:documentation>Log connection pool activity?</xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+  <xs:attribute name="pool_recycle" type="xs:integer" default="-1">
+    <xs:annotation>
+      <xs:documentation>
+        Number of seconds after which idle connections are recycled;
+        -1 (the default) turns off recycling.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+
+</xs:complexType>
+
+
+<xs:element name="engines">
+  <xs:complexType>
+    <xs:annotation>
+      <xs:documentation>
+        Root element; contains a list of engine elements.
+      </xs:documentation>
+    </xs:annotation>
+
+    <xs:sequence>
+      <xs:element name="engine" type="Engine" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+</xs:schema>
+

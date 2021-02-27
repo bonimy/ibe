@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--    ____________________________________________________
+      /                                                      \
+     |   2MASS 6X Catalog Images                                | -->
+
+<catalogs>
+
+<schema_group id="twomass">
+
+ <schema name="sixxcat" engine="twomass_sixxcat">
+
+  <description>2MASS 6X Catalog Images </description>
+
+
+<!--  2MASS  -->
+
+  <!-- 2MASS 6X Catalog image metadata -->
+
+  <table name="sixxcat" dbname="imeta_a6x_cat_view">
+
+    <description>2MASS 6X Catalog Images</description>
+
+    <chunk_index path="/xpf/2mass/6X/chunk_index/catimages/index.ci"/>
+    <corners radius="0.15900928"/>
+    <center ra="crval1" dec="crval2"/>
+
+    <unique refs="cntr" />
+    <unique refs="fname" />
+
+    <image_set refs="scanno coaddno ordate hemisphere" />
+
+    <sia writer="ibe.lib.sia.TwomassSiaWriter" />
+
+    <products rootpath="/stage/tmass-data/links/sixxcatalog" />
+
+    <column name="cntr" principal="true">
+      <description>cntr</description>
+      <datatype>DECIMAL(10,0)</datatype>
+    </column>
+
+    <column name="bin" principal="true">
+      <description>bin</description>
+      <datatype>DECIMAL(10,0)</datatype>
+    </column>
+
+    <column name="copy_flag" principal="true">
+      <description>copy flag</description>
+      <datatype>DECIMAL(5,0)</datatype>
+    </column>
+
+    <column name="fname" principal="true">
+      <description>file name</description>
+      <datatype>VARCHAR(20)</datatype>
+    </column>
+
+    <column name="scanno" principal="true">
+      <description>scan number</description>
+      <datatype>DECIMAL(5,0)</datatype>
+    </column>
+
+    <column name="ordate" principal="true">
+      <description>or date</description>
+      <datatype>VARCHAR(10)</datatype>
+    </column>
+
+    <column name="hemisphere" principal="true">
+      <description>hemisphere</description>
+      <datatype>VARCHAR(2)</datatype>
+    </column>
+
+    <column name="coaddno" principal="true">
+      <description>coadd number</description>
+      <datatype>DECIMAL(5,0)</datatype>
+    </column>
+
+    <column name="iordate" principal="true">
+      <description>ior date</description>
+      <datatype>DECIMAL(10,0)</datatype>
+    </column>
+
+    <column name="strip_id" principal="true">
+      <description>strip id</description>
+      <datatype>DECIMAL(10,0)</datatype>
+    </column>
+
+    <column name="daynum" principal="true">
+      <description>day number</description>
+      <datatype>VARCHAR(10)</datatype>
+    </column>
+
+    <column name="type" principal="true">
+      <description>type</description>
+      <datatype>VARCHAR(10)</datatype>
+    </column>
+
+    <column name="scandir" principal="true">
+      <description>scan directory</description>
+      <datatype>VARCHAR(10)</datatype>
+    </column>
+
+    <column name="pixnam" principal="true">
+      <description>pixnam</description>
+      <datatype>VARCHAR(30)</datatype>
+    </column>
+
+    <column name="icsversn" principal="true">
+      <description>icsversn</description>
+      <datatype>VARCHAR(10)</datatype>
+    </column>
+
+    <column name="schedver" principal="true">
+      <description>schedver</description>
+      <datatype>VARCHAR(10)</datatype>
+    </column>
+
+    <column name="telname" principal="true">
+      <description>telname</description>
+      <datatype>VARCHAR(10)</datatype>
+    </column>
+
+    <column name="filter" principal="true">
+      <description>filter</description>
+      <datatype>VARCHAR(10)</datatype>
+    </column>
+
+    <column name="ut_date" principal="true">
+      <description>ut date</description>
+      <datatype>VARCHAR(10)</datatype>
+    </column>
+
+    <column name="ut" principal="true">
+      <description>ut</description>
+      <datatype>VARCHAR(20)</datatype>
+    </column>
+
+    <column name="calid" principal="true">
+      <description>calid</description>
+      <datatype>VARCHAR(20)</datatype>
+    </column>
+
+    <column name="focus" principal="true">
+      <description>focus</description>
+      <datatype>DECIMAL(10,0)</datatype>
+    </column>
+
+    <column name="hum_sos" principal="true">
+      <description>hum_sos</description>
+      <datatype>DECIMAL(5,0)</datatype>
+    </column>
+
+    <column name="ns" principal="true">
+      <description>number of pixels in x (data axis 1)</description>
+      <utype>fits:NAXIS1</utype>
+      <datatype>DECIMAL(10,0)</datatype>
+    </column>
+
+    <column name="nl" principal="true">
+      <description>number of pixels in y (data axis 2)</description>
+      <utype>fits:NAXIS2</utype>
+      <datatype>DECIMAL(10,0)</datatype>
+    </column>
+
+    <column name="ctype1" principal="true">
+      <description>CTYPE1</description>
+      <datatype>VARCHAR(10)</datatype>
+      <utype>fits:CTYPE1</utype>
+    </column>
+
+    <column name="ctype2" principal="true">
+      <description>CTYPE2</description>
+      <datatype>VARCHAR(10)</datatype>
+      <utype>fits:CTYPE2</utype>
+    </column>
+
+    <column name="epochsys" principal="true">
+      <description>Epoch sys</description>
+      <datatype>VARCHAR(2)</datatype>
+    </column>
+
+    <column name="equinox" principal="true">
+      <unit>yr</unit>
+      <description>Equinox</description>
+      <datatype>DOUBLE</datatype>
+      <utype>fits:EQUINOX</utype>
+    </column>
+
+    <column name="crpix1" principal="true">
+      <description>CRPIX1</description>
+      <datatype>DOUBLE</datatype>
+      <utype>fits:CRPIX1</utype>
+    </column>
+
+    <column name="crpix2" principal="true">
+      <description>CRPIX2</description>
+      <datatype>DOUBLE</datatype>
+      <utype>fits:CRPIX2</utype>
+    </column>
+
+    <column name="crval1" principal="true">
+      <description>CRVAL1</description>
+      <datatype>DOUBLE</datatype>
+      <utype>fits:CRVAL1</utype>
+    </column>
+
+    <column name="crval2" principal="true">
+      <description>CRVAL2</description>
+      <datatype>DOUBLE</datatype>
+      <utype>fits:CRVAL2</utype>
+    </column>
+
+    <column name="cdelt1" principal="true">
+      <description>CDELT1</description>
+      <datatype>DOUBLE</datatype>
+      <utype>fits:CDELT1</utype>
+    </column>
+
+    <column name="cdelt2" principal="true">
+      <description>CDELT2</description>
+      <datatype>DOUBLE</datatype>
+      <utype>fits:CDELT2</utype>
+    </column>
+
+    <column name="crota2" principal="true">
+      <description>CROTA2</description>
+      <datatype>DOUBLE</datatype>
+      <utype>fits:CROTA2</utype>
+    </column>
+
+    <column name="x" principal="true">
+      <description>x</description>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="y" principal="true">
+      <description>y</description>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="z" principal="true">
+      <description>z</description>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="cos_r" principal="true">
+      <description>cos r</description>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="sin_r" principal="true">
+      <description>sin r</description>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="usxref" principal="true">
+      <description>usxref</description>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="usyref" principal="true">
+      <description>usyref</description>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="skyval" principal="true">
+      <description>skyval</description>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="skysig" principal="true">
+      <description>skysig</description>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="qt0227" principal="true">
+      <description>qt0227</description>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="qt0668" principal="true">
+      <description>qt0668</description>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="qt1586" principal="true">
+      <description>qt1586</description>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="qt3085" principal="true">
+      <description>qt3085</description>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="qt5000" principal="true">
+      <description>qt5000</description>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="qt6914" principal="true">
+      <description>qt6914</description>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="qt8413" principal="true">
+      <description>qt8413</description>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="qt9331" principal="true">
+      <description>qt9331</description>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="qt9772" principal="true">
+      <description>qt9772</description>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="amass_fc" principal="true">
+      <description>amass_fc</description>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="bar_sos" principal="true">
+      <description>bar_sos</description>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="airt_sos" principal="true">
+      <description>airt_sos</description>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="telt_sos" principal="true">
+      <description>telt_sos</description>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="magzp" principal="true">
+      <description>magzp</description>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="seesh" principal="true">
+      <description>seesh</description>
+      <datatype>DOUBLE</datatype>
+    </column>
+
+    <column name="coadd_key" principal="true">
+      <description>coadd_key</description>
+      <datatype>DECIMAL(10,0)</datatype>
+    </column>
+
+    <column name="psp" principal="true">
+      <description>psp</description>
+      <datatype>DECIMAL(6,3)</datatype>
+    </column>
+
+    <column name="msnr10" principal="true">
+      <description>msnr10</description>
+      <datatype>DECIMAL(5,3)</datatype>
+    </column>
+
+    <column name="atlasdir" principal="true">
+      <description>atlasdir</description>
+      <datatype>VARCHAR(8)</datatype>
+    </column>
+
+    <column name="spt_ind" principal="true">
+      <description>spt_ind</description>
+      <datatype>DECIMAL(10,0)</datatype>
+    </column>
+
+    <column name="ra" principal="true">
+      <unit>deg</unit>
+      <description>ra</description>
+      <datatype>DOUBLE</datatype>
+      <utype>fits:RA</utype>
+    </column>
+
+    <column name="dec" principal="true">
+      <unit>deg</unit>
+      <description>dec</description>
+      <datatype>DOUBLE</datatype>
+      <utype>fits:DEC</utype>
+    </column>
+
+    <column name="naxis" selectable="false">
+      <description>number of data axes</description>
+      <utype>fits:NAXIS</utype>
+      <datatype>SMALLINT</datatype>
+      <format_spec>1d</format_spec>
+      <constant>2</constant>
+    </column>
+
+
+  </table>
+
+</schema>
+
+</schema_group>
+
+</catalogs>
+
+<!-- |                                                        |
+      \ ____________________________________________________ /  -->
+

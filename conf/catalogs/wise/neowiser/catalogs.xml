@@ -1,0 +1,774 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<catalogs>
+
+<!-- {  ____________________________________________________
+      /                                                      \
+     |   NEOWISER Public                                      | -->
+
+<schema_group id="wise">
+
+<!--  all of NEOWISER is ~ 2-Band  -->
+
+<schema name="neowiser" engine="wise_neowiser">
+
+ <description>NEOWISER L1b Tables</description>
+
+
+  <!-- neowiser_p1bm_frm - NEOWISER L1b Tables        -->
+
+  <table name="p1bm_frm" dbname="neowiser_p1bm_frm">
+
+    <description>NEOWISER L1b Images</description>
+
+    <!--
+    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/p1bm_frm/current/merge.ci" />
+    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/p1bm_frm/current/merge.ci" />
+    -->
+    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/p1bm_frm/current/merge.ci" />
+
+    <corners radius="0.75"/>
+    <center ra="crval1" dec="crval2"/>
+
+    <unique refs="cntr" />
+    <unique refs="scan_id frame_num band" />
+    <unique refs="mjd_obs band" />
+
+    <image_set refs="scan_id frame_num" />
+
+    <reference from="scan_id"   to="wise.neowiser.i1bm_frm.scan_id"         />
+    <reference from="frame_num" to="wise.neowiser.i1bm_frm.frame_num"       />
+
+    <reference from="scan_id"   to="wise.neowiser.i1bs_psd.scan_id"         />
+    <reference from="frame_num" to="wise.neowiser.i1bs_psd.frame_num"       />
+
+    <reference from="scan_id"   to="wise.neowiser.p1bm_frm.scan_id"         />
+    <reference from="frame_num" to="wise.neowiser.p1bm_frm.frame_num"       />
+
+    <reference from="scan_id"   to="wise.neowiser.p1bs_psd.scan_id"         />
+    <reference from="frame_num" to="wise.neowiser.p1bs_psd.frame_num"       />
+
+    <!--
+    <reference from="scan_id"   to="wise.neowiser.p1bm_frm.scan_id"     />
+    <reference from="frame_num" to="wise.neowiser.p1bm_frm.frame_num"   />
+    -->
+
+    <reference from="scan_id"   to="wise.neowiser.p1bs_psd.scan_id"     />
+    <reference from="frame_num" to="wise.neowiser.p1bs_psd.frame_num"   />
+
+
+    <reference from="scan_id"   to="wise.allsky.2band_p1bs_psd.scan_id"     />
+    <reference from="frame_num" to="wise.allsky.2band_p1bs_psd.frame_num"   />
+
+    <reference from="scan_id"   to="wise.allsky.2band_p3bs_psd.scan_id"     />
+    <reference from="frame_num" to="wise.allsky.2band_p3bs_psd.frame_num"   />
+
+    <reference from="scan_id"   to="wise.merge.merge_p1bs_psd.scan_id"      />  
+    <reference from="frame_num" to="wise.merge.merge_p1bs_psd.frame_num"    />  
+
+    <reference from="scan_id"   to="wise.merge.merge_p3bs_psd.scan_id"      />  
+    <reference from="frame_num" to="wise.merge.merge_p3bs_psd.frame_num"    />  
+
+    <reference from="scan_id"   to="wise.postcryo.2band_p1bs_psd.scan_id"   />  
+    <reference from="frame_num" to="wise.postcryo.2band_p1bs_psd.frame_num" />  
+
+    <reference from="scan_id"   to="wise.postcryo.2band_p3bs_psd.scan_id"   />  
+    <reference from="frame_num" to="wise.postcryo.2band_p3bs_psd.frame_num" />  
+
+    <sia writer="ibe.lib.sia.WiseSiaWriter" />
+
+    <!--
+    <products rootpath="/stage/irsa-wise-links-ops/links-neowiser/l1b-pub"    />
+    <products rootpath="/stage/irsa-wise-links-public/links-neowiser/l1b"     />
+    <products rootpath="/stage/irsa-wise-links-public/links-neowiser/l1b-pub" />
+    -->
+    <products rootpath="/stage/irsa-wise-links-public/links-neowiser/l1b"     />
+
+        <column name="band" principal="true">
+          <description>WISE band number</description>
+            <ucd>instr.filter</ucd>
+          <datatype>INTEGER</datatype>
+          <format_spec>1d</format_spec>
+        </column>
+
+        <column name="naxis">
+          <description>number of data axes</description>
+            <ucd>pos.wcs.naxes</ucd>
+            <utype>fits:NAXIS;stc:PixelCoordSystem.PixelCoordFrame.CoordFlavor.coord_naxes</utype>
+          <datatype>INTEGER</datatype>
+          <format_spec>1d</format_spec>
+        </column>
+
+        <column name="naxis1">
+          <description>number of pixels in x (data axis 1)</description>
+            <utype>fits:NAXIS1;stc:PixelCoordArea.PixelCoord2VecInterval.HiLimit2Vec.C1</utype>
+          <datatype>INTEGER</datatype>
+          <format_spec>4d</format_spec>
+        </column>
+
+        <column name="naxis2">
+          <description>number of pixels in y (data axis 2)</description>
+            <utype>fits:NAXIS2;stc:PixelCoordArea.PixelCoord2VecInterval.HiLimit2Vec.C2</utype>
+          <datatype>INTEGER</datatype>
+          <format_spec>4d</format_spec>
+        </column>
+
+        <column name="wrelease">
+          <description>release version of WSDS pipeline</description>
+            <ucd>meta.version</ucd>
+          <datatype>VARCHAR(15)</datatype>
+        </column>
+
+        <column name="crpix1">
+          <description>reference pixel value for axis 1 (x)</description>
+            <utype>fits:CRPIX1;stc:PixelCoordSystem.PixelCoordFrame.ReferencePixel.Pixel2d.Value2.C1</utype>
+          <unit>pix</unit>
+          <datatype>DECIMAL(4,1)</datatype>
+        </column>
+
+        <column name="crpix2">
+          <description>reference pixel value for axis 2 (y)</description>
+            <utype>fits:CRPIX2;stc:PixelCoordSystem.PixelCoordFrame.ReferencePixel.Pixel2d.Value2.C2</utype>
+          <unit>pix</unit>
+          <datatype>DECIMAL(4,1)</datatype>
+        </column>
+
+        <column name="crval1" principal="true">
+          <description>reference RA J2000 position at crpix1,crpix2</description>
+            <ucd>pos.eq.ra</ucd>
+            <utype>fits:CRVAL1;stc:PixelCoordSystem.PixelCoordFrame.CoordRefPos.Vector2DCoordinate.Value2.C1</utype>
+          <unit>deg</unit>
+          <datatype>DECIMAL(15,12)</datatype>
+        </column>
+
+        <column name="crval2" principal="true">
+          <description>reference Dec J2000 position at crpix1,crpix2</description>
+            <ucd>pos.eq.dec</ucd>
+            <utype>fits:CRVAL2;stc:PixelCoordSystem.PixelCoordFrame.CoordRefPos.Vector2DCoordinate.Value2.C2</utype>
+          <unit>deg</unit>
+          <datatype>DECIMAL(15,12)</datatype>
+        </column>
+
+        <column name="ctype1">
+          <description>projection type (with distortion) for axis 1 (x)</description>
+            <utype>fits:CTYPE1</utype>
+          <datatype>VARCHAR(13)</datatype>
+        </column>
+
+        <column name="ctype2">
+          <description>projection type (with distortion) for axis 2 (y)</description>
+            <utype>fits:CTYPE2</utype>
+          <datatype>VARCHAR(13)</datatype>
+        </column>
+
+        <column name="equinox">
+          <description>equinox of WCS information</description>
+            <ucd>time.equinox</ucd>
+            <utype>fits:EQUINOX</utype>
+          <unit>year</unit>
+          <datatype>DECIMAL(5,1)</datatype>
+        </column>
+
+        <column name="bunit">
+          <description>image data unit</description>
+          <datatype>VARCHAR(20)</datatype>
+        </column>
+
+        <column name="elon">
+          <description>ecliptic longitude of crval1,crval2</description>
+            <ucd>pos.ecliptic.lon</ucd>
+            <utype>stc:AstroCoords.Position2D.Value2.C1</utype>
+          <unit>deg</unit>
+          <datatype>DECIMAL(15,12)</datatype>
+        </column>
+
+        <column name="elat">
+          <description>ecliptic latitude of crval1,crval2</description>
+            <ucd>pos.ecliptic.lat</ucd>
+            <utype>stc:AstroCoords.Position2D.Value2.C2</utype>
+          <unit>deg</unit>
+          <datatype>DECIMAL(15,12)</datatype>
+        </column>
+
+        <column name="glon">
+          <description>galactic longitude of crval1,crval2</description>
+            <ucd>pos.galactic.lon</ucd>
+            <utype>stc:AstroCoords.Position2D.Value2.C1</utype>
+          <unit>deg</unit>
+          <datatype>DECIMAL(15,12)</datatype>
+        </column>
+
+        <column name="glat">
+          <description>galactic latitude of crval1,crval2</description>
+            <ucd>pos.galactic.lat</ucd>
+            <utype>stc:AstroCoords.Position2D.Value2.C2</utype>
+          <unit>deg</unit>
+          <datatype>DECIMAL(15,12)</datatype>
+        </column>
+
+        <column name="ra1" principal="true">
+          <description>RA J2000 position at corner #1 (crpix1,crpix2=-.5,-.5)</description>
+            <ucd>pos.eq.ra</ucd>
+          <unit>deg</unit>
+          <datatype>DECIMAL(15,12)</datatype>
+        </column>
+
+        <column name="dec1" principal="true">
+          <description>Dec J2000 position at corner #1 (crpix1,crpix2=-.5,-.5)</description>
+            <ucd>pos.eq.dec</ucd>
+          <unit>deg</unit>
+          <datatype>DECIMAL(15,12)</datatype>
+        </column>
+
+        <column name="ra2" principal="true">
+          <description>RA J2000 position at corner #2 (crpix1,crpix2=naxis1+.5,-.5)</description>
+            <ucd>pos.eq.ra</ucd>
+          <unit>deg</unit>
+          <datatype>DECIMAL(15,12)</datatype>
+        </column>
+
+        <column name="dec2" principal="true">
+          <description>Dec J2000 position at corner #2 (crpix1,crpix2=naxis1+.5,-.5)</description>
+            <ucd>pos.eq.dec</ucd>
+          <unit>deg</unit>
+          <datatype>DECIMAL(15,12)</datatype>
+        </column>
+
+        <column name="ra3" principal="true">
+          <description>RA J2000 position at corner #3 (crpix1,crpix2=naxis1+.5,naxis1+.5)</description>
+            <ucd>pos.eq.ra</ucd>
+          <unit>deg</unit>
+          <datatype>DECIMAL(15,12)</datatype>
+        </column>
+
+        <column name="dec3" principal="true">
+          <description>Dec J2000 position at corner #3 (crpix1,crpix2=naxis1+.5,naxis1+.5)</description>
+            <ucd>pos.eq.dec</ucd>
+          <unit>deg</unit>
+          <datatype>DECIMAL(15,12)</datatype>
+        </column>
+
+        <column name="ra4" principal="true">
+          <description>RA J2000 position at corner #4 (crpix1,crpix2=-.5,naxis1+.5)</description>
+            <ucd>pos.eq.ra</ucd>
+          <unit>deg</unit>
+          <datatype>DECIMAL(15,12)</datatype>
+        </column>
+
+        <column name="dec4" principal="true">
+          <description>Dec J2000 position at corner #4 (crpix1,crpix2=-.5,naxis1+.5)</description>
+            <ucd>pos.eq.dec</ucd>
+          <unit>deg</unit>
+          <datatype>DECIMAL(15,12)</datatype>
+        </column>
+
+        <column name="magzp" principal="true">
+          <description>relative photometric zero-point mag</description>
+          <unit>mag</unit>
+          <datatype>DECIMAL(7,5)</datatype>
+        </column>
+
+        <column name="magzpunc" principal="true">
+          <description>1-sigma uncertainty in photometric zero-point mag</description>
+          <unit>mag</unit>
+          <datatype>DECIMAL(7,6)</datatype>
+        </column>
+
+        <column name="modeint" principal="true">
+          <description>mode of pixel DN in frame within lowest sigma partition</description>
+          <unit>DN</unit>
+          <datatype>DECIMAL(9,3)</datatype>
+        </column>
+
+        <column name="scan_id" principal="true">
+          <description>scan ID</description>
+            <ucd>meta.id</ucd>
+          <datatype>VARCHAR(6)</datatype>
+        </column>
+
+        <column name="scangrp" principal="true">
+          <description>scan group ID</description>
+            <ucd>meta.id</ucd>
+          <datatype>VARCHAR(2)</datatype>
+        </column>
+
+        <column name="frame_num" principal="true">
+          <description>frame number in scan</description>
+            <ucd>meta.id</ucd>
+          <datatype>INTEGER</datatype>
+          <format_spec>03d</format_spec>
+        </column>
+
+        <column name="l0file">
+          <description>corresponding level 0 image file name</description>
+            <ucd>meta.file</ucd>
+          <datatype>VARCHAR(200)</datatype>
+        </column>
+
+        <column name="date_obs" principal="true">
+          <description>date and time of mid-point of frame observation, UTC</description>
+            <ucd>time.epoch</ucd>
+          <unit>datetimeZ</unit>
+          <datatype>VARCHAR(24)</datatype>
+        </column>
+
+        <column name="mjd_obs" principal="true">
+          <description>modified julian date of mid-point of frame observation, UTC</description>
+            <ucd>time.epoch</ucd>
+          <unit>mjdate</unit>
+          <datatype>DECIMAL(13,8)</datatype>
+        </column>
+
+        <column name="icaldir">
+          <description>reference dir used for ICAL</description>
+            <ucd>meta.file</ucd>
+          <datatype>VARCHAR(200)</datatype>
+        </column>
+
+        <column name="dtanneal" principal="true">
+          <description>time since last anneal</description>
+            <ucd>time.interval</ucd>
+          <unit>sec</unit>
+          <datatype>DECIMAL(17,11)</datatype>
+        </column>
+
+        <column name="utanneal" principal="true">
+          <description>date and time of last anneal, UTC</description>
+            <ucd>time.epoch</ucd>
+          <unit>datetimeZ</unit>
+          <datatype>VARCHAR(24)</datatype>
+        </column>
+
+        <column name="unixt">
+          <description>UNIX date-time in sec of mid-point of frame observation, UTC</description>
+            <ucd>time.epoch</ucd>
+          <unit>sec</unit>
+          <datatype>DECIMAL(15,5)</datatype>
+        </column>
+
+        <column name="ephemt">
+          <description>ephemeris date-time in sec of mid-point of frame observation, UTC</description>
+            <ucd>time.epoch</ucd>
+          <unit>sec</unit>
+          <datatype>DECIMAL(15,6)</datatype>
+        </column>
+
+        <column name="exptime" principal="true">
+          <description>frame exposure time</description>
+            <ucd>time.duration</ucd>
+          <unit>sec</unit>
+          <datatype>DECIMAL(3,1)</datatype>
+        </column>
+
+        <column name="tsamp">
+          <description>time interval between non-destructively read samples-up-the-ramp</description>
+          <unit>sec</unit>
+          <datatype>DECIMAL(3,1)</datatype>
+        </column>
+
+        <column name="wcdelt1">
+          <description>deg/pix scale at crpix1,crpix2 for axis 1 (x)</description>
+          <unit>deg/pix</unit>
+          <datatype>DECIMAL(19,18)</datatype>
+        </column>
+
+        <column name="wcdelt2">
+          <description>deg/pix scale at crpix1,crpix2 for axis 2 (y)</description>
+          <unit>deg/pix</unit>
+          <datatype>DECIMAL(19,18)</datatype>
+        </column>
+
+        <column name="crder1">
+          <description>uncertainty in crval1 (RA)</description>
+          <unit>deg</unit>
+          <datatype>DOUBLE</datatype>
+          <format_spec>20.14e</format_spec>
+        </column>
+
+        <column name="crder2">
+          <description>uncertainty in crval2 (Dec)</description>
+          <unit>deg</unit>
+          <datatype>DOUBLE</datatype>
+          <format_spec>20.14e</format_spec>
+        </column>
+
+        <column name="csdradec">
+          <description>costandard deviation in crval1 and crval2 (RA and Dec)</description>
+          <unit>deg</unit>
+          <datatype>DOUBLE</datatype>
+          <format_spec>21.14e</format_spec>
+        </column>
+
+        <column name="pxscal1">
+          <description>arcsec/pix scale at crpix1,crpix2 for axis 1 (x)</description>
+          <unit>asec/pix</unit>
+          <datatype>DECIMAL(15,14)</datatype>
+        </column>
+
+        <column name="pxscal2">
+          <description>arcsec/pix scale at crpix1,crpix2 for axis 2 (y)</description>
+          <unit>asec/pix</unit>
+          <datatype>DECIMAL(15,14)</datatype>
+        </column>
+
+        <column name="uncrts1">
+          <description>uncertainty in wcdelt1</description>
+          <unit>deg/pix</unit>
+          <datatype>DOUBLE</datatype>
+          <format_spec>20.14e</format_spec>
+        </column>
+
+        <column name="uncrts2">
+          <description>uncertainty in wcdelt2</description>
+          <unit>deg/pix</unit>
+          <datatype>DOUBLE</datatype>
+          <format_spec>20.14e</format_spec>
+        </column>
+
+        <column name="wcrota2">
+          <description>image twist angle of +axis2 W of N</description>
+          <unit>deg</unit>
+          <datatype>DECIMAL(16,13)</datatype>
+        </column>
+
+        <column name="pa">
+          <description>position angle of +axis2 E of N</description>
+          <unit>deg</unit>
+          <datatype>DECIMAL(16,13)</datatype>
+        </column>
+
+        <column name="uncrtpa">
+          <description>uncertainty in position angle</description>
+          <unit>deg</unit>
+          <datatype>DECIMAL(19,18)</datatype>
+        </column>
+
+        <column name="skew">
+          <description>measure of non-orthogonality of frame axes</description>
+          <datatype>DECIMAL(3,1)</datatype>
+        </column>
+
+        <column name="cd1_1">
+          <description>CD matrix element 1_1</description>
+            <utype>fits:CD1_1;stc:PixelCoordSystem.PixelCoordFrame.Cart2DRefFrame.Transform2Matrix.M11</utype>
+          <unit>deg/pix</unit>
+          <datatype>DECIMAL(19,18)</datatype>
+        </column>
+
+        <column name="cd1_2">
+          <description>CD matrix element 1_2</description>
+            <utype>fits:CD1_2;stc:PixelCoordSystem.PixelCoordFrame.Cart2DRefFrame.Transform2Matrix.M12</utype>
+          <unit>deg/pix</unit>
+          <datatype>DECIMAL(19,18)</datatype>
+        </column>
+
+        <column name="cd2_1">
+          <description>CD matrix element 2_1</description>
+            <utype>fits:CD2_1;stc:PixelCoordSystem.PixelCoordFrame.Cart2DRefFrame.Transform2Matrix.M21</utype>
+          <unit>deg/pix</unit>
+          <datatype>DECIMAL(19,18)</datatype>
+        </column>
+
+        <column name="cd2_2">
+          <description>CD matrix element 2_2</description>
+            <utype>fits:CD2_2;stc:PixelCoordSystem.PixelCoordFrame.Cart2DRefFrame.Transform2Matrix.M22</utype>
+          <unit>deg/pix</unit>
+          <datatype>DECIMAL(19,18)</datatype>
+        </column>
+
+        <column name="debgain" principal="true">
+          <description>digital electronics box gain (not available in neowiser)</description>
+          <unit>e-/DEB ADU</unit>
+          <datatype>DECIMAL(8,3)</datatype>
+        </column>
+
+        <column name="febgain" principal="true">
+          <description>flight electronics box gain for individ. (not available in neowiser)</description>
+          <unit>e-/SUR ADU</unit>
+          <datatype>DECIMAL(9,4)</datatype>
+        </column>
+
+        <column name="moon_sep" principal="true">
+          <description>distance from frame center to moon (not available in neowiser)</description>
+          <unit>deg</unit>
+          <datatype>DECIMAL(6,3)</datatype>
+        </column>
+
+        <column name="saa_sep" principal="true">
+          <description>distance from frame center to SAA boundary (not available in neowiser)</description>
+          <unit>deg</unit>
+          <datatype>DECIMAL(6,3)</datatype>
+        </column>
+
+        <column name="qa_status" principal="true">
+          <description>QA status for scan: Prelim, Reviewed, or Final</description>
+          <datatype>VARCHAR(9)</datatype>
+        </column>
+
+        <column name="qual_frame" principal="true">
+          <description>quality score value for frame</description>
+          <datatype>INTEGER</datatype>
+          <format_spec>2d</format_spec>
+        </column>
+
+        <column name="qc_fact">
+          <description>quality factor qc value for frame: completion quality</description>
+          <datatype>DECIMAL(2,1)</datatype>
+        </column>
+
+        <column name="qi_fact">
+          <description>quality factor qi value for frame: image quality</description>
+          <datatype>DECIMAL(2,1)</datatype>
+        </column>
+
+        <column name="qn_fact">
+          <description>quality factor qn value for frame: noise quality</description>
+          <datatype>DECIMAL(2,1)</datatype>
+        </column>
+
+        <column name="qa_fact">
+          <description>quality factor qa value for frame: astrometry quality</description>
+          <datatype>DECIMAL(2,1)</datatype>
+        </column>
+
+        <column name="q1_fact">
+          <description>quality factor TBD value for frame: TBD</description>
+          <datatype>DECIMAL(2,1)</datatype>
+        </column>
+
+        <column name="q2_fact">
+          <description>quality factor TBD value for frame: TBD</description>
+          <datatype>DECIMAL(2,1)</datatype>
+        </column>
+
+        <column name="q3_fact">
+          <description>quality factor TBD value for frame: TBD</description>
+          <datatype>DECIMAL(2,1)</datatype>
+        </column>
+
+        <column name="q4_fact">
+          <description>quality factor TBD value for frame: TBD</description>
+          <datatype>DECIMAL(2,1)</datatype>
+        </column>
+
+        <column name="q5_fact">
+          <description>quality factor TBD value for frame: TBD</description>
+          <datatype>DECIMAL(2,1)</datatype>
+        </column>
+
+        <column name="qual_scan" principal="true">
+          <description>quality score value for scan</description>
+          <datatype>INTEGER</datatype>
+          <format_spec>2d</format_spec>
+        </column>
+
+        <column name="qs1_fact">
+          <description>quality factor qs1 value for scan: 1x1 scansynch quality</description>
+          <datatype>DECIMAL(2,1)</datatype>
+        </column>
+
+        <column name="qs5_fact">
+          <description>quality factor qs5 value for scan: 5x5 scansynch quality</description>
+          <datatype>DECIMAL(2,1)</datatype>
+        </column>
+
+        <column name="qp_fact">
+          <description>quality factor qp value for scan: photometric quality</description>
+          <datatype>DECIMAL(2,1)</datatype>
+        </column>
+
+        <column name="qs_fact">
+          <description>quality factor qs value for scan:</description>
+          <datatype>DECIMAL(2,1)</datatype>
+        </column>
+
+        <column name="q6_fact">
+          <description>quality factor TBD value for scan: TBD</description>
+          <datatype>DECIMAL(2,1)</datatype>
+        </column>
+
+        <column name="q7_fact">
+          <description>quality factor TBD value for scan: TBD</description>
+          <datatype>DECIMAL(2,1)</datatype>
+        </column>
+
+        <column name="q8_fact">
+          <description>quality factor TBD value for scan: TBD</description>
+          <datatype>DECIMAL(2,1)</datatype>
+        </column>
+
+        <column name="q9_fact">
+          <description>quality factor TBD value for scan: TBD</description>
+          <datatype>DECIMAL(2,1)</datatype>
+        </column>
+
+        <column name="q10_fact">
+          <description>quality factor TBD value for scan: TBD</description>
+          <datatype>DECIMAL(2,1)</datatype>
+        </column>
+
+        <column name="date_imgprep">
+          <description>date and time of imgprep run, UTC</description>
+          <unit>datetimeZ</unit>
+          <datatype>VARCHAR(20)</datatype>
+        </column>
+
+        <column name="load_id">
+          <description>unique load ID number</description>
+          <datatype>INTEGER</datatype>
+          <format_spec>4d</format_spec>
+        </column>
+
+        <column name="cntr">
+          <description>unique entry counter (key) number</description>
+            <ucd>meta.record</ucd>
+          <datatype>BIGINT</datatype>
+          <format_spec>19d</format_spec>
+        </column>
+
+        <column name="x">
+          <description>unit sphere (x,y,z) position x value</description>
+            <ucd>pos.cartesian.x</ucd>
+          <datatype>DECIMAL(17,16)</datatype>
+        </column>
+
+        <column name="y">
+          <description>unit sphere (x,y,z) position y value</description>
+            <ucd>pos.cartesian.y</ucd>
+          <datatype>DECIMAL(17,16)</datatype>
+        </column>
+
+        <column name="z">
+          <description>unit sphere (x,y,z) position z value</description>
+            <ucd>pos.cartesian.z</ucd>
+          <datatype>DECIMAL(17,16)</datatype>
+        </column>
+
+        <column name="spt_ind">
+          <description>spatial (x,y,z) index key</description>
+          <datatype>INTEGER</datatype>
+          <format_spec>9d</format_spec>
+        </column>
+
+</table>
+
+
+  <!-- neowiser_p1bs_psd - NEOWISER L1b image metadata -->
+
+  <table name="p1bs_psd" dbname="neowiser_p1bs_psd">
+
+    <description>NEOWISER L1b Images</description>
+
+    <!--
+    <chunk_index path="/stage/irsa-wise-xpf/chunk_index/neowiser/p1bs_psd/current/merge.ci" />
+    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/p1bs_psd/current/merge.ci" />
+    -->
+    <chunk_index path="/stage/irsa-wise-xpf-public/chunk_index/wise_neowiser/p1bs_psd/current/merge.ci" />
+
+    <unique refs="cntr" />
+    <unique refs="source_id" />
+
+    <image_set refs="scan_id frame_num" />
+
+    <reference from="scan_id"   to="wise.neowiser.i1bm_frm.scan_id"         />
+    <reference from="frame_num" to="wise.neowiser.i1bm_frm.frame_num"       />
+
+    <reference from="scan_id"   to="wise.neowiser.i1bs_psd.scan_id"         />
+    <reference from="frame_num" to="wise.neowiser.i1bs_psd.frame_num"       />
+
+    <reference from="scan_id"   to="wise.neowiser.p1bm_frm.scan_id"         />
+    <reference from="frame_num" to="wise.neowiser.p1bm_frm.frame_num"       />
+
+    <reference from="scan_id"   to="wise.neowiser.p1bs_psd.scan_id"         />
+    <reference from="frame_num" to="wise.neowiser.p1bs_psd.frame_num"       />
+
+    <reference from="scan_id"   to="wise.neowiser.p1bm_frm.scan_id"     />
+    <reference from="frame_num" to="wise.neowiser.p1bm_frm.frame_num"   />
+
+    <!--
+    <reference from="scan_id"   to="wise.neowiser.p1bs_psd.scan_id"     />
+    <reference from="frame_num" to="wise.neowiser.p1bs_psd.frame_num"   />
+    -->
+
+
+    <reference from="scan_id"   to="wise.allsky.2band_p1bs_psd.scan_id"     />
+    <reference from="frame_num" to="wise.allsky.2band_p1bs_psd.frame_num"   />
+
+    <reference from="scan_id"   to="wise.allsky.2band_p3bs_psd.scan_id"     />
+    <reference from="frame_num" to="wise.allsky.2band_p3bs_psd.frame_num"   />
+
+    <reference from="scan_id"   to="wise.merge.merge_p1bm_frm.scan_id"      />  
+    <reference from="frame_num" to="wise.merge.merge_p1bm_frm.frame_num"    />  
+
+    <reference from="scan_id"   to="wise.merge.merge_p3am_cdd.scan_id"      />  
+    <reference from="frame_num" to="wise.merge.merge_p3am_cdd.frame_num"    />  
+
+    <reference from="scan_id"   to="wise.postcryo.2band_p1bs_psd.scan_id"   />  
+    <reference from="frame_num" to="wise.postcryo.2band_p1bs_psd.frame_num" />  
+
+    <reference from="scan_id"   to="wise.postcryo.2band_p3bs_psd.scan_id"   />  
+    <reference from="frame_num" to="wise.postcryo.2band_p3bs_psd.frame_num" />  
+
+    <reference from="scan_id"   to="wise.postcryo.2band_p1bm_frm.scan_id"   />  
+    <reference from="frame_num" to="wise.postcryo.2band_p1bm_frm.frame_num" />  
+
+    <reference from="scan_id"   to="wise.postcryo.2band_p3bm_frm.scan_id"   />  
+    <reference from="frame_num" to="wise.postcryo.2band_p3bm_frm.frame_num" />  
+
+    <!-- for now, describe just the subset of columns necessary for search by source id -->
+
+
+    <column name="ra" principal="true">
+      <description>RA</description>
+      <ucd>pos.eq.ra</ucd>
+      <unit>deg</unit>
+      <datatype>DECIMAL(15,12)</datatype>
+    </column>
+
+    <column name="dec" principal="true">
+      <description>Dec</description>
+      <ucd>pos.eq.dec</ucd>
+      <unit>deg</unit>
+      <datatype>DECIMAL(14,12)</datatype>
+    </column>
+
+    <column name="source_id" principal="true">
+      <description>unique source ID (scan ID, frame num, and source number)</description>
+      <ucd>meta.id</ucd>
+      <datatype>CHAR(16)</datatype>
+    </column>
+
+    <column name="scan_id" principal="true">
+      <description>scan ID</description>
+      <ucd>meta.id</ucd>
+      <datatype>CHAR(6)</datatype>
+    </column>
+
+    <column name="frame_num" principal="true">
+      <description>frame number in scan</description>
+      <ucd>meta.id</ucd>
+      <datatype>INTEGER</datatype>
+      <format_spec>03d</format_spec>
+    </column>
+
+    <column name="cntr">
+      <description>unique record ID</description>
+      <ucd>meta.record</ucd>
+      <datatype>BIGINT</datatype>
+      <format_spec>19d</format_spec>
+    </column>
+
+
+</table>
+
+
+
+</schema>
+
+<!-- |                                                        |
+      \ ____________________________________________________ /  }  -->
+
+</schema_group>
+
+</catalogs>
+

@@ -1,0 +1,15 @@
+{
+    "WSGIProcesses": "2", 
+    "datasets": [
+        "wise/neowiser",
+        "wise/merge"
+    ], 
+    "MaxSpareServers": "2", 
+    "MinSpareServers": "1", 
+    "proxied": false, 
+    "host": "http://bacchus.ipac.caltech.edu:5001", 
+    "workspace_root": "/work/irsadmin_5001",    
+    "StartServers": "2", 
+    "MaxClients": "100", 
+    "Port": "5001"
+}
