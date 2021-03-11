@@ -1,19 +1,20 @@
 #include "FitsFile.hxx"
 
-#include "checkFitsError.hxx"
+// Local headers
+#include "check_fits_error.hxx"
 
 namespace ibe {
-FitsFile::FitsFile(char const* path) : _file(0) {
+FitsFile::FitsFile(char const* path) : file_(0) {
     int status = 0;
-    fits_open_file(&_file, path, READONLY, &status);
-    checkFitsError(status);
+    fits_open_file(&file_, path, READONLY, &status);
+    check_fits_error(status);
 }
 
 FitsFile::~FitsFile() {
-    if (_file != 0) {
+    if (file_ != 0) {
         int status = 0;
-        fits_close_file(_file, &status);
-        _file = 0;
+        fits_close_file(file_, &status);
+        file_ = 0;
     }
 }
 }  // namespace ibe
