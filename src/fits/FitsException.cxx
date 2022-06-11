@@ -1,5 +1,6 @@
-#include "fits/FitsException.hxx"
+#include "FitsException.hxx"
 
 namespace fits {
-FitsException::FitsException(const std::string& str) : std::exception(str.c_str()) {}
+FitsException::FitsException(const std::string& str)
+        : std::runtime_error(str.c_str()) {}
 }  // namespace fits

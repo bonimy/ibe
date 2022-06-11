@@ -1,7 +1,18 @@
 #include "stream_subimage.hxx"
 
-// Standard library
-#include <cstring>
+// Local headers
+#include "Coords.hxx"
+#include "FitsFile.hxx"
+#include "HttpException.hxx"
+#include "HttpResponseCode.hxx"
+#include "check_fits_error.hxx"
+#include "cutout_pixel_box.hxx"
+
+// External APIs
+#include <fitsio.h>
+extern "C" {
+#include <fitsio2.h>
+}
 
 // Windows
 #ifdef WIN32
@@ -12,19 +23,8 @@
 #define __builtin_bswap64 _byteswap_uint64
 #endif
 
-// Third-party libraries
-#include <fitsio.h>
-extern "C" {
-#include <fitsio2.h>
-}
-
-// Local headers
-#include "Coords.hxx"
-#include "FitsFile.hxx"
-#include "HttpException.hxx"
-#include "HttpResponseCode.hxx"
-#include "check_fits_error.hxx"
-#include "cutout_pixel_box.hxx"
+// Standard library
+#include <cstring>
 
 namespace ibe {
 namespace {
@@ -77,12 +77,10 @@ size_t copy_data(FitsFile& f, Writer& writer, size_t num_bytes) {
     check_fits_error(status);
     long num_blocks = static_cast<long>((data_end - data_start) / 2880);
     if (num_blocks > 0) {
-
         // Move to the initial copy position
         ffmbyt(f, data_start, REPORT_EOF, &status);
         check_fits_error(status);
         for (long b = 0; b < num_blocks; b++) {
-
             // Read input block
             ffgbyt(f, sizeof(block), block, &status);
             check_fits_error(status);
@@ -213,7 +211,6 @@ size_t write_subimage(FitsFile& f, Writer& writer, const long* naxis, const long
     }
 
     if (!fits_is_compressed_image(f, &status)) {
-
         // Write out subimage one row at a time.
         size_t buf_size =
                 static_cast<size_t>(box[2] - box[0] + 1) * (std::abs(bitpix) / 8);
@@ -233,7 +230,6 @@ size_t write_subimage(FitsFile& f, Writer& writer, const long* naxis, const long
             num_bytes += buf_size;
         }
     } else {
-
         // Reading a subset of a tile compressed image row by row, as is done
         // for uncompressed images, is very slow. (Hypothesis: because a tile
         // that contributes to N output rows is decompressed N times). Use a
@@ -291,17 +287,14 @@ void stream_subimage(fs::path const& path, Coords const& center, Coords const& s
     for (int hdunum = 1;; ++hdunum) {
         fits_movabs_hdu(f, hdunum, &hdutype, &status);
         if (status == END_OF_FILE) {
-
             // looped over all HDUs
             break;
         }
         check_fits_error(status);
         if (status > 0) {
-
             // throw an error here.
         }
         if (hdutype != IMAGE_HDU) {
-
             // Copy the HDU.
             num_bytes = copy_header(f, writer, num_bytes);
 
@@ -312,7 +305,6 @@ void stream_subimage(fs::path const& path, Coords const& center, Coords const& s
         fits_get_img_param(f, 2, &bitpix, &naxes, naxis, &status);
         check_fits_error(status);
         if (naxes == 0) {
-
             // No data - just copy the header.
             num_bytes = copy_header(f, writer, num_bytes);
             continue;
@@ -338,7 +330,6 @@ void stream_subimage(fs::path const& path, Coords const& center, Coords const& s
         std::shared_ptr<char> h(hdr, std::free);
         check_fits_error(status);
         if (!cutout_pixel_box(center, size, hdr, naxis, box)) {
-
             // no overlap between cutout box and image
             throw HTTP_EXCEPT(HttpResponseCode::INTERNAL_SERVER_ERROR,
                               "Cutout does not overlap image");
@@ -346,7 +337,6 @@ void stream_subimage(fs::path const& path, Coords const& center, Coords const& s
         bool is_compressed_image = fits_is_compressed_image(f, &status);
         check_fits_error(status);
         if (is_compressed_image) {
-
             // Replace SIMPLE card with EXTENSION card
             num_bytes = write_card(writer, num_bytes, "XTENSION", "'IMAGE   '",
                                    "IMAGE extension");
@@ -359,7 +349,6 @@ void stream_subimage(fs::path const& path, Coords const& center, Coords const& s
         // to account for the subimage operation along the way.
         for (int k = 0; k < nkeys; ++k, hdr += FITS_CARD_LENGTH) {
             if (is_compressed_image) {
-
                 // Skip EXTEND card and reference comments
                 if (strncmp(hdr, "EXTEND  ", 8) == 0 ||
                     strncmp(hdr,
@@ -425,7 +414,6 @@ void stream_subimage(fs::path const& path, Coords const& center, Coords const& s
             if (modified) {
                 num_bytes = write_card(writer, num_bytes, keyname, valstring, comment);
                 if (is_compressed_image && found_naxis2) {
-
                     // Add in PCOUNT and GCOUNT cards after NAXIS2
                     num_bytes = write_card(writer, num_bytes, "PCOUNT", "0",
                                            "number of random group parameters");

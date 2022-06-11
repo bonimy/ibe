@@ -1,13 +1,13 @@
 #include "MemoryWriter.hxx"
 
+// Local headers
+#include "HttpException.hxx"
+#include "HttpResponseCode.hxx"
+
 // Standard library
 #include <algorithm>
 #include <cstdlib>
 #include <cstring>
-
-// Local headers
-#include "HttpException.hxx"
-#include "HttpResponseCode.hxx"
 
 namespace ibe {
 MemoryWriter::MemoryWriter() : content_length_(0), cap_(1024 * 1024), content_(0) {

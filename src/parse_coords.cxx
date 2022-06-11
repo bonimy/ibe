@@ -1,12 +1,12 @@
 #include "parse_coords.hxx"
 
-// Standard library
-#include <regex>
-
 // Local headers
 #include "HttpException.hxx"
 #include "HttpResponseCode.hxx"
 #include "format.hxx"
+
+// Standard library
+#include <regex>
 
 #define PP_MSG                                                                  \
     format("Value of %s parameter must consist of %s comma separated floating " \
@@ -43,7 +43,6 @@ Coords const parse_coords(Environment const& env, string const& key,
         throw HTTP_EXCEPT(HttpResponseCode::BAD_REQUEST, PP_MSG);
     }
     if (require_pair || comma != string::npos) {
-
         // get value of second coordinate
         for (; std::isspace(*s); ++s) {
         }
@@ -55,7 +54,6 @@ Coords const parse_coords(Environment const& env, string const& key,
             throw HTTP_EXCEPT(HttpResponseCode::BAD_REQUEST, PP_MSG);
         }
     } else {
-
         // single coordinate value passed in
         coords.c[1] = coords.c[0];
     }
@@ -63,7 +61,6 @@ Coords const parse_coords(Environment const& env, string const& key,
     for (; std::isspace(*s); ++s) {
     }
     if (*s != 0) {
-
         // parse unit specification
         if (std::regex_match(s, pix_re)) {
             coords.units = PIX;

@@ -1,25 +1,25 @@
 #include "pixel_cutout.hxx"
 
+// Local headers
+#include "fits/FitsError.hxx"
+#include "fits/FitsFile.hxx"
+#include "fits/HDUIterator.hxx"
+
+// External APIs
+#include <wcsxx/Rectangle.hxx>
+#include <wcsxx/SpherePoint.hxx>
+#include <wcsxx/Vector2d.hxx>
+#include <wcsxx/Wcs.hxx>
+#include <wcsxx/WcsError.hxx>
+
 // Standard library
 #include <algorithm>
 #include <cstdlib>
 #include <functional>
 #include <memory>
 #include <numeric>
-#include <set>
+#include <unordered_set>
 #include <vector>
-
-// Third-party headers
-#include <wcslibxx/Rectangle.hxx>
-#include <wcslibxx/SpherePoint.hxx>
-#include <wcslibxx/Vector2d.hxx>
-#include <wcslibxx/Wcs.hxx>
-#include <wcslibxx/WcsError.hxx>
-
-// Local headers
-#include "fits/FitsError.hxx"
-#include "fits/FitsFile.hxx"
-#include "fits/HDUIterator.hxx"
 
 using namespace wcsxx;
 using namespace fits;
@@ -27,7 +27,6 @@ using namespace fits;
 namespace ibe {
 long pixel_bounds(Wcs& wcs, const SpherePoint& center, const Vector2d& pixel_direction,
                   double radius) {
-
     // The scaling parameter determines how we grow or shrink our step distance until we
     // fall onto our pixel boundary. We will either double our distance (scale = 2.0)
     // until we exceed the search radius, or halve it (scale = 0.5) once we exceed it.
@@ -50,7 +49,6 @@ long pixel_bounds(Wcs& wcs, const SpherePoint& center, const Vector2d& pixel_dir
     // Continue refining search until we are within one pixel of tolerance. Because we
     // are dealing with exponential growth, we track that `step` remains finite.
     while (step >= 1.0 && !std::isinf(step)) {
-
         // Celestial coordinate (radians) of `pixel_pos`.
         SpherePoint sky_offset =
                 wcs.pixel_to_sky<Vector2d, SpherePoint>(pixel_pos, true);
@@ -61,7 +59,6 @@ long pixel_bounds(Wcs& wcs, const SpherePoint& center, const Vector2d& pixel_dir
         // Determine whether we grow or shrink or step distance based on whether we are
         // inside or outside of the search radius.
         if (distance < radius) {
-
             // If we're inside the search radius, then double our step distance to try
             // to get us outside of the radius even faster.
             //
@@ -73,7 +70,6 @@ long pixel_bounds(Wcs& wcs, const SpherePoint& center, const Vector2d& pixel_dir
             // Update `pixel_pos` to go forward by the next amount of distance.
             pixel_pos += pixel_unit_direction * step;
         } else if (distance > radius) {
-
             // If we are instead now outside of the radius, the we need to start
             // gradually
             // refining our distance until we are within one pixel of radius.
@@ -85,14 +81,12 @@ long pixel_bounds(Wcs& wcs, const SpherePoint& center, const Vector2d& pixel_dir
             // Update `pixel_pos` to go backward by the next amount of distance.
             pixel_pos -= pixel_unit_direction * step;
         } else {
-
             // If we somehow land exactly on the radius, then we're done!
             break;
         }
     }
 
     if (std::isinf(step)) {
-
         // TODO(nrg): Throw a better exception.
         throw std::range_error("Could not find boundary.");
     }
@@ -116,14 +110,13 @@ void make_cutout(FitsFile& source, FitsFile& dest, SpherePoint center, double ra
 
 void make_cutout(fits::HDU& source_hdu, fits::FitsFile& dest, wcsxx::SpherePoint center,
                  double radius) {
-
     // Get HDU axes.
     std::vector<long> source_naxes = source_hdu.naxes();
 
     // Do pure HDU copies for non-images or images with zero size.
     if (source_hdu.ext_type() != HDU::Type::image || source_naxes.size() < 2 ||
         std::any_of(source_naxes.begin(), source_naxes.end(),
-                    [](long i) { return i == 0; })) {
+                    [](long naxis) { return naxis == 0; })) {
         dest.copy_hdu(source_hdu);
     }
 
@@ -131,11 +124,10 @@ void make_cutout(fits::HDU& source_hdu, fits::FitsFile& dest, wcsxx::SpherePoint
     Wcs wcs(2);
     try {
         source_hdu.make_current();
-        wcs = Wcs::create_from_fits_file(*source_hdu.owner())[0].create_celestial_wcs();
+        wcs = Wcs::create_from_fits_file(*source_hdu.owner())[0].create_sky_wcs();
         wcs.fix_units(true);
         wcs.setup();
     } catch (WcsError) {
-
         // Do not make cutouts of images with no celestial axes.
         dest.copy_hdu(source_hdu);
         return;
@@ -172,9 +164,8 @@ void make_cutout(fits::HDU& source_hdu, fits::FitsFile& dest, wcsxx::SpherePoint
     HDU dest_hdu = dest.create_image_hdu(source_hdu.pixel_format(), dest_naxes);
 
     // Store initial keywords of new HDU to not overwrite them.
-    std::set<std::string> source_keys;
+    std::unordered_set<std::string> source_keys;
     for (Keyword keyword : dest_hdu.read_keys()) {
-
         // Do not add any initial comments or history strings.
         if (keyword.name == "COMMENT" || keyword.name == "HISTORY") {
             continue;
@@ -189,7 +180,6 @@ void make_cutout(fits::HDU& source_hdu, fits::FitsFile& dest, wcsxx::SpherePoint
 
     // Write header to dest HDU.
     for (Keyword keyword : source_hdu.read_keys()) {
-
         // Do not add empty or preexisting strings.
         if (keyword.name.empty() ||
             source_keys.find(keyword.name) != source_keys.end()) {

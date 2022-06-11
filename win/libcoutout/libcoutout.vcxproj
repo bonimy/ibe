@@ -19,16 +19,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\ibe\fits\arstring.hxx" />
-    <ClInclude Include="..\..\include\ibe\fits\Buffer.hxx" />
-    <ClInclude Include="..\..\include\ibe\fits\FitsError.hxx" />
-    <ClInclude Include="..\..\include\ibe\fits\FitsException.hxx" />
-    <ClInclude Include="..\..\include\ibe\fits\FitsFile.hxx" />
-    <ClInclude Include="..\..\include\ibe\fits\HDU.hxx" />
-    <ClInclude Include="..\..\include\ibe\fits\HDUIterator.hxx" />
-    <ClInclude Include="..\..\include\ibe\fits\Keyword.hxx" />
-    <ClInclude Include="..\..\include\ibe\fits\PixelFormat.hxx" />
-    <ClInclude Include="..\..\include\ibe\pixel_cutout.hxx" />
+    <ClInclude Include="..\..\src\fits\arstring.hxx" />
+    <ClInclude Include="..\..\src\fits\Buffer.hxx" />
+    <ClInclude Include="..\..\src\fits\FitsError.hxx" />
+    <ClInclude Include="..\..\src\fits\FitsException.hxx" />
+    <ClInclude Include="..\..\src\fits\FitsFile.hxx" />
+    <ClInclude Include="..\..\src\fits\HDU.hxx" />
+    <ClInclude Include="..\..\src\fits\HDUIterator.hxx" />
+    <ClInclude Include="..\..\src\fits\Keyword.hxx" />
+    <ClInclude Include="..\..\src\fits\PixelFormat.hxx" />
+    <ClInclude Include="..\..\src\pixel_cutout.hxx" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\fits\FitsError.cxx" />
@@ -39,11 +39,6 @@
     <ClCompile Include="..\..\src\fits\Keyword.cxx" />
     <ClCompile Include="..\..\src\fits\PixelFormat.cxx" />
     <ClCompile Include="..\..\src\pixel_cutout.cxx" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\include\ibe\fits\arstring.inl" />
-    <None Include="..\..\include\ibe\fits\Buffer.inl" />
-    <None Include="..\..\include\ibe\fits\FitsError.inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -56,26 +51,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -99,28 +94,28 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)../../../cfitsio;$(ProjectDir)../../../wcslibxx/win/include;$(ProjectDir)../../../libirvm/include;$(ProjectDir)../../../wcslibxx/include;$(ProjectDir)../../include/ibe;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)../../../cfitsio;$(ProjectDir)../../../include;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)$(Configuration)\$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\$(Configuration)\$(PlatformTarget)\</IntDir>
     <SourcePath>$(ProjectDir)../../src;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)../../../cfitsio;$(ProjectDir)../../../wcslibxx/win/include;$(ProjectDir)../../../libirvm/include;$(ProjectDir)../../../wcslibxx/include;$(ProjectDir)../../include/ibe;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)../../../cfitsio;$(ProjectDir)../../../include;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)$(Configuration)\$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\$(Configuration)\$(PlatformTarget)\</IntDir>
     <SourcePath>$(ProjectDir)../../src;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)../../../cfitsio;$(ProjectDir)../../../wcslibxx/win/include;$(ProjectDir)../../../wcslibxx/include;$(ProjectDir)../../include/ibe;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)../../../cfitsio;$(ProjectDir)../../../include;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)$(Configuration)\$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\$(Configuration)\$(PlatformTarget)\</IntDir>
     <SourcePath>$(ProjectDir)../../src;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)../../../cfitsio;$(ProjectDir)../../../wcslibxx/win/include;$(ProjectDir)../../../wcslibxx/include;$(ProjectDir)../../include/ibe;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)../../../cfitsio;$(ProjectDir)../../../include;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)$(Configuration)\$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\$(Configuration)\$(PlatformTarget)\</IntDir>
     <SourcePath>$(ProjectDir)../../src;$(SourcePath)</SourcePath>

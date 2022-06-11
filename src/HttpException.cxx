@@ -1,11 +1,11 @@
 #include "HttpException.hxx"
 
+// Local headers
+#include "get_env.hxx"
+
 // Standard library
 #include <cstdlib>
 #include <sstream>
-
-// Local headers
-#include "get_env.hxx"
 
 namespace ibe {
 /** Creates an HttpException from throw-site information.

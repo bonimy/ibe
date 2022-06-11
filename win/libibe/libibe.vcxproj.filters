@@ -15,49 +15,46 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\ibe\check_fits_error.hxx">
+    <ClInclude Include="..\..\src\check_fits_error.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ibe\Coords.hxx">
+    <ClInclude Include="..\..\src\ChunkedWriter.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ibe\cutout_pixel_box.hxx">
+    <ClInclude Include="..\..\src\Coords.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ibe\FitsFile.hxx">
+    <ClInclude Include="..\..\src\FitsFile.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ibe\format.hxx">
+    <ClInclude Include="..\..\src\format.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ibe\MemoryWriter.hxx">
+    <ClInclude Include="..\..\src\GZIPWriter.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ibe\stream_subimage.hxx">
+    <ClInclude Include="..\..\src\HttpException.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ibe\Units.hxx">
+    <ClInclude Include="..\..\src\HttpResponseCode.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ibe\Wcs.hxx">
+    <ClInclude Include="..\..\src\ibe_filesystem.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ibe\Writer.hxx">
+    <ClInclude Include="..\..\src\MemoryWriter.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ibe\ibe_filesystem.hxx">
+    <ClInclude Include="..\..\src\stream_subimage.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ibe\HttpException.hxx">
+    <ClInclude Include="..\..\src\Units.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ibe\HttpResponseCode.hxx">
+    <ClInclude Include="..\..\src\Wcs.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ibe\ChunkedWriter.hxx">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\ibe\GZIPWriter.hxx">
+    <ClInclude Include="..\..\src\Writer.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

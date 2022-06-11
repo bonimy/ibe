@@ -29,26 +29,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -167,14 +167,14 @@
     <ClCompile Include="..\..\src\parse_coords.cxx" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\ibe\Access.hxx" />
-    <ClInclude Include="..\..\include\ibe\check_access.hxx" />
-    <ClInclude Include="..\..\include\ibe\Environment.hxx" />
-    <ClInclude Include="..\..\include\ibe\get_env.hxx" />
-    <ClInclude Include="..\..\include\ibe\GZIPWriter.hxx" />
-    <ClInclude Include="..\..\include\ibe\HttpCookie.hxx" />
-    <ClInclude Include="..\..\include\ibe\parse_coords.hxx" />
-    <ClInclude Include="..\..\include\ibe\write_error_response.hxx" />
+    <ClInclude Include="..\..\src\Access.hxx" />
+    <ClInclude Include="..\..\src\check_access.hxx" />
+    <ClInclude Include="..\..\src\Environment.hxx" />
+    <ClInclude Include="..\..\src\get_env.hxx" />
+    <ClInclude Include="..\..\src\GZIPWriter.hxx" />
+    <ClInclude Include="..\..\src\HttpCookie.hxx" />
+    <ClInclude Include="..\..\src\parse_coords.hxx" />
+    <ClInclude Include="..\..\src\write_error_response.hxx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\libibe\libibe.vcxproj">

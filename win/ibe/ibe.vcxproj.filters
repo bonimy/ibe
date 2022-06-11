@@ -35,28 +35,28 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\ibe\Access.hxx">
+    <ClInclude Include="..\..\src\Access.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ibe\check_access.hxx">
+    <ClInclude Include="..\..\src\check_access.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ibe\Environment.hxx">
+    <ClInclude Include="..\..\src\Environment.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ibe\get_env.hxx">
+    <ClInclude Include="..\..\src\get_env.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ibe\GZIPWriter.hxx">
+    <ClInclude Include="..\..\src\GZIPWriter.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ibe\HttpCookie.hxx">
+    <ClInclude Include="..\..\src\HttpCookie.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ibe\parse_coords.hxx">
+    <ClInclude Include="..\..\src\parse_coords.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ibe\write_error_response.hxx">
+    <ClInclude Include="..\..\src\write_error_response.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

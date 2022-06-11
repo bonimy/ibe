@@ -1,14 +1,14 @@
 #include "Environment.hxx"
 
-// Standard library
-#include <iostream>
-#include <typeinfo>
-#include <utility>
-
 // Local headers
 #include "HttpException.hxx"
 #include "format.hxx"
 #include "get_env.hxx"
+
+// Standard library
+#include <iostream>
+#include <typeinfo>
+#include <utility>
 
 namespace ibe {
 namespace {
@@ -102,8 +102,8 @@ std::string const& Environment::get_value(std::string const& key) const {
 /** Returns the first value of the query parameter with the given name, or
  * the specified default if the parameter is unavailable.
  */
-std::string const Environment::get_value(std::string const& key,
-                                         std::string const& def) const {
+std::string const Environment::get_value_or_default(std::string const& key,
+                                                    std::string const& def) const {
     size_t n = get_num_values(key);
     if (n == 0) {
         return def;
@@ -205,7 +205,6 @@ void Environment::parse_input(std::string const& data) {
     while (true) {
         std::string::size_type i = data.find_first_of('=', prev);
         if (i == std::string::npos) {
-
             // no more key=value pairs
             break;
         }
@@ -309,7 +308,6 @@ void Environment::parse_post_input(std::string const& data) {
         kv_map_.insert(std::make_pair(data.substr(nb, ne - nb), data.substr(h, j - h)));
         i = j + sep.size();
         if (i < data.size() - 2 && data[i] == '-' && data[i + 1] == '-') {
-
             // found multipart epilogue separator
             break;
         }
@@ -321,7 +319,6 @@ void Environment::parse_cookies(std::string const& data) {
         j = data.find(";", i);
         std::string::size_type sep = data.find("=", i);
         if (sep != std::string::npos && sep < j) {
-
             // eat whitespace
             for (; std::isspace(data[i]) != 0; ++i) {
             }

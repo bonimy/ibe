@@ -1,14 +1,14 @@
 #include "check_access.hxx"
 
-// Standard library
-#include <sstream>
-
-// Third-party libraries
-#include <pqxx/pqxx>
-
 // Local headers
 #include "HttpException.hxx"
 #include "HttpResponseCode.hxx"
+
+// External APIs
+#include <pqxx/pqxx>
+
+// Standard library
+#include <sstream>
 
 namespace ibe {
 

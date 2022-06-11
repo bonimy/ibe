@@ -1,4 +1,4 @@
-#include "fits/HDUIterator.hxx"
+#include "HDUIterator.hxx"
 
 namespace fits {
 HDUIterator::HDUIterator(const FitsFile& fits, size_t hdu_index)
@@ -54,5 +54,9 @@ HDUIterator::reference HDUIterator::operator[](difference_type n) {
 
 bool HDUIterator::operator<(const HDUIterator& other) const {
     return hdu_index_ < other.hdu_index_;
+}
+
+HDUIterator operator+(HDUIterator::difference_type n, const HDUIterator& it) {
+    return it + n;
 }
 }  // namespace fits

@@ -1,14 +1,14 @@
-#include "fits/HDU.hxx"
+#include "HDU.hxx"
+
+// Local headers
+#include "FitsError.hxx"
+#include "PixelFormat.hxx"
 
 // Standard library
 #include <algorithm>
 #include <cstdlib>
 #include <functional>
 #include <numeric>
-
-// Local headers
-#include "fits/FitsError.hxx"
-#include "fits/PixelFormat.hxx"
 
 namespace fits {
 HDU::HDU(FitsFile& owner, size_t hdu_num) : owner_(owner), hdu_num_(hdu_num) {}
@@ -28,7 +28,7 @@ size_t HDU::naxis() {
 
     int result;
     int status = 0;
-    if (fits_get_img_dim(&owner_, &result, &status) > 0) {
+    if (fits_get_img_dim(owner_.get(), &result, &status) > 0) {
         throw FitsError(status);
     }
     return static_cast<size_t>(result);
@@ -38,7 +38,7 @@ std::vector<long> HDU::naxes() {
 
     std::vector<long> result(naxis());
     int status = 0;
-    if (fits_get_img_size(&owner_, static_cast<int>(result.size()), result.data(),
+    if (fits_get_img_size(owner_.get(), static_cast<int>(result.size()), result.data(),
                           &status) > 0) {
         throw FitsError(status);
     }
@@ -50,7 +50,7 @@ HDU::Type HDU::ext_type() {
 
     int status = 0;
     int ext_type;
-    if (fits_get_hdu_type(&owner_, &ext_type, &status) > 0) {
+    if (fits_get_hdu_type(owner_.get(), &ext_type, &status) > 0) {
         throw FitsError(status);
     }
     return static_cast<Type>(ext_type);
@@ -62,7 +62,7 @@ PixelFormat HDU::pixel_format() {
 
     int status = 0;
     int result;
-    if (fits_get_img_type(&owner_, &result, &status) > 0) {
+    if (fits_get_img_type(owner_.get(), &result, &status) > 0) {
         throw FitsError(status);
     }
     return static_cast<PixelFormat>(result);
@@ -75,7 +75,7 @@ size_t HDU::keyword_count() {
 
     int status = 0;
     int size;
-    if (fits_get_hdrpos(&owner_, &size, nullptr, &status) > 0) {
+    if (fits_get_hdrpos(owner_.get(), &size, nullptr, &status) > 0) {
         throw FitsError(status);
     }
     return static_cast<size_t>(size);
@@ -85,8 +85,8 @@ Keyword HDU::read_keyword(size_t index) {
 
     int status = 0;
     Keyword result;
-    if (fits_read_keyn(&owner_, static_cast<int>(index + 1), result.name, result.value,
-                       result.comment, &status) > 0) {
+    if (fits_read_keyn(owner_.get(), static_cast<int>(index + 1), result.name,
+                       result.value, result.comment, &status) > 0) {
         throw FitsError(status);
     }
     return result;
@@ -96,7 +96,7 @@ card_str HDU::read_card(const key_str& key) {
 
     card_str result;
     int status = 0;
-    if (fits_read_card(&owner_, key, result, &status) > 0) {
+    if (fits_read_card(owner_.get(), key, result, &status) > 0) {
         throw FitsError(status);
     }
     return result;
@@ -113,7 +113,7 @@ void HDU::write_card(const card_str& card) {
     make_current();
 
     int status = 0;
-    if (fits_write_record(&owner_, card, &status) > 0) {
+    if (fits_write_record(owner_.get(), card, &status) > 0) {
         throw FitsError(status);
     }
 }
@@ -126,7 +126,7 @@ void HDU::write_key(const Keyword& keyword) {
                       keyword.comment, card, &status) > 0) {
         throw FitsError(status);
     }
-    if (fits_write_record(&owner_, card, &status) > 0) {
+    if (fits_write_record(owner_.get(), card, &status) > 0) {
         throw FitsError(status);
     }
 }
@@ -134,7 +134,7 @@ void HDU::write_float(const card_str& name, float value, const comment_str& comm
     make_current();
 
     int status = 0;
-    if (fits_write_key_flt(&owner_, name, value, 9, comment, &status) > 0) {
+    if (fits_write_key_flt(owner_.get(), name, value, 9, comment, &status) > 0) {
         throw FitsError(status);
     }
 }
@@ -143,7 +143,7 @@ bool HDU::is_compressed_image() {
     make_current();
 
     int status = 0;
-    return static_cast<bool>(fits_is_compressed_image(&owner_, &status));
+    return static_cast<bool>(fits_is_compressed_image(owner_.get(), &status));
 }
 
 void HDU::clear_bscale() { set_bscale(1, 0); }
@@ -151,7 +151,7 @@ void HDU::set_bscale(double scale, double offset) {
     make_current();
 
     int status = 0;
-    if (fits_set_bscale(&owner_, scale, offset, &status) > 0) {
+    if (fits_set_bscale(owner_.get(), scale, offset, &status) > 0) {
         throw FitsError(status);
     }
 }
@@ -226,10 +226,11 @@ Buffer<void> HDU::read_image_subset(TableDataType pixel_type,
 
     int status = 0;
     int anynul = static_cast<int>(any_null);
-    if (fits_read_subset(
-                &owner_, static_cast<int>(pixel_type), const_cast<long*>(first.data()),
-                const_cast<long*>(last.data()), const_cast<long*>(increment.data()),
-                null_value, buffer.get(), &anynul, &status) > 0) {
+    if (fits_read_subset(owner_.get(), static_cast<int>(pixel_type),
+                         const_cast<long*>(first.data()),
+                         const_cast<long*>(last.data()),
+                         const_cast<long*>(increment.data()), null_value, buffer.get(),
+                         &anynul, &status) > 0) {
         throw FitsError(status);
     }
     any_null = static_cast<bool>(anynul);
@@ -248,7 +249,7 @@ void HDU::write_image_subset(TableDataType pixel_type, const std::vector<long>& 
     make_current();
 
     int status = 0;
-    if (fits_write_subset(&owner_, static_cast<int>(pixel_type),
+    if (fits_write_subset(owner_.get(), static_cast<int>(pixel_type),
                           const_cast<long*>(first.data()),
                           const_cast<long*>(last.data()),
                           const_cast<void*>(buffer.get()), &status) > 0) {

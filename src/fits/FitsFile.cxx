@@ -1,9 +1,9 @@
-#include "fits/FitsFile.hxx"
+#include "FitsFile.hxx"
 
 // Local headers
-#include "fits/FitsError.hxx"
-#include "fits/HDU.hxx"
-#include "fits/HDUIterator.hxx"
+#include "FitsError.hxx"
+#include "HDU.hxx"
+#include "HDUIterator.hxx"
 
 namespace fits {
 void FitsFile::deleter::operator()(pointer fptr) {
@@ -22,8 +22,8 @@ FitsFile::FitsFile(void*& buffer, size_t& size, size_t delta_size, mem_realloc r
 bool FitsFile::operator==(const FitsFile& other) const { return fptr_ == other.fptr_; }
 bool FitsFile::operator!=(const FitsFile& other) const { return !(*this == other); }
 
-fitsfile* FitsFile::operator&() { return fptr_.get(); }
-const fitsfile* FitsFile::operator&() const { return fptr_.get(); }
+fitsfile* FitsFile::get() { return fptr_.get(); }
+const fitsfile* FitsFile::get() const { return fptr_.get(); }
 
 fitsfile& FitsFile::operator*() { return fptr_.operator*(); }
 const fitsfile& FitsFile::operator*() const { return fptr_.operator*(); }
@@ -34,13 +34,12 @@ const fitsfile& FitsFile::operator->() const { return fptr_.operator*(); }
 size_t FitsFile::hdu_count() {
     int status = 0;
     int result;
-    if (fits_get_num_hdus(this->operator&(), &result, &status) > 0)
-        throw FitsError(status);
+    if (fits_get_num_hdus(get(), &result, &status) > 0) throw FitsError(status);
     return static_cast<size_t>(result);
 }
 size_t FitsFile::current_hdu_num() {
     int result;
-    fits_get_hdu_num(this->operator&(), &result);
+    fits_get_hdu_num(get(), &result);
     return static_cast<size_t>(result);
 }
 
@@ -72,7 +71,7 @@ void FitsFile::copy_hdu(HDU& hdu) {
     hdu.make_current();
 
     int status = 0;
-    if (fits_copy_hdu(&hdu.owner_, fptr_.get(), 0, &status) > 0) {
+    if (fits_copy_hdu(hdu.owner_.get(), fptr_.get(), 0, &status) > 0) {
         throw FitsError(status);
     }
 }
@@ -94,6 +93,4 @@ fitsfile* FitsFile::open_mem_fitsfile(void*& buffer, size_t& size, size_t delta_
         throw FitsError(status);
     return result;
 }
-
-void swap(FitsFile& left, FitsFile& right) { return left.swap(right); }
 }  // namespace fits

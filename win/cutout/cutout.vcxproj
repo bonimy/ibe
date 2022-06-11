@@ -29,26 +29,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -74,28 +74,28 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)$(Configuration)\$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\$(Configuration)\$(PlatformTarget)\</IntDir>
-    <IncludePath>$(ProjectDir)../../../cfitsio;$(ProjectDir)../../../wcslibxx/win/include;$(ProjectDir)../../../libirvm/include;$(ProjectDir)../../../wcslibxx/include;$(ProjectDir)../../include/ibe;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)../../../cfitsio;$(ProjectDir)../../../include;$(ProjectDir)../../../libirvm/include;$(ProjectDir)../../../wcslibxx/include;$(ProjectDir)../../include/ibe;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)$(Configuration)\$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\$(Configuration)\$(PlatformTarget)\</IntDir>
-    <IncludePath>$(ProjectDir)../../../cfitsio;$(ProjectDir)../../../wcslibxx/win/include;$(ProjectDir)../../../libirvm/include;$(ProjectDir)../../../wcslibxx/include;$(ProjectDir)../../include/ibe;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)../../../cfitsio;$(ProjectDir)../../../include;$(ProjectDir)../../../libirvm/include;$(ProjectDir)../../../wcslibxx/include;$(ProjectDir)../../include/ibe;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)$(Configuration)\$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\$(Configuration)\$(PlatformTarget)\</IntDir>
-    <IncludePath>$(ProjectDir)../../../cfitsio;$(ProjectDir)../../../wcslibxx/win/include;$(ProjectDir)../../../wcslibxx/include;$(ProjectDir)../../include/;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)../../../cfitsio;$(ProjectDir)../../../include;$(ProjectDir)../../../wcslibxx/include;$(ProjectDir)../../include/;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)$(Configuration)\$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\$(Configuration)\$(PlatformTarget)\</IntDir>
-    <IncludePath>$(ProjectDir)../../../cfitsio;$(ProjectDir)../../../wcslibxx/win/include;$(ProjectDir)../../../wcslibxx/include;$(ProjectDir)../../include/;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)../../../cfitsio;$(ProjectDir)../../../include;$(ProjectDir)../../../wcslibxx/include;$(ProjectDir)../../include/;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -166,11 +166,11 @@
     <ProjectReference Include="..\..\..\cfitsio\build\cfitsio.vcxproj">
       <Project>{ada9992a-1618-3857-876d-6adec5359114}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\DUST\win\wcslib.vcxproj">
-      <Project>{e6772487-e51c-4230-8837-82898256c40d}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\wcslibxx\win\wcslibxx\wcslibxx.vcxproj">
       <Project>{04132607-7e66-483d-8c64-f05caceadd13}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\wcslib\win\wcslib.vcxproj">
+      <Project>{e6772487-e51c-4230-8837-82898256c40d}</Project>
     </ProjectReference>
     <ProjectReference Include="..\libcoutout\libcoutout.vcxproj">
       <Project>{ab482413-1abe-4d81-8694-362f2432d0e5}</Project>

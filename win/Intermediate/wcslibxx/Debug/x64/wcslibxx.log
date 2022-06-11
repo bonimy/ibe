@@ -1,0 +1,10 @@
+﻿  math_utils.cxx
+  Matrix3d.cxx
+  SpherePoint.cxx
+  Vector2d.cxx
+  Vector3d.cxx
+  Wcs.cxx
+  WcsError.cxx
+  WcsException.cxx
+  Generating Code...
+  wcslibxx.vcxproj -> C:\Users\nrgarcia\Dropbox\Nelson\git\ipac-sw\ibe-dev\win\Debug\x64\wcslibxx.lib

@@ -1,11 +1,11 @@
 #include "ChunkedWriter.hxx"
 
-// Standard library
-#include <cstdio>
-
 // Local headers
 #include "HttpException.hxx"
 #include "HttpResponseCode.hxx"
+
+// Standard library
+#include <cstdio>
 
 namespace ibe {
 ChunkedWriter::~ChunkedWriter() {}

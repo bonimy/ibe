@@ -1,12 +1,12 @@
 #include "write_error_response.hxx"
 
-// Standard library
-#include <sstream>
-#include <string>
-
 // Local headers
 #include "HttpResponseCode.hxx"
 #include "get_env.hxx"
+
+// Standard library
+#include <sstream>
+#include <string>
 
 namespace ibe {
 void write_error_response(std::ostream& stream, std::exception const& e) {

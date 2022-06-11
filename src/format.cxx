@@ -23,7 +23,6 @@ std::string const format(char const* fmt, ...) {
     int n = ::vsnprintf(buf, sizeof(buf), fmt, list);
     try {
         if (n >= static_cast<int>(sizeof(buf))) {
-
             // buf was too small, allocate the necessary memory on the heap
             std::vector<char> bigbuf(n + 1);
             va_end(list);

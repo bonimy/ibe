@@ -1,0 +1,29 @@
+﻿  cel.c
+  dis.c
+C:\Users\nrgarcia\Dropbox\Nelson\git\ipac-sw\wcslib\C\dis.c(497,43): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+  fitshdr.c
+  wcsbth.c
+  wcspih.c
+  wcsulex.c
+  wcsutrn.c
+  getwcstab.c
+  lin.c
+  log.c
+  prj.c
+  spc.c
+  sph.c
+  spx.c
+  tab.c
+  wcs.c
+  wcserr.c
+C:\Users\nrgarcia\Dropbox\Nelson\git\ipac-sw\wcslib\C\wcserr.c(61,34): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+  wcsfix.c
+  wcshdr.c
+  wcsprintf.c
+  Generating Code...
+  Compiling...
+  wcstrig.c
+  wcsunits.c
+  wcsutil.c
+  Generating Code...
+  wcslib.vcxproj -> C:\Users\nrgarcia\Dropbox\Nelson\git\ipac-sw\ibe-dev\win\Debug\x64\wcslib.lib

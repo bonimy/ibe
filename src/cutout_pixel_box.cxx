@@ -1,14 +1,13 @@
 #include "cutout_pixel_box.hxx"
 
-// Standard library
-#include <algorithm>
-#include <cmath>
-
 // Local headers
-
 #include "HttpException.hxx"
 #include "HttpResponseCode.hxx"
 #include "Wcs.hxx"
+
+// Standard library
+#include <algorithm>
+#include <cmath>
 
 namespace ibe {
 double const RAD_PER_DEG = 0.0174532925199432957692369076849;
@@ -38,14 +37,12 @@ bool cutout_pixel_box(Coords center,  // Cutout center.
 {
     double xmin, xmax, ymin, ymax;
     if (center.units != PIX || size.units != PIX) {
-
         // need to map center and/or size to pixel coordinates
         Wcs wcs(hdr);
         double sky[2];
         if (center.units == PIX) {
             wcs.pixel_to_sky(center.c, sky);
         } else {
-
             // convert to degrees
             switch (center.units) {
                 case ARCSEC:

@@ -19,21 +19,20 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\ibe\check_fits_error.hxx" />
-    <ClInclude Include="..\..\include\ibe\ChunkedWriter.hxx" />
-    <ClInclude Include="..\..\include\ibe\Coords.hxx" />
-    <ClInclude Include="..\..\include\ibe\cutout_pixel_box.hxx" />
-    <ClInclude Include="..\..\include\ibe\FitsFile.hxx" />
-    <ClInclude Include="..\..\include\ibe\format.hxx" />
-    <ClInclude Include="..\..\include\ibe\GZIPWriter.hxx" />
-    <ClInclude Include="..\..\include\ibe\HttpException.hxx" />
-    <ClInclude Include="..\..\include\ibe\HttpResponseCode.hxx" />
-    <ClInclude Include="..\..\include\ibe\ibe_filesystem.hxx" />
-    <ClInclude Include="..\..\include\ibe\MemoryWriter.hxx" />
-    <ClInclude Include="..\..\include\ibe\stream_subimage.hxx" />
-    <ClInclude Include="..\..\include\ibe\Units.hxx" />
-    <ClInclude Include="..\..\include\ibe\Wcs.hxx" />
-    <ClInclude Include="..\..\include\ibe\Writer.hxx" />
+    <ClInclude Include="..\..\src\check_fits_error.hxx" />
+    <ClInclude Include="..\..\src\ChunkedWriter.hxx" />
+    <ClInclude Include="..\..\src\Coords.hxx" />
+    <ClInclude Include="..\..\src\FitsFile.hxx" />
+    <ClInclude Include="..\..\src\format.hxx" />
+    <ClInclude Include="..\..\src\GZIPWriter.hxx" />
+    <ClInclude Include="..\..\src\HttpException.hxx" />
+    <ClInclude Include="..\..\src\HttpResponseCode.hxx" />
+    <ClInclude Include="..\..\src\ibe_filesystem.hxx" />
+    <ClInclude Include="..\..\src\MemoryWriter.hxx" />
+    <ClInclude Include="..\..\src\stream_subimage.hxx" />
+    <ClInclude Include="..\..\src\Units.hxx" />
+    <ClInclude Include="..\..\src\Wcs.hxx" />
+    <ClInclude Include="..\..\src\Writer.hxx" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\check_fits_error.cxx" />
@@ -60,28 +59,28 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -107,32 +106,35 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)$(Configuration)\$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\$(Configuration)\$(PlatformTarget)\</IntDir>
-    <IncludePath>$(ProjectDir)../../../wcslibxx/win/include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\..\..\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)$(Configuration)\$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\$(Configuration)\$(PlatformTarget)\</IntDir>
-    <IncludePath>$(ProjectDir)../../../wcslibxx/win/include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\..\..\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)$(Configuration)\$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\$(Configuration)\$(PlatformTarget)\</IntDir>
-    <IncludePath>$(ProjectDir)../../../wcslibxx/win/include;$(ProjectDir)../../../zlib;$(ProjectDir)../../include/ibe;$(ProjectDir)../../../cfitsio;$(ProjectDir)../../../wcstools;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\..\..\include;$(ProjectDir)..\..\..\cfitsio;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)$(Configuration)\$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\$(Configuration)\$(PlatformTarget)\</IntDir>
-    <IncludePath>$(ProjectDir)../../../wcslibxx/win/include;$(ProjectDir)../../../zlib;$(ProjectDir)../../include/ibe;$(ProjectDir)../../../cfitsio;$(ProjectDir)../../../wcstools;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\..\..\include;$(ProjectDir)..\..\..\cfitsio;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__STDC__;_CRT_DECLARE_NONSTDC_NAMES=0;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <DisableLanguageExtensions>true</DisableLanguageExtensions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc11</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -145,8 +147,11 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__STDC__;_CRT_DECLARE_NONSTDC_NAMES=0;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <DisableLanguageExtensions>true</DisableLanguageExtensions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc11</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -159,11 +164,12 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__STDC__;_CRT_DECLARE_NONSTDC_NAMES=0;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalOptions>/FS /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
       <DisableLanguageExtensions>true</DisableLanguageExtensions>
+      <LanguageStandard_C>stdc11</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -176,11 +182,12 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__STDC__;_CRT_DECLARE_NONSTDC_NAMES=0;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalOptions>/FS /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
       <DisableLanguageExtensions>true</DisableLanguageExtensions>
+      <LanguageStandard_C>stdc11</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

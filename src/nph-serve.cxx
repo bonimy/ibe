@@ -1,12 +1,3 @@
-// Standard library
-#include <cstdio>
-#include <iostream>
-#include <memory>
-#include <regex>
-#include <set>
-#include <sstream>
-#include <utility>
-
 // Local headers
 #include "Access.hxx"
 #include "Coords.hxx"
@@ -20,6 +11,15 @@
 #include "parse_coords.hxx"
 #include "stream_subimage.hxx"
 #include "write_error_response.hxx"
+
+// Standard library
+#include <cstdio>
+#include <iostream>
+#include <memory>
+#include <regex>
+#include <set>
+#include <sstream>
+#include <utility>
 
 using std::make_pair;
 using std::pair;
@@ -40,7 +40,6 @@ using ibe::HttpResponseCode;
 using ibe::MemoryWriter;
 
 namespace {
-
 // Return a vector of (filename extension, MIME content-type) pairs.
 vector<pair<string, string> > const get_content_types() {
     vector<pair<string, string> > v;
@@ -106,13 +105,13 @@ void validate(ibe::Environment const& env) {
         }
     }
 
-    if (!is_valid_path(env.get_value("path", ""))) {
+    if (!is_valid_path(env.get_value_or_default("path", ""))) {
         throw HTTP_EXCEPT(HttpResponseCode::BAD_REQUEST);
     }
-    if (!is_valid_prefix(env.get_value("prefix", ""))) {
+    if (!is_valid_prefix(env.get_value_or_default("prefix", ""))) {
         throw HTTP_EXCEPT(HttpResponseCode::BAD_REQUEST);
     }
-    if (!is_valid_url_root(env.get_value("url_root", "/"))) {
+    if (!is_valid_url_root(env.get_value_or_default("url_root", "/"))) {
         throw HTTP_EXCEPT(HttpResponseCode::BAD_REQUEST);
     }
 }
@@ -194,7 +193,7 @@ string const get_dir_listing(const fs::path& path, Environment const& env,
                              Access const& access) {
     std::ostringstream oss;
     vector<string> entries;
-    fs::path prefix(env.get_value("prefix", ""));
+    fs::path prefix(env.get_value_or_default("prefix", ""));
     fs::path diskpath = fs::path(IBE_DATA_ROOT) / prefix / path;
     if (access.get_policy() == Access::GRANTED && access.get_pg_conn().empty()) {
         entries = get_dir_entries(diskpath);
@@ -206,7 +205,7 @@ string const get_dir_listing(const fs::path& path, Environment const& env,
     std::sort(entries.begin(), entries.end());
 
     // build HTML
-    fs::path url_root(env.get_value("url_root", "/"));
+    fs::path url_root(env.get_value_or_default("url_root", "/"));
     fs::path url = url_root / prefix / path;
     fs::path parent = url.parent_path();
     string a_prefix = url.filename().string();
@@ -269,7 +268,6 @@ int serve_directory_listing(const fs::path& path, const Environment& env,
 
 int serve_fits_cutout(const fs::path& filename, const fs::path& diskpath,
                       const Environment& env, bool& sent_header) {
-
     // 2. Serve a FITS cutout
     validate_cutout_params(env, true);
     bool const isGzip = parse_bool(env, "gzip", true);
@@ -381,8 +379,8 @@ int main(int argc, char const* const* argv) {
         Environment env(argc, argv);
         validate(env);
         Access access(env);
-        fs::path path(env.get_value("path", ""));
-        fs::path prefix(env.get_value("prefix", ""));
+        fs::path path(env.get_value_or_default("path", ""));
+        fs::path prefix(env.get_value_or_default("prefix", ""));
         fs::path diskpath = fs::path(IBE_DATA_ROOT) / prefix / path;
 
         // -------------------------
@@ -391,7 +389,6 @@ int main(int argc, char const* const* argv) {
         if (fs::is_directory(diskpath)) {
             return serve_directory_listing(path, env, access, sent_header);
         } else if (!fs::is_regular_file(diskpath)) {
-
             // diskpath is neither a directory nor a file
             throw HTTP_EXCEPT(HttpResponseCode::NOT_FOUND);
         }

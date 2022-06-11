@@ -1,10 +1,10 @@
-#include "fits/Keyword.hxx"
+#include "Keyword.hxx"
+
+// Local headers
+#include "FitsError.hxx"
 
 // Standard library
 #include <cstring>
-
-// Local headers
-#include "fits/FitsError.hxx"
 
 namespace fits {
 Keyword::Keyword() = default;

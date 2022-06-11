@@ -1,15 +1,21 @@
-#include "fits/FitsError.hxx"
+#include "FitsError.hxx"
+
+// Local headers
+#include "arstring.hxx"
+
+// External APIs
+#include <fitsio.h>
 
 // Standard library
 #include <sstream>
 
-// Third-party headers
-#include <fitsio.h>
-
-// Local headers
-#include "fits/arstring.hxx"
-
 namespace fits {
+FitsError::FitsError(int status) : FitsError(get_error_message(status), status) {}
+FitsError::FitsError(const std::string& message, int status)
+        : FitsException(message), status_(status) {}
+
+int FitsError::status() const { return status_; }
+
 std::string FitsError::get_error_message(int status) {
     using error_status_str = arstring<FLEN_STATUS>;
     using error_message_str = arstring<FLEN_ERRMSG>;
@@ -27,10 +33,4 @@ std::string FitsError::get_error_message(int status) {
 
     return ss.str();
 }
-
-FitsError::FitsError(int status) : FitsError(get_error_message(status), status) {}
-FitsError::FitsError(const std::string& message, int status)
-        : FitsException(message), status_(status) {}
-
-int FitsError::status() const { return status_; }
 }  // namespace fits

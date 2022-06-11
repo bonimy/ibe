@@ -4,20 +4,20 @@
  */
 #include "Access.hxx"
 
-// Standard library
-#include <cstdlib>
-#include <limits>
-#include <memory>
-
-// Third-party libraries
-extern "C" {
-#include "ssoclient.h"
-}
-
 // Local headers
 #include "HttpException.hxx"
 #include "HttpResponseCode.hxx"
 #include "format.hxx"
+
+// External APIs
+extern "C" {
+#include "ssoclient.h"
+}
+
+// Standard library
+#include <cstdlib>
+#include <limits>
+#include <memory>
 
 using std::set;
 using std::string;
@@ -96,7 +96,6 @@ set<int> const get_user_groups(string const& session, int mission) {
     std::shared_ptr<sso_sessionContext_t> ctx(
             sso_openUsingSessionId(const_cast<char*>(session.c_str())), sso_close);
     if (!ctx || ctx->status != SSO_OK) {
-
         // Failed to retrieve session context - treat user as anonymous.
         return groups;
     }
@@ -141,9 +140,8 @@ Access::Access(Environment const& env)
           pg_table_(),
           groups_(),
           groups_valid_(false) {
-
     // get access related CGI parameters and sanity check them
-    string const policy = env.get_value("policy", "ACCESS_GRANTED");
+    string const policy = env.get_value_or_default("policy", "ACCESS_GRANTED");
     if (env.get_num_values("policy") > 1 ||
         (mission_ == MISSION_NONE && group_ != GROUP_NONE) ||
         (mission_ <= 0 && mission_ != MISSION_NONE)) {
@@ -154,8 +152,8 @@ Access::Access(Environment const& env)
         policy_ = DENIED;
     } else if (policy == "ACCESS_GRANTED") {
         policy_ = GRANTED;
-        pg_conn_ = env.get_value("pgconn", "");
-        pg_table_ = env.get_value("pgtable", "");
+        pg_conn_ = env.get_value_or_default("pgconn", "");
+        pg_table_ = env.get_value_or_default("pgtable", "");
     } else if (policy == "ACCESS_TABLE") {
         if (group_ == GROUP_ROW) {
             throw HTTP_EXCEPT(HttpResponseCode::INTERNAL_SERVER_ERROR,

@@ -1,5 +1,6 @@
-#include "fits/PixelFormat.hxx"
+#include "PixelFormat.hxx"
 
+// Standard library
 #include <cmath>
 
 namespace fits {

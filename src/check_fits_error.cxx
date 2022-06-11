@@ -1,12 +1,12 @@
 #include "check_fits_error.hxx"
 
-// Third-party libraries
-#include <fitsio.h>
-
 // Local headers
 #include "HttpException.hxx"
 #include "HttpResponseCode.hxx"
 #include "format.hxx"
+
+// External APIs
+#include <fitsio.h>
 
 namespace ibe {
 

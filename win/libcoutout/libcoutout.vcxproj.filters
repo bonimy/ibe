@@ -21,34 +21,34 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\ibe\pixel_cutout.hxx">
+    <ClInclude Include="..\..\src\pixel_cutout.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ibe\fits\arstring.hxx">
+    <ClInclude Include="..\..\src\fits\arstring.hxx">
       <Filter>Header Files\fits</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ibe\fits\Buffer.hxx">
+    <ClInclude Include="..\..\src\fits\Buffer.hxx">
       <Filter>Header Files\fits</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ibe\fits\FitsError.hxx">
+    <ClInclude Include="..\..\src\fits\FitsError.hxx">
       <Filter>Header Files\fits</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ibe\fits\FitsException.hxx">
+    <ClInclude Include="..\..\src\fits\FitsException.hxx">
       <Filter>Header Files\fits</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ibe\fits\FitsFile.hxx">
+    <ClInclude Include="..\..\src\fits\FitsFile.hxx">
       <Filter>Header Files\fits</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ibe\fits\HDU.hxx">
+    <ClInclude Include="..\..\src\fits\HDU.hxx">
       <Filter>Header Files\fits</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ibe\fits\HDUIterator.hxx">
+    <ClInclude Include="..\..\src\fits\HDUIterator.hxx">
       <Filter>Header Files\fits</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ibe\fits\Keyword.hxx">
+    <ClInclude Include="..\..\src\fits\Keyword.hxx">
       <Filter>Header Files\fits</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ibe\fits\PixelFormat.hxx">
+    <ClInclude Include="..\..\src\fits\PixelFormat.hxx">
       <Filter>Header Files\fits</Filter>
     </ClInclude>
   </ItemGroup>
@@ -77,16 +77,5 @@
     <ClCompile Include="..\..\src\fits\PixelFormat.cxx">
       <Filter>Source Files\fits</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\include\ibe\fits\arstring.inl">
-      <Filter>Header Files\fits</Filter>
-    </None>
-    <None Include="..\..\include\ibe\fits\Buffer.inl">
-      <Filter>Header Files\fits</Filter>
-    </None>
-    <None Include="..\..\include\ibe\fits\FitsError.inl">
-      <Filter>Header Files\fits</Filter>
-    </None>
   </ItemGroup>
 </Project>
